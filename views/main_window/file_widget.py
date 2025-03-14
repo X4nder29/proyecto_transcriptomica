@@ -6,9 +6,11 @@ from PySide6.QtWidgets import (
     QPushButton,
     QSizePolicy,
     QSpacerItem,
-    QMenu
+    QMenu,
+    QStyleOption,
+    QStyle
 )
-from PySide6.QtGui import QPixmap, QIcon
+from PySide6.QtGui import QPixmap, QIcon, QPainter
 from PySide6.QtCore import Qt, Signal
 
 
@@ -28,13 +30,10 @@ class FileWidget(QWidget):
         self.setStyleSheet(
             """
 
-            QWidget#file_widget {
-                background-color: blue;
-            }
-        
-            QWidget:hover {
+            QWidget#file_widget:hover {
                 background-color: #303030;
-            }   
+            }
+
             """
         )
 
@@ -120,3 +119,9 @@ class FileWidget(QWidget):
         self.menu.exec_(
             self.action_button.mapToGlobal(self.action_button.rect().bottomLeft())
         )
+
+    def paintEvent(self, event):
+        opt = QStyleOption()
+        opt.initFrom(self)
+        p = QPainter(self)
+        self.style().drawPrimitive(QStyle.PE_Widget, opt, p, self)
