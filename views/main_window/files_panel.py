@@ -30,7 +30,7 @@ class FilesPanel(QWidget):
     def setupUi(self):
 
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(24, 0, 24, 0)
+        layout.setContentsMargins(28, 0, 28, 0)
         layout.setSpacing(0)
 
         # Header
@@ -50,7 +50,7 @@ class FilesPanel(QWidget):
         self.search_icon = QLabel(header)
         self.search_icon.setPixmap(
             QPixmap("assets/search.svg").scaled(
-                32, 32, Qt.AspectRatioMode.KeepAspectRatio, Qt.SmoothTransformation
+                28, 28, Qt.AspectRatioMode.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
         self.search_icon.setFixedSize(32, 32)
