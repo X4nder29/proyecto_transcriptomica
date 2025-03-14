@@ -1,3 +1,5 @@
+import os
+import textwrap
 from PySide6.QtWidgets import (
     QWidget,
     QHBoxLayout,
@@ -17,10 +19,10 @@ from PySide6.QtCore import Qt, Signal
 class FileWidget(QWidget):
     clicked = Signal()
 
-    def __init__(self, file_name):
+    def __init__(self, file_path):
         super().__init__()
 
-        self.file_name = file_name
+        self.file_path = file_path
 
         self.setupUi()
 
@@ -36,6 +38,8 @@ class FileWidget(QWidget):
 
             """
         )
+        self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
+        self.setFixedHeight(64)
 
         layout = QHBoxLayout(self)
 
@@ -67,15 +71,14 @@ class FileWidget(QWidget):
         content_layout.setSpacing(0)
 
         # Nombre del archivo
-        file_name_label = QLabel(self.file_name)
+        file_name_label = QLabel(os.path.basename(self.file_path))
         file_name_label.setStyleSheet(
             "font-size: 16px; font-weight: bold; color: white;"
         )
 
         # Ruta del archivo
-        file_path_label = QLabel(self.file_name)
+        file_path_label = QLabel(textwrap.shorten(self.file_path, width=100, placeholder="..."))
         file_path_label.setStyleSheet("font-size: 12px; color: #AAA;")
-        file_path_label.setWordWrap(True)
 
         # Botón de acción (tres puntos)
         self.action_button = QPushButton(self)

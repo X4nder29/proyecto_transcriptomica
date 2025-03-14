@@ -1,4 +1,4 @@
-from asyncio import constants
+from ctypes import alignment
 from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -9,7 +9,8 @@ from PySide6.QtWidgets import (
     QFileDialog,
     QMessageBox,
     QScrollArea,
-    QMenu
+    QMenu,
+    QSizePolicy
 )
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
@@ -90,31 +91,30 @@ class FilesPanel(QWidget):
         content.setStyleSheet(
             """
             QScrollArea {
-                background: none;
+                background: red;
                 border: none;
             }
             """
         )
 
         file_list = QWidget()
+
         list_layout = QVBoxLayout(file_list)
         list_layout.setContentsMargins(0, 0, 0, 0)
         list_layout.setSpacing(0)
 
         file_paths = self.settings.value("file_paths", [], type=list)
 
-        for i in range(16):
-            btn = FileWidget(f"Archivo {i}")
-
-            
-
+        for file_path in file_paths:
+            btn = FileWidget(file_path)
             list_layout.addWidget(btn)
+
+        list_layout.addStretch()
 
         content.setWidget(file_list)
 
         layout.addWidget(header)
         layout.addWidget(content)
-        """ layout.addWidget(file_list, 1) """
 
     def openFileDialog(self):
         file_path, _ = QFileDialog.getOpenFileName(
@@ -127,7 +127,6 @@ class FilesPanel(QWidget):
         if file_path:
             print(f"Archivo seleccionado: {file_path}")
             self.add_file_path(file_path)
-            self.check_files_paths()
         else:
             print("No se seleccionó ningún archivo")
             QMessageBox.warning(self, "Error", "No se seleccionó ningún archivo")
