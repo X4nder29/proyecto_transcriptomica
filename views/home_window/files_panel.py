@@ -1,4 +1,3 @@
-from ctypes import alignment
 from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -15,6 +14,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtGui import QPixmap
 from PySide6.QtCore import Qt
 from .file_widget import FileWidget
+from views.main_window import MainWindow
 
 
 class FilesPanel(QWidget):
@@ -107,6 +107,7 @@ class FilesPanel(QWidget):
 
         for file_path in file_paths:
             btn = FileWidget(file_path)
+            btn.clicked.connect(self.fileWidgetClicked)
             list_layout.addWidget(btn)
 
         list_layout.addStretch()
@@ -132,8 +133,6 @@ class FilesPanel(QWidget):
             QMessageBox.warning(self, "Error", "No se seleccionó ningún archivo")
 
     def fileWidgetClicked(self):
-        file_paths = self.settings.value("file_paths", [], type=list)
-        print(file_paths)
-        file_paths.clear()
-        self.settings.setValue("file_paths", file_paths)
-        self.file_widget_click()
+        print("File widget clicked")
+        self.window().close()
+        MainWindow().show()
