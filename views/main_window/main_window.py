@@ -1,81 +1,47 @@
 from PySide6.QtWidgets import (
-    QMainWindow,
     QWidget,
-    QStackedLayout,
-    QMessageBox
+    QHBoxLayout,
 )
-from PySide6.QtGui import QIcon
-from PySide6.QtCore import Qt, QSettings
-from .empty_file_panel import EmptyFilePanel
-from .files_panel import FilesPanel
+from .widgets.side_bar import SideBar
+from .widgets.content import Content
 
-
-class MainWindow(QMainWindow):
+class MainWindow(QWidget):
 
     def __init__(self):
         super().__init__()
 
+        self.setObjectName("MainWindow")
         self.setWindowTitle("TranscriptoHub")
-        self.setFixedSize(800, 500)
-        self.setAcceptDrops(True)
-
-        self.settings = QSettings("preferences.ini", QSettings.IniFormat)
-        print(self.settings.fileName())
+        self.setGeometry(500, 250, 1000, 600)
 
         self.setupUi()
 
     def setupUi(self):
 
-        central_widget = QWidget(self)
-        self.setCentralWidget(central_widget)
+        self.main_layout = QHBoxLayout(self)
+        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.setSpacing(0)
 
-        self.main_layout = QStackedLayout(central_widget)
+        self.side_bar = SideBar(self)
+        self.content = Content(self)
 
-        empty_file_panel = EmptyFilePanel(
-            add_file_path=self.addFilePath
+        self.side_bar.home_button.clicked.connect(
+            lambda: self.changePanel(0, self.side_bar.home_button)
         )
-        self.main_layout.addWidget(empty_file_panel)
-
-        files_panel = FilesPanel(
-            settings=self.settings,
-            add_file_path=self.addFilePath,
-            file_widget_click=self.checkFilesPaths,
+        self.side_bar.bioinformatics_button.clicked.connect(
+            lambda: self.changePanel(1, self.side_bar.bioinformatics_button)
         )
-        self.main_layout.addWidget(files_panel)
+        self.side_bar.graphics_button.clicked.connect(
+            lambda: self.changePanel(2, self.side_bar.graphics_button)
+        )
+        self.side_bar.settings_button.clicked.connect(
+            lambda: self.changePanel(3, self.side_bar.settings_button)
+        )
 
-        self.checkFilesPaths()
+        self.main_layout.addWidget(self.side_bar)
+        self.main_layout.addWidget(self.content, 1)
 
-    def dragEnterEvent(self, event):
-        if event.mimeData().hasUrls():
-            event.acceptProposedAction()
-
-    def dropEvent(self, event):
-        for url in event.mimeData().urls():
-            print(url.toLocalFile())
-            if url.toLocalFile().endswith(".fastq"):
-                self.addFilePath(url.toLocalFile())
-            else:
-                print("Invalid file type")
-                QMessageBox.warning(self, "Error", "Tipo de archivo inválido")
-
-    def addFilePath(self, path):
-        files_pahts = self.settings.value("file_paths", [], type=list)
-        files_pahts.append(path)
-        self.settings.setValue("file_paths", files_pahts)
-
-        self.checkFilesPaths()
-
-    def removeFilePath(self, path):
-        files_pahts = self.settings.value("file_paths", [], type=list)
-        files_pahts.remove(path)
-        self.settings.setValue("file_paths", files_pahts)
-
-        self.checkFilesPaths()
-
-    def checkFilesPaths(self):
-        file_paths = self.settings.value("file_paths", [], type=list)
-
-        if file_paths:
-            self.main_layout.setCurrentIndex(1)
-        else:
-            self.main_layout.setCurrentIndex(0)
+    def changePanel(self, index, button):
+        if index != self.content.main_layout.currentIndex():
+            self.content.main_layout.setCurrentIndex(index)
+            self.side_bar.changeButtonsStyle(index)
