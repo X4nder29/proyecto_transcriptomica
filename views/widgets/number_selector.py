@@ -1,3 +1,4 @@
+from pathlib import Path
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QWidget,
@@ -10,12 +11,11 @@ class NumberSelector(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.number = 0
-        self.setStyleSheet(
-            """
-            background-color: #555;
-            padding: 1em;
-            """
-        )
+        
+        self.setObjectName("NumberSelector")
+        
+        self.load_stylesheet()
+
         self._setup_ui()
 
     def _setup_ui(self):
@@ -24,54 +24,17 @@ class NumberSelector(QWidget):
         layout.setSpacing(0)
 
         self._decrement_button = QPushButton("-", self)
-        self._decrement_button.setStyleSheet(
-            """
-            QPushButton {
-                background-color: #555;
-                padding: 0.5em;
-                color: white;
-                border: none;
-                border-top-left-radius: 0.5em;
-                border-bottom-left-radius: 0.5em;
-            }
-
-            QPushButton:hover {
-                background-color: #666;
-            }
-            """
-        )
+        self._decrement_button.setObjectName("Left")
         self._decrement_button.clicked.connect(self._decrement)
         layout.addWidget(self._decrement_button)
 
         self._number_label = QLabel(f"{self.number}", self)
-        self._number_label.setStyleSheet(
-            """
-            color: white;
-            padding: 0em;
-            text-align: center;
-            """
-        )
         self._number_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._number_label.setMaximumHeight(self._decrement_button.sizeHint().height())
         layout.addWidget(self._number_label)
 
         self._increment_button = QPushButton("+", self)
-        self._increment_button.setStyleSheet(
-            """
-            QPushButton {
-                background-color: #555;
-                padding: 0.5em;
-                color: white;
-                border: none;
-                border-top-right-radius: 0.5em;
-                border-bottom-right-radius: 0.5em;
-            }
-
-            QPushButton:hover {
-                background-color: #666;
-            }
-            """
-        )
+        self._increment_button.setObjectName("Right")
         self._increment_button.clicked.connect(self._increment)
         layout.addWidget(self._increment_button)
 
@@ -82,3 +45,9 @@ class NumberSelector(QWidget):
     def _decrement(self):
         self.number -= 1
         self._number_label.setText(f"{self.number}")
+
+    def load_stylesheet(self):
+        styles_path = Path(__file__).parent / "number_selector.qss"
+        if styles_path.exists():
+            with open(styles_path, "r") as styles:
+                self.setStyleSheet(styles.read())
