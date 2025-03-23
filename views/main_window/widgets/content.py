@@ -12,6 +12,7 @@ from ..panels.home_panel import HomePanel
 from ..panels.bioinformatic_panel import BioinformaticPanel
 from ..panels.graphics_panel import GraphicsPanel
 from ..panels.settings_panel import SettingsPanel
+from ..panels.trimmomatic_panel import TrimmomaticPanel
 
 
 class Content(QWidget):
@@ -46,8 +47,10 @@ class Content(QWidget):
         self.graphics_panel = GraphicsPanel(self)
         self.settings_panel = SettingsPanel(self)
 
+        self.trimmomatic_panel = TrimmomaticPanel(self)
+
         self.main_layout.addWidget(self.home_panel)
-        self.main_layout.addWidget(self.bioinformatic_panel)
+        self.main_layout.addWidget(self.trimmomatic_panel)
         self.main_layout.addWidget(self.graphics_panel)
         self.main_layout.addWidget(self.settings_panel)
 
