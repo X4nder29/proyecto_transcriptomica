@@ -1,0 +1,15 @@
+#SingleOption {
+    background-color: #404040;
+    border-radius: 10px;
+}
+
+#Checkbox {
+    background-color: none;
+    border: none;
+    width: 16;
+    height: 16;
+}
+
+#Checkbox:hover {
+    background-color: #505050;
+}

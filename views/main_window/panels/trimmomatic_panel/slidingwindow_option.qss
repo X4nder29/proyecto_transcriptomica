@@ -1,0 +1,15 @@
+QWidget#SlidingWindowOption {
+    background-color: #404040;
+    border-radius: 10px;
+}
+
+QPushButton#Checkbox {
+    background-color: none;
+    border: none;
+    width: 16;
+    height: 16;
+}
+
+QPushButton#Checkbox:hover {
+    background-color: #505050;
+}
