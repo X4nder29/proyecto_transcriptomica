@@ -89,7 +89,7 @@ class TrimmomaticPanelBody(QWidget):
         self.slidingwindow_option = SlidingWindowOption(self.center_section)
         self.leading_option = SingleOption("Leading", self.center_section)
         self.trailing_option = SingleOption("Trailing", self.center_section)
-        self_minlen_option = SingleOption("Minlen", self.center_section)
+        self.minlen_option = SingleOption("Minlen", self.center_section)
         self.crop = SingleOption("Crop", self.center_section)
         self.headcrop = SingleOption("Headcrop", self.center_section)
 
@@ -101,7 +101,7 @@ class TrimmomaticPanelBody(QWidget):
 
         self.center_section_layout.addWidget(self.leading_option, 1, 1, 1, 1, alignment=Qt.AlignmentFlag.AlignTop)
         self.center_section_layout.addWidget(self.trailing_option, 2, 1, 1, 1, alignment=Qt.AlignmentFlag.AlignTop)
-        self.center_section_layout.addWidget(self_minlen_option, 3, 1, 1, 1, alignment=Qt.AlignmentFlag.AlignTop)
+        self.center_section_layout.addWidget(self.minlen_option, 3, 1, 1, 1, alignment=Qt.AlignmentFlag.AlignTop)
         self.center_section_layout.addWidget(self.crop, 4, 1, 1, 1, alignment=Qt.AlignmentFlag.AlignTop)
         self.center_section_layout.addWidget(self.headcrop, 5, 1, 1, 1, alignment=Qt.AlignmentFlag.AlignTop)
 
