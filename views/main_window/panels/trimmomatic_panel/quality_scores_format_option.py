@@ -44,6 +44,7 @@ class QualityScoresFormatOption(QWidget):
 
         self.phred33_button = QPushButton("Phred 33", self.button_group_area)
         self.phred33_button.setCheckable(True)
+        self.phred33_button.setChecked(True)
         self.button_group.addButton(self.phred33_button)
         self.button_group.setId(self.phred33_button, 33)
         self.button_group_area_layout.addWidget(self.phred33_button)
