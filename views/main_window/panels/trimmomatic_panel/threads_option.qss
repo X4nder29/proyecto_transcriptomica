@@ -1,0 +1,10 @@
+#ThreadsOption {
+    background-color: #404040;
+    border-radius: 10px;
+}
+
+#OptionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}

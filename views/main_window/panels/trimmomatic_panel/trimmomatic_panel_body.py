@@ -12,6 +12,7 @@ from PySide6.QtCore import Qt
 from .mode_area import ModeArea
 from .se_files_area import SeFilesArea
 from .pe_files_area import PeFilesArea
+from .threads_options import ThreadsOption
 from .single_option import SingleOption
 from .illumina_clip_option import IlluminaClipOption
 from .slidingwindow_option import SlidingWindowOption
@@ -81,6 +82,7 @@ class TrimmomaticPanelBody(QWidget):
         self.center_section_layout.setContentsMargins(0, 0, 0, 0)
         self.center_section_layout.setSpacing(20)
 
+        self.threads_option = ThreadsOption(self.center_section)
         self.illumina_clip_option = IlluminaClipOption(self.center_section)
         self.slidingwindow_option = SlidingWindowOption(self.center_section)
         self.leading_option = SingleOption("Leading", self.center_section)
@@ -88,6 +90,8 @@ class TrimmomaticPanelBody(QWidget):
         self_minlen_option = SingleOption("Minlen", self.center_section)
         self.crop = SingleOption("Crop", self.center_section)
         self.headcrop = SingleOption("Headcrop", self.center_section)
+
+        self.center_section_layout.addWidget(self.threads_option, 0, 0, 1, 1, alignment=Qt.AlignmentFlag.AlignTop)
 
         self.center_section_layout.addWidget(self.illumina_clip_option, 1, 0, 4, 1, alignment=Qt.AlignmentFlag.AlignTop)
         self.center_section_layout.addWidget(self.slidingwindow_option, 5, 0, 2, 1, alignment=Qt.AlignmentFlag.AlignTop)
