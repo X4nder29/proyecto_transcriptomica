@@ -22,7 +22,7 @@ class SingleOption(QWidget):
 
         self.setObjectName("SingleOption")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
-        self.setMinimumWidth(200)
+        self.setMinimumWidth(300)
 
         self.load_stylesheet()
 
