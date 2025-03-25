@@ -12,7 +12,7 @@ class MainWindow(QWidget):
 
         self.setObjectName("MainWindow")
         self.setWindowTitle("TranscriptoHub")
-        self.setGeometry(500, 250, 1000, 600)
+        self.setGeometry(250, 200, 1000, 700)
 
         self.setupUi()
 
