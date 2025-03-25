@@ -49,23 +49,13 @@ class TrimmomaticPanelBody(QWidget):
         self.left_section_layout.setSpacing(20)
 
         self.mode_area = ModeArea(self.left_section)
+        self.mode_area.button_group.idClicked.connect(lambda id: self.changeMode(id))
 
         self.files_areas = QWidget(self.left_section)
         self.files_areas_layout = QStackedLayout(self.files_areas)
 
         self.files_area_se = SeFilesArea(self.left_section)
         self.files_area_pe = PeFilesArea(self.left_section)
-
-        self.mode_area.pe_button.toggled.connect(
-            lambda checked: self.toggleModeButtons(
-                self.mode_area.pe_button, self.mode_area.se_button, checked
-            )
-        )
-        self.mode_area.se_button.toggled.connect(
-            lambda checked: self.toggleModeButtons(
-                self.mode_area.se_button, self.mode_area.pe_button, checked
-            )
-        )
 
         self.files_areas_layout.addWidget(self.files_area_se)
         self.files_areas_layout.addWidget(self.files_area_pe)
@@ -135,18 +125,5 @@ class TrimmomaticPanelBody(QWidget):
             with open(styles_path, "r") as styles:
                 self.setStyleSheet(styles.read())
 
-    def toggleModeButtons(self, clicked_button, other_button, checked):
-        if not checked:
-            clicked_button.blockSignals(True)
-            clicked_button.setChecked(True)
-            clicked_button.blockSignals(False)
-            return
-
-        other_button.blockSignals(True)
-        other_button.setChecked(False)
-        other_button.blockSignals(False)
-
-        if clicked_button.text() == "PE":
-            self.files_areas_layout.setCurrentIndex(1)
-        else:
-            self.files_areas_layout.setCurrentIndex(0)
+    def changeMode(self, id):
+        self.files_areas_layout.setCurrentIndex(id)
