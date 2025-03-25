@@ -3,17 +3,19 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QWidget,
     QPushButton,
-    QLabel,
+    QLineEdit,
+    QSizePolicy
 )
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QIntValidator
 
 class NumberSelector(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.number = 0
-        
+
         self.setObjectName("NumberSelector")
-        
+
         self.load_stylesheet()
 
         self._setup_ui()
@@ -28,9 +30,11 @@ class NumberSelector(QWidget):
         self._decrement_button.clicked.connect(self._decrement)
         layout.addWidget(self._decrement_button)
 
-        self._number_label = QLabel(f"{self.number}", self)
+        self._number_label = QLineEdit(f"{self.number}", self)
+        self._number_label.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         self._number_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self._number_label.setMaximumHeight(self._decrement_button.sizeHint().height())
+        self._number_label.setValidator(QIntValidator(self))
         layout.addWidget(self._number_label)
 
         self._increment_button = QPushButton("+", self)

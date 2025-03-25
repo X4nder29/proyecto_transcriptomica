@@ -1,9 +1,11 @@
-QLabel {
+QLineEdit {
     color: white;
     padding: 0em;
     text-align: center;
     background-color: #555;
-    /* padding: 1em; */
+    padding: 0;
+    border: none;
+    width: 5em;
 }
 
 QPushButton {
