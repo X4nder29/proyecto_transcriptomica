@@ -1,0 +1,5 @@
+.env
+/kraken2-2.14/
+/.venv/
+/Trimmomatic-0.39/
+Trimmomatic-0.39.zip
