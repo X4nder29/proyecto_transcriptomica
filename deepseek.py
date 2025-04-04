@@ -1,6 +1,6 @@
 from openai import OpenAI
 
-cliente = OpenAI(api_key="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", 
+cliente = OpenAI(api_key="aca va tu api key", 
                  base_url="https://openrouter.ai/api/v1")
 
 chat = cliente.chat.completions.create(
