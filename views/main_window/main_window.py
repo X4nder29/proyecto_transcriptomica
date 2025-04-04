@@ -2,7 +2,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QHBoxLayout,
 )
-from .widgets.side_bar import SideBar
+from .main_window_sidebar import MainWindowSideBar
 from .widgets.content import Content
 
 class MainWindow(QWidget):
@@ -22,26 +22,14 @@ class MainWindow(QWidget):
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(0)
 
-        self.side_bar = SideBar(self)
+        self.side_bar = MainWindowSideBar(self)
         self.content = Content(self)
 
-        self.side_bar.home_button.clicked.connect(
-            lambda: self.changePanel(0, self.side_bar.home_button)
-        )
-        self.side_bar.bioinformatics_button.clicked.connect(
-            lambda: self.changePanel(1, self.side_bar.bioinformatics_button)
-        )
-        self.side_bar.graphics_button.clicked.connect(
-            lambda: self.changePanel(2, self.side_bar.graphics_button)
-        )
-        self.side_bar.settings_button.clicked.connect(
-            lambda: self.changePanel(3, self.side_bar.settings_button)
-        )
+        self.side_bar.button_group.idClicked.connect(lambda id: self.changePanel(id))
 
         self.main_layout.addWidget(self.side_bar)
         self.main_layout.addWidget(self.content, 1)
 
-    def changePanel(self, index, button):
+    def changePanel(self, index):
         if index != self.content.main_layout.currentIndex():
             self.content.main_layout.setCurrentIndex(index)
-            self.side_bar.changeButtonsStyle(index)
