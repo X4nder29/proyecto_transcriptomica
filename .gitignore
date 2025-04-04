@@ -3,3 +3,9 @@
 /.venv/
 /Trimmomatic-0.39/
 Trimmomatic-0.39.zip
+/fastqc_final/
+/fastqc_initial/
+MP_2.fastq
+/trimmed_sequences/
+kraken2_results.txt
+kraken2_results.txt.report
