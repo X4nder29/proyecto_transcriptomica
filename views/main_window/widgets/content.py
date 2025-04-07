@@ -9,7 +9,6 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QPainter
 from ..panels.home_panel import HomePanel
-from ..panels.bioinformatic_panel import BioinformaticPanel
 from ..panels.graphics_panel import GraphicsPanel
 from ..panels.settings_panel import SettingsPanel
 from ..panels.trimmomatic_panel import TrimmomaticPanel
@@ -43,7 +42,6 @@ class Content(QWidget):
         )
 
         self.home_panel = HomePanel(self)
-        self.bioinformatic_panel = BioinformaticPanel(self)
         self.graphics_panel = GraphicsPanel(self)
         self.settings_panel = SettingsPanel(self)
 
