@@ -1,0 +1,18 @@
+#SideBar {
+    background-color: #303030;
+}
+
+QPushButton {
+    background-color: none;
+    border: none;
+}
+
+QPushButton:checked {
+    background-color: #222222;
+    border-radius: 10px;
+}
+
+QPushButton:unchecked:hover {
+    background-color: #505050;
+    border-radius: 10px;
+}
