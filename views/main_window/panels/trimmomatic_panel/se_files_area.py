@@ -6,6 +6,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
     QLineEdit,
+    QFileDialog,
 )
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
@@ -34,6 +35,9 @@ class SeFilesArea(QWidget):
 
         self.input_file_se = LineEditWithButton("assets/file.svg")
         self.input_file_se.setObjectName("FilesInput")
+        self.input_file_se.button.clicked.connect(
+            lambda: self.open_file_dialog(self.input_file_se.line_edit)
+        )
 
         self.output_file_label = QLabel("Archivo de Salida", self)
         self.output_file_label.setObjectName("FilesLabel")
@@ -46,3 +50,16 @@ class SeFilesArea(QWidget):
         self.main_layout.addWidget(self.output_file_label)
         self.main_layout.addWidget(self.output_file_se)
         self.main_layout.addStretch()
+
+    def open_file_dialog(self, line_edit):
+        filter = (
+            "Archivos FASTA/FASTQ (*.fasta *.fa *.fastq *.fq)"
+        )
+
+        file, _ = QFileDialog.getOpenFileName(
+            self,
+            "Seleccionar archivo FASTA o FASTQ", "", filter
+        )
+
+        if file:
+            line_edit.setText(file)
