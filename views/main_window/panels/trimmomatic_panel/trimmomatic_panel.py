@@ -2,6 +2,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
     QSizePolicy,
+    QMessageBox,
 )
 from PySide6.QtCore import Qt
 from .trimmomatic_panel_head import TrimmomaticPanelHead
@@ -36,3 +37,11 @@ class TrimmomaticPanel(QWidget):
 
         self.main_layout.addWidget(self.head, alignment=Qt.AlignmentFlag.AlignTop)
         self.main_layout.addWidget(self.body)
+
+    def show_error_dialog(self, message):
+        QMessageBox.critical(
+            self,
+            "Error",
+            message,
+            QMessageBox.StandardButton.Ok,
+        )
