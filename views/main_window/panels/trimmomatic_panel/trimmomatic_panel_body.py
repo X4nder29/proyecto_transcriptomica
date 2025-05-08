@@ -77,7 +77,11 @@ class TrimmomaticPanelBody(QWidget):
         self.quality_scores_format_option = QualityScoresFormatOption(self.center_section)
         self.illumina_clip_option = IlluminaClipOption(self.center_section)
         self.slidingwindow_option = SlidingWindowOption(self.center_section)
+        self.slidingwindow_option.window_size_button
+
         self.leading_option = SingleOption("Leading", self.center_section)
+        self.leading_option.leading_button.setChecked(True)
+
         self.trailing_option = SingleOption("Trailing", self.center_section)
         self.minlen_option = SingleOption("Minlen", self.center_section)
         self.crop_option = SingleOption("Crop", self.center_section)
@@ -118,6 +122,24 @@ class TrimmomaticPanelBody(QWidget):
         self.main_layout.addWidget(self.left_section)
         self.main_layout.addWidget(self.center_section, alignment=Qt.AlignmentFlag.AlignTop)
         self.main_layout.addWidget(self.right_section)
+
+        # default values
+        self.files_area_se.input_file_se.line_edit.setText(
+            "D:\\projects_ucc\\proyecto_transcriptomica\\programs\\trimmomatic_0.39\\Primera Prueba.fastq"
+        )
+        self.files_area_se.output_file_se.line_edit.setText(
+            "D:\\projects_ucc\\proyecto_transcriptomica\\programs\\trimmomatic_0.39\\Primera.fastq"
+        )
+        self.illumina_clip_option.adapter_options.setCurrentIndex(0)
+        self.illumina_clip_option.seed_mismatches_input._number_label.setText("2")
+        self.illumina_clip_option.palindrome_clip_threshold_input._number_label.setText("30")
+        self.illumina_clip_option.simple_clip_threshold_input._number_label.setText("10")
+        self.leading_option.number_selector._number_label.setText("3")
+        self.trailing_option.number_selector._number_label.setText("3")
+        self.slidingwindow_option.window_size_selector._number_label.setText("4")
+        self.slidingwindow_option.quality_threshold_selector._number_label.setText("18")
+        self.minlen_option.number_selector._number_label.setText("80")
+        self.crop_option.number_selector._number_label.setText("320")
 
     def loadStylesheet(self):
         styles_path = Path(__file__).parent / "trimmomatic_panel_body.qss"

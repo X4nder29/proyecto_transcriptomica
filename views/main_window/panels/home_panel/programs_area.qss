@@ -1,0 +1,20 @@
+QLabel#AreaTitle {
+    font-size: 16px;
+}
+
+#Program {
+    background-color: #303030;
+    border-radius: 10px;
+}
+
+QPushButton#InstallButton {
+    background-color: #303030;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 14px;
+    padding: 5px 10px;
+}
+
+QPushButton#InstallButton:hover {
+    background-color: #505050;
+}

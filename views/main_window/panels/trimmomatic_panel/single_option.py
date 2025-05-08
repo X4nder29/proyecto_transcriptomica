@@ -15,10 +15,11 @@ from ....widgets.number_selector import NumberSelector
 
 class SingleOption(QWidget):
 
-    def __init__(self, name: str, parent=None):
+    def __init__(self, name: str, parent=None, enabled: bool = True):
         super().__init__(parent)
 
         self.name = name
+        self.enabled = enabled
 
         self.setObjectName("SingleOption")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
@@ -40,12 +41,13 @@ class SingleOption(QWidget):
         self.leading_button = QPushButton(self)
         self.leading_button.setObjectName("Checkbox")
         self.leading_button.setCheckable(True)
+        self.leading_button.setChecked(self.enabled)
         self.leading_button.setSizePolicy(
             QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed
         )
-        self.leading_button.setIcon(self.checkbox_icon_outlined)
+        self.leading_button.setIcon(self.checkbox_icon_outlined if not self.enabled else self.checkbox_icon_filled)
         self.leading_button.toggled.connect(
-            lambda checked: self.update_icon(self.leading_button, checked)
+            lambda checked: self.leading_button_toggled(checked)
         )
 
         self.leading_label = QLabel(self.name, self)
@@ -65,16 +67,20 @@ class SingleOption(QWidget):
             self.number_selector, alignment=Qt.AlignmentFlag.AlignRight
         )
 
-    def load_stylesheet(self):
-        styles_path = Path(__file__).parent / "single_option.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+    def leading_button_toggled(self, checked):
+        self.number_selector.setEnabled(checked)
+        self.update_icon(self.leading_button, checked)
 
     def update_icon(self, button, checked):
         button.setIcon(
             self.checkbox_icon_filled if checked else self.checkbox_icon_outlined
         )
+
+    def load_stylesheet(self):
+        styles_path = Path(__file__).parent / "single_option.qss"
+        if styles_path.exists():
+            with open(styles_path, "r") as styles:
+                self.setStyleSheet(styles.read())
 
     def paintEvent(self, event):
         opt = QStyleOption()

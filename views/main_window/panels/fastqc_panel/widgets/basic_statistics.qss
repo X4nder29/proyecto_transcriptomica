@@ -1,0 +1,9 @@
+QWidget#BasicStatistics {
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+}
+
+QLabel#BasicStatisticsTitle {
+    font-size: 14px;
+    font-weight: bold;
+}
