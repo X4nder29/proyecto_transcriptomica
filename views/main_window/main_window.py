@@ -3,7 +3,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
 )
 from .main_window_sidebar import MainWindowSideBar
-from .widgets.content import Content
+from .main_window_content import MainWindowContent
 
 class MainWindow(QWidget):
 
@@ -23,7 +23,7 @@ class MainWindow(QWidget):
         self.main_layout.setSpacing(0)
 
         self.side_bar = MainWindowSideBar(self)
-        self.content = Content(self)
+        self.content = MainWindowContent(self)
 
         self.side_bar.button_group.idClicked.connect(lambda id: self.changePanel(id))
 
