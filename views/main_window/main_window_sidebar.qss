@@ -12,7 +12,7 @@ QPushButton:checked {
     border-radius: 10px;
 }
 
-QPushButton:unchecked:hover {
+QPushButton:!checked:hover {
     background-color: #505050;
     border-radius: 10px;
 }
