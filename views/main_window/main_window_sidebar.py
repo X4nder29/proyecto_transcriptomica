@@ -110,7 +110,7 @@ class MainWindowSideBar(QWidget):
 
         self.sortmerna_button = QPushButton()
         self.sortmerna_button.setFixedHeight(44)
-        self.sortmerna_button.setToolTip("Sortmerna")
+        self.sortmerna_button.setToolTip("SortMeRNA")
         self.sortmerna_button.setCheckable(True)
         self.sortmerna_button.setIcon(self.outlined_icon[2])
         self.sortmerna_button.setIconSize(QSize(24, 24))
