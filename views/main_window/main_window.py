@@ -2,6 +2,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QHBoxLayout,
 )
+from PySide6.QtGui import QIcon
 from .main_window_sidebar import MainWindowSideBar
 from .main_window_content import MainWindowContent
 
@@ -13,6 +14,7 @@ class MainWindow(QWidget):
         self.setObjectName("MainWindow")
         self.setWindowTitle("TranscriptoHub")
         self.setGeometry(250, 200, 1000, 700)
+        self.setWindowIcon(QIcon("assets/icon.svg"))
 
         self.setupUi()
 

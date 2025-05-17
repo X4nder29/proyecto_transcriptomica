@@ -18,6 +18,7 @@ class HomeWindow(QMainWindow):
         self.setWindowTitle("TranscriptoHub")
         self.setFixedSize(800, 500)
         self.setAcceptDrops(True)
+        self.setWindowIcon(QIcon("assets/icon.svg"))
 
         self.settings = QSettings("preferences.ini", QSettings.IniFormat)
         print(self.settings.fileName())
