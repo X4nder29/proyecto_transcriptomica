@@ -8,9 +8,6 @@ from utils import center_window_on_screen
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    screen = app.screenAt(QCursor.pos())
-    center_point = screen.availableGeometry().center()
-
     home_window = HomeWindow()
     home_window_controller = HomeWindowController(home_window)
     center_window_on_screen(home_window)
