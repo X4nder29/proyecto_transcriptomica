@@ -1,6 +1,7 @@
 /.venv
 /.vscode
 /programs/
+/tests
 
 __pycache__/
 *.ini
