@@ -6,19 +6,14 @@ from utils import center_window_on_screen, settings
 if __name__ == "__main__":
     app = QApplication(sys.argv)
 
-    current_worksapce = Path(settings.value("current_workspace", ""))
-    print(Path(__file__).name, f'Current workspace: {current_worksapce}')
+    current_workspace = str(settings.value("current_workspace", ""))
+    print(Path(__file__).name, f"Current workspace value: {current_workspace}")
 
-    if current_worksapce.exists():
-        from views import MainWindow
-        from controllers import MainWindowController
+    current_worksapce = Path(current_workspace) if current_workspace != "" else ""
+    print(Path(__file__).name, f"Current workspace: {current_workspace == ''}")
 
-        main_window = MainWindow()
-        main_window_controller = MainWindowController(main_window)
+    if current_workspace == '':
 
-        main_window.show()
-        center_window_on_screen(main_window)
-    else:
         from views import HomeWindow
         from controllers import HomeWindowController
 
@@ -27,5 +22,16 @@ if __name__ == "__main__":
 
         home_window.show()
         center_window_on_screen(home_window)
+
+    elif current_worksapce.exists():
+
+        from views import MainWindow
+        from controllers import MainWindowController
+
+        main_window = MainWindow()
+        main_window_controller = MainWindowController(main_window)
+
+        main_window.show()
+        center_window_on_screen(main_window)
 
     sys.exit(app.exec())
