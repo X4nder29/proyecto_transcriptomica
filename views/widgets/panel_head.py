@@ -25,7 +25,7 @@ class PanelHead(QWidget):
     def setup_ui(self):
         self.main_layout = QHBoxLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
-        self.main_layout.setSpacing(20)
+        self.main_layout.setSpacing(10)
         self.setLayout(self.main_layout)
 
         # title label
