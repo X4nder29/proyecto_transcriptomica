@@ -2,6 +2,7 @@
 /.vscode
 /programs/
 /tests
+/dist
 
 __pycache__/
 *.ini
