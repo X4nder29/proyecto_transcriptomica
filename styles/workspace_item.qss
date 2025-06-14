@@ -1,0 +1,49 @@
+#WorkspaceItem:hover {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+#IconLabel {
+    background-color: #FF6565;
+    border-radius: 8px;
+}
+#IconLabel:disabled {
+    background-color: gray;
+}
+
+#FileNameLabel {
+    font-size: 16px;
+    font-weight: bold; color:
+    white;
+}
+#FileNameLabel:disabled {
+    color: gray;
+}
+
+#FilePathLabel {
+    color: #AAA;
+    font-size: 12px;
+}
+#FilePathLabel:disabled {
+    color: gray;
+}
+
+#ActionButton {
+    background-color: transparent;
+    border-radius: none;
+}
+
+#ActionButton:hover {
+    background-color: #505050;
+    border-radius: 8px;
+}
+
+#Menu {
+    background-color: #505050;
+    border-radius: 5px;
+}
+
+#Menu::item {
+    padding: 5px 10px;
+    border-radius: 5px;
+}

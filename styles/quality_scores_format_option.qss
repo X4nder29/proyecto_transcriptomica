@@ -1,0 +1,25 @@
+#QualityScoresFormatOption {
+    background-color: #404040;
+    border-radius: 10px;
+}
+
+#OptionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+QPushButton {
+    background-color: #202020;
+    color: white;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+QPushButton:hover {
+    background-color: #303030;
+}
+
+QPushButton:checked {
+    background-color: cornflowerblue;
+}

@@ -1,0 +1,21 @@
+#SearchLineEdit {
+    background-color: transparent;
+    border: none;
+    font-size: 14px;
+}
+
+#CreateNewWorkspaceButton, #OpenExistingWorkspaceButton {
+    border: 1px solid #505050;
+    border-radius: 5px;
+    padding: 5px 10px;
+    background-color: #303030;
+}
+
+#CreateNewWorkspaceButton:hover, #OpenExistingWorkspaceButton:hover {
+    background-color: #404040;
+}
+
+#HorizontalSpacer {
+    color: gray;
+    max-height: 1px;
+}

@@ -1,0 +1,4 @@
+#OptionArea {
+    background-color: #404040;
+    border-radius: 10px;
+}

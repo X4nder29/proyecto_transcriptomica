@@ -1,0 +1,9 @@
+#Title {
+    font-weight: bold;
+}
+
+#LocationInput, #NameInput {
+    border: none;
+    border-radius: 5px;
+    padding-left: 5px;
+}

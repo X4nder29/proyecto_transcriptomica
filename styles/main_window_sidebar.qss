@@ -1,0 +1,45 @@
+#SideBar {
+    background-color: #303030;
+}
+
+QPushButton {
+    background-color: none;
+    border: none;
+}
+
+QPushButton:checked {
+    background-color: #222222;
+    border-radius: 10px;
+}
+
+QPushButton:!checked:hover {
+    background-color: #505050;
+    border-radius: 10px;
+}
+
+#IconApp::menu-indicator {
+    width:0;
+    image: none;
+}
+#IconApp::open {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#IconAppMenu {
+    background-color: #505050;
+    border: none;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#IconAppMenu::item {
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#IconAppMenu::item:selected {
+    background-color: #404040;
+}

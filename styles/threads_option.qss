@@ -1,0 +1,21 @@
+#ThreadsOption {
+    background-color: #404040;
+    border-radius: 10px;
+}
+
+#HelpButton {
+    background-color: none;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#HelpButton:hover {
+    background-color: #505050;
+}
+
+#OptionTitle {
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}

@@ -1,0 +1,26 @@
+#SlidingWindowOption {
+    background-color: #404040;
+    border-radius: 10px;
+}
+
+#ActiveButton {
+    background-color: none;
+    border: none;
+    width: 16;
+    height: 16;
+}
+
+#ActiveButton:hover {
+    background-color: #505050;
+}
+
+#HelpButton {
+    background-color: none;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#HelpButton:hover {
+    background-color: #505050;
+}
