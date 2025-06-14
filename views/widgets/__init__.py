@@ -5,3 +5,4 @@ from .panel_head_simple import PanelHeadSimple
 from .info_row import InfoRow
 from .work_in_progress_poster_panel import WorkInProgressPosterPanel
 from .single_option_widget import SingleOptionWidget
+from .combo_box_option_widget import ComboBoxOptionWidget

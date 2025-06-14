@@ -1,0 +1,115 @@
+from pathlib import Path
+from PySide6.QtWidgets import (
+    QWidget,
+    QVBoxLayout,
+    QHBoxLayout,
+    QStyleOption,
+    QStyle,
+    QSizePolicy,
+    QLabel,
+    QPushButton,
+    QComboBox,
+)
+from PySide6.QtGui import QPainter, QIcon
+from PySide6.QtCore import Qt, QFile, QTextStream
+
+
+class ComboBoxOptionWidget(QWidget):
+    def __init__(self, label: str, options: list[str], parent=None):
+        super().__init__(parent)
+
+        self.label = label
+        self.options = options
+
+        self.setObjectName("ComboBoxOptionWidget")
+        self.setMinimumWidth(300)
+
+        self.load_stylesheet()
+        self.setup_ui()
+
+    def setup_ui(self):
+        self.main_layout = QVBoxLayout(self)
+        self.main_layout.setContentsMargins(10, 10, 10, 10)
+        self.main_layout.setSpacing(10)
+
+        # head
+
+        self.head = QWidget(self)
+        self.head.setObjectName("HeadWidget")
+        self.main_layout.addWidget(self.head)
+
+        self.head_layout = QHBoxLayout(self.head)
+        self.head_layout.setContentsMargins(0, 0, 0, 0)
+        self.head_layout.setSpacing(10)
+        self.head.setLayout(self.head_layout)
+
+        # eheckbox
+
+        self.checkbox = QPushButton(self)
+        self.checkbox.setObjectName("Checkbox")
+        self.checkbox.setCheckable(True)
+        self.checkbox.setChecked(False)
+        self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
+        self.checkbox.toggled.connect(self.toggle_checkbox_icon)
+        self.head_layout.addWidget(self.checkbox, alignment=Qt.AlignmentFlag.AlignLeft)
+
+        self.help_button = QPushButton("?", self)
+        self.help_button.setObjectName("HelpButton")
+        self.help_button.setToolTip("Help")
+        self.head_layout.addWidget(
+            self.help_button, alignment=Qt.AlignmentFlag.AlignRight
+        )
+
+        # body
+
+        self.body = QWidget(self)
+        self.body.setObjectName("BodyWidget")
+        self.main_layout.addWidget(self.body)
+
+        self.body_layout = QHBoxLayout(self.body)
+        self.body_layout.setContentsMargins(0, 0, 0, 0)
+        self.body_layout.setSpacing(10)
+        self.body.setLayout(self.body_layout)
+
+        # name label
+
+        self.name_label = QLabel(self.label, self.head)
+        self.name_label.setObjectName("NameLabel")
+        self.body_layout.addWidget(
+            self.name_label, alignment=Qt.AlignmentFlag.AlignLeft
+        )
+
+        # spacer
+
+        self.body_layout.addStretch()
+
+        # combo box
+
+        self.combo_box = QComboBox(self.body)
+        self.combo_box.setObjectName("ComboBox")
+        self.combo_box.setSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed
+        )
+        self.combo_box.addItems(self.options)
+        self.combo_box.setCurrentIndex(0)
+        self.body_layout.addWidget(self.combo_box, alignment=Qt.AlignmentFlag.AlignRight)
+
+    def toggle_checkbox_icon(self):
+        if self.checkbox.isChecked():
+            self.checkbox.setIcon(QIcon(":/assets/checkbox_filled.svg"))
+        else:
+            self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
+
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
+
+    def paintEvent(self, event):
+        option = QStyleOption()
+        option.initFrom(self)
+        painter = QPainter(self)
+        self.style().drawPrimitive(QStyle.PrimitiveElement.PE_Widget, option, painter, self)
+        super().paintEvent(event)
