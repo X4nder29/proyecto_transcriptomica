@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (
     QStyle,
     QLabel,
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QFile, QTextStream
 from .home_panel_head import HomePanelHead
 from .home_panel_body import HomePanelBody
 
@@ -35,7 +35,8 @@ class HomePanel(QWidget):
         self.main_layout.addWidget(self.panel_body)
 
     def load_stylesheet(self):
-        styles_path = Path(__file__).parent / "home_panel.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()

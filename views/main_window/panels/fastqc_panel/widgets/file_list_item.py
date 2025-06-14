@@ -6,7 +6,8 @@ from PySide6.QtWidgets import (
     QStyle,
     QStyleOption,
 )
-from PySide6.QtCore import Qt
+from PySide6.QtGui import QPainter, QIcon
+from PySide6.QtCore import QSize, QFile, QTextStream
 from PySide6.QtGui import QPainter
 from pathlib import Path
 
@@ -22,35 +23,16 @@ class FileListItem(QWidget):
         self.setObjectName("FileListItem")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.load_style_sheet()
+        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
-        self.main_layout = QVBoxLayout(self)
-        self.main_layout.setContentsMargins(10, 10, 10, 10)
-        self.main_layout.setSpacing(0)
-
-        # file name
-        self.name_label = QLabel(self.name, self)
-        self.name_label.setObjectName("FileListItemTitle")
-        self.main_layout.addWidget(self.name_label)
-
-        # file path
-        self.paht_label = QLabel(self.path, self)
-        self.paht_label.setObjectName("FileListItemPath")
-        self.main_layout.addWidget(self.paht_label)
-
-        # body widgets setup can be added here
-
-        self.setLayout(self.main_layout)
-
-    def load_style_sheet(self):
-        styles_path = Path(__file__).parent / "file_list_item.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
-
-    def paintEvent(self, event):
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
         opt = QStyleOption()
         opt.initFrom(self)
         p = QPainter(self)

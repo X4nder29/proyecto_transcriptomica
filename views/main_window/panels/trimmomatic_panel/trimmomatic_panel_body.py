@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QLabel,
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QFile, QTextStream
 from .mode_area import ModeArea
 from .se_files_area import SeFilesArea
 from .pe_files_area import PeFilesArea
@@ -27,7 +27,7 @@ class TrimmomaticPanelBody(QWidget):
         self.setObjectName("TrimmomaticPanelBody")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.loadStylesheet()
+        self.load_stylesheet()
 
         self.setupUi()
 
@@ -141,11 +141,12 @@ class TrimmomaticPanelBody(QWidget):
         self.minlen_option.number_selector._number_label.setText("80")
         self.crop_option.number_selector._number_label.setText("320")
 
-    def loadStylesheet(self):
-        styles_path = Path(__file__).parent / "trimmomatic_panel_body.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
 
     def changeMode(self, id):
         self.files_areas_layout.setCurrentIndex(id)

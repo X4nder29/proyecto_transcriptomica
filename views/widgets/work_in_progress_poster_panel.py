@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
     QStyleOption,
     QStyle,
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QFile, QTextStream
 from PySide6.QtGui import QPainter, QIcon
 from pathlib import Path
 
@@ -18,7 +18,7 @@ class WorkInProgressPosterPanel(QWidget):
         self.setObjectName("WorkInProgressPosterPanel")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.load_style_sheet()
+        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
@@ -58,11 +58,12 @@ class WorkInProgressPosterPanel(QWidget):
             self.text_area, alignment=Qt.AlignmentFlag.AlignCenter
         )
 
-    def load_style_sheet(self):
-        styles_path = Path(__file__).parent / "work_in_progress_poster_panel.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
 
     def paintEvent(self, event):
         opt = QStyleOption()

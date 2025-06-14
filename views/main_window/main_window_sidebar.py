@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (
     QStyle,
 )
 from PySide6.QtGui import QPainter, QIcon, Qt
-from PySide6.QtCore import QSize
+from PySide6.QtCore import QSize, QFile, QTextStream
 from pathlib import Path
 
 
@@ -191,10 +191,11 @@ class MainWindowSideBar(QWidget):
             self.fastqc_button.setIcon(self.outlined_icon[4])
 
     def load_stylesheet(self):
-        styles_path = Path(__file__).parent / "main_window_sidebar.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
 
     def paintEvent(self, event):
         opt = QStyleOption()

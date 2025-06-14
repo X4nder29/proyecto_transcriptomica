@@ -7,7 +7,7 @@ from PySide6.QtWidgets import (
     QPushButton,
 )
 from PySide6.QtGui import QIcon
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QFile, QTextStream
 
 
 class TrimmomaticPanelHead(QWidget):
@@ -18,7 +18,7 @@ class TrimmomaticPanelHead(QWidget):
         self.setObjectName("TrimmomaticPanelHead")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.loadStylesheet()
+        self.load_stylesheet()
 
         self.setupUi()
 
@@ -52,8 +52,9 @@ class TrimmomaticPanelHead(QWidget):
         self.main_layout.addWidget(self.play_button)
         self.main_layout.addWidget(self.star_button)
 
-    def loadStylesheet(self):
-        styles_path = Path(__file__).parent / "trimmomatic_panel_head.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()

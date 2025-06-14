@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
     QStyleOption,
     QStyle,
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QFile, QTextStream
 from PySide6.QtGui import QPainter
 from pathlib import Path
 import os
@@ -41,10 +41,11 @@ class ThreadsOption(QWidget):
         self.main_layout.addWidget(self.slider)
 
     def load_stylesheet(self):
-        styles_path = Path(__file__).parent / "threads_option.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
 
     def paintEvent(self, event):
         opt = QStyleOption()

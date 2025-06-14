@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QSizePolicy
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QFile, QTextStream
 from PySide6.QtGui import QIntValidator
 
 class NumberSelector(QWidget):
@@ -51,7 +51,8 @@ class NumberSelector(QWidget):
         self._number_label.setText(f"{self.number}")
 
     def load_stylesheet(self):
-        styles_path = Path(__file__).parent / "number_selector.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()

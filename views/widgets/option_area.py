@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QWidget, QVBoxLayout, QLabel, QStyle, QStyleOption
 from PySide6.QtGui import QPainter
+from PySide6.QtCore import QFile, QTextStream
 from pathlib import Path
 
 
@@ -32,10 +33,11 @@ class OptionArea(QWidget):
             self.main_layout.addWidget(self.title_label)
 
     def load_stylesheet(self):
-        styles_path = Path(__file__).parent / "option_area.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
 
     def paintEvent(self, event):
         opt = QStyleOption()

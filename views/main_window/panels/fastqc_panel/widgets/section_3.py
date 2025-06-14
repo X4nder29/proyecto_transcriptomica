@@ -19,7 +19,7 @@ class Section3(QWidget):
         self.setObjectName("RightSection")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.load_style_sheet()
+        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):

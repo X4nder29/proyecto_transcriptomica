@@ -20,7 +20,7 @@ class Section2(QWidget):
         self.setObjectName("Section3")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.load_style_sheet()
+        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
@@ -66,11 +66,12 @@ class Section2(QWidget):
 
         self.main_layout.addStretch(1)
 
-    def load_style_sheet(self):
-        styles_path = Path(__file__).parent / "section_2.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
 
     def paintEvent(self, event):
         opt = QStyleOption()

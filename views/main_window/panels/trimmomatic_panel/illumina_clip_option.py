@@ -244,10 +244,11 @@ class IlluminaClipOption(QWidget):
         self.body_layout.addWidget(self.keep_both_reads_area)
 
     def load_stylesheet(self):
-        styles_path = Path(__file__).parent / "illumina_clip_option.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
 
     def update_icon(self, button, checked):
         button.setIcon(self.checkbox_icon_filled if checked else self.checkbox_icon_outlined)

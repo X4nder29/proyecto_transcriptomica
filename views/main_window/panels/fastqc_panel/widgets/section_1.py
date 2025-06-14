@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
     QStyle,
     QStyleOption,
 )
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QFile, QTextStream
 from PySide6.QtGui import QPainter
 from pathlib import Path
 from .file_list import FileList
@@ -20,7 +20,7 @@ class Section1(QWidget):
         self.setObjectName("Section1")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.load_style_sheet()
+        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
@@ -37,11 +37,12 @@ class Section1(QWidget):
         self.main_layout.addWidget(self.basic_statistics, alignment=Qt.AlignmentFlag.AlignBottom)
         self.setLayout(self.main_layout)
 
-    def load_style_sheet(self):
-        styles_path = Path(__file__).parent / "section_1.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
 
     def paintEvent(self, event):
         opt = QStyleOption()

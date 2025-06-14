@@ -4,6 +4,7 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QLabel,
 )
+from PySide6.QtCore import QFile, QTextStream
 from pathlib import Path
 
 
@@ -17,7 +18,7 @@ class PanelHeadSimple(QWidget):
         self.setObjectName("PanelHead")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.load_style_sheet()
+        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
@@ -33,8 +34,9 @@ class PanelHeadSimple(QWidget):
 
         self.setLayout(self.main_layout)
 
-    def load_style_sheet(self):
-        styles_path = Path(__file__).with_suffix(".qss")
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()

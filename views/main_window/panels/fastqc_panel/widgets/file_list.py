@@ -4,8 +4,7 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QLabel,
     QScrollArea,
-)
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QFile, QTextStream
 from pathlib import Path
 from .file_list_item import FileListItem
 
@@ -17,7 +16,7 @@ class FileList(QWidget):
         self.setObjectName("FileList")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.load_style_sheet()
+        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
@@ -46,14 +45,9 @@ class FileList(QWidget):
 
         for i in range(15):
             file_item = FileListItem(f"File {i + 1}", f"/path/to/file_{i + 1}.txt", self.file_list_area)
-            self.file_list_layout.addWidget(file_item)
-
-        # body widgets setup can be added here
-
-        self.setLayout(self.main_layout)
-
-    def load_style_sheet(self):
-        styles_path = Path(__file__).parent / "file_list.qss"
-        if styles_path.exists():
-            with open(styles_path, "r") as styles:
-                self.setStyleSheet(styles.read())
+    def load_stylesheet(self):
+        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            qss_file.close()
