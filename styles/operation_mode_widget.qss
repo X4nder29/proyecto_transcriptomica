@@ -1,0 +1,42 @@
+#OperationModeWidget {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+#OperationModeLabel {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#HelpButton {
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+#HelpButton:hover {
+    background-color: #404040;
+}
+
+#ModeButton {
+    background-color: #202020;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+#ModeButton:checked {
+    background-color: #6495ED;
+}
+
+#ModeButton:!checked {
+    background-color: #202020;
+    color: darkgray;
+}
+
+#ModeButton:!checked:hover {
+    background-color: #505050;
+}
