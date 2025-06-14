@@ -29,8 +29,8 @@ class SlidingWindowOption(QWidget):
 
     def setup_ui(self):
 
-        self.checkbox_icon_outlined = QIcon("assets/checkbox_outlined.svg")
-        self.checkbox_icon_filled = QIcon("assets/checkbox_filled.svg")
+        self.checkbox_icon_outlined = QIcon(":/assets/checkbox_outlined.svg")
+        self.checkbox_icon_filled = QIcon(":/assets/checkbox_filled.svg")
 
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(10, 10, 10, 10)

@@ -33,7 +33,7 @@ class SeFilesArea(QWidget):
         self.input_file_label.setObjectName("FilesLabel")
         self.input_file_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        self.input_file_se = LineEditWithButton("assets/file.svg")
+        self.input_file_se = LineEditWithButton(":/assets/file.svg")
         self.input_file_se.setObjectName("FilesInput")
         self.input_file_se.button.clicked.connect(
             lambda: self.open_file_dialog(self.input_file_se.line_edit)
@@ -42,7 +42,7 @@ class SeFilesArea(QWidget):
         self.output_file_label = QLabel("Archivo de Salida", self)
         self.output_file_label.setObjectName("FilesLabel")
 
-        self.output_file_se = LineEditWithButton("assets/file.svg")
+        self.output_file_se = LineEditWithButton(":/assets/file.svg")
         self.output_file_se.setObjectName("FilesInput")
 
         self.main_layout.addWidget(self.input_file_label)

@@ -33,7 +33,7 @@ class SingleOptionWidget(QWidget):
         self.checkbox.setObjectName("Checkbox")
         self.checkbox.setCheckable(True)
         self.checkbox.setChecked(False)
-        self.checkbox.setIcon(QIcon("assets/checkbox_outlined.svg"))
+        self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
         self.main_layout.addWidget(self.checkbox, alignment=Qt.AlignmentFlag.AlignLeft)
 
         self.name_label = QLabel(self.label, self)

@@ -43,18 +43,18 @@ class MainWindowSideBar(QWidget):
             "fastqc",
         ]
         self.outlined_icon = [
-            QIcon("assets/home_outlined.svg"),
-            QIcon("assets/adn_outlined.svg"),
-            QIcon("assets/cut_outlined.svg"),
-            QIcon("assets/kraken_outlined.svg"),
-            QIcon("assets/graphics_outlined.svg"),
+            QIcon(":/assets/home_outlined.svg"),
+            QIcon(":/assets/adn_outlined.svg"),
+            QIcon(":/assets/cut_outlined.svg"),
+            QIcon(":/assets/kraken_outlined.svg"),
+            QIcon(":/assets/graphics_outlined.svg"),
         ]
         self.filled_icon = [
-            QIcon("assets/home.svg"),
-            QIcon("assets/adn.svg"),
-            QIcon("assets/cut.svg"),
-            QIcon("assets/kraken.svg"),
-            QIcon("assets/graphics.svg"),
+            QIcon(":/assets/home.svg"),
+            QIcon(":/assets/adn.svg"),
+            QIcon(":/assets/cut.svg"),
+            QIcon(":/assets/kraken.svg"),
+            QIcon(":/assets/graphics.svg"),
         ]
         self.buttons = []
 
@@ -64,7 +64,7 @@ class MainWindowSideBar(QWidget):
         self.icon_app.setFixedHeight(44)
         self.icon_app.setToolTip("TranscriptoHub")
 
-        self.icon_app.setPixmap(QIcon("assets/icon.svg").pixmap(QSize(32, 32)))
+        self.icon_app.setIcon(QIcon(":/assets/icon.svg"))
         self.icon_app.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(self.icon_app, alignment=Qt.AlignmentFlag.AlignTop)
         self.main_layout.addStretch()
@@ -156,7 +156,7 @@ class MainWindowSideBar(QWidget):
         self.settings_button.setCheckable(True)
         self.button_group.addButton(self.settings_button, 5)
 
-        self.settings_button_icon = QIcon("assets/settings_outlined.svg")
+        self.settings_button_icon = QIcon(":/assets/settings_outlined.svg")
         self.settings_button.setIcon(self.settings_button_icon)
         self.settings_button.setIconSize(QSize(24, 24))
         self.main_layout.addStretch()

@@ -30,7 +30,7 @@ class PeFilesArea(QWidget):
         self.input_file_1_label.setObjectName("FilesLabel")
         self.input_file_1_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        self.input_file_1_pe = LineEditWithButton("assets/file.svg")
+        self.input_file_1_pe = LineEditWithButton(":/assets/file.svg")
         self.input_file_1_pe.button.clicked.connect(
             lambda: self.open_file_dialog(self.input_file_1_pe.line_edit)
         )
@@ -39,7 +39,7 @@ class PeFilesArea(QWidget):
         self.input_file_2_label.setObjectName("FilesLabel")
         self.input_file_2_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        self.input_file_2_pe = LineEditWithButton("assets/file.svg")
+        self.input_file_2_pe = LineEditWithButton(":/assets/file.svg")
         self.input_file_2_pe.button.clicked.connect(
             lambda: self.open_file_dialog(self.input_file_2_pe.line_edit)
         )
@@ -48,13 +48,13 @@ class PeFilesArea(QWidget):
         self.output_file_1_label.setObjectName("FilesLabel")
         self.output_file_1_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        self.output_file_1_pe = LineEditWithButton("assets/file.svg")
+        self.output_file_1_pe = LineEditWithButton(":/assets/file.svg")
 
         self.output_file_2_label = QLabel("Archivo de Salida 2", self)
         self.output_file_2_label.setObjectName("FilesLabel")
         self.output_file_2_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
-        self.output_file_2_pe = LineEditWithButton("assets/file.svg")
+        self.output_file_2_pe = LineEditWithButton(":/assets/file.svg")
         self.output_file_2_pe.button.clicked.connect(lambda: print("hello, boy"))
 
         self.main_layout.addWidget(self.input_file_1_label)

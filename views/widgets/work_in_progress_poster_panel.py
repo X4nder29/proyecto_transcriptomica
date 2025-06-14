@@ -41,7 +41,7 @@ class WorkInProgressPosterPanel(QWidget):
         self.icon_label.setObjectName("Icon")
         self.icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.icon_label.setPixmap(
-            QIcon("assets/work_in_progress.svg").pixmap(32, 32)
+            QIcon(":/assets/work_in_progress.svg").pixmap(32, 32)
         )
         self.text_area_layout.addWidget(
             self.icon_label, alignment=Qt.AlignmentFlag.AlignCenter

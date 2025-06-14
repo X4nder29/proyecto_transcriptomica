@@ -43,7 +43,7 @@ class PanelHead(QWidget):
         self.play_button = QPushButton(self)
         self.play_button.setObjectName("action_button")
 
-        self.play_button_icon = QIcon("assets/play.svg")
+        self.play_button_icon = QIcon(":/assets/play.svg")
         self.play_button.setIcon(self.play_button_icon)
 
         self.main_layout.addWidget(self.play_button)
@@ -53,7 +53,7 @@ class PanelHead(QWidget):
         self.star_button = QPushButton(self)
         self.star_button.setObjectName("action_button")
 
-        self.star_button_icon = QIcon("assets/outlined_star.svg")
+        self.star_button_icon = QIcon(":/assets/outlined_star.svg")
         self.star_button.setIcon(self.star_button_icon)
 
         self.main_layout.addWidget(self.star_button)
