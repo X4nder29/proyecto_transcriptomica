@@ -34,6 +34,7 @@ class SingleOptionWidget(QWidget):
         self.checkbox.setCheckable(True)
         self.checkbox.setChecked(False)
         self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
+        self.checkbox.toggled.connect(self.toggle_checkbox_icon)
         self.main_layout.addWidget(self.checkbox, alignment=Qt.AlignmentFlag.AlignLeft)
 
         self.name_label = QLabel(self.label, self)
@@ -50,6 +51,12 @@ class SingleOptionWidget(QWidget):
         self.main_layout.addWidget(
             self.help_button, alignment=Qt.AlignmentFlag.AlignRight
         )
+
+    def toggle_checkbox_icon(self):
+        if self.checkbox.isChecked():
+            self.checkbox.setIcon(QIcon(":/assets/checkbox_filled.svg"))
+        else:
+            self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
 
     def load_stylesheet(self):
         qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
