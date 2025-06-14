@@ -1,5 +1,5 @@
 import sys
-import asset.assets_rc
+import assets.assets_rc
 import styles.styles_rc
 from pathlib import Path
 from PySide6.QtWidgets import QApplication
