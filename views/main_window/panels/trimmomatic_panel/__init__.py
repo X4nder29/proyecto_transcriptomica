@@ -1,5 +1,4 @@
 from .trimmomatic_panel import TrimmomaticPanel
-from .trimmomatic_panel_head import TrimmomaticPanelHead
 from .trimmomatic_panel_body import TrimmomaticPanelBody
 from .threads_options import ThreadsOption
 from .quality_scores_format_option import QualityScoresFormatOption

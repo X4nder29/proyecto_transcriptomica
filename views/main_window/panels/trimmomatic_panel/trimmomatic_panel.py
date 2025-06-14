@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
     QMessageBox,
 )
 from PySide6.QtCore import Qt
-from .trimmomatic_panel_head import TrimmomaticPanelHead
+from ....widgets import PanelHead
 from .trimmomatic_panel_body import TrimmomaticPanelBody
 
 
@@ -27,7 +27,7 @@ class TrimmomaticPanel(QWidget):
 
         # head
 
-        self.head = TrimmomaticPanelHead(self)
+        self.head = PanelHead("Trimmomatic", self)
 
         # body
 
