@@ -6,8 +6,8 @@ from PySide6.QtCore import QFile, QTextStream
 
 class LineEditWithButton(QWidget):
 
-    def __init__(self, icon_path: str):
-        super().__init__()
+    def __init__(self, icon_path: str, parent=None):
+        super().__init__(parent=parent)
 
         self.icon_path = icon_path
 
