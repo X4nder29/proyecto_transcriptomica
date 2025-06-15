@@ -22,4 +22,5 @@ def path_programs() -> str:
     programs_path = os.path.join(get_app_data_path(), "programs")
     if not os.path.exists(programs_path):
         os.makedirs(programs_path, exist_ok=True)
+        print(f"Created programs directory at: {programs_path}")
     return programs_path
