@@ -4,3 +4,4 @@ from .section_3 import Section3
 from .file_list import FileList
 from .basic_statistics import BasicStatistics
 from .graphic import Graphic
+from .summary_widget import SummaryListWidget
