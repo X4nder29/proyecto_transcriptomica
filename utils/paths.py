@@ -13,6 +13,7 @@ def get_app_data_path() -> str:
     app_data_path = QStandardPaths.writableLocation(QStandardPaths.AppDataLocation)
     if not os.path.exists(app_data_path):
         os.makedirs(app_data_path, exist_ok=True)
+        print(f"Created app data directory at: {app_data_path}")
     return app_data_path
 
 
