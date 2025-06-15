@@ -17,6 +17,11 @@ def get_app_data_path() -> str:
     return app_data_path
 
 
+"""
+Funciones relacionadas con la ruta de los programas.
+"""
+
+
 def path_programs() -> str:
     """Get the path to the programs directory."""
     programs_path = os.path.join(get_app_data_path(), "programs")
