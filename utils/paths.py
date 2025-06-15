@@ -2,7 +2,7 @@ import os
 from PySide6.QtCore import QStandardPaths, QCoreApplication
 
 
-QCoreApplication.setOrganizationName("Universidad de Cooperativa de Colombia")
+QCoreApplication.setOrganizationName("Universidad Cooperativa de Colombia")
 QCoreApplication.setOrganizationDomain("ucc.edu.co")
 QCoreApplication.setApplicationName("Transcripohub")
 QCoreApplication.setApplicationVersion("1.0.0")
