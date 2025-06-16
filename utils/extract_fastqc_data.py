@@ -105,26 +105,3 @@ def extract_fastqc_data(html_path: str, output_dir: str):
         "basic_statistics_json": basic_stats_json,
         "overrepresented_sequences_json": overrep_json,
     }
-
-
-# -------------------------
-# Ejemplo de uso:
-# -------------------------
-if __name__ == "__main__":
-    html_path = (
-        r"D:\projects_ucc\proyecto_transcriptomica\tests\Primera_Prueba_fastqc.html"
-    )
-    output_dir = r"D:\projects_ucc\proyecto_transcriptomica\tests\result"
-
-    resultados = extract_fastqc_data(html_path, output_dir)
-
-    print("Imágenes extraídas:")
-    for módulo, ruta in resultados["images"]:
-        print(f"  - {módulo}: {ruta}")
-
-    if resultados["basic_statistics_json"]:
-        print(f"Basic Statistics JSON: {resultados['basic_statistics_json']}")
-    if resultados["overrepresented_sequences_json"]:
-        print(
-            f"Overrepresented Sequences JSON: {resultados['overrepresented_sequences_json']}"
-        )
