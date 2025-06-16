@@ -3,9 +3,10 @@ import base64
 import pandas as pd
 from bs4 import BeautifulSoup
 from io import StringIO
+from pathlib import Path
 
 
-def extract_fastqc_data(html_path: str, output_dir: str):
+def extract_fastqc_data(html_path: str, output_dir: Path):
     """
     Extrae las gráficas (segunda imagen) de cada módulo y las tablas “Basic statistics”
     y “Overrepresented sequences” de un informe FastQC en HTML. Guarda:
@@ -23,10 +24,16 @@ def extract_fastqc_data(html_path: str, output_dir: str):
           - "overrepresented_sequences_json": ruta al JSON de Overrepresented sequences (o None)
     """
     # Crear carpeta de salida si no existe
-    os.makedirs(output_dir, exist_ok=True)
+    if not output_dir.exists() and output_dir.is_dir():
+        output_dir.mkdir(parents=True, exist_ok=True)
 
     # Cargar y parsear el HTML con BeautifulSoup
-    with open(html_path, "r", encoding="utf-8") as f:
+    report_path = Path(html_path)
+    if not report_path.exists():
+        print(f"El archivo {report_path} no existe.")
+        return 
+
+    with report_path.open("r", encoding="utf-8") as f:
         soup = BeautifulSoup(f.read(), "html.parser")
 
     # Nombres exactos de los módulos de los que queremos la segunda imagen
