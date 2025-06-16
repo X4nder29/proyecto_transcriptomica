@@ -1,0 +1,13 @@
+#BasicStatisticsReportWidget {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+#BasicStatisticsTitleLabel {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#BasicStatisticsValueLabel {
+    font-size: 12px;
+}
