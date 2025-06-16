@@ -60,6 +60,7 @@ class SummaryListWidget(QWidget):
         )
         self.per_base_sequence_quality_push_button.setObjectName("SummaryItem")
         self.per_base_sequence_quality_push_button.setCheckable(True)
+        self.per_base_sequence_quality_push_button.setEnabled(False)
         self.button_group.addButton(self.per_base_sequence_quality_push_button)
         self.main_layout.addWidget(
             self.per_base_sequence_quality_push_button,
@@ -71,6 +72,7 @@ class SummaryListWidget(QWidget):
         )
         self.per_sequence_quality_scores_push_button.setObjectName("SummaryItem")
         self.per_sequence_quality_scores_push_button.setCheckable(True)
+        self.per_sequence_quality_scores_push_button.setEnabled(False)
         self.button_group.addButton(self.per_sequence_quality_scores_push_button)
         self.main_layout.addWidget(
             self.per_sequence_quality_scores_push_button,
@@ -82,6 +84,7 @@ class SummaryListWidget(QWidget):
         )
         self.per_base_sequence_content_push_button.setObjectName("SummaryItem")
         self.per_base_sequence_content_push_button.setCheckable(True)
+        self.per_base_sequence_content_push_button.setEnabled(False)
         self.button_group.addButton(self.per_base_sequence_content_push_button)
         self.main_layout.addWidget(
             self.per_base_sequence_content_push_button,
@@ -93,6 +96,7 @@ class SummaryListWidget(QWidget):
         )
         self.per_sequence_gc_content_push_button.setObjectName("SummaryItem")
         self.per_sequence_gc_content_push_button.setCheckable(True)
+        self.per_sequence_gc_content_push_button.setEnabled(False)
         self.button_group.addButton(self.per_sequence_gc_content_push_button)
         self.main_layout.addWidget(
             self.per_sequence_gc_content_push_button,
@@ -102,6 +106,7 @@ class SummaryListWidget(QWidget):
         self.per_base_n_content = QPushButton("Contenido N por base", self)
         self.per_base_n_content.setObjectName("SummaryItem")
         self.per_base_n_content.setCheckable(True)
+        self.per_base_n_content.setEnabled(False)
         self.button_group.addButton(self.per_base_n_content)
         self.main_layout.addWidget(
             self.per_base_n_content, alignment=Qt.AlignmentFlag.AlignTop
@@ -112,6 +117,7 @@ class SummaryListWidget(QWidget):
         )
         self.sequence_length_distribution_push_button.setObjectName("SummaryItem")
         self.sequence_length_distribution_push_button.setCheckable(True)
+        self.sequence_length_distribution_push_button.setEnabled(False)
         self.button_group.addButton(self.sequence_length_distribution_push_button)
         self.main_layout.addWidget(
             self.sequence_length_distribution_push_button,
@@ -123,6 +129,7 @@ class SummaryListWidget(QWidget):
         )
         self.sequence_duplication_levels_push_button.setObjectName("SummaryItem")
         self.sequence_duplication_levels_push_button.setCheckable(True)
+        self.sequence_duplication_levels_push_button.setEnabled(False)
         self.button_group.addButton(self.sequence_duplication_levels_push_button)
         self.main_layout.addWidget(
             self.sequence_duplication_levels_push_button,
@@ -134,6 +141,7 @@ class SummaryListWidget(QWidget):
         )
         self.overrepresented_sequences_push_button.setObjectName("SummaryItem")
         self.overrepresented_sequences_push_button.setCheckable(True)
+        self.overrepresented_sequences_push_button.setEnabled(False)
         self.button_group.addButton(self.overrepresented_sequences_push_button)
         self.main_layout.addWidget(
             self.overrepresented_sequences_push_button,
@@ -143,6 +151,7 @@ class SummaryListWidget(QWidget):
         self.adapter_content_push_button = QPushButton("Contenido de adaptador", self)
         self.adapter_content_push_button.setObjectName("SummaryItem")
         self.adapter_content_push_button.setCheckable(True)
+        self.adapter_content_push_button.setEnabled(False)
         self.button_group.addButton(self.adapter_content_push_button)
         self.main_layout.addWidget(
             self.adapter_content_push_button, alignment=Qt.AlignmentFlag.AlignTop
