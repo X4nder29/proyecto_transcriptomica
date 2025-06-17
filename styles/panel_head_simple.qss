@@ -3,3 +3,20 @@ QLabel#title {
     font-weight: bold;
     color: white;
 }
+
+#ActionButton {
+    background-color: #303030;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#ActionButton:hover {
+    background-color: #505050;
+}
+
+#ActionButton:pressed {
+    background-color: #353535;
+}

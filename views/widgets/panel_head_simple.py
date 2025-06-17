@@ -1,9 +1,11 @@
 from PySide6.QtWidgets import (
     QWidget,
-    QVBoxLayout,
+    QHBoxLayout,
     QSizePolicy,
     QLabel,
+    QPushButton,
 )
+from PySide6.QtGui import QIcon
 from PySide6.QtCore import QFile, QTextStream
 from pathlib import Path
 
@@ -22,13 +24,25 @@ class PanelHeadSimple(QWidget):
         self.setup_ui()
 
     def setup_ui(self):
-        self.main_layout = QVBoxLayout(self)
+        self.main_layout = QHBoxLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(20)
 
         self.title = QLabel(self.title, self)
         self.title.setObjectName("title")
         self.main_layout.addWidget(self.title)
+
+        # add stretch
+
+        self.main_layout.addStretch()
+
+        # cli push button
+
+        self.cli_push_button = QPushButton(self)
+        self.cli_push_button.setObjectName("ActionButton")
+        self.cli_push_button.setIcon(QIcon(":/assets/cli_filled.svg"))
+        self.cli_push_button.setToolTip("Visualizar comando a ejecutar")
+        self.main_layout.addWidget(self.cli_push_button)
 
         # head widgets setup can be added here
 
