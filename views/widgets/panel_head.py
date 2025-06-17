@@ -59,6 +59,13 @@ class PanelHead(QWidget):
 
         self.main_layout.addWidget(self.star_button)
 
+        # cli push button
+
+        self.cli_push_button = QPushButton(self)
+        self.cli_push_button.setObjectName("action_button")
+        self.cli_push_button.setIcon(QIcon(":/assets/cli_filled.svg"))
+        self.main_layout.addWidget(self.cli_push_button)
+
     def load_stylesheet(self):
         qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
         if qss_file.open(QFile.ReadOnly | QFile.Text):
