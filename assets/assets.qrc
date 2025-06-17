@@ -1,2 +1,47 @@
-<?xml version='1.0' encoding='utf-8'?>
-<RCC><qresource prefix="assets"><file>./add.svg</file><file>./adn.svg</file><file>./adn_outlined.svg</file><file>./ai.svg</file><file>./bioinformatic.svg</file><file>./checkbox_filled.svg</file><file>./checkbox_outlined.svg</file><file>./cut.svg</file><file>./cut_outlined.svg</file><file>./fast.svg</file><file>./fast_outlined.svg</file><file>./file.svg</file><file>./filled_star.svg</file><file>./folder.svg</file><file>./graphics.svg</file><file>./graphics_outlined.svg</file><file>./home.svg</file><file>./home_outlined.svg</file><file>./icon.svg</file><file>./install_filled.svg</file><file>./install_outlined.svg</file><file>./kraken.svg</file><file>./kraken_outlined.svg</file><file>./more_vert.svg</file><file>./outlined_star.svg</file><file>./play.svg</file><file>./search.svg</file><file>./settings.svg</file><file>./settings_outlined.svg</file><file>./sort_filled.svg</file><file>./sort_outlined.svg</file><file>./square.svg</file><file>./trash.svg</file><file>./upload_file.svg</file><file>./work_in_progress.svg</file></qresource></RCC>
+<?xml version="1.0" ?>
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="assets">
+    <file alias="add.svg">add.svg</file>
+    <file alias="adn.svg">adn.svg</file>
+    <file alias="adn_outlined.svg">adn_outlined.svg</file>
+    <file alias="ai.svg">ai.svg</file>
+    <file alias="assets.qrc">assets.qrc</file>
+    <file alias="assets_rc.py">assets_rc.py</file>
+    <file alias="bioinformatic.svg">bioinformatic.svg</file>
+    <file alias="checkbox_filled.svg">checkbox_filled.svg</file>
+    <file alias="checkbox_outlined.svg">checkbox_outlined.svg</file>
+    <file alias="cli_filled.svg">cli_filled.svg</file>
+    <file alias="cli_outlined.svg">cli_outlined.svg</file>
+    <file alias="cut.svg">cut.svg</file>
+    <file alias="cut_outlined.svg">cut_outlined.svg</file>
+    <file alias="fast.svg">fast.svg</file>
+    <file alias="fast_outlined.svg">fast_outlined.svg</file>
+    <file alias="file.svg">file.svg</file>
+    <file alias="filled_star.svg">filled_star.svg</file>
+    <file alias="folder.svg">folder.svg</file>
+    <file alias="graphics.svg">graphics.svg</file>
+    <file alias="graphics_outlined.svg">graphics_outlined.svg</file>
+    <file alias="home.svg">home.svg</file>
+    <file alias="home_outlined.svg">home_outlined.svg</file>
+    <file alias="icon.svg">icon.svg</file>
+    <file alias="install_filled.svg">install_filled.svg</file>
+    <file alias="install_outlined.svg">install_outlined.svg</file>
+    <file alias="kraken.svg">kraken.svg</file>
+    <file alias="kraken_outlined.svg">kraken_outlined.svg</file>
+    <file alias="more_vert.svg">more_vert.svg</file>
+    <file alias="outlined_star.svg">outlined_star.svg</file>
+    <file alias="play.svg">play.svg</file>
+    <file alias="search.svg">search.svg</file>
+    <file alias="settings.svg">settings.svg</file>
+    <file alias="settings_outlined.svg">settings_outlined.svg</file>
+    <file alias="sort_filled.svg">sort_filled.svg</file>
+    <file alias="sort_outlined.svg">sort_outlined.svg</file>
+    <file alias="square.svg">square.svg</file>
+    <file alias="trash.svg">trash.svg</file>
+    <file alias="upload_file.svg">upload_file.svg</file>
+    <file alias="work_in_progress.svg">work_in_progress.svg</file>
+    <file alias="assets_rc.cpython-313.pyc">__pycache__/assets_rc.cpython-313.pyc</file>
+    <file alias="resources_rc.cpython-313.pyc">__pycache__/resources_rc.cpython-313.pyc</file>
+  </qresource>
+</RCC>
