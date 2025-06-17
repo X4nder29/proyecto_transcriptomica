@@ -54,7 +54,7 @@ class PanelHead(QWidget):
         self.star_button = QPushButton(self)
         self.star_button.setObjectName("action_button")
 
-        self.star_button_icon = QIcon(":/assets/outlined_star.svg")
+        self.star_button_icon = QIcon(":/assets/filled_star.svg")
         self.star_button.setIcon(self.star_button_icon)
 
         self.main_layout.addWidget(self.star_button)
