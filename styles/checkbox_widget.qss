@@ -1,0 +1,11 @@
+#CheckBoxWidget {
+	border: none;
+	border-radius: 5px;
+	padding: 0px;
+	width: 20px;
+	height: 20px;
+}
+
+#CheckBoxWidget:hover {
+	background-color: #404040;
+}
