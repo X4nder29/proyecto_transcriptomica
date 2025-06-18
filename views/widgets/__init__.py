@@ -8,3 +8,4 @@ from .operation_mode_widget import OperationModeWidget
 from .threads_selector_widget import ThreadsSelectorWidget
 from .single_option_widget import SingleOptionWidget
 from .combo_box_option_widget import ComboBoxOptionWidget
+from .option_widget import OptionWidget
