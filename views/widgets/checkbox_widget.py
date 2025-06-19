@@ -10,15 +10,16 @@ from PySide6.QtCore import QFile, QTextStream
 
 
 class CheckBoxWidget(QPushButton):
-    def __init__(self, parent: QWidget = None):
+    def __init__(self, parent: QWidget = None, checked: bool = False):
         super().__init__(parent)
+        self.checked = checked
         self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
         self.setObjectName("CheckBoxWidget")
         self.setCheckable(True)
-        self.setChecked(False)
+        self.setChecked(self.checked)
         self.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
         self.toggled.connect(self._toggle_checkbox_icon)
 
