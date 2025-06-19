@@ -7,14 +7,14 @@ QLineEdit {
     color: white;
     padding: 0em;
     text-align: center;
-    background-color: #555;
+    background-color: #202020;
     padding: 0;
     border: none;
     width: 5em;
 }
 
 QPushButton {
-    background-color: #555;
+    background-color: #202020;
     padding: 0.5em;
     color: white;
     border: none;   
