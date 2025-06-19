@@ -14,11 +14,12 @@ from PySide6.QtCore import Qt, QFile, QTextStream
 
 class OptionWidget(QWidget):
     def __init__(
-        self, parent: QWidget = None, title: str = None, checkable: bool = True
+        self, parent: QWidget = None, title: str = None, checkable: bool = True, checked: bool = False
     ):
         super().__init__(parent)
         self.title = title
         self.checkable = checkable
+        self.checked = checked
         self.load_stylesheet()
         self.setup_ui()
 
@@ -44,7 +45,7 @@ class OptionWidget(QWidget):
             self.checkbox = QPushButton(self)
             self.checkbox.setObjectName("OptionWidgetCheckbox")
             self.checkbox.setCheckable(True)
-            self.checkbox.setChecked(False)
+            self.checkbox.setChecked(self.checked)
             self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
             self.checkbox.toggled.connect(self._toggle_checkbox_icon)
             self.head_layout.addWidget(
