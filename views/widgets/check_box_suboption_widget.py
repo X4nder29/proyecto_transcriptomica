@@ -18,8 +18,6 @@ class CheckBoxSuboptionWidget(QWidget):
         self.checked = checked
         self.setObjectName("CheckBoxSuboptionWidget")
         self.setMinimumWidth(300)
-
-        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
