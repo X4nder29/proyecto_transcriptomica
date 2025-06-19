@@ -9,6 +9,7 @@
     <file alias="assets.qrc">assets.qrc</file>
     <file alias="assets_rc.py">assets_rc.py</file>
     <file alias="bioinformatic.svg">bioinformatic.svg</file>
+    <file alias="cancel.svg">cancel.svg</file>
     <file alias="checkbox_filled.svg">checkbox_filled.svg</file>
     <file alias="checkbox_outlined.svg">checkbox_outlined.svg</file>
     <file alias="cli_filled.svg">cli_filled.svg</file>
