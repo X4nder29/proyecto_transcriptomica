@@ -42,7 +42,7 @@ class PanelHead(QWidget):
         # play button
 
         self.play_button = QPushButton(self)
-        self.play_button.setObjectName("action_button")
+        self.play_button.setObjectName("ActionButton")
         self.play_button.setToolTip("Ejecutar")
 
         self.play_button_icon = QIcon(":/assets/play.svg")
@@ -53,7 +53,7 @@ class PanelHead(QWidget):
         # star button
 
         self.star_button = QPushButton(self)
-        self.star_button.setObjectName("action_button")
+        self.star_button.setObjectName("ActionButton")
         self.star_button.setToolTip("Marcar como favorito configuración actual")
 
         self.star_button_icon = QIcon(":/assets/filled_star.svg")
@@ -64,7 +64,7 @@ class PanelHead(QWidget):
         # cli push button
 
         self.cli_push_button = QPushButton(self)
-        self.cli_push_button.setObjectName("action_button")
+        self.cli_push_button.setObjectName("ActionButton")
         self.cli_push_button.setIcon(QIcon(":/assets/cli_filled.svg"))
         self.cli_push_button.setToolTip("Visualizar comando a ejecutar")
         self.main_layout.addWidget(self.cli_push_button)

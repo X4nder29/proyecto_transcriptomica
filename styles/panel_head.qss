@@ -4,7 +4,7 @@ QLabel#title {
     color: white;
 }
 
-QPushButton#action_button {
+#ActionButton {
     background-color: #303030;
     border-radius: 10px;
     color: white;
@@ -13,10 +13,10 @@ QPushButton#action_button {
     padding: 10px;
 }
 
-QPushButton#action_button:hover {
+#ActionButton:hover {
     background-color: #505050;
 }
 
-QPushButton#action_button:pressed {
+#ActionButton:pressed {
     background-color: #353535;
 }
