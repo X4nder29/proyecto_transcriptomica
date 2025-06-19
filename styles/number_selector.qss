@@ -8,6 +8,10 @@ QLineEdit {
     width: 5em;
 }
 
+QLineEdit:disabled  {
+    color: #9D9D9D;
+}
+
 QPushButton {
     background-color: #202020;
     padding: 0.5em;
@@ -17,6 +21,10 @@ QPushButton {
 
 QPushButton:hover {
     background-color: #666;
+}
+
+QPushButton:disabled  {
+    color: #9D9D9D;
 }
 
 QPushButton#Right {
