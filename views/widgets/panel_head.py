@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
     QSizePolicy,
+    QProgressBar,
 )
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import QFile, QTextStream
@@ -38,6 +39,35 @@ class PanelHead(QWidget):
         # add stretch
 
         self.main_layout.addStretch()
+
+        # inderteminate progress bar
+        self.indeterminate_progress_bar_background = QWidget(self)
+        self.indeterminate_progress_bar_background.setObjectName("IndeterminateProgressBarBackground")
+        self.indeterminate_progress_bar_background.setFixedWidth(150)
+        self.indeterminate_progress_bar_background.setVisible(False)
+        self.main_layout.addWidget(self.indeterminate_progress_bar_background)
+
+        self.indeterminate_progress_bar_background_layout = QHBoxLayout(self.indeterminate_progress_bar_background)
+        self.indeterminate_progress_bar_background_layout.setContentsMargins(15, 0, 15, 0)
+        self.indeterminate_progress_bar_background_layout.setSpacing(0)
+        self.indeterminate_progress_bar_background.setLayout(self.indeterminate_progress_bar_background_layout)
+
+        self.indeterminate_progress_bar = QProgressBar(self)
+        self.indeterminate_progress_bar.setObjectName("IndeterminateProgressBar")
+        self.indeterminate_progress_bar.setRange(0, 0)
+        self.indeterminate_progress_bar.setToolTip("Ejecución en curso")
+        self.indeterminate_progress_bar.setTextVisible(False)
+        self.indeterminate_progress_bar_background_layout.addWidget(
+            self.indeterminate_progress_bar
+        )
+
+        # cancel button
+        self.cancel_button = QPushButton(self)
+        self.cancel_button.setObjectName("ActionButton")
+        self.cancel_button.setToolTip("Cancelar ejecución")
+        self.cancel_button.setIcon(QIcon(":/assets/cancel.svg"))
+        self.cancel_button.setVisible(False)
+        self.main_layout.addWidget(self.cancel_button)
 
         # play button
 

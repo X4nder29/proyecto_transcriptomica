@@ -20,3 +20,12 @@ QLabel#title {
 #ActionButton:pressed {
     background-color: #353535;
 }
+
+#IndeterminateProgressBarBackground {
+    background-color: #303030;
+    border-radius: 10px;
+}
+
+#IndeterminateProgressBar {
+    background-color: #202020;
+}
