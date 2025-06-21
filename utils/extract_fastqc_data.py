@@ -31,7 +31,7 @@ def extract_fastqc_data(html_path: str, output_dir: Path):
     report_path = Path(html_path)
     if not report_path.exists():
         print(f"El archivo {report_path} no existe.")
-        return 
+        return
 
     with report_path.open("r") as f:
         soup = BeautifulSoup(f.read(), "html.parser")
