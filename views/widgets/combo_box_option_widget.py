@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Tuple
 from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -15,7 +16,7 @@ from PySide6.QtCore import Qt, QFile, QTextStream
 
 
 class ComboBoxOptionWidget(QWidget):
-    def __init__(self, label: str, options: list[str], parent=None):
+    def __init__(self, label: str, options: list[Tuple[str, str]], parent=None):
         super().__init__(parent)
 
         self.label = label
@@ -90,7 +91,8 @@ class ComboBoxOptionWidget(QWidget):
         self.combo_box.setSizePolicy(
             QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed
         )
-        self.combo_box.addItems(self.options)
+        for option, data in self.options:
+            self.combo_box.addItem(option, data)
         self.combo_box.setCurrentIndex(0)
         self.body_layout.addWidget(self.combo_box, alignment=Qt.AlignmentFlag.AlignRight)
 
