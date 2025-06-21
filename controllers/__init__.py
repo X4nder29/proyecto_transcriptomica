@@ -1,1 +1,2 @@
 from .check_installed_programs import CheckInstalledPrograms
+from .fastqc_panel_controller import FastQCPanelController

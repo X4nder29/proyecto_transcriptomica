@@ -48,6 +48,13 @@ class MainWindowContent(QWidget):
         # home panel
 
         self.home_panel = HomePanel(self)
+        # fastqc panel
+
+        from controllers import FastQCPanelController
+
+        self.fastqc_panel = FastqcPanel(self)
+        self.fastqc_panel_controller = FastQCPanelController(self.fastqc_panel)
+        self.main_layout.addWidget(self.fastqc_panel)
 
         # trimmomatic panel
 
