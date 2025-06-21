@@ -1,0 +1,18 @@
+#SelectFilePushButton {
+    background-color: #202020;
+    outline: none;
+    border-radius: 5px;
+}
+
+#SelectFilePushButton:hover {
+    background-color: #404040;
+}
+
+#PrimaryLabel {
+    font-size: 12px;
+}
+
+#SecondaryLabel {
+    color: gray;
+    font-size: 11px;
+}
