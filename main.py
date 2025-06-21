@@ -14,7 +14,7 @@ if __name__ == "__main__":
     current_worksapce = Path(current_workspace) if current_workspace != "" else ""
     print(Path(__file__).name, f"Current workspace: {current_workspace == ''}")
 
-    if current_workspace == '':
+    if current_workspace == '' or not current_worksapce.exists():
 
         from views import HomeWindow
         from controllers import HomeWindowController
