@@ -33,7 +33,7 @@ def extract_fastqc_data(html_path: str, output_dir: Path):
         print(f"El archivo {report_path} no existe.")
         return 
 
-    with report_path.open("r", encoding="utf-8") as f:
+    with report_path.open("r") as f:
         soup = BeautifulSoup(f.read(), "html.parser")
 
     # Nombres exactos de los módulos de los que queremos la segunda imagen
