@@ -10,6 +10,7 @@ from .single_option_widget import SingleOptionWidget
 from .combo_box_option_widget import ComboBoxOptionWidget
 from .select_file_push_button import SelectFilePushButton
 from .file_list_item_widget import FileListItemWidget
+from .paired_input_file_widget import PairedInputFileWidget
 from .cli_dialog import CliDialog
 from .number_selector_option_widget import NumberSelectorOptionWidget
 from .segmented_option_widget import SegmentedOptionWidget
