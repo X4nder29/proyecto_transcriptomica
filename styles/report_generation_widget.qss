@@ -1,0 +1,28 @@
+#ReportGenerationContainer {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+#ReportGenerationLabel {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#ReportGenerationCancelButton {
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+#ReportGenerationCancelButton:hover {
+    background-color: #404040;
+}
+
+#ReportGenerationProgressBar {
+    QProgressBar {
+                border: 2px solid #555;
+                border-radius: 8px;
+                text-align: center;
+                background-color: #EEE;
+            }
+}

@@ -1,5 +1,6 @@
 from .summary_widget import SummaryListWidget
 from .unselected_report_widget import UnselectedReportWidget
+from .report_generation_widget import ReportGenerationWidget
 from .unselected_report_visualization_widget import UnselectedReportVisualizationWidget
 from .basic_statistics_report_widget import BasicStatisticsReportWidget
 from .report_chart_widget import ReportChartWidget
