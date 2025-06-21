@@ -107,6 +107,10 @@ def extract_fastqc_data(html_path: str, output_dir: Path):
             overrep_json = os.path.join(output_dir, "overrepresented_sequences.json")
             overrep_df.to_json(overrep_json, orient="records", indent=4)
 
+    if report_path.exists():
+        report_path.with_suffix(".html").unlink(missing_ok=True)
+        report_path.with_suffix(".zip").unlink(missing_ok=True)
+
     return {
         "images": extracted_images,
         "basic_statistics_json": basic_stats_json,
