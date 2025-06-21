@@ -10,6 +10,7 @@ from .single_option_widget import SingleOptionWidget
 from .combo_box_option_widget import ComboBoxOptionWidget
 from .cli_dialog import CliDialog
 from .number_selector_option_widget import NumberSelectorOptionWidget
+from .segmented_option_widget import SegmentedOptionWidget
 from .number_selector_suboption_widget import NumberSelectorSuboptionWidget
 from .check_box_suboption_widget import CheckBoxSuboptionWidget
 from .combo_box_suboption_widget import ComboBoxSuboptionWidget
