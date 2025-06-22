@@ -18,11 +18,11 @@ from PySide6.QtCore import Qt, Signal, QFile, QTextStream
 class WorkspaceItem(QWidget):
     clicked = Signal()
 
-    def __init__(self, name, path, parent=None):
+    def __init__(self, name, path: Path, parent=None):
         super().__init__(parent=parent)
 
         self.name = name
-        self.path = Path(path) / name
+        self.path = path
         self.enable = self.path.exists() and self.path.is_dir()
 
         self.setObjectName("WorkspaceItem")
