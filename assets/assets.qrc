@@ -3,6 +3,8 @@
 <RCC version="1.0">
   <qresource prefix="assets">
     <file alias="add.svg">add.svg</file>
+    <file alias="add_file_filled.svg">add_file_filled.svg</file>
+    <file alias="add_file_outlined.svg">add_file_outlined.svg</file>
     <file alias="adn.svg">adn.svg</file>
     <file alias="adn_outlined.svg">adn_outlined.svg</file>
     <file alias="ai.svg">ai.svg</file>
