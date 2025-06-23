@@ -1,0 +1,10 @@
+#WorkspaceLabel {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+#WorkspacePath {
+    font-size: 14px;
+    color: #CCCCCC;
+}
