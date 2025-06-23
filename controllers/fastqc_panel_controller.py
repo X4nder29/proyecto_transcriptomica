@@ -201,10 +201,18 @@ class FastQCPanelController:
         )
 
     def show_report_chart(self, chart_path: Path):
+        if not chart_path.exists():
+            self.view.body.report_content_area.setCurrentIndex(2)
+            return
+
         self.view.body.report_chart_widget.set_chart(chart_path)
         self.view.body.report_content_area.setCurrentIndex(3)
 
     def show_report_table(self, table_data_path: Path):
+        if not table_data_path.exists():
+            self.view.body.report_content_area.setCurrentIndex(2)
+            return
+
         with table_data_path.open("r", encoding="utf-8") as f:
             table_data = json.load(f)
             table_data = list(
