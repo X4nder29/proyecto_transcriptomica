@@ -1,0 +1,13 @@
+#UploadFilesPushButton {
+    background-color: #202020;
+    border-radius: 5px;
+    outline: none;
+}
+
+#UploadFilesPushButton:hover {
+    background-color: #404040;
+}
+
+#SecondaryLabel {
+    color: gray;
+}
