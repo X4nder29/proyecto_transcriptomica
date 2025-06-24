@@ -3,10 +3,11 @@ import assets.assets_rc
 import styles.styles_rc
 from pathlib import Path
 from PySide6.QtWidgets import QApplication
-from utils import center_window_on_screen, settings
+from PySide6.QtGui import QGuiApplication, Qt
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+    QGuiApplication.styleHints().setColorScheme(Qt.ColorScheme.Dark)
 
     current_workspace = str(settings.value("current_workspace", ""))
     print(Path(__file__).name, f"Current workspace value: {current_workspace}")
