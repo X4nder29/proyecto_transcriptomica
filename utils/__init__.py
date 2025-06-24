@@ -1,0 +1,1 @@
+from .trimmomatic_modes import TrimmomaticModes
