@@ -1,1 +1,2 @@
 from .illumina_clip_option_widget import IlluminaClipOptionWidget
+from .sliding_window_option_widget import SlidingWindowOptionWidget
