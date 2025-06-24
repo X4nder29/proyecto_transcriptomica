@@ -1,1 +1,1 @@
-from .trimmomatic_modes import TrimmomaticModes
+from .operation_modes import OperationModes

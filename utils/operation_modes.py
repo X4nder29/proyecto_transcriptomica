@@ -1,6 +1,6 @@
 from enum import Enum
 
 
-class TrimmomaticModes(Enum):
+class OperationModes(Enum):
     SingleEnd = ("Single End", "SE")
     PairedEnd = ("Paired End", "PE")
