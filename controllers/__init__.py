@@ -1,2 +1,3 @@
 from .check_installed_programs import CheckInstalledPrograms
+from .trimmomatic_panel_controller import TrimmomaticPanelController
 from .fastqc_panel_controller import FastQCPanelController

@@ -58,8 +58,13 @@ class MainWindowContent(QWidget):
 
         # trimmomatic panel
 
+        from controllers import TrimmomaticPanelController
+
         self.trimmomatic_panel = TrimmomaticPanel(self)
-        self.trimmomatic_panel_controller = TrimmomaticPanelController(self.trimmomatic_panel)
+        self.trimmomatic_panel_controller = TrimmomaticPanelController(
+            self.trimmomatic_panel
+        )
+        self.main_layout.addWidget(self.trimmomatic_panel)
 
         # sort me rna panel
 
