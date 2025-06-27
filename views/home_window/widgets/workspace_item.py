@@ -18,7 +18,7 @@ from PySide6.QtCore import Qt, Signal, QFile, QTextStream
 class WorkspaceItem(QWidget):
     clicked = Signal()
 
-    def __init__(self, name, path: Path, parent=None):
+    def __init__(self, name: str, path: Path, parent=None):
         super().__init__(parent=parent)
 
         self.name = name
