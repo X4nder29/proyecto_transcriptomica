@@ -8,13 +8,13 @@
     color: #AAA;
 }
 
-#CreateWorkspaceButton {
+#CreateWorkspaceButton, #OpenWorkspaceButton {
     font-size: 14px;
     border: none;
     border-radius: 10px;
     background-color: #303030;
 }
 
-#CreateWorkspaceButton:hover {
+#CreateWorkspaceButton:hover, #OpenWorkspaceButton:hover {
     background-color: #505050;
 }
