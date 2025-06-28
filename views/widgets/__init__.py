@@ -20,3 +20,4 @@ from .check_box_suboption_widget import CheckBoxSuboptionWidget
 from .combo_box_suboption_widget import ComboBoxSuboptionWidget
 from .option_widget import OptionWidget
 from .checkbox_widget import CheckBoxWidget
+from .config_item_widget import ConfigItemWidget
