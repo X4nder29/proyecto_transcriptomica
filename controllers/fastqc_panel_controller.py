@@ -91,6 +91,7 @@ class FastQCPanelController:
 
         else:
             print(f"No report found for {file}. Generating report...")
+            self.view.body.report_generation_widget.progress_bar.setValue(0)
             self.view.body.basic_statistics_report_widget.setVisible(False)
             self.view.body.main_layout.removeWidget(self.view.body.report_content_area)
             self.view.body.main_layout.addWidget(
