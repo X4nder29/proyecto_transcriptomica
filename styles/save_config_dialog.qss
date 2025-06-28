@@ -1,0 +1,18 @@
+#ConfigName {
+    background-color: #303030;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+}
+
+QPushButton {
+    background-color: #303030;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+}
+
+QPushButton:hover {
+    background-color: #505050;
+}
