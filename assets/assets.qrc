@@ -8,6 +8,7 @@
     <file alias="adn.svg">adn.svg</file>
     <file alias="adn_outlined.svg">adn_outlined.svg</file>
     <file alias="ai.svg">ai.svg</file>
+    <file alias="app.ico">app.ico</file>
     <file alias="assets.qrc">assets.qrc</file>
     <file alias="assets_rc.py">assets_rc.py</file>
     <file alias="bioinformatic.svg">bioinformatic.svg</file>
@@ -43,6 +44,7 @@
     <file alias="square.svg">square.svg</file>
     <file alias="trash.svg">trash.svg</file>
     <file alias="upload_file.svg">upload_file.svg</file>
+    <file alias="user_manual.svg">user_manual.svg</file>
     <file alias="work_in_progress.svg">work_in_progress.svg</file>
     <file alias="assets_rc.cpython-313.pyc">__pycache__/assets_rc.cpython-313.pyc</file>
     <file alias="resources_rc.cpython-313.pyc">__pycache__/resources_rc.cpython-313.pyc</file>
