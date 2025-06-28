@@ -1,3 +1,40 @@
+#TitleLabel {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#ScrollArea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+#ScrollContentWidget {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+
+#FileListWidgetHeaderLabel {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#FileListWidgetUploadButton {
+    color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	padding: 5px 10px;
+}
+
+#FileListWidgetUploadButton:hover {
+	background-color: #404040;
+}
+
+
+
+
 #FilterButton {
     background-color: #202020;
     color: #FFFFFF;
