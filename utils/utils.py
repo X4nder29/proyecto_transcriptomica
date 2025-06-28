@@ -1,4 +1,5 @@
 import os
+from pathlib import Path
 from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QCursor
 
@@ -37,3 +38,15 @@ def center_window_on_screen(window, screen=None):
     window_geometry = window.frameGeometry()
     window_geometry.moveCenter(screen_center)
     window.move(window_geometry.topLeft())
+
+
+def win_to_wsl(p: Path) -> Path:
+    """
+    Convierte una ruta Windows (ej. C:\\Users\\…)
+    en su equivalente WSL (/mnt/c/…).
+    """
+    # Obtiene la letra de unidad (p.drive es 'C:' en tu caso)
+    drive = p.drive.rstrip(":").lower()      # → 'c'
+    # p.anchor es 'C:\\' en WindowsPath
+    rel   = p.relative_to(p.anchor)          # → Path('Users/Alexander/Desktop/Test 1/source/2CP_…')
+    return Path("/mnt") / drive / rel
