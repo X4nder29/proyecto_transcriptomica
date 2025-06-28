@@ -241,7 +241,7 @@ class FastQCPanelController:
             f"--outdir={to_unc_path(output_dir.as_posix())}",
         ]
 
-        fastqc_file_path = get_fastqc_file_path()
+        fastqc_file_path = get_fastqc_file_path().as_posix()
 
         return (
             fastqc_file_path,
@@ -249,7 +249,7 @@ class FastQCPanelController:
         )
 
     def generate_report(self, file_path):
-        self.process.setWorkingDirectory(get_fastqc_folder_path())
+        self.process.setWorkingDirectory(get_fastqc_folder_path().as_posix())
         self.process.start(*self._generate_command(file_path))
 
     def on_stdout(self):
