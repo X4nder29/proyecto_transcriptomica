@@ -11,6 +11,7 @@
     <file alias="app.ico">app.ico</file>
     <file alias="assets.qrc">assets.qrc</file>
     <file alias="assets_rc.py">assets_rc.py</file>
+    <file alias="back.svg">back.svg</file>
     <file alias="bioinformatic.svg">bioinformatic.svg</file>
     <file alias="cancel.svg">cancel.svg</file>
     <file alias="checkbox_filled.svg">checkbox_filled.svg</file>
