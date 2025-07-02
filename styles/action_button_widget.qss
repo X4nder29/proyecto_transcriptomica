@@ -1,0 +1,16 @@
+#ActionButtonWidget {
+    background-color: #303030;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#ActionButtonWidget:hover {
+    background-color: #505050;
+}
+
+#ActionButtonWidget:pressed {
+    background-color: #353535;
+}
