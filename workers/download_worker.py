@@ -1,13 +1,11 @@
 import os
 import re
 import requests
-from pathlib import Path
 from urllib.parse import urlparse
 from PySide6.QtCore import QThread, Signal
-from PySide6.QtWidgets import QWidget
 
 
-class DownloadThread(QThread):
+class DownloadWorker(QThread):
     progress_changed = Signal(int)
     file_name_signal = Signal(str)
     finished_signal = Signal(bool, str)
