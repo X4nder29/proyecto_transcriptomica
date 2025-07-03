@@ -1,0 +1,11 @@
+#ScrollArea {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+#ScrollContentWidget {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}

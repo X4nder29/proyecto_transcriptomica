@@ -9,7 +9,7 @@ from .threads_selector_widget import ThreadsSelectorWidget
 from .single_option_widget import SingleOptionWidget
 from .combo_box_option_widget import ComboBoxOptionWidget
 from .select_file_push_button import SelectFilePushButton
-from .file_list_widget import FileListWidget
+from .list_widget import ListWidget
 from .file_list_item_widget import FileListItemWidget
 from .simple_input_file_widget import SimpleInputFileWidget
 from .paired_input_file_widget import PairedInputFileWidget

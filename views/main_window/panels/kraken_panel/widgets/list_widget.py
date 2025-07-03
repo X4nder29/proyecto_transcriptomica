@@ -1,4 +1,3 @@
-from email.charset import QP
 from pathlib import Path
 from PySide6.QtWidgets import (
     QWidget,
@@ -6,7 +5,6 @@ from PySide6.QtWidgets import (
     QStyleOption,
     QStyle,
     QSizePolicy,
-    QLabel,
     QScrollArea,
 )
 from PySide6.QtGui import QPainter
@@ -17,7 +15,7 @@ class FileListWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.setObjectName("FileListWidget")
+        self.setObjectName("ListWidget")
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
         self.load_stylesheet()
@@ -28,11 +26,6 @@ class FileListWidget(QWidget):
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(10)
         self.main_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-
-        self.title_label = QLabel("Files", self)
-        self.title_label.setObjectName("TitleLabel")
-        self.title_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        self.main_layout.addWidget(self.title_label)
 
         self.scroll_area = QScrollArea(self)
         self.scroll_area.setWidgetResizable(True)
@@ -55,6 +48,12 @@ class FileListWidget(QWidget):
         self.scroll_content_layout.setSpacing(10)
         self.scroll_content_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
         self.scroll_content_widget.setLayout(self.scroll_content_layout)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self.scroll_area.setMaximumWidth(
+            self.width() - self.scroll_area.style().pixelMetric(QStyle.PixelMetric.PM_ScrollBarExtent)
+        )
 
     def load_stylesheet(self):
         qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
