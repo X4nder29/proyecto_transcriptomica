@@ -50,3 +50,7 @@ def win_to_wsl(p: Path) -> Path:
     # p.anchor es 'C:\\' en WindowsPath
     rel   = p.relative_to(p.anchor)          # → Path('Users/Alexander/Desktop/Test 1/source/2CP_…')
     return Path("/mnt") / drive / rel
+
+
+def split_name(name: str):
+    return name.removesuffix(".tar")
