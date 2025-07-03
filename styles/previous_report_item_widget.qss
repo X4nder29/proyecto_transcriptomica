@@ -1,0 +1,12 @@
+#PreviousReportItemWidget {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+#PreviousReportItemWidget:hover {
+    background-color: #252525;
+}
+
+#NameLabel {
+    font-weight: bold;
+}
