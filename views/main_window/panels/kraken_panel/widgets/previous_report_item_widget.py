@@ -51,11 +51,10 @@ class PreviousReportItemWidget(ItemWidget):
         self.action_area_layout.addWidget(self.delete_action)
 
     def load_stylesheet(self):
-        super().load_stylesheet()
         qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
-            self.setStyleSheet(self.styleSheet() + stylesheet)
+            self.setStyleSheet(stylesheet)
             qss_file.close()
 
     def mousePressEvent(self, event):
