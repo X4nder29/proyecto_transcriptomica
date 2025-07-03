@@ -1,4 +1,3 @@
-from pathlib import Path
 from PySide6.QtWidgets import (
     QWidget,
     QSizePolicy,
@@ -9,14 +8,13 @@ from PySide6.QtWidgets import (
     QLabel,
 )
 from PySide6.QtGui import QPainter, QIcon
-from PySide6.QtCore import Qt, QFile, QTextStream
+from PySide6.QtCore import Qt
 
 
 class ItemWidget(QWidget):
     def __init__(self, icon: str, parent=None):
         super().__init__(parent)
         self.icon = icon
-        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
