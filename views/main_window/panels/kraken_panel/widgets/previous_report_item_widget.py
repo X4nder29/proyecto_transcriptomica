@@ -13,6 +13,7 @@ class PreviousReportItemWidget(ItemWidget):
         self.path = path
         super().__init__(":/assets/file.svg", parent=parent)
         self.load_stylesheet()
+        self._resize_timer.timeout.connect(self._on_resize_finished)
 
     def setup_ui(self):
         super().setup_ui()
@@ -26,7 +27,7 @@ class PreviousReportItemWidget(ItemWidget):
             QFontMetrics(self.name_label.font()).elidedText(
                 str(self.name),
                 Qt.TextElideMode.ElideRight,
-                200,
+                235,
             ),
         )
         self.content_area_layout.addWidget(self.name_label)
@@ -38,7 +39,7 @@ class PreviousReportItemWidget(ItemWidget):
             QFontMetrics(self.path_label.font()).elidedText(
                 str(self.path),
                 Qt.TextElideMode.ElideRight,
-                200,
+                235,
             ),
         )
         self.content_area_layout.addWidget(self.path_label)
@@ -57,6 +58,22 @@ class PreviousReportItemWidget(ItemWidget):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
             qss_file.close()
+
+    def _on_resize_finished(self):
+        self.name_label.setText(
+            QFontMetrics(self.name_label.font()).elidedText(
+                str(self.name),
+                Qt.TextElideMode.ElideRight,
+                self.width() - 175,
+            ),
+        )
+        self.path_label.setText(
+            QFontMetrics(self.path_label.font()).elidedText(
+                str(self.path),
+                Qt.TextElideMode.ElideRight,
+                self.width() - 175,
+            ),
+        )
 
     def mousePressEvent(self, event):
         super().mousePressEvent(event)
