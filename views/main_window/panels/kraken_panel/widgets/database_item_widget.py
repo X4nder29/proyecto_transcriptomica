@@ -15,6 +15,7 @@ class DatabaseItemWidget(ItemWidget):
         self.link = link
         self.installed = installed
         super().__init__(":/assets/database.svg", parent=parent)
+        self.load_stylesheet()
 
     def setup_ui(self):
         super().setup_ui()
