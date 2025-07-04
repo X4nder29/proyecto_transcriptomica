@@ -3,6 +3,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QLabel,
 )
+from PySide6.QtGui import QFontMetrics
 from PySide6.QtCore import Qt, QFile, QTextStream
 from views.widgets import ItemWidget, ItemActionWidget
 
@@ -16,19 +17,34 @@ class DatabaseItemWidget(ItemWidget):
         self.installed = installed
         super().__init__(":/assets/database.svg", parent=parent)
         self.load_stylesheet()
+        self._resize_timer.timeout.connect(self._on_resize_finished)
 
     def setup_ui(self):
         super().setup_ui()
         self.setObjectName("DatabaseItemWidget")
 
-        self.name_label = QLabel(self.name, self.content_area)
+        self.name_label = QLabel(self.content_area)
         self.name_label.setObjectName("NameLabel")
         self.name_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.name_label.setText(
+            QFontMetrics(self.name_label.font()).elidedText(
+                str(self.name),
+                Qt.TextElideMode.ElideRight,
+                self.width() - 175,
+            ),
+        )
         self.content_area_layout.addWidget(self.name_label)
 
-        self.link_label = QLabel(self.link, self.content_area)
+        self.link_label = QLabel(self.content_area)
         self.link_label.setObjectName("LinkLabel")
         self.link_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.link_label.setText(
+            QFontMetrics(self.link_label.font()).elidedText(
+                str(self.link),
+                Qt.TextElideMode.ElideRight,
+                self.width() - 175,
+            ),
+        )
         self.content_area_layout.addWidget(self.link_label)
 
         if not self.installed:
@@ -56,3 +72,19 @@ class DatabaseItemWidget(ItemWidget):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
             qss_file.close()
+
+    def _on_resize_finished(self):
+        self.name_label.setText(
+            QFontMetrics(self.name_label.font()).elidedText(
+                str(self.name),
+                Qt.TextElideMode.ElideRight,
+                self.width() - 175,
+            ),
+        )
+        self.link_label.setText(
+            QFontMetrics(self.link_label.font()).elidedText(
+                str(self.link),
+                Qt.TextElideMode.ElideRight,
+                self.width() - 175,
+            ),
+        )
