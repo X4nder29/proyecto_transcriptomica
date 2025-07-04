@@ -26,5 +26,6 @@ from .config_list_widget import ConfigListWidget
 from .config_item_widget import ConfigItemWidget
 from .action_button_widget import ActionButtonWidget
 from .item_widget import ItemWidget
+from .item_abstract_button import ItemAbstractButton
 from .item_action_widget import ItemActionWidget
 from .panel_head_base import PanelHeadBase
