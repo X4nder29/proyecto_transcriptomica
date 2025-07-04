@@ -23,7 +23,7 @@ class ItemWidget(QWidget):
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
 
         self.main_layout = QHBoxLayout(self)
-        self.main_layout.setContentsMargins(20, 10, 10, 10)
+        self.main_layout.setContentsMargins(20, 10, 20, 10)
         self.main_layout.setSpacing(20)
         self.setLayout(self.main_layout)
 
