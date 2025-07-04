@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (
     QLabel,
 )
 from PySide6.QtGui import QPainter, QIcon
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
 
 
 class ItemWidget(QWidget):
@@ -16,6 +16,8 @@ class ItemWidget(QWidget):
         super().__init__(parent)
         self.icon = icon
         self.setup_ui()
+        self._resize_timer = QTimer()
+        self._resize_timer.setSingleShot(True)
 
     def setup_ui(self):
         self.setObjectName("ItemWidget")
@@ -63,6 +65,10 @@ class ItemWidget(QWidget):
         self.action_area_layout.setContentsMargins(0, 0, 0, 0)
         self.action_area_layout.setSpacing(5)
         self.action_area.setLayout(self.action_area_layout)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self._resize_timer.start(100)
 
     def paintEvent(self, _):
         opt = QStyleOption()
