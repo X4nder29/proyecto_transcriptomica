@@ -1,36 +1,22 @@
-from pathlib import Path
-from PySide6.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
-    QLabel,
-)
-from PySide6.QtCore import QFile, QTextStream
+from PySide6.QtWidgets import QWidget
+from PySide6.QtCore import Qt
+from views.widgets import PanelHeadBase, ActionButtonWidget
 
 
-class HomePanelHead(QWidget):
+class HomePanelHead(PanelHeadBase):
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, parent: QWidget = None):
+        super().__init__("TranscriptoHub", parent)
 
-        self.setObjectName("HomePanelHead")
+    def setup_ui(self):
+        super().setup_ui()
 
-        self.load_stylesheet()
+        # user manual button
 
-        self.setupUi()
-
-    def setupUi(self):
-
-        self.main_layout = QVBoxLayout(self)
-        self.main_layout.setContentsMargins(0, 0, 0, 0)
-        self.main_layout.setSpacing(0)
-
-        self.panel_title = QLabel("TranscriptoHub", self)
-        self.panel_title.setObjectName("PanelTitle")
-        self.main_layout.addWidget(self.panel_title)
-
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
-        if qss_file.open(QFile.ReadOnly | QFile.Text):
-            stylesheet = QTextStream(qss_file).readAll() + "\n"
-            self.setStyleSheet(stylesheet)
-            qss_file.close()
+        self.user_manual_button = ActionButtonWidget(
+            icon_path=":/assets/user_manual.svg",
+            tooltip="Abrir manual de usuario",
+            parent=self,
+        )
+        self.user_manual_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.main_layout.addWidget(self.user_manual_button)
