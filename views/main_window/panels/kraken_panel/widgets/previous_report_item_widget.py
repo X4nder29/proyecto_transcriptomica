@@ -12,6 +12,7 @@ class PreviousReportItemWidget(ItemWidget):
         self.name = name
         self.path = path
         super().__init__(":/assets/file.svg", parent=parent)
+        self.load_stylesheet()
 
     def setup_ui(self):
         super().setup_ui()
