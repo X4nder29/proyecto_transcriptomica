@@ -50,6 +50,7 @@ class ItemWidget(QWidget):
         self.content_area_layout = QVBoxLayout(self.content_area)
         self.content_area_layout.setContentsMargins(0, 0, 0, 0)
         self.content_area_layout.setSpacing(5)
+        self.content_area_layout.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         self.content_area.setLayout(self.content_area_layout)
 
         # Space
