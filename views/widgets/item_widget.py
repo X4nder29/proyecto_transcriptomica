@@ -18,6 +18,7 @@ class ItemWidget(QWidget):
         self.setup_ui()
         self._resize_timer = QTimer()
         self._resize_timer.setSingleShot(True)
+        self._resize_timer.timeout.connect(self._on_resize_finished)
 
     def setup_ui(self):
         self.setObjectName("ItemWidget")
@@ -65,6 +66,9 @@ class ItemWidget(QWidget):
         self.action_area_layout.setContentsMargins(0, 0, 0, 0)
         self.action_area_layout.setSpacing(5)
         self.action_area.setLayout(self.action_area_layout)
+    
+    def _on_resize_finished(self):
+        pass
 
     def resizeEvent(self, event):
         super().resizeEvent(event)

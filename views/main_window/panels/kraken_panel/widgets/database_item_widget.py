@@ -17,7 +17,6 @@ class DatabaseItemWidget(ItemWidget):
         self.installed = installed
         super().__init__(":/assets/database.svg", parent=parent)
         self.load_stylesheet()
-        self._resize_timer.timeout.connect(self._on_resize_finished)
 
     def setup_ui(self):
         super().setup_ui()

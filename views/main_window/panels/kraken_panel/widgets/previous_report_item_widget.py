@@ -13,7 +13,6 @@ class PreviousReportItemWidget(ItemWidget):
         self.path = path
         super().__init__(":/assets/file.svg", parent=parent)
         self.load_stylesheet()
-        self._resize_timer.timeout.connect(self._on_resize_finished)
 
     def setup_ui(self):
         super().setup_ui()
