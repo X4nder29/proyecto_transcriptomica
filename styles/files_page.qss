@@ -1,0 +1,21 @@
+#SelectInputsWidget, #SelectDatabaseWidget {
+    border: 2px dashed #303030;
+    border-radius: 5px;
+}
+
+#PreviousReportsLabel, #SelectDatabaseLabel {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#NavigationButton {
+    background-color: #303030;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+#NavigationButton:hover {
+    background-color: #404040;
+}
