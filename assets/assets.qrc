@@ -2,6 +2,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource prefix="assets">
+    <file alias="add.png">add.png</file>
     <file alias="add.svg">add.svg</file>
     <file alias="add_file_filled.svg">add_file_filled.svg</file>
     <file alias="add_file_outlined.svg">add_file_outlined.svg</file>
@@ -37,6 +38,8 @@
     <file alias="kraken.svg">kraken.svg</file>
     <file alias="kraken_outlined.svg">kraken_outlined.svg</file>
     <file alias="load.svg">load.svg</file>
+    <file alias="minus.png">minus.png</file>
+    <file alias="minus.svg">minus.svg</file>
     <file alias="more_vert.svg">more_vert.svg</file>
     <file alias="outlined_star.svg">outlined_star.svg</file>
     <file alias="play.svg">play.svg</file>
