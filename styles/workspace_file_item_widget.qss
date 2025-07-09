@@ -1,0 +1,8 @@
+#WorkspaceFileItemWidget {
+    background-color: #202020;
+    border-radius: 5px;
+}
+
+#NameLabel {
+    font-weight: bold;
+}
