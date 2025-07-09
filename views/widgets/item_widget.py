@@ -28,6 +28,7 @@ class ItemWidget(QWidget):
         self.main_layout = QHBoxLayout(self)
         self.main_layout.setContentsMargins(20, 10, 20, 10)
         self.main_layout.setSpacing(20)
+        self.main_layout.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         self.setLayout(self.main_layout)
 
         self.icon_label = QLabel(self)
@@ -66,6 +67,7 @@ class ItemWidget(QWidget):
         self.action_area_layout = QHBoxLayout(self.action_area)
         self.action_area_layout.setContentsMargins(0, 0, 0, 0)
         self.action_area_layout.setSpacing(5)
+        self.action_area_layout.setAlignment(Qt.AlignmentFlag.AlignVCenter)
         self.action_area.setLayout(self.action_area_layout)
     
     def _on_resize_finished(self):
