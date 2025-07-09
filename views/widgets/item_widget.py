@@ -73,7 +73,7 @@ class ItemWidget(QWidget):
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
-        self._resize_timer.start(100)
+        self._resize_timer.start(50)
 
     def paintEvent(self, _):
         opt = QStyleOption()
