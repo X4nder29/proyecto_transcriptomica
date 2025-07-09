@@ -23,7 +23,6 @@ from .option_widget import OptionWidget
 from .checkbox_widget import CheckBoxWidget
 from .save_config_dialog import SaveConfigDialog
 from .config_list_widget import ConfigListWidget
-from .config_item_widget import ConfigItemWidget
 from .action_button_widget import ActionButtonWidget
 from .item_widget import ItemWidget
 from .item_abstract_button import ItemAbstractButton
