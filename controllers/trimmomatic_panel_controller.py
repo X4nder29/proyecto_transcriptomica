@@ -1,11 +1,9 @@
 import os
 import json
 from pathlib import Path
-from sqlite3 import adapters
 from typing import Callable, Optional, cast
 from PySide6.QtCore import QProcess
 from utils import (
-    get_app_data_path,
     get_current_workspace,
     get_trimmomatic_adapters_path,
     get_trimmomatic_jar_path,
