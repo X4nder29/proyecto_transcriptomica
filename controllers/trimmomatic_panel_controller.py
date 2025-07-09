@@ -19,7 +19,7 @@ from utils import (
     OperationModes,
 )
 from views.main_window.panels.trimmomatic_panel import TrimmomaticPanel
-from views.widgets import SaveConfigDialog, ConfigItemWidget
+from views.widgets import SaveConfigDialog, SavedConfigItemWidget
 from views.widgets import SelectFilePushButton
 
 
@@ -185,7 +185,7 @@ class TrimmomaticPanelController:
         files = (
             [
                 self.selected_input_file_1.as_posix(),
-                get_trimmomatic_output_file_path().as_posix(),
+                get_trimmomatic_output_file_path(self.selected_input_file_1.stem).as_posix(),
             ]
             if mode == OperationModes.SingleEnd.value[0]
             else [
@@ -618,14 +618,14 @@ class TrimmomaticPanelController:
                 configs = data.get("trimmomatic_configs", {})
 
                 for config_name, _ in configs.items():
-                    config_item_widget = ConfigItemWidget(
+                    config_item_widget = SavedConfigItemWidget(
                         config_name,
                         parent=self.view.body.config_list_widget.list_widget,
                     )
-                    config_item_widget.load_button.clicked.connect(
+                    config_item_widget.load_action.clicked.connect(
                         lambda _, c=config_name: self.load_config(c)
                     )
-                    config_item_widget.delete_button.clicked.connect(
+                    config_item_widget.delete_action.clicked.connect(
                         lambda _, c=config_name: self.delete_config(c)
                     )
                     self.view.body.config_list_widget.list_layout.addWidget(
