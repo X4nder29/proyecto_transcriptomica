@@ -30,5 +30,6 @@ from .item_abstract_button import ItemAbstractButton
 from .item_action_widget import ItemActionWidget
 from .panel_head_base import PanelHeadBase
 from .generation_page import GenerationPage
+from .saved_config_item_widget import SavedConfigItemWidget
 from .database_item_widget import DatabaseItemWidget
 from .database_manager_dialog import DatabaseManagerDialog
