@@ -8,12 +8,12 @@ from PySide6.QtWidgets import (
     QSizePolicy,
 )
 from PySide6.QtGui import QPainter
-from PySide6.QtCore import Qt, QFile, QTextStream, Signal
+from PySide6.QtCore import QFile, QTextStream, Signal
 from .upload_files_push_button import UploadFilesPushButton
-from .file_list_widget import FileListWidget
+from .workspace_files_page import WorkspaceFilesPage
 
 
-class FilesArea(QWidget):
+class WorkspaceFilesWidget(QWidget):
     dropped = Signal(str)
 
     def __init__(self, parent=None):
@@ -38,7 +38,7 @@ class FilesArea(QWidget):
         self.upload_files_push_button = UploadFilesPushButton(self)
         self.stacked.addWidget(self.upload_files_push_button)
 
-        self.file_list_widget = FileListWidget(self)
+        self.file_list_widget = WorkspaceFilesPage(self)
         self.stacked.addWidget(self.file_list_widget)
 
     def load_stylesheet(self):
