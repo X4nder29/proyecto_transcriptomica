@@ -1,0 +1,12 @@
+#TaxonomizeButton {
+    background-color: #6495ED;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+#TaxonomizeButton:hover {
+    background-color: #4169E1;
+}
