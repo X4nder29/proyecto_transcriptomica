@@ -9,6 +9,96 @@ settings_file = QDir(get_app_data_path()).filePath("transcriptohub.ini")
 
 settings = QSettings(settings_file, QSettings.IniFormat)
 
+# default settings
+
+settings.setDefaultFormat(QSettings.IniFormat)
+
+
+def set_default_settings():
+    """
+    Set default settings if they do not exist.
+    """
+    if not settings.contains("current_workspace"):
+        settings.setValue("current_workspace", "")
+
+    if not settings.contains("workspaces"):
+        settings.setValue("workspaces", [])
+
+    if not settings.contains("fastqc_executable"):
+        settings.setValue("fastqc_executable", "")
+
+    if not settings.contains("trimmomatic_executable"):
+        settings.setValue("trimmomatic_executable", "")
+
+    if not settings.contains("sortmerna_executable"):
+        settings.setValue("sortmerna_executable", "")
+
+    if not settings.contains("kraken2_database_folder"):
+        settings.setValue("kraken2_database_folder", "")
+
+    if not settings.contains("kraken2_databases"):
+        settings.setValue(
+            "kraken2_databases",
+            dumps(
+                [
+                    {
+                        "name": "gtdb_r89_54k_kraken2_01gb.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378256",
+                    },
+                    {
+                        "name": "gtdb_r89_54k_kraken2_02gb.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378259",
+                    },
+                    {
+                        "name": "gtdb_r89_54k_kraken2_04gb.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378262",
+                    },
+                    {
+                        "name": "gtdb_r89_54k_kraken2_08gb.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378271",
+                    },
+                    {
+                        "name": "gtdb_r89_54k_kraken2_16gb.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378274",
+                    },
+                    {
+                        "name": "gtdb_r89_54k_kraken2_32gb.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378277",
+                    },
+                    {
+                        "name": "gtdb_r89_54k_kraken2_64gb.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378295",
+                    },
+                    {
+                        "name": "gtdb_r89_54k_kraken2_full.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378322",
+                    },
+                    {
+                        "name": "gtdb_r89_54k_centrifuge.tar",
+                        "link": "https://bridges.monash.edu/ndownloader/files/16378439",
+                    },
+                ],
+                ensure_ascii=False,
+            ),
+        )
+
+    if not settings.contains("sortmerna_databases"):
+        settings.setValue(
+            "sortmerna_databases",
+            dumps(
+                [
+                    {
+                        "name": "Official SortMeRNA Database",
+                        "link": "https://github.com/biocore/sortmerna/releases/download/v4.3.4/database.tar.gz",
+                    }
+                ],
+                ensure_ascii=False,
+            ),
+        )
+
+
+#
+
 
 def get_current_workspace() -> Optional[Path]:
     """

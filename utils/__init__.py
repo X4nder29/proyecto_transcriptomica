@@ -1,4 +1,5 @@
 from .settings import (
+    set_default_settings,
     get_current_workspace,
     set_current_workspace,
     clear_current_workspace,
