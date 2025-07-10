@@ -1,4 +1,5 @@
 from .check_installed_programs import CheckInstalledPrograms
 from .trimmomatic_panel_controller import TrimmomaticPanelController
 from .fastqc_panel_controller import FastQCPanelController
+from .kraken_panel_controller import KrakenPanelController
 from .kraken_database_manager_controller import KrakenDatabaseManagerController
