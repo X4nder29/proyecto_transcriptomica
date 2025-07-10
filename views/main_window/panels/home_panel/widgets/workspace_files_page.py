@@ -9,13 +9,13 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
     QButtonGroup,
-    QScrollArea,
 )
 from PySide6.QtGui import QPainter, QIcon
 from PySide6.QtCore import Qt, QFile, QTextStream
+from views.widgets import ListWidget
 
 
-class FileListWidget(QWidget):
+class WorkspaceFilesPage(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
@@ -28,7 +28,7 @@ class FileListWidget(QWidget):
     def setup_ui(self):
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
-        self.main_layout.setSpacing(10)
+        self.main_layout.setSpacing(20)
         self.setLayout(self.main_layout)
 
         # header
@@ -44,11 +44,11 @@ class FileListWidget(QWidget):
         self.header_widget.setLayout(header_layout)
 
         self.label = QLabel("Archivos", self.header_widget)
-        self.label.setObjectName("FileListWidgetHeaderLabel")
+        self.label.setObjectName("HeaderLabel")
         header_layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignLeft)
 
         self.upload_button = QPushButton(self.header_widget)
-        self.upload_button.setObjectName("FileListWidgetUploadButton")
+        self.upload_button.setObjectName("UploadButton")
         self.upload_button.setIcon(QIcon(":/assets/add_file_filled.svg"))
         header_layout.addWidget(
             self.upload_button, alignment=Qt.AlignmentFlag.AlignRight
@@ -62,7 +62,7 @@ class FileListWidget(QWidget):
 
         filter_layout = QHBoxLayout(self.filter_widget)
         filter_layout.setContentsMargins(0, 0, 0, 0)
-        filter_layout.setSpacing(5)
+        filter_layout.setSpacing(10)
         self.filter_widget.setLayout(filter_layout)
 
         self.filter_button_group = QButtonGroup(self.filter_widget)
@@ -82,7 +82,13 @@ class FileListWidget(QWidget):
         self.filter_button_group.addButton(self.trimmed_button)
         filter_layout.addWidget(self.trimmed_button)
 
-        self.sorted_button = QPushButton("Ordenados", self.filter_widget)
+        self.krakened_button = QPushButton("Taxonomizado", self.filter_widget)
+        self.krakened_button.setObjectName("FilterButton")
+        self.krakened_button.setCheckable(True)
+        self.filter_button_group.addButton(self.krakened_button)
+        filter_layout.addWidget(self.krakened_button)
+
+        """ self.sorted_button = QPushButton("Ordenados", self.filter_widget)
         self.sorted_button.setObjectName("FilterButton")
         self.sorted_button.setCheckable(True)
         self.filter_button_group.addButton(self.sorted_button)
@@ -92,31 +98,12 @@ class FileListWidget(QWidget):
         self.analyzed_button.setObjectName("FilterButton")
         self.analyzed_button.setCheckable(True)
         self.filter_button_group.addButton(self.analyzed_button)
-        filter_layout.addWidget(self.analyzed_button)
+        filter_layout.addWidget(self.analyzed_button) """
 
         # scroll area
 
-        self.scroll_area = QScrollArea(self)
-        self.scroll_area.setWidgetResizable(True)
-        self.scroll_area.setObjectName("ScrollArea")
-        self.scroll_area.setHorizontalScrollBarPolicy(
-            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
-        )
-        self.scroll_area.setVerticalScrollBarPolicy(
-            Qt.ScrollBarPolicy.ScrollBarAsNeeded
-        )
-        self.scroll_area.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.main_layout.addWidget(self.scroll_area)
-
-        self.scroll_content_widget = QWidget(self.scroll_area)
-        self.scroll_content_widget.setObjectName("ScrollContentWidget")
-        self.scroll_area.setWidget(self.scroll_content_widget)
-
-        self.scroll_content_layout = QVBoxLayout(self.scroll_content_widget)
-        self.scroll_content_layout.setContentsMargins(0, 0, 0, 0)
-        self.scroll_content_layout.setSpacing(10)
-        self.scroll_content_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
-        self.scroll_content_widget.setLayout(self.scroll_content_layout)
+        self.list_widget = ListWidget(self)
+        self.main_layout.addWidget(self.list_widget)
 
     def load_stylesheet(self):
         qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
