@@ -71,7 +71,7 @@ class DatabaseManagerDialog(QDialog):
         self.installed_scroll_area.setMinimumWidth(350)
         self.installed_scroll_area.setMaximumHeight(200)
         self.installed_scroll_area.setSizePolicy(
-            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
         )
         self.installed_scroll_area.setVisible(False)
         self.main_layout.addWidget(self.installed_scroll_area)
@@ -102,7 +102,7 @@ class DatabaseManagerDialog(QDialog):
         self.uninstalled_scroll_area.setMinimumWidth(350)
         self.uninstalled_scroll_area.setMaximumHeight(200)
         self.uninstalled_scroll_area.setSizePolicy(
-            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
         )
         self.uninstalled_scroll_area.setVisible(False)
         self.main_layout.addWidget(
