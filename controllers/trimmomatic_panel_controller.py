@@ -208,13 +208,13 @@ class TrimmomaticPanelController:
                 self.view.body.illumina_clip_option_widget.adaptar_suboption.combo_box.currentData()
             )
             seed_mismatches = (
-                self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._number_label.text()
+                self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.value()
             )
             palindrome_clip_threshold = (
-                self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._number_label.text()
+                self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.value()
             )
             simple_clip_threshold = (
-                self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._number_label.text()
+                self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.value()
             )
 
             illumina_clip_arguments = f"ILLUMINACLIP:{to_unc_path(adapter)}:{seed_mismatches}:{palindrome_clip_threshold}:{simple_clip_threshold}"
@@ -224,7 +224,7 @@ class TrimmomaticPanelController:
             )
             if is_min_adapter_length_active:
                 min_adapter_length = (
-                    self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._number_label.text()
+                    self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.value()
                 )
                 illumina_clip_arguments += f":{min_adapter_length}"
             else:
@@ -244,10 +244,10 @@ class TrimmomaticPanelController:
         )
         if is_sliding_window_active:
             window_size = (
-                self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._number_label.text()
+                self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.value()
             )
             quality_threshold = (
-                self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._number_label.text()
+                self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.value()
             )
             arguments.append(f"SLIDINGWINDOW:{window_size}:{quality_threshold}")
 
@@ -256,7 +256,7 @@ class TrimmomaticPanelController:
         is_leading_active = self.view.body.leading_option_widget.checkbox.isChecked()
         if is_leading_active:
             leading = (
-                self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._number_label.text()
+                self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"LEADING:{leading}")
 
@@ -264,7 +264,7 @@ class TrimmomaticPanelController:
         is_trailing_active = self.view.body.trailing_option_widget.checkbox.isChecked()
         if is_trailing_active:
             trailing = (
-                self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._number_label.text()
+                self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"TRAILING:{trailing}")
 
@@ -272,7 +272,7 @@ class TrimmomaticPanelController:
         is_minlen_active = self.view.body.minlen_option_widget.checkbox.isChecked()
         if is_minlen_active:
             minlen = (
-                self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._number_label.text()
+                self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"MINLEN:{minlen}")
 
@@ -280,7 +280,7 @@ class TrimmomaticPanelController:
         is_crop_active = self.view.body.crop_option_widget.checkbox.isChecked()
         if is_crop_active:
             crop = (
-                self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._number_label.text()
+                self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"CROP:{crop}")
 
@@ -288,7 +288,7 @@ class TrimmomaticPanelController:
         is_headcrop_active = self.view.body.headcrop_option_widget.checkbox.isChecked()
         if is_headcrop_active:
             headcrop = (
-                self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._number_label.text()
+                self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"HEADCROP:{headcrop}")
 
@@ -673,37 +673,37 @@ class TrimmomaticPanelController:
                 )
                 .relative_to(adapters_folder_path)
                 .name,
-                "seed_mismatches": self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._number_label.text(),
-                "palindrome_clip_threshold": self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._number_label.text(),
-                "simple_clip_threshold": self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._number_label.text(),
+                "seed_mismatches": self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.value(),
+                "palindrome_clip_threshold": self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.value(),
+                "simple_clip_threshold": self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.value(),
                 "min_adapter_length_active": self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.check_box_widget.isChecked(),
-                "min_adapter_length": self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._number_label.text(),
+                "min_adapter_length": self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.value(),
                 "keep_both_reads": self.view.body.illumina_clip_option_widget.checkbox.isChecked(),
             },
             "leading": {
                 "active": self.view.body.leading_option_widget.checkbox.isChecked(),
-                "value": self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._number_label.text(),
+                "value": self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
             "trailing": {
                 "active": self.view.body.trailing_option_widget.checkbox.isChecked(),
-                "value": self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._number_label.text(),
+                "value": self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
             "sliding_window": {
                 "active": self.view.body.sliding_window_option_widget.checkbox.isChecked(),
-                "window_size": self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._number_label.text(),
-                "quality_threshold": self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._number_label.text(),
+                "window_size": self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.value(),
+                "quality_threshold": self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.value(),
             },
             "minlen": {
                 "active": self.view.body.minlen_option_widget.checkbox.isChecked(),
-                "value": self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._number_label.text(),
+                "value": self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
             "crop": {
                 "active": self.view.body.crop_option_widget.checkbox.isChecked(),
-                "value": self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._number_label.text(),
+                "value": self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
             "headcrop": {
                 "active": self.view.body.headcrop_option_widget.checkbox.isChecked(),
-                "value": self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._number_label.text(),
+                "value": self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
         }
 
@@ -807,19 +807,19 @@ class TrimmomaticPanelController:
                         config_data["illumina_clip"]["adapter"]
                     )
                 )
-                self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._number_label.setText(
+                self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.setValue(
                     config_data["illumina_clip"]["seed_mismatches"]
                 )
-                self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._number_label.setText(
+                self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.setValue(
                     config_data["illumina_clip"]["palindrome_clip_threshold"]
                 )
-                self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._number_label.setText(
+                self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.setValue(
                     config_data["illumina_clip"]["simple_clip_threshold"]
                 )
                 self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.check_box_widget.setChecked(
                     config_data["illumina_clip"]["min_adapter_length_active"]
                 )
-                self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._number_label.setText(
+                self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.setValue(
                     config_data["illumina_clip"]["min_adapter_length"]
                 )
                 self.view.body.illumina_clip_option_widget.keep_both_reads_suboption.checkbox.setChecked(
@@ -829,45 +829,45 @@ class TrimmomaticPanelController:
                 self.view.body.sliding_window_option_widget.checkbox.setChecked(
                     config_data["sliding_window"]["active"]
                 )
-                self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._number_label.setText(
+                self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.setValue(
                     config_data["sliding_window"]["window_size"]
                 )
-                self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._number_label.setText(
+                self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.setValue(
                     config_data["sliding_window"]["quality_threshold"]
                 )
 
                 self.view.body.leading_option_widget.checkbox.setChecked(
                     config_data["leading"]["active"]
                 )
-                self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._number_label.setText(
+                self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["leading"]["value"]
                 )
 
                 self.view.body.trailing_option_widget.checkbox.setChecked(
                     config_data["trailing"]["active"]
                 )
-                self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._number_label.setText(
+                self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["trailing"]["value"]
                 )
 
                 self.view.body.minlen_option_widget.checkbox.setChecked(
                     config_data["minlen"]["active"]
                 )
-                self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._number_label.setText(
+                self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["minlen"]["value"]
                 )
 
                 self.view.body.crop_option_widget.checkbox.setChecked(
                     config_data["crop"]["active"]
                 )
-                self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._number_label.setText(
+                self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["crop"]["value"]
                 )
 
                 self.view.body.headcrop_option_widget.checkbox.setChecked(
                     config_data["headcrop"]["active"]
                 )
-                self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._number_label.setText(
+                self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["headcrop"]["value"]
                 )
 
