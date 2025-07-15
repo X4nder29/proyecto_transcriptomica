@@ -36,13 +36,7 @@ class MainWindowContent(QWidget):
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(0)
 
-        self.setStyleSheet(
-            """
-            QWidget#Content {
-                background-color: none;
-            }
-            """
-        )
+        self.main_layout.setCurrentIndex(1)
 
         # panels
         # home panel
@@ -91,9 +85,7 @@ class MainWindowContent(QWidget):
         self.main_layout.addWidget(self.fastqc_panel)
         self.main_layout.addWidget(self.settings_panel)
 
-        self.main_layout.setCurrentIndex(0)
-
-    def paintEvent(self, event):
+    def paintEvent(self, _):
         opt = QStyleOption()
         opt.initFrom(self)
         p = QPainter(self)
