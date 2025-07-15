@@ -630,13 +630,6 @@ class KrakenPanelController:
                 / f"{self.selected_input_file_1.stem}_report.krona.html"
             )
 
-            report = (
-                get_kraken2_output_folder_path()
-                / f"{self.selected_input_file_1.stem}_report.txt"
-            )
-            if report.exists():
-                report.unlink(missing_ok=True)  # Remove the old report if it exists
-
         if mode == "Paired End":
             krona_html = (
                 get_kraken2_output_folder_path()
