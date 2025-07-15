@@ -72,11 +72,11 @@ class MainWindowContent(QWidget):
 
         # kraken2 panel
 
-        self.kraken2 = WorkInProgressPosterPanel(self)
+        from controllers import KrakenPanelController
 
-        # fastqc panel
-
-        self.fastqc_panel = FastqcPanel(self)
+        self.kraken2 = KrakenPanel(self)
+        self.kraken2_controller = KrakenPanelController(self.kraken2)
+        self.main_layout.addWidget(self.kraken2)
 
         # settings panel
 
