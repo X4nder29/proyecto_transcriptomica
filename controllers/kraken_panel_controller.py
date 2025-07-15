@@ -513,20 +513,14 @@ class KrakenPanelController:
         self.view.body.options_page.quick.checkbox.setChecked(False)
         self.view.body.options_page.memory_mapping.checkbox.setChecked(False)
 
-        self.view.body.options_page.minimum_hit_groups.checkbox.setEnabled(False)
-        self.view.body.options_page.minimum_hit_groups.number_selector_suboption_widget.number_selector._spin_box.setValue(
-            0
-        )
+        self.view.body.options_page.minimum_hit_groups.checkbox.setChecked(False)
+        self.view.body.options_page.minimum_hit_groups.set_value(0)
 
-        self.view.body.options_page.minimum_base_quality.checkbox.setEnabled(False)
-        self.view.body.options_page.minimum_base_quality.number_selector_suboption_widget.number_selector._spin_box.setValue(
-            0
-        )
+        self.view.body.options_page.minimum_base_quality.checkbox.setChecked(False)
+        self.view.body.options_page.minimum_base_quality.set_value(0)
 
-        self.view.body.options_page.confidence.checkbox.setEnabled(False)
-        self.view.body.options_page.confidence.decimal_selector_suboption_widget.decimal_selector._spin_box.setValue(
-            0.0
-        )
+        self.view.body.options_page.confidence.checkbox.setChecked(False)
+        self.view.body.options_page.confidence.set_value(0.0)
 
     def _reset_upload_files_values(self):
         """
@@ -889,19 +883,19 @@ class KrakenPanelController:
         """
         data = {
             "threads": self.view.body.options_page.threads_selector_widget.slider.value(),
-            "quick": self.view.body.options_page.quick.checkbox.isChecked(),
-            "memory_mapping": self.view.body.options_page.memory_mapping.checkbox.isChecked(),
+            "quick": self.view.body.options_page.quick.is_checked(),
+            "memory_mapping": self.view.body.options_page.memory_mapping.is_checked(),
             "confidence": {
-                "active": self.view.body.options_page.confidence.checkbox.isChecked(),
-                "value": self.view.body.options_page.confidence.decimal_selector_suboption_widget.decimal_selector._spin_box.value(),
+                "active": self.view.body.options_page.confidence.is_checked(),
+                "value": self.view.body.options_page.confidence.value(),
             },
             "minimum_hit_groups": {
-                "active": self.view.body.options_page.minimum_hit_groups.checkbox.isChecked(),
-                "value": self.view.body.options_page.minimum_hit_groups.number_selector_suboption_widget.number_selector._spin_box.value(),
+                "active": self.view.body.options_page.minimum_hit_groups.is_checked(),
+                "value": self.view.body.options_page.minimum_hit_groups.value(),
             },
             "minimum_base_quality": {
-                "active": self.view.body.options_page.minimum_base_quality.checkbox.isChecked(),
-                "value": self.view.body.options_page.minimum_base_quality.number_selector_suboption_widget.number_selector._spin_box.value(),
+                "active": self.view.body.options_page.minimum_base_quality.is_checked(),
+                "value": self.view.body.options_page.minimum_base_quality.value(),
             },
         }
 
@@ -938,23 +932,19 @@ class KrakenPanelController:
 
         # Quick
         value: bool = config.get("quick", False)
-        self.view.body.options_page.quick.checkbox.setChecked(value)
+        self.view.body.options_page.quick.set_checked(value)
 
         # Memory mapping
         value: bool = config.get("memory_mapping", False)
-        self.view.body.options_page.memory_mapping.checkbox.setChecked(value)
+        self.view.body.options_page.memory_mapping.set_checked(value)
 
         # Confidence
         value_dict: dict = config.get("confidence", None)
         if value is not None and isinstance(value_dict, dict):
             value: bool = value_dict.get("active", False)
-            self.view.body.options_page.confidence.checkbox.setChecked(value)
+            self.view.body.options_page.confidence.set_checked(value)
 
-            value: str = value_dict.get("value", None)
-            if value is not None and isinstance(value, str):
-                self.view.body.options_page.confidence.decimal_selector_suboption_widget.decimal_selector._spin_box.setValue(
-                    value
-                )
+                self.view.body.options_page.confidence.set_value(value)
             else:
                 print(Path(__file__).name, "-", "No confidence value found in config.")
         else:
@@ -964,13 +954,9 @@ class KrakenPanelController:
         value_dict: dict = config.get("minimum_hit_groups", None)
         if value_dict is not None and isinstance(value_dict, dict):
             value: bool = value_dict.get("active", False)
-            self.view.body.options_page.minimum_hit_groups.checkbox.setChecked(value)
+            self.view.body.options_page.minimum_hit_groups.set_checked(value)
 
-            value: str = value_dict.get("value", None)
-            if value is not None and isinstance(value, str):
-                self.view.body.options_page.minimum_hit_groups.number_selector_suboption_widget.number_selector._spin_box.setValue(
-                    value
-                )
+                self.view.body.options_page.minimum_hit_groups.set_value(value)
             else:
                 print(
                     Path(__file__).name,
@@ -986,13 +972,9 @@ class KrakenPanelController:
         value_dict: dict = config.get("minimum_base_quality", None)
         if value_dict is not None and isinstance(value_dict, dict):
             value: bool = value_dict.get("active", False)
-            self.view.body.options_page.minimum_base_quality.checkbox.setChecked(value)
+            self.view.body.options_page.minimum_base_quality.set_checked(value)
 
-            value: str = value_dict.get("value", None)
-            if value is not None and isinstance(value, str):
-                self.view.body.options_page.minimum_base_quality.number_selector_suboption_widget.number_selector._spin_box.setValue(
-                    config["minimum_base_quality"]["value"]
-                )
+                self.view.body.options_page.minimum_base_quality.set_value(config["minimum_base_quality"]["value"])
             else:
                 print(
                     Path(__file__).name,
