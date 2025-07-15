@@ -223,7 +223,9 @@ def set_trimmomatic_executable_path_in_settings(path: Path):
     settings.setValue("trimmomatic_executable", path.as_posix())
 
 
-# get sortmerna executable path
+# sortmerna
+
+
 def get_sortmerna_executable_path_from_settings() -> Optional[Path]:
     """
     Get the SortMeRNA executable path from the settings.
