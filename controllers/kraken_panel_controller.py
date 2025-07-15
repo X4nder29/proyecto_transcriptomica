@@ -944,6 +944,8 @@ class KrakenPanelController:
             value: bool = value_dict.get("active", False)
             self.view.body.options_page.confidence.set_checked(value)
 
+            value: float = value_dict.get("value", None)
+            if value is not None and isinstance(value, float):
                 self.view.body.options_page.confidence.set_value(value)
             else:
                 print(Path(__file__).name, "-", "No confidence value found in config.")
@@ -956,6 +958,8 @@ class KrakenPanelController:
             value: bool = value_dict.get("active", False)
             self.view.body.options_page.minimum_hit_groups.set_checked(value)
 
+            value: int = value_dict.get("value", None)
+            if value is not None and isinstance(value, int):
                 self.view.body.options_page.minimum_hit_groups.set_value(value)
             else:
                 print(
@@ -974,6 +978,8 @@ class KrakenPanelController:
             value: bool = value_dict.get("active", False)
             self.view.body.options_page.minimum_base_quality.set_checked(value)
 
+            value: int = value_dict.get("value", None)
+            if value is not None and isinstance(value, int):
                 self.view.body.options_page.minimum_base_quality.set_value(config["minimum_base_quality"]["value"])
             else:
                 print(
