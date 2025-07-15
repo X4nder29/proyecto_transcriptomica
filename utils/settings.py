@@ -168,7 +168,7 @@ def remove_workspace(workspace_path: Path):
     if not isinstance(workspaces, list):
         workspaces = []
 
-    if workspace_path.as_posix() in workspaces:
+    if workspaces.count(workspace_path.as_posix()):
         workspaces.remove(workspace_path.as_posix())
 
     settings.setValue("workspaces", [] if workspaces == [] else workspaces)
