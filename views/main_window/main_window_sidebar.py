@@ -197,7 +197,7 @@ class MainWindowSideBar(QWidget):
             self.setStyleSheet(stylesheet)
             qss_file.close()
 
-    def paintEvent(self, event):
+    def paintEvent(self, _):
         opt = QStyleOption()
         opt.initFrom(self)
         p = QPainter(self)
