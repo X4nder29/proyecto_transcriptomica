@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from PySide6.QtWidgets import QApplication
+from PySide6.QtWidgets import QApplication, QBoxLayout
 from PySide6.QtGui import QCursor
 
 def to_unc_path(path):
@@ -54,3 +54,15 @@ def win_to_wsl(p: Path) -> Path:
 
 def split_name(name: str):
     return name.removesuffix(".tar")
+
+
+def clear_layout(layout: QBoxLayout):
+    """
+    Clears all widgets from the given layout.
+    """
+    while layout.count():
+        item = layout.takeAt(0)
+        if item.widget():
+            item.widget().deleteLater()
+        elif item.layout():
+            clear_layout(item.layout())
