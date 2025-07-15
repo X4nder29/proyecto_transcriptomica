@@ -32,3 +32,4 @@ from .generation_page import GenerationPage
 from .saved_config_item_widget import SavedConfigItemWidget
 from .database_item_widget import DatabaseItemWidget
 from .database_manager_dialog import DatabaseManagerDialog
+from .number_selector import NumberSelector

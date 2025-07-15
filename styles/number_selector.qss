@@ -1,42 +1,38 @@
-QLineEdit {
-    color: white;
-    padding: 0em;
-    text-align: center;
-    background-color: #202020;
-    padding: 0;
+#NumberSelector {
+    background: #202020;
+    border-radius: 5px;
+}
+
+QSpinBox {
+    padding: 8px 10px;
+    background: #202020;
     border: none;
-    width: 5em;
+}
+QSpinBox > QLineEdit {
+    background: none;
 }
 
-QLineEdit:disabled  {
-    color: #9D9D9D;
+#IncrementButton, #DecrementButton {
+    padding: 0px 10px;
+    background: none;
+}
+#IncrementButton:hover, #DecrementButton:hover {
+    background: #404040;
+}
+#IncrementButton:pressed, #DecrementButton:pressed {
+    background: #252525;
 }
 
-QPushButton {
-    background-color: #202020;
-    padding: 0.5em;
-    color: white;
-    border: none;   
+#IncrementButton {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
-QPushButton:hover {
-    background-color: #666;
-}
-
-QPushButton:disabled  {
-    color: #9D9D9D;
-}
-
-QPushButton#Right {
-    border-top-left-radius: 0em;
-    border-bottom-left-radius: 0em;
-    border-top-right-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
-}
-
-QPushButton#Left {
-    border-top-left-radius: 0.5em;
-    border-bottom-left-radius: 0.5em;
-    border-top-right-radius: 0em;
-    border-bottom-right-radius: 0em;
+#DecrementButton {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
 }
