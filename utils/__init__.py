@@ -15,6 +15,12 @@ from .settings import (
     get_kraken2_database_folder_from_settings,
     set_kraken2_database_folder_in_settings,
 )
-from .utils import to_unc_path, center_window_on_screen, win_to_wsl, split_name
+from .utils import (
+    to_unc_path,
+    center_window_on_screen,
+    win_to_wsl,
+    split_name,
+    clear_layout,
+)
 from .extract_fastqc_data import extract_fastqc_data
 from .operation_modes import OperationModes
