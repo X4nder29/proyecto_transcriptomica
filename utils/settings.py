@@ -249,6 +249,89 @@ def set_sortmerna_executable_path_in_settings(path: Path):
     settings.setValue("sortmerna_executable", path.as_posix())
 
 
+def get_sortmerna_databases_folder_from_settings() -> Optional[Path]:
+    """
+    Get the SortMeRNA databases folder path from the settings.
+    """
+    sortmerna_databases_folder = settings.value("sortmerna_databases_folder", "")
+
+    if not isinstance(sortmerna_databases_folder, str):
+        sortmerna_databases_folder = ""
+
+    return Path(sortmerna_databases_folder) if sortmerna_databases_folder else None
+
+
+def set_sortmerna_databases_folder_in_settings(path: Path):
+    """
+    Set the SortMeRNA databases folder path in the settings.
+    """
+    if not isinstance(path, Path):
+        raise ValueError("path must be a Path object")
+
+    if not path.exists():
+        raise FileNotFoundError(
+            f"SortMeRNA databases folder path {path} does not exist"
+        )
+
+    settings.setValue("sortmerna_databases_folder", path.as_posix())
+
+
+def get_sortmerna_databases() -> list[dict[str, str]]:
+    """
+    Get the SortMeRNA databases from the settings.
+    """
+    sortmerna_databases = settings.value("sortmerna_databases", "", str)
+
+    if not isinstance(sortmerna_databases, str):
+        sortmerna_databases = ""
+
+    return loads(sortmerna_databases) if sortmerna_databases.strip() != "" else []
+
+
+def add_sortmerna_database(database: dict[str, str]):
+    """
+    Add a new SortMeRNA database to the settings.
+    """
+    if not isinstance(database, dict):
+        raise ValueError("database must be a dictionary")
+
+    sortmerna_databases = loads(settings.value("sortmerna_databases", "", str))
+
+    if not isinstance(sortmerna_databases, list):
+        sortmerna_databases = []
+
+    if database not in sortmerna_databases:
+        sortmerna_databases.append(database)
+
+    settings.setValue(
+        "sortmerna_databases", dumps(sortmerna_databases, ensure_ascii=False)
+    )
+
+
+def remove_sortmerna_database_by_link(link: str):
+    """
+    Remove a SortMeRNA database by its link from the settings.
+    """
+    if not isinstance(link, str):
+        raise ValueError("link must be a string")
+
+    sortmerna_databases: list[dict[str, str]] = loads(
+        settings.value("sortmerna_databases", "", str)
+    )
+
+    for database in sortmerna_databases:
+        if database["link"] == link:
+            sortmerna_databases.remove(database)
+            break
+
+    settings.setValue(
+        "sortmerna_databases", dumps(sortmerna_databases, ensure_ascii=False)
+    )
+
+
+# kraken 2
+
+
 # get kraken2 database folder path
 def get_kraken2_database_folder_from_settings() -> Optional[Path]:
     """
