@@ -3,10 +3,11 @@ import json
 from pathlib import Path
 from typing import Optional, Tuple
 from PySide6.QtCore import QProcess
-from views import FilesWindow
 from views.main_window.panels.fastqc_panel import FastqcPanel
 from utils import (
     to_unc_path,
+    get_source_files_paths,
+    get_trimmed_files_paths,
     extract_fastqc_data,
     get_current_workspace_folder_path,
     get_fastqc_file_path,
@@ -296,20 +297,25 @@ class FastQCPanelController:
 
     def open_files_window(self):
         """Open the FilesWindow."""
-        from controllers import FilesWindowController
+        from views.widgets import FileSelectorDialog
 
-        files_window = FilesWindow(parent=self.view)
-        files_window_controller = FilesWindowController(files_window)
-        result = files_window.exec_()
+        file_selector_dialog = FileSelectorDialog(
+            icon=":/assets/file.svg",
+            files=get_source_files_paths() + get_trimmed_files_paths(),
+            parent=self.view,
+            filters=True,
+            multiple=False,
+        )
+        result = file_selector_dialog.exec_()
 
-        if result == FilesWindow.Accepted:
+        if result == FileSelectorDialog.Accepted:
 
             self._disable_summary_buttons()
 
             print("FilesWindow accepted")
-            print(f"Selected file: {files_window_controller.selected_input_file}")
+            print(f"Selected file: {file_selector_dialog.checked_files[0]}")
 
-            self.selected_input_file = files_window_controller.selected_input_file
+            self.selected_input_file = file_selector_dialog.checked_files[0]
 
             self.view.body.input_file_widget.select_file_button.set_file(
                 self.selected_input_file.stem, self.selected_input_file.as_posix()
