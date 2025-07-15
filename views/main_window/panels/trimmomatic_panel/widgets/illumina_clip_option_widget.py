@@ -1,4 +1,3 @@
-from PySide6.QtGui import QIcon
 from views.widgets import (
     OptionWidget,
     NumberSelectorSuboptionWidget,
@@ -48,12 +47,6 @@ class IlluminaClipOptionWidget(OptionWidget):
         )
         self.keep_both_reads_suboption.setEnabled(self.checkbox.isChecked())
         self.main_layout.addWidget(self.keep_both_reads_suboption)
-
-    def toggle_checkbox_icon(self):
-        if self.checkbox.isChecked():
-            self.checkbox.setIcon(QIcon(":/assets/checkbox_filled.svg"))
-        else:
-            self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
 
     def toggle_suboption(self, checked: bool):
         self.adaptar_suboption.setEnabled(checked)
