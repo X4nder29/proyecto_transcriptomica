@@ -357,3 +357,55 @@ def set_kraken2_database_folder_in_settings(path: Path):
         raise FileNotFoundError(f"Kraken2 database folder path {path} does not exist")
 
     settings.setValue("kraken2_database", path.as_posix())
+
+
+# get kraken2 database links
+def get_kraken2_databases() -> list[str]:
+    """
+    Get the Kraken2 database links from the settings.
+    """
+    kraken2_database_links = settings.value("kraken2_databases", "", str)
+
+    if not isinstance(kraken2_database_links, str):
+        kraken2_database_links = ""
+
+    return loads(kraken2_database_links) if kraken2_database_links.strip() != "" else []
+
+
+# add kraken2 database link
+def add_kraken2_database(database: str):
+    """
+    Add a new Kraken2 database link to the settings.
+    """
+    if not isinstance(database, str):
+        raise ValueError("link must be a string")
+
+    kraken2_database_links = loads(settings.value("kraken2_databases", "", str))
+
+    if not isinstance(kraken2_database_links, list):
+        kraken2_database_links = []
+
+    if database not in kraken2_database_links:
+        kraken2_database_links.append(database)
+
+    settings.setValue("kraken2_database", kraken2_database_links)
+
+
+# remove kraken2 database link
+def remove_kraken2_database_by_link(link: str):
+    """
+    Remove a Kraken2 database link from the settings.
+    """
+    if not isinstance(link, str):
+        raise ValueError("link must be a string")
+
+    kraken2_databases: list[dict[str, str]] = loads(
+        settings.value("kraken2_databases", "", str)
+    )
+
+    for database in kraken2_databases:
+        if database["link"] == link:
+            kraken2_databases.remove(database)
+            break
+
+    settings.setValue("kraken2_databases", dumps(kraken2_databases, ensure_ascii=False))
