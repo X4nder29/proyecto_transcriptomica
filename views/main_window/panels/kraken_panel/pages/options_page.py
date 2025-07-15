@@ -98,7 +98,7 @@ class OptionsPage(QWidget):
             decimals=2,
             step=0.01,
         )
-        self.confidence.setRange(0.0, 1.0)
+        self.confidence.set_range(0.0, 1.0)
         self.confidence.help_button.setToolTip(
             "Umbral mínimo de confianza (--confidence) para asignaciones.\nSolo se reportarán clasificaciones con una puntuación\nde confianza ≥ este valor (float entre 0 y 1)."
         )
