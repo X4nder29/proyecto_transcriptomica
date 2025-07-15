@@ -1,0 +1,15 @@
+#InstalledWidget {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+#InstalledPushButton {
+    background-color: none;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+#InstalledPushButton:hover {
+    background-color: #404040;
+}
