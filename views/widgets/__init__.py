@@ -34,4 +34,5 @@ from .database_item_widget import DatabaseItemWidget
 from .database_manager_dialog import DatabaseManagerDialog
 from .decimal_selector import DecimalSelector
 from .decimal_selector_suboption_widget import DecimalSelectorSuboptionWidget
+from .decimal_selector_option_widget import DecimalSelectorOptionWidget
 from .number_selector import NumberSelector
