@@ -5,6 +5,8 @@ from typing import Callable, Optional, cast
 from PySide6.QtCore import QProcess
 from utils import (
     get_current_workspace,
+    get_source_files_paths,
+    get_trimmed_files_paths,
     get_trimmomatic_adapters_path,
     get_trimmomatic_jar_path,
     get_trimmomatic_output_file_path,
@@ -97,15 +99,19 @@ class TrimmomaticPanelController:
         on_cancel: Optional[Callable[[], None]] = None,
     ):
         """Open the FilesWindow."""
-        from views import FilesWindow
-        from controllers import FilesWindowController
+        from views.widgets import FileSelectorDialog
 
-        files_window = FilesWindow(parent=self.view)
-        files_window_controller = FilesWindowController(files_window)
-        result = files_window.exec_()
+        file_selector_dialog = FileSelectorDialog(
+            icon=":/assets/file.svg",
+            files=get_source_files_paths() + get_trimmed_files_paths(),
+            parent=self.view,
+            filters=True,
+            multiple=False,
+        )
+        result = file_selector_dialog.exec_()
 
-        if result == FilesWindow.Accepted:
-            selected_input_file = files_window_controller.selected_input_file
+        if result == FileSelectorDialog.Accepted:
+            selected_input_file = file_selector_dialog.checked_files[0]
 
             button.set_file(selected_input_file.stem, str(selected_input_file))
             on_file(selected_input_file)
