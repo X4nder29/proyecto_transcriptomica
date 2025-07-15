@@ -837,7 +837,7 @@ def get_krakened_files_paths() -> list[Path]:
         return []
 
     # Extensiones que queremos capturar
-    exts = ["html"]
+    exts = ["html", "txt"]
 
     collected: list[Path] = []
     path = get_kraken2_output_folder_path()
