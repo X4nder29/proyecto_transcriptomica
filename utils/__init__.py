@@ -12,6 +12,11 @@ from .settings import (
     set_trimmomatic_executable_path_in_settings,
     get_sortmerna_executable_path_from_settings,
     set_sortmerna_executable_path_in_settings,
+    get_sortmerna_databases_folder_from_settings,
+    set_sortmerna_databases_folder_in_settings,
+    get_sortmerna_databases,
+    add_sortmerna_database,
+    remove_sortmerna_database_by_link,
     get_kraken2_database_folder_from_settings,
     set_kraken2_database_folder_in_settings,
 )
