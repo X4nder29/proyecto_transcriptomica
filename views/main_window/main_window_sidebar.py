@@ -115,7 +115,7 @@ class MainWindowSideBar(QWidget):
         self.trimmomatic_button.setIcon(self.outlined_icon[1])
         self.trimmomatic_button.setIconSize(QSize(26, 26))
 
-        self.button_group.addButton(self.trimmomatic_button, 1)
+        self.button_group.addButton(self.trimmomatic_button, 2)
         self.main_layout.addWidget(
             self.trimmomatic_button, alignment=Qt.AlignmentFlag.AlignTop
         )
@@ -129,7 +129,7 @@ class MainWindowSideBar(QWidget):
         self.sortmerna_button.setIcon(self.outlined_icon[2])
         self.sortmerna_button.setIconSize(QSize(24, 24))
 
-        self.button_group.addButton(self.sortmerna_button, 2)
+        self.button_group.addButton(self.sortmerna_button, 3)
         self.main_layout.addWidget(
             self.sortmerna_button, alignment=Qt.AlignmentFlag.AlignTop
         )
@@ -143,7 +143,7 @@ class MainWindowSideBar(QWidget):
         self.kraken_button.setIcon(self.outlined_icon[3])
         self.kraken_button.setIconSize(QSize(24, 24))
 
-        self.button_group.addButton(self.kraken_button, 3)
+        self.button_group.addButton(self.kraken_button, 4)
         self.main_layout.addWidget(
             self.kraken_button, alignment=Qt.AlignmentFlag.AlignTop
         )
