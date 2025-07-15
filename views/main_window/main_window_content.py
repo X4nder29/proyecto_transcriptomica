@@ -1,4 +1,3 @@
-from ctypes import alignment
 from PySide6.QtWidgets import (
     QWidget,
     QSizePolicy,
@@ -6,15 +5,13 @@ from PySide6.QtWidgets import (
     QStyle,
     QStackedLayout,
 )
-from PySide6.QtCore import Qt
 from PySide6.QtGui import QPainter
-from ..widgets import WorkInProgressPosterPanel
-from .panels.home_panel import HomePanel
-from .panels.graphics_panel import GraphicsPanel
-from .panels.settings_panel import SettingsPanel
-from .panels.trimmomatic_panel import TrimmomaticPanel
-from .panels.fastqc_panel import FastqcPanel
-from controllers.trimmomatic_panel_controller import TrimmomaticPanelController
+from .panels import HomePanel
+from .panels import TrimmomaticPanel
+from .panels import FastqcPanel
+from .panels import SortMeRnaPanel
+from .panels import KrakenPanel
+from .panels import SettingsPanel
 
 
 class MainWindowContent(QWidget):
@@ -23,10 +20,7 @@ class MainWindowContent(QWidget):
         super().__init__(parent)
 
         self.setObjectName("Content")
-        self.setSizePolicy(
-            QSizePolicy.Policy.Expanding,
-            QSizePolicy.Policy.Expanding
-        )
+        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
         self.setupUi()
 
@@ -35,13 +29,17 @@ class MainWindowContent(QWidget):
         self.main_layout = QStackedLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(0)
-
         self.main_layout.setCurrentIndex(1)
 
-        # panels
+        ## panels
         # home panel
 
+        from controllers import HomePanelController
+
         self.home_panel = HomePanel(self)
+        self.home_panel_controller = HomePanelController(self.home_panel)
+        self.main_layout.addWidget(self.home_panel)
+
         # fastqc panel
 
         from controllers import FastQCPanelController
@@ -62,7 +60,11 @@ class MainWindowContent(QWidget):
 
         # sort me rna panel
 
-        self.sort_me_rna = WorkInProgressPosterPanel(self)
+        from controllers import SortMeRnaPanelController
+
+        self.sort_me_rna = SortMeRnaPanel(self)
+        self.sort_me_rna_controller = SortMeRnaPanelController(self.sort_me_rna)
+        self.main_layout.addWidget(self.sort_me_rna)
 
         # kraken2 panel
 
@@ -74,15 +76,10 @@ class MainWindowContent(QWidget):
 
         # settings panel
 
+        from controllers import SettingsPanelController
+
         self.settings_panel = SettingsPanel(self)
-
-        # add panels to the main layout
-
-        self.main_layout.addWidget(self.home_panel)
-        self.main_layout.addWidget(self.trimmomatic_panel)
-        self.main_layout.addWidget(self.sort_me_rna)
-        self.main_layout.addWidget(self.kraken2)
-        self.main_layout.addWidget(self.fastqc_panel)
+        self.settings_panel_controller = SettingsPanelController(self.settings_panel)
         self.main_layout.addWidget(self.settings_panel)
 
     def paintEvent(self, _):
