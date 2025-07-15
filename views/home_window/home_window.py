@@ -1,10 +1,14 @@
+from pathlib import Path
 from PySide6.QtWidgets import (
     QMainWindow,
     QWidget,
-    QStackedLayout,
-    QMessageBox
+    QVBoxLayout,
+    QStyle,
+    QStyleOption,
 )
+from PySide6.QtGui import QIcon, QPainter
 from PySide6.QtCore import QFile, QTextStream
+from .home_window_body import HomeWindowBody
 
 
 class HomeWindow(QMainWindow):
@@ -14,34 +18,32 @@ class HomeWindow(QMainWindow):
 
         self.setWindowTitle("TranscriptoHub")
         self.setWindowIcon(QIcon(":/assets/icon.svg"))
+        self.setMinimumSize(1000, 600)
         self.setAcceptDrops(True)
-        self.setWindowIcon(QIcon("assets/icon.svg"))
 
-        self.settings = QSettings("preferences.ini", QSettings.IniFormat)
-        print(self.settings.fileName())
+        self.load_stylesheet()
 
-        self.setupUi()
+        self.setup_ui()
 
-    def setupUi(self):
+    def setup_ui(self):
 
-        central_widget = QWidget(self)
-        self.setCentralWidget(central_widget)
+        self.setObjectName("HomeWindow")
 
-        self.main_layout = QStackedLayout(central_widget)
+        # central widget
 
-        empty_file_panel = EmptyFilePanel(
-            add_file_path=self.addFilePath
-        )
-        self.main_layout.addWidget(empty_file_panel)
+        self.central_widget = QWidget(self)
+        self.central_widget.setObjectName("CentralWidget")
+        self.setCentralWidget(self.central_widget)
 
-        files_panel = FilesPanel(
-            settings=self.settings,
-            add_file_path=self.addFilePath,
-            file_widget_click=self.checkFilesPaths,
-        )
-        self.main_layout.addWidget(files_panel)
+        self.central_layout = QVBoxLayout(self.central_widget)
+        self.central_layout.setContentsMargins(0, 0, 0, 0)
+        self.central_layout.setSpacing(0)
 
-        self.checkFilesPaths()
+        # body
+
+        self.body = HomeWindowBody(self)
+        self.body.setObjectName("Body")
+        self.central_layout.addWidget(self.body)
 
     def load_stylesheet(self):
         qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
@@ -49,3 +51,9 @@ class HomeWindow(QMainWindow):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
             qss_file.close()
+
+    def paintEvent(self, _):
+        option = QStyleOption()
+        option.initFrom(self)
+        painter = QPainter(self)
+        self.style().drawPrimitive(QStyle.PE_Widget, option, painter, self)
