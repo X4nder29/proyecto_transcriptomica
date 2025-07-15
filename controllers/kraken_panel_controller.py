@@ -150,18 +150,27 @@ class KrakenPanelController:
                 get_kraken2_output_folder_path()
                 / f"{self.selected_input_file_1.stem}_report.krona.html"
             )
+            kraken_txt = (
+                get_kraken2_output_folder_path()
+                / f"{self.selected_input_file_1.stem}_report.txt"
+            )
 
         if mode == "Paired End":
             krona_html = (
                 get_kraken2_output_folder_path()
                 / f"{self.selected_input_file_1.stem}_{self.selected_input_file_2.stem}.krona.html"
             )
+            kraken_txt = (
+                get_kraken2_output_folder_path()
+                / f"{self.selected_input_file_1.stem}_{self.selected_input_file_2.stem}_report.txt"
+            )
 
         print(f"{Path(__file__).name}", "-", "Krona HTML report path:", krona_html)
+        print(f"{Path(__file__).name}", "-", "Kraken TXT report path:", kraken_txt)
 
-        if krona_html.exists():
+        if krona_html.exists() and kraken_txt.exists():
 
-            print(f"{Path(__file__).name}", "-", "Krona report already exists.")
+            print(f"{Path(__file__).name}", "-", "Krona report and Kraken report found.")
             self._reset_upload_files_values()
             self._reset_options_values()
             self._go_back()
