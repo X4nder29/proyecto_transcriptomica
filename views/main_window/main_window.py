@@ -7,6 +7,7 @@ from PySide6.QtGui import QIcon
 from .main_window_sidebar import MainWindowSideBar
 from .main_window_content import MainWindowContent
 
+
 class MainWindow(QMainWindow):
 
     def __init__(self):
