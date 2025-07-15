@@ -19,6 +19,9 @@ from .settings import (
     remove_sortmerna_database_by_link,
     get_kraken2_database_folder_from_settings,
     set_kraken2_database_folder_in_settings,
+    get_kraken2_databases,
+    add_kraken2_database,
+    remove_kraken2_database_by_link,
 )
 from .utils import (
     to_unc_path,
