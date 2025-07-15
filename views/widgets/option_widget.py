@@ -8,8 +8,9 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
 )
-from PySide6.QtGui import QIcon, QPainter
+from PySide6.QtGui import QPainter
 from PySide6.QtCore import Qt, QFile, QTextStream
+from .checkbox_widget import CheckBoxWidget
 
 
 class OptionWidget(QWidget):
@@ -42,12 +43,7 @@ class OptionWidget(QWidget):
         self.head.setLayout(self.head_layout)
 
         if self.checkable:
-            self.checkbox = QPushButton(self)
-            self.checkbox.setObjectName("OptionWidgetCheckbox")
-            self.checkbox.setCheckable(True)
-            self.checkbox.setChecked(self.checked)
-            self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
-            self.checkbox.toggled.connect(self._toggle_checkbox_icon)
+            self.checkbox = CheckBoxWidget(self)
             self.head_layout.addWidget(
                 self.checkbox, alignment=Qt.AlignmentFlag.AlignLeft
             )
