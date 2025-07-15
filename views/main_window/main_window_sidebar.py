@@ -92,6 +92,20 @@ class MainWindowSideBar(QWidget):
             self.home_button, alignment=Qt.AlignmentFlag.AlignTop
         )
 
+        # fastqc section
+
+        self.fastqc_button = QPushButton()
+        self.fastqc_button.setFixedHeight(44)
+        self.fastqc_button.setToolTip("FastQC")
+        self.fastqc_button.setCheckable(True)
+        self.fastqc_button.setIcon(self.outlined_icon[4])
+        self.fastqc_button.setIconSize(QSize(24, 24))
+
+        self.button_group.addButton(self.fastqc_button, 1)
+        self.main_layout.addWidget(
+            self.fastqc_button, alignment=Qt.AlignmentFlag.AlignTop
+        )
+
         # trimmomatic section
 
         self.trimmomatic_button = QPushButton()
@@ -132,20 +146,6 @@ class MainWindowSideBar(QWidget):
         self.button_group.addButton(self.kraken_button, 3)
         self.main_layout.addWidget(
             self.kraken_button, alignment=Qt.AlignmentFlag.AlignTop
-        )
-
-        # fastqc section
-
-        self.fastqc_button = QPushButton()
-        self.fastqc_button.setFixedHeight(44)
-        self.fastqc_button.setToolTip("FastQC")
-        self.fastqc_button.setCheckable(True)
-        self.fastqc_button.setIcon(self.outlined_icon[4])
-        self.fastqc_button.setIconSize(QSize(24, 24))
-
-        self.button_group.addButton(self.fastqc_button, 4)
-        self.main_layout.addWidget(
-            self.fastqc_button, alignment=Qt.AlignmentFlag.AlignTop
         )
 
         # settings section
