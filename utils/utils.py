@@ -3,6 +3,7 @@ from pathlib import Path
 from PySide6.QtWidgets import QApplication, QBoxLayout
 from PySide6.QtGui import QCursor
 
+
 def to_unc_path(path):
     """
     Convierte una ruta local de Windows a formato UNC utilizando el nombre del host local.
@@ -21,6 +22,7 @@ def to_unc_path(path):
     unc_path = f"\\\\localhost\\{drive_letter}$\\{remaining_path.lstrip(os.sep)}"
 
     return unc_path
+
 
 def center_window_on_screen(window, screen=None):
     """
@@ -46,9 +48,11 @@ def win_to_wsl(p: Path) -> Path:
     en su equivalente WSL (/mnt/c/…).
     """
     # Obtiene la letra de unidad (p.drive es 'C:' en tu caso)
-    drive = p.drive.rstrip(":").lower()      # → 'c'
+    drive = p.drive.rstrip(":").lower()  # → 'c'
     # p.anchor es 'C:\\' en WindowsPath
-    rel   = p.relative_to(p.anchor)          # → Path('Users/Alexander/Desktop/Test 1/source/2CP_…')
+    rel = p.relative_to(
+        p.anchor
+    )  # → Path('Users/Alexander/Desktop/Test 1/source/2CP_…')
     return Path("/mnt") / drive / rel
 
 
