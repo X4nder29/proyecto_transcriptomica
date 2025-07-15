@@ -63,11 +63,12 @@ class OptionWidget(QWidget):
             self.help_button, alignment=Qt.AlignmentFlag.AlignRight
         )
 
-    def _toggle_checkbox_icon(self):
-        if self.checkbox.isChecked():
-            self.checkbox.setIcon(QIcon(":/assets/checkbox_filled.svg"))
-        else:
-            self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
+    def is_checked(self):
+        return self.checkbox.isChecked() if self.checkable else True
+    
+    def set_checked(self, checked: bool):
+        if self.checkable:
+            self.checkbox.setChecked(checked)
 
     def load_stylesheet(self):
         qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
