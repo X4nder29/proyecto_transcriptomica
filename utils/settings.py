@@ -236,7 +236,6 @@ def get_sortmerna_executable_path_from_settings() -> Optional[Path]:
     return Path(sortmerna_executable) if sortmerna_executable else None
 
 
-# set sortmerna executable path
 def set_sortmerna_executable_path_in_settings(path: Path):
     """
     Set the SortMeRNA executable path in the settings.
