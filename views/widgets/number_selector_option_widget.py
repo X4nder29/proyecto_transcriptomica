@@ -21,3 +21,12 @@ class NumberSelectorOptionWidget(OptionWidget):
 
     def toggle_suboption(self, checked: bool):
         self.number_selector_suboption_widget.setEnabled(checked)
+
+    def set_checked(self, checked: bool):
+        self.checkbox.setEnabled(checked)
+
+    def value(self):
+        return self.number_selector_suboption_widget.value()
+
+    def set_value(self, value: int):
+        self.number_selector_suboption_widget.set_value(value)
