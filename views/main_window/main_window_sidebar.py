@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import (
     QWidget,
-    QLabel,
+    QMenu,
     QVBoxLayout,
     QSizePolicy,
     QPushButton,
@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (
     QStyleOption,
     QStyle,
 )
-from PySide6.QtGui import QPainter, QIcon, Qt
+from PySide6.QtGui import QPainter, QIcon, Qt, QAction
 from PySide6.QtCore import QSize, QFile, QTextStream
 from pathlib import Path
 
@@ -69,6 +69,18 @@ class MainWindowSideBar(QWidget):
         self.icon_app.setIconSize(QSize(32, 32))
         self.main_layout.addWidget(self.icon_app, alignment=Qt.AlignmentFlag.AlignTop)
         self.main_layout.addStretch()
+
+        self.icon_app_menu = QMenu(self.icon_app)
+        self.icon_app_menu.setObjectName("IconAppMenu")
+        self.icon_app.setMenu(self.icon_app_menu)
+
+        self.about_action = QAction("Acerca de", self.icon_app_menu)
+        self.about_action.setObjectName("AboutAction")
+        self.icon_app_menu.addAction(self.about_action)
+
+        self.close_workspace = QAction("Cerrar espacio de trabajo", self.icon_app_menu)
+        self.close_workspace.setObjectName("CloseWorkspaceAction")
+        self.icon_app_menu.addAction(self.close_workspace)
 
         # button group
 
