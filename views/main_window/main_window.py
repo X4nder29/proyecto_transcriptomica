@@ -1,12 +1,13 @@
 from PySide6.QtWidgets import (
     QWidget,
+    QMainWindow,
     QHBoxLayout,
 )
 from PySide6.QtGui import QIcon
 from .main_window_sidebar import MainWindowSideBar
 from .main_window_content import MainWindowContent
 
-class MainWindow(QWidget):
+class MainWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
@@ -20,9 +21,14 @@ class MainWindow(QWidget):
 
     def setupUi(self):
 
-        self.main_layout = QHBoxLayout(self)
+        self.central_widget = QWidget(self)
+        self.central_widget.setObjectName("CentralWidget")
+        self.setCentralWidget(self.central_widget)
+
+        self.main_layout = QHBoxLayout(self.central_widget)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(0)
+        self.central_widget.setLayout(self.main_layout)
 
         self.side_bar = MainWindowSideBar(self)
         self.content = MainWindowContent(self)
