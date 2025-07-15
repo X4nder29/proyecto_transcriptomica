@@ -65,3 +65,16 @@ class NumberSelectorSuboptionWidget(QWidget):
 
     def set_value(self, value: int):
         self.number_selector.set_value(value)
+
+    def set_range(self, minimum: int, maximum: int):
+        self.number_selector.set_range(minimum, maximum)
+
+    def set_single_step(self, step: int):
+        self.number_selector.set_single_step(step)
+
+    def is_checked(self):
+        return self.check_box_widget.isChecked() if self.checkable else True
+    
+    def set_checked(self, checked: bool):
+        if self.checkable:
+            self.check_box_widget.setChecked(checked)
