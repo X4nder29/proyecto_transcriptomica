@@ -1,3 +1,4 @@
+from json import dumps, loads
 from pathlib import Path
 from typing import Optional
 from PySide6.QtCore import QDir, QSettings
