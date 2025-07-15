@@ -24,6 +24,7 @@ class ItemAbstractButton(QAbstractButton):
         self.toggled.connect(self._update_style)
         self._resize_timer = QTimer()
         self._resize_timer.setSingleShot(True)
+        self._resize_timer.timeout.connect(self._on_resize_finished)
 
     def setup_ui(self):
         self.setObjectName("ItemAbstractButton")
@@ -79,6 +80,9 @@ class ItemAbstractButton(QAbstractButton):
         self.style().unpolish(self)
         self.style().polish(self)
         self.update()
+
+    def _on_resize_finished(self):
+        pass
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
