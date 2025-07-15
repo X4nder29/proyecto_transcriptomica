@@ -60,12 +60,13 @@ class MainWindowSideBar(QWidget):
 
         # icon app
 
-        self.icon_app = QLabel()
+        self.icon_app = QPushButton()
+        self.icon_app.setObjectName("IconApp")
         self.icon_app.setFixedHeight(44)
         self.icon_app.setToolTip("TranscriptoHub")
 
         self.icon_app.setIcon(QIcon(":/assets/icon.svg"))
-        self.icon_app.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.icon_app.setIconSize(QSize(32, 32))
         self.main_layout.addWidget(self.icon_app, alignment=Qt.AlignmentFlag.AlignTop)
         self.main_layout.addStretch()
 
