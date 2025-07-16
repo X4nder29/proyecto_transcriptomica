@@ -289,19 +289,22 @@ def get_sortmerna_databases() -> list[dict[str, str]]:
     return loads(sortmerna_databases) if sortmerna_databases.strip() != "" else []
 
 
-def add_sortmerna_database(database: dict[str, str]):
+def add_sortmerna_database(name: str, link: str):
     """
     Add a new SortMeRNA database to the settings.
     """
-    if not isinstance(database, dict):
-        raise ValueError("database must be a dictionary")
 
     sortmerna_databases = loads(settings.value("sortmerna_databases", "", str))
 
     if not isinstance(sortmerna_databases, list):
         sortmerna_databases = []
 
-    if database not in sortmerna_databases:
+    database = {
+        "name": name,
+        "link": link,
+    }
+
+    if sortmerna_databases.count(database):
         sortmerna_databases.append(database)
 
     settings.setValue(
