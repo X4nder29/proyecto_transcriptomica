@@ -8,7 +8,8 @@ from PySide6.QtCore import QThread, Signal
 class DownloadWorker(QThread):
     progress_changed = Signal(int)
     file_name_signal = Signal(str)
-    finished_signal = Signal(bool, str)
+    finished_signal = Signal(str)
+    error = Signal(str)
 
     def __init__(self, url: str, dest_folder: str, parent=None):
         super().__init__(parent)
@@ -55,6 +56,6 @@ class DownloadWorker(QThread):
                         pct = int(downloaded * 100 / total)
                         self.progress_changed.emit(pct)
 
-            self.finished_signal.emit(True, filepath)
+            self.finished_signal.emit(filepath)
         except Exception as e:
-            self.finished_signal.emit(False, str(e))
+            self.error.emit(str(e))
