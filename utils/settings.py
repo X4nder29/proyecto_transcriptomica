@@ -304,7 +304,7 @@ def add_sortmerna_database(name: str, link: str):
         "link": link,
     }
 
-    if sortmerna_databases.count(database):
+    if not sortmerna_databases.count(database):
         sortmerna_databases.append(database)
 
     settings.setValue(
