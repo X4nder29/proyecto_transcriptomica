@@ -8,7 +8,7 @@ from PySide6.QtWidgets import (
     QSizePolicy,
 )
 from PySide6.QtGui import QIcon, QFontMetrics
-from PySide6.QtCore import Qt, QFile, QTextStream
+from PySide6.QtCore import Qt, QFile, QTextStream, QTimer
 
 
 class SelectFilePushButton(QPushButton):
@@ -21,6 +21,10 @@ class SelectFilePushButton(QPushButton):
 
         self.load_stylesheet()
         self.setup_ui()
+
+        self._resize_timer = QTimer()
+        self._resize_timer.setSingleShot(True)
+        self._resize_timer.timeout.connect(self._on_resize_finished)
 
     def setup_ui(self):
         self.main_layout = QHBoxLayout(self)
@@ -92,6 +96,26 @@ class SelectFilePushButton(QPushButton):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
             qss_file.close()
+
+    def _on_resize_finished(self):
+        self.primary_label.setText(
+            QFontMetrics(self.primary_label.font()).elidedText(
+                str(self.primary_label.text()),
+                Qt.TextElideMode.ElideRight,
+                self.width(),
+            ),
+        )
+        self.secondary_label.setText(
+            QFontMetrics(self.secondary_label.font()).elidedText(
+                self.secondary_label.text(),
+                Qt.TextElideMode.ElideRight,
+                self.width() - 50,  # Adjusted to account for icon width and padding
+            ),
+        )
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        self._resize_timer.start(50)
 
     def sizeHint(self):
         return self.layout().sizeHint()
