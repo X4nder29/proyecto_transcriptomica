@@ -799,16 +799,11 @@ class KrakenPanelController:
 
         from views.widgets import FileSelectorDialog
 
-        """ from controllers import FileSelectorDialogController """
-
         file_selector_dialog = FileSelectorDialog(
             icon=":/assets/database.svg",
             files=databases,
             parent=self.view,
         )
-        """ file_selector_dialog_controller = FileSelectorDialogController(
-            file_selector_dialog
-        ) """
         result = file_selector_dialog.exec_()
 
         if result == FileSelectorDialog.DialogCode.Accepted:
