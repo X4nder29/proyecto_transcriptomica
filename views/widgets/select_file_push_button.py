@@ -74,7 +74,7 @@ class SelectFilePushButton(QPushButton):
             QFontMetrics(self.secondary_label.font()).elidedText(
                 str(path),
                 Qt.TextElideMode.ElideRight,
-                self.secondary_label.width(),
+                self.width() - 60,
             )
         )
         self.secondary_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
