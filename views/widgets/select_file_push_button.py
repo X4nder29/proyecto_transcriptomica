@@ -55,7 +55,7 @@ class SelectFilePushButton(QPushButton):
         self.secondary_label = QLabel(self.label_area)
         self.secondary_label.setObjectName("SecondaryLabel")
         self.secondary_label.setText("O hacer clic para seleccionar un archivo")
-        self.primary_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
+        self.secondary_label.setAlignment(Qt.AlignmentFlag.AlignHCenter)
         self.label_area_layout.addWidget(self.secondary_label)
 
     def set_file(self, name: str, path: str):
