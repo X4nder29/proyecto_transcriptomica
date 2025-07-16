@@ -67,7 +67,13 @@ class SelectFilePushButton(QPushButton):
         self.setToolTip(path)
         self.icon_label.setPixmap(QIcon(":/assets/file.svg").pixmap(24, 24))
 
-        self.primary_label.setText(name)
+        self.primary_label.setText(
+            QFontMetrics(self.primary_label.font()).elidedText(
+                str(name),
+                Qt.TextElideMode.ElideRight,
+                self.width() - 60,
+            )
+        )
         self.primary_label.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         self.secondary_label.setText(
