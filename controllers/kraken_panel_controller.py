@@ -212,40 +212,6 @@ class KrakenPanelController:
         except Exception as e:
             print(f"Error deleting file {file}: {e}")
 
-    def _checking_existing_databases(self) -> bool:
-        """
-        Returns True if there is at least one existing directory in `db_paths`
-        that contains one or more `.k2d` files; otherwise shows a warning and
-        returns False.
-        """
-        databases = get_kraken2_database_folders()
-
-        has_k2d = any(path.exists() and any(path.glob("*.k2d")) for path in databases)
-
-        if not databases or not has_k2d:
-            from PySide6.QtWidgets import QMessageBox
-
-            # Creamos el QMessageBox manualmente para poder añadir botones
-            msg = QMessageBox(self.view)
-            msg.setIcon(QMessageBox.Warning)
-            msg.setWindowTitle("Error")
-            msg.setText("No downloaded databases found.")
-
-            # Botón por defecto para cerrar
-            close_btn = msg.addButton(QMessageBox.Close)
-            # Botón personalizado para lanzar el gestor de bases
-            download_btn = msg.addButton("Download Database...", QMessageBox.AcceptRole)
-
-            msg.exec()  # Espera a que el usuario pulse algo
-
-            clicked = msg.clickedButton()
-            if clicked == download_btn:
-                self._open_database_manager()
-
-            return False
-
-        return True
-
     # kraken
 
     def _generate_kraken_command(self) -> Tuple[str, list[str]]:
