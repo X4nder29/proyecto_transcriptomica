@@ -6,7 +6,6 @@ from .widgets import Workspaces
 class HomeWindowBody(QWidget):
     def __init__(self, parent: QWidget = None):
         super().__init__(parent)
-        self.load_stylesheet()
         self.setup_ui()
 
     def setup_ui(self):
