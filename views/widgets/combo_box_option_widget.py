@@ -31,7 +31,7 @@ class ComboBoxOptionWidget(QWidget):
     def setup_ui(self):
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(10, 10, 10, 10)
-        self.main_layout.setSpacing(10)
+        self.main_layout.setSpacing(20)
 
         # head
 
@@ -54,6 +54,18 @@ class ComboBoxOptionWidget(QWidget):
         self.checkbox.toggled.connect(self.toggle_checkbox_icon)
         self.head_layout.addWidget(self.checkbox, alignment=Qt.AlignmentFlag.AlignLeft)
 
+        # name label
+
+        self.name_label = QLabel(self.label, self.head)
+        self.name_label.setObjectName("NameLabel")
+        self.head_layout.addWidget(
+            self.name_label, alignment=Qt.AlignmentFlag.AlignLeft
+        )
+
+        # spacer
+
+        self.head_layout.addStretch()
+
         self.help_button = QPushButton("?", self)
         self.help_button.setObjectName("HelpButton")
         self.help_button.setToolTip("Help")
@@ -67,34 +79,22 @@ class ComboBoxOptionWidget(QWidget):
         self.body.setObjectName("BodyWidget")
         self.main_layout.addWidget(self.body)
 
-        self.body_layout = QHBoxLayout(self.body)
+        self.body_layout = QVBoxLayout(self.body)
         self.body_layout.setContentsMargins(0, 0, 0, 0)
         self.body_layout.setSpacing(10)
         self.body.setLayout(self.body_layout)
-
-        # name label
-
-        self.name_label = QLabel(self.label, self.head)
-        self.name_label.setObjectName("NameLabel")
-        self.body_layout.addWidget(
-            self.name_label, alignment=Qt.AlignmentFlag.AlignLeft
-        )
-
-        # spacer
-
-        self.body_layout.addStretch()
 
         # combo box
 
         self.combo_box = QComboBox(self.body)
         self.combo_box.setObjectName("ComboBox")
         self.combo_box.setSizePolicy(
-            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
         )
         for option, data in self.options:
             self.combo_box.addItem(option, data)
         self.combo_box.setCurrentIndex(0)
-        self.body_layout.addWidget(self.combo_box, alignment=Qt.AlignmentFlag.AlignRight)
+        self.body_layout.addWidget(self.combo_box)
 
     def toggle_checkbox_icon(self):
         if self.checkbox.isChecked():
