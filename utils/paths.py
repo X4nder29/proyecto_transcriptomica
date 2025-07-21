@@ -800,6 +800,8 @@ def get_sorted_files_paths() -> list[Path]:
       - .fastq.gz
       - .fasta
       - .fasta.gz
+      - .fq
+      - .fa
 
     Si no se ha establecido un directorio de trabajo, devuelve una lista vacía.
     """
@@ -808,7 +810,7 @@ def get_sorted_files_paths() -> list[Path]:
         return []
 
     # Extensiones que queremos capturar
-    exts = ["fastq", "fastq.gz", "fasta", "fasta.gz"]
+    exts = ["fastq", "fastq.gz", "fasta", "fasta.gz", "fa", "fq"]
 
     collected: list[Path] = []
     path = Path(workspace_path) / "sorted"
