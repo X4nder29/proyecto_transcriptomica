@@ -88,13 +88,13 @@ class WorkspaceFilesPage(QWidget):
         self.filter_button_group.addButton(self.krakened_button)
         filter_layout.addWidget(self.krakened_button)
 
-        """ self.sorted_button = QPushButton("Ordenados", self.filter_widget)
+        self.sorted_button = QPushButton("Ordenados", self.filter_widget)
         self.sorted_button.setObjectName("FilterButton")
         self.sorted_button.setCheckable(True)
         self.filter_button_group.addButton(self.sorted_button)
         filter_layout.addWidget(self.sorted_button)
 
-        self.analyzed_button = QPushButton("Analizados", self.filter_widget)
+        """ self.analyzed_button = QPushButton("Analizados", self.filter_widget)
         self.analyzed_button.setObjectName("FilterButton")
         self.analyzed_button.setCheckable(True)
         self.filter_button_group.addButton(self.analyzed_button)
