@@ -27,6 +27,7 @@ from .item_widget import ItemWidget
 from .item_abstract_button import ItemAbstractButton
 from .item_action_widget import ItemActionWidget
 from .panel_head_base import PanelHeadBase
+from .file_selector_dialog import FileSelectorDialog
 from .file_selector_dialog_item_widget import FileSelectorDialogItemWidget
 from .generation_page import GenerationPage
 from .saved_config_item_widget import SavedConfigItemWidget
