@@ -1,4 +1,4 @@
-from .check_installed_programs import CheckInstalledPrograms
+from .home_window_controller import HomeWindowController
 from .trimmomatic_panel_controller import TrimmomaticPanelController
 from .fastqc_panel_controller import FastQCPanelController
 from .sortmerna_panel_controller import SortMeRnaPanelController
