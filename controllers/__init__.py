@@ -1,4 +1,5 @@
 from .home_window_controller import HomeWindowController
+from .main_window_controller import MainWindowController
 from .trimmomatic_panel_controller import TrimmomaticPanelController
 from .fastqc_panel_controller import FastQCPanelController
 from .sortmerna_panel_controller import SortMeRnaPanelController
