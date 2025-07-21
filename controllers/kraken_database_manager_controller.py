@@ -220,7 +220,7 @@ class KrakenDatabaseManagerController:
         download_worker.progress_changed.connect(self.progress.setValue)
         download_worker.file_name_signal.connect(self.on_file_name)
         download_worker.finished_signal.connect(
-            lambda _, __, th=download_worker: (
+            lambda _, th=download_worker: (
                 self._download_threads.remove(th),
                 untar_worker.start(),
                 self.progress.setLabelText("Database downloaded, extracting..."),
