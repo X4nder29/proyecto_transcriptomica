@@ -60,6 +60,17 @@ def split_name(name: str):
     return name.removesuffix(".tar")
 
 
+def strip_any_suffix(text: str, sep: str = ".") -> str:
+    """
+    Strips the last occurrence of the specified separator from the text.
+    If the separator is not found, returns the original text.
+    """
+    idx = text.rfind(sep)
+    if idx == -1:
+        return text
+    return text[:idx]
+
+
 def clear_layout(layout: QBoxLayout):
     """
     Clears all widgets from the given layout.
