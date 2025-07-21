@@ -825,6 +825,35 @@ def get_sorted_files_paths() -> list[Path]:
     return sorted(collected)
 
 
+def get_sorted_folders_paths() -> list[Path]:
+    """
+    Obtiene una lista de rutas a las carpetas de archivos ordenados
+    que estén dentro del directorio de trabajo actual.
+    Las carpetas deben contener archivos con extensiones válidas:
+      - .fastq
+      - .fastq.gz
+      - .fasta
+      - .fasta.gz
+
+    Si no se ha establecido un directorio de trabajo, devuelve una lista vacía.
+    """
+    workspace_path = get_current_workspace_folder_path()
+    if not workspace_path:
+        return []
+
+    collected: list[Path] = []
+    path = Path(workspace_path) / "sorted"
+
+    if not path.is_dir():
+        return collected
+
+    for entry in path.iterdir():
+        if entry.is_dir() and any(entry.glob("**/*")):
+            collected.append(entry)
+
+    return sorted(collected)
+
+
 def get_krakened_files_paths() -> list[Path]:
     """
     Obtiene una lista de rutas a los reportes procesadas por Kraken2 y krona
