@@ -29,6 +29,7 @@ from .utils import (
     win_to_wsl,
     split_name,
     clear_layout,
+    strip_any_suffix
 )
 from .paths import (
     get_app_data_path,
@@ -66,6 +67,7 @@ from .paths import (
     remove_kraken2_saved_config,
     get_trimmed_files_paths,
     get_sorted_files_paths,
+    get_sorted_folders_paths,
     get_krakened_files_paths,
 )
 from .extract_fastqc_data import extract_fastqc_data
