@@ -35,8 +35,10 @@
     <file alias="icon.svg">icon.svg</file>
     <file alias="install_filled.svg">install_filled.svg</file>
     <file alias="install_outlined.svg">install_outlined.svg</file>
+    <file alias="java.svg">java.svg</file>
     <file alias="kraken.svg">kraken.svg</file>
     <file alias="kraken_outlined.svg">kraken_outlined.svg</file>
+    <file alias="krona.svg">krona.svg</file>
     <file alias="load.svg">load.svg</file>
     <file alias="minus.png">minus.png</file>
     <file alias="minus.svg">minus.svg</file>
@@ -46,6 +48,7 @@
     <file alias="search.svg">search.svg</file>
     <file alias="settings.svg">settings.svg</file>
     <file alias="settings_outlined.svg">settings_outlined.svg</file>
+    <file alias="sort.svg">sort.svg</file>
     <file alias="sort_filled.svg">sort_filled.svg</file>
     <file alias="sort_outlined.svg">sort_outlined.svg</file>
     <file alias="square.svg">square.svg</file>
@@ -53,6 +56,7 @@
     <file alias="upload_file.svg">upload_file.svg</file>
     <file alias="user_manual.svg">user_manual.svg</file>
     <file alias="work_in_progress.svg">work_in_progress.svg</file>
+    <file alias="wsl.svg">wsl.svg</file>
     <file alias="assets_rc.cpython-313.pyc">__pycache__/assets_rc.cpython-313.pyc</file>
     <file alias="resources_rc.cpython-313.pyc">__pycache__/resources_rc.cpython-313.pyc</file>
   </qresource>
