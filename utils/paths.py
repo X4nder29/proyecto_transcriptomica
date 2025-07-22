@@ -71,6 +71,9 @@ def get_fastqc_file_path() -> Optional[Path]:
     """
     base_dir = get_fastqc_folder_path()
 
+    if base_dir is None:
+        return None
+
     if not base_dir.is_dir():
         return None
 
