@@ -3,3 +3,4 @@ from .download_worker import DownloadWorker
 from .untar_worker import UntarWorker
 from .ungzip_worker import UngzipWorker
 from .filename_worker import FilenameWorker
+from .generic_worker import GenericWorker
