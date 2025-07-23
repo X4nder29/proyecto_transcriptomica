@@ -37,3 +37,4 @@ from .decimal_selector import DecimalSelector
 from .decimal_selector_suboption_widget import DecimalSelectorSuboptionWidget
 from .decimal_selector_option_widget import DecimalSelectorOptionWidget
 from .number_selector import NumberSelector
+from .loading_widget import LoadingWidget
