@@ -2,7 +2,7 @@ import os
 import json
 from pathlib import Path
 from typing import Callable, Optional, cast
-from PySide6.QtCore import QProcess
+from PySide6.QtCore import QProcess, QThreadPool
 from utils import (
     get_current_workspace,
     get_source_files_paths,
@@ -16,11 +16,13 @@ from utils import (
     get_trimmomatic_output_2unpaired_file_path,
     get_project_file_path,
     to_unc_path,
+    clear_layout,
     OperationModes,
 )
 from views.main_window.panels.trimmomatic_panel import TrimmomaticPanel
-from views.widgets import SaveConfigDialog, SavedConfigItemWidget
-from views.widgets import SelectFilePushButton
+from views.main_window.panels.trimmomatic_panel.widgets import PreviousReportItemWidget
+from views.widgets import SaveConfigDialog, SavedConfigItemWidget, SelectFilePushButton
+from workers import GenericWorker
 
 
 class TrimmomaticPanelController:
@@ -29,52 +31,123 @@ class TrimmomaticPanelController:
     selected_input_file_2: Optional[Path] = None
 
     def __init__(self, view: TrimmomaticPanel):
+
         self.view = view
+
         self.process = QProcess()
-
-        self.view.body.threads_selector_widget.help.clicked.connect(self._show_help)
-        self.view.head.star_button.clicked.connect(self.open_save_config_dialog)
-
-        self.load_saved_configs()
-        self._load_available_adapters()
-
         self.process.readyReadStandardOutput.connect(self.on_stdout)
         self.process.readyReadStandardError.connect(self.on_stderr)
         self.process.finished.connect(self.on_finished)
 
-        # header buttons
-        self.view.head.cancel_button.clicked.connect(self.kill_process)
-        self.view.head.play_button.clicked.connect(self.run_proccess)
-        self.view.head.star_button.clicked.connect(
-            lambda: (
-                print("Selected file 1:", self.selected_input_file_1),
-                print("Selected file 2:", self.selected_input_file_2),
-            )
-        )
-        self.view.head.cli_push_button.clicked.connect(self._open_cli_dialog)
+        self._load_available_adapters()
 
-        # suboptions buttons
-        self.view.body.operation_mode_widget.button_group.idClicked.connect(
-            lambda id: self._change_operation_mode(id)
-        )
-        self.view.body.simple_input_file_widget.select_file_button.clicked.connect(
-            lambda: self._open_files_window(
-                button=self.view.body.simple_input_file_widget.select_file_button,
+        self.view.head.cli_push_button.clicked.connect(self._open_cli_dialog)
+        self.view.head.star_button.clicked.connect(self.open_save_config_dialog)
+
+        # upload files page
+
+        self.view.body.files_page.select_file_1.clicked.connect(
+            lambda: self._open_file_selector_dialog(
+                button=self.view.body.files_page.select_file_1,
                 on_file=lambda file: setattr(self, "selected_input_file_1", file),
             )
         )
-        self.view.body.paired_input_file_widget.select_file_push_button_1.clicked.connect(
-            lambda: self._open_files_window(
-                button=self.view.body.paired_input_file_widget.select_file_push_button_1,
+        self.view.body.files_page.select_file_2.clicked.connect(
+            lambda: self._open_file_selector_dialog(
+                button=self.view.body.files_page.select_file_2,
                 on_file=lambda file: setattr(self, "selected_input_file_1", file),
             )
         )
-        self.view.body.paired_input_file_widget.select_file_push_button_2.clicked.connect(
-            lambda: self._open_files_window(
-                button=self.view.body.paired_input_file_widget.select_file_push_button_2,
-                on_file=lambda file: setattr(self, "selected_input_file_2", file),
-            )
+
+        # options page
+
+        self.view.body.options_page.trimmer_button.clicked.connect(self.run_proccess)
+
+        # navigation
+
+        self.view.body.currentChanged.connect(self._change_page)
+        self.view.body.files_page.next_page_button.clicked.connect(
+            self._to_options_page
         )
+        self.view.body.options_page.back_button.clicked.connect(self._go_back)
+
+    # previous trimms
+
+    def _load_existing_report(self):
+        self.view.body.files_page.previous_reports_container_widget.setVisible(False)
+        self.view.body.files_page.list_widget.setVisible(False)
+
+        self.pool = QThreadPool.globalInstance()
+
+        self.worker = GenericWorker(get_trimmed_files_paths)
+        self.worker.signals.finished.connect(self._on_load_existing_report_finished)
+        self.worker.signals.error.connect(self._on_load_existing_report_error)
+        self.pool.start(self.worker)
+
+    def _on_load_existing_report_finished(self, files: list[Path]):
+        self.view.body.files_page.previous_reports_container_widget.setVisible(True)
+        self.view.body.files_page.list_widget.setVisible(True)
+        self.view.body.files_page.loading_widget.setVisible(False)
+
+        clear_layout(self.view.body.files_page.list_widget.scroll_content_layout)
+
+        for file in files:
+            file_list_item = PreviousReportItemWidget(
+                file.name,
+                str(file),
+                parent=self.view.body.files_page.list_widget,
+            )
+            file_list_item.open_action.clicked.connect(
+                lambda _, f=file: os.startfile(f.parent.as_posix())
+            )
+            file_list_item.delete_action.clicked.connect(
+                lambda _, f=file: self._show_delete_source_file_dialog(f)
+            )
+            self.view.body.files_page.list_widget.scroll_content_layout.addWidget(
+                file_list_item
+            )
+
+        print(f"{Path(__file__).name}", "-", "Existing Krakened files loaded.")
+
+    def _on_load_existing_report_error(self, error: str):
+        self.view.body.files_page.previous_reports_container_widget.setVisible(True)
+        self.view.body.files_page.previous_reports_list_widget.setVisible(False)
+        self.view.body.files_page.loading_widget.setCurrentIndex(1)  # Show error state
+        print(f"{Path(__file__).name}", "-", "Error loading existing reports:", error)
+
+    def _show_delete_source_file_dialog(self, source_file: Path):
+        """
+        Show a confirmation dialog before deleting a source file.
+        """
+        from PySide6.QtWidgets import QMessageBox
+
+        reply = QMessageBox.question(
+            self.view,
+            "Delete Source File",
+            f"Are you sure you want to delete {source_file.name}?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+
+        if reply == QMessageBox.StandardButton.Yes:
+            self._delete_file(source_file)
+
+    def _delete_file(self, file: Path):
+        """
+        Delete the source file from the workspace.
+        """
+        if not file.exists():
+            return
+
+        try:
+            if file.exists():
+                file.unlink(missing_ok=True)  # Remove the file if it exists
+
+            self._load_existing_report()
+        except Exception as e:
+            print(f"Error deleting file {file}: {e}")
+
+    #
 
     def _change_operation_mode(self, mode: int):
         """Change the operation mode of the trimmomatic panel."""
@@ -150,6 +223,41 @@ class TrimmomaticPanelController:
         self._support_window.show()
         print("SupportWindow opened")
 
+        # Select files
+
+    def _open_file_selector_dialog(
+        self,
+        button: SelectFilePushButton,
+        on_file: Callable[[Path], None],
+        on_cancel: Optional[Callable[[], None]] = None,
+    ):
+        from views.widgets import FileSelectorDialog
+
+        file_selector_dialog = FileSelectorDialog(
+            icon=":/assets/file.svg",
+            files=get_source_files_paths() + get_trimmed_files_paths(),
+            parent=self.view,
+            filters=True,
+            multiple=False,
+        )
+        result = file_selector_dialog.exec_()
+
+        if result == FileSelectorDialog.DialogCode.Accepted:
+            selected_input_file = file_selector_dialog.checked_files[0]
+            button.set_file(selected_input_file.name, selected_input_file.as_posix())
+            on_file(selected_input_file)
+            print(
+                Path(__file__).name,
+                "-",
+                "Selected input file:",
+                selected_input_file,
+            )
+        else:
+            if on_cancel:
+                on_cancel()
+                button.clear_file()
+            print(Path(__file__).name, "-", "FileSelectorDialog rejected")
+
     # command
 
     def generate_arguments(self) -> list[str]:
@@ -161,10 +269,12 @@ class TrimmomaticPanelController:
             )
             return []
 
-        mode = self.view.body.operation_mode_widget.button_group.checkedButton().text()
-        threads = self.view.body.threads_selector_widget.slider.value()
+        mode = (
+            self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
+        )
+        threads = self.view.body.options_page.threads_selector_widget.slider.value()
         phred = (
-            self.view.body.quality_scores_format_options_widget.button_group.checkedButton().text()
+            self.view.body.options_page.quality_scores_format_options_widget.button_group.checkedButton().text()
         )
 
         arguments = [
@@ -189,7 +299,9 @@ class TrimmomaticPanelController:
         files = (
             [
                 self.selected_input_file_1.as_posix(),
-                get_trimmomatic_output_file_path(self.selected_input_file_1.stem).as_posix(),
+                get_trimmomatic_output_file_path(
+                    self.selected_input_file_1.stem
+                ).as_posix(),
             ]
             if mode == OperationModes.SingleEnd.value[0]
             else [
@@ -206,38 +318,38 @@ class TrimmomaticPanelController:
 
         # illumina clip option
         is_illumina_clip_active = (
-            self.view.body.illumina_clip_option_widget.checkbox.isChecked()
+            self.view.body.options_page.illumina_clip_option_widget.checkbox.isChecked()
         )
         if is_illumina_clip_active:
 
             adapter = (
-                self.view.body.illumina_clip_option_widget.adaptar_suboption.combo_box.currentData()
+                self.view.body.options_page.illumina_clip_option_widget.adaptar_suboption.combo_box.currentData()
             )
             seed_mismatches = (
-                self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.value()
+                self.view.body.options_page.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.value()
             )
             palindrome_clip_threshold = (
-                self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.value()
+                self.view.body.options_page.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.value()
             )
             simple_clip_threshold = (
-                self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.value()
+                self.view.body.options_page.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.value()
             )
 
             illumina_clip_arguments = f"ILLUMINACLIP:{to_unc_path(adapter)}:{seed_mismatches}:{palindrome_clip_threshold}:{simple_clip_threshold}"
 
             is_min_adapter_length_active = (
-                self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.check_box_widget.isChecked()
+                self.view.body.options_page.illumina_clip_option_widget.min_adapter_length_suboption.check_box_widget.isChecked()
             )
             if is_min_adapter_length_active:
                 min_adapter_length = (
-                    self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.value()
+                    self.view.body.options_page.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.value()
                 )
                 illumina_clip_arguments += f":{min_adapter_length}"
             else:
                 illumina_clip_arguments += ":0"
 
             keep_both_reads = (
-                self.view.body.illumina_clip_option_widget.keep_both_reads_suboption.checkbox.isChecked()
+                self.view.body.options_page.illumina_clip_option_widget.keep_both_reads_suboption.checkbox.isChecked()
             )
             if keep_both_reads:
                 illumina_clip_arguments += ":True"
@@ -246,55 +358,65 @@ class TrimmomaticPanelController:
 
         # sliding window option
         is_sliding_window_active = (
-            self.view.body.sliding_window_option_widget.checkbox.isChecked()
+            self.view.body.options_page.sliding_window_option_widget.checkbox.isChecked()
         )
         if is_sliding_window_active:
             window_size = (
-                self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.value()
+                self.view.body.options_page.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.value()
             )
             quality_threshold = (
-                self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.value()
+                self.view.body.options_page.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.value()
             )
             arguments.append(f"SLIDINGWINDOW:{window_size}:{quality_threshold}")
 
         # leading option
 
-        is_leading_active = self.view.body.leading_option_widget.checkbox.isChecked()
+        is_leading_active = (
+            self.view.body.options_page.leading_option_widget.checkbox.isChecked()
+        )
         if is_leading_active:
             leading = (
-                self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
+                self.view.body.options_page.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"LEADING:{leading}")
 
         # trailing option
-        is_trailing_active = self.view.body.trailing_option_widget.checkbox.isChecked()
+        is_trailing_active = (
+            self.view.body.options_page.trailing_option_widget.checkbox.isChecked()
+        )
         if is_trailing_active:
             trailing = (
-                self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
+                self.view.body.options_page.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"TRAILING:{trailing}")
 
         # minlen option
-        is_minlen_active = self.view.body.minlen_option_widget.checkbox.isChecked()
+        is_minlen_active = (
+            self.view.body.options_page.minlen_option_widget.checkbox.isChecked()
+        )
         if is_minlen_active:
             minlen = (
-                self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
+                self.view.body.options_page.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"MINLEN:{minlen}")
 
         # crop option
-        is_crop_active = self.view.body.crop_option_widget.checkbox.isChecked()
+        is_crop_active = (
+            self.view.body.options_page.crop_option_widget.checkbox.isChecked()
+        )
         if is_crop_active:
             crop = (
-                self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
+                self.view.body.options_page.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"CROP:{crop}")
 
         # headcrop option
-        is_headcrop_active = self.view.body.headcrop_option_widget.checkbox.isChecked()
+        is_headcrop_active = (
+            self.view.body.options_page.headcrop_option_widget.checkbox.isChecked()
+        )
         if is_headcrop_active:
             headcrop = (
-                self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
+                self.view.body.options_page.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value()
             )
             arguments.append(f"HEADCROP:{headcrop}")
 
@@ -312,248 +434,23 @@ class TrimmomaticPanelController:
 
         return arguments
 
-        #
-        mode = self.view.body.mode_area.button_group.checkedButton().text()
-        threads = self.view.body.threads_option.slider.value()
-        phred = self.view.body.quality_scores_format_option.button_group.checkedId()
-
-        # check if mode is selected
-        if mode not in ["SE", "PE"]:
-            self.view.show_error_dialog("Please select a mode (SE or PE)")
-            return
-
-        if mode == "SE":
-
-            # files for SE mode
-            input_file_se = self.view.body.files_area_se.input_file_se.line_edit.text()
-
-            if not input_file_se:
-                self.view.show_error_dialog("Please select an input file")
-                return
-
-            output_file_se = (
-                self.view.body.files_area_se.output_file_se.line_edit.text()
-            )
-
-            if not output_file_se:
-                self.view.show_error_dialog("Please select an output file")
-                return
-
-        else:
-
-            # files for PE mode
-            input_file_pe1 = (
-                self.view.body.files_area_pe.output_file_2_pe.line_edit.text()
-            )
-
-            if not input_file_pe1:
-                self.view.show_error_dialog("Please select input file 1 for PE mode")
-                return
-
-            input_file_pe2 = (
-                self.view.body.files_area_pe.input_file_2_pe.line_edit.text()
-            )
-
-            if not input_file_pe2:
-                self.view.show_error_dialog("Please select input file 2 for PE mode")
-                return
-
-            output_file_paired1 = (
-                self.view.body.files_area_pe.output_file_1_pe.line_edit.text()
-            )
-
-            if not output_file_paired1:
-                self.view.show_error_dialog("Please select output file 1 for PE mode")
-                return
-
-            output_file_paired2 = (
-                self.view.body.files_area_pe.output_file_1_pe.line_edit.text()
-            )
-
-            if not output_file_paired2:
-                self.view.show_error_dialog("Please select output file 2 for PE mode")
-                return
-
-            output_file_unpaired1 = (
-                self.view.body.files_area_pe.output_file_2_pe.line_edit.text()
-            )
-
-            if not output_file_unpaired1:
-                self.view.show_error_dialog(
-                    "Please select output file 1 for unpaired reads"
-                )
-                return
-
-            output_file_unpaired2 = (
-                self.view.body.files_area_pe.output_file_2_pe.line_edit.text()
-            )
-
-            if not output_file_unpaired2:
-                self.view.show_error_dialog(
-                    "Please select output file 2 for unpaired reads"
-                )
-                return
-
-        # trim steps
-
-        # illumina clip
-        is_illumina_clip_active = (
-            self.view.body.illumina_clip_option.active_button.isChecked()
-        )
-        adapter = self.view.body.illumina_clip_option.adapter_options.currentData()
-        seed_mismatches = (
-            self.view.body.illumina_clip_option.seed_mismatches_input._number_label.text()
-        )
-        palindrome_clip_threshold = (
-            self.view.body.illumina_clip_option.palindrome_clip_threshold_input._number_label.text()
-        )
-        simple_clip_threshold = (
-            self.view.body.illumina_clip_option.simple_clip_threshold_input._number_label.text()
-        )
-
-        is_min_adapter_length_active = (
-            self.view.body.illumina_clip_option.min_adapter_length_button.isChecked()
-        )
-        min_adapter_length = (
-            self.view.body.illumina_clip_option.min_adapter_length_selector._number_label.text()
-        )
-
-        keep_both_reads = (
-            self.view.body.illumina_clip_option.keep_both_reads_button.isChecked()
-        )
-
-        is_leading_active = self.view.body.leading_option.leading_button.isChecked()
-        leading = self.view.body.leading_option.number_selector._number_label.text()
-
-        is_trailing_active = self.view.body.trailing_option.leading_button.isChecked()
-        trailing = self.view.body.trailing_option.number_selector._number_label.text()
-
-        is_sliding_window_active = (
-            self.view.body.slidingwindow_option.active_button.isChecked()
-        )
-        window_size = (
-            self.view.body.slidingwindow_option.window_size_selector._number_label.text()
-        )
-
-        is_quality_threshold_active = (
-            self.view.body.slidingwindow_option.active_button.isChecked()
-        )
-        quality_threshold = (
-            self.view.body.slidingwindow_option.quality_threshold_selector._number_label.text()
-        )
-
-        is_minlen_active = self.view.body.minlen_option.leading_button.isChecked()
-        minlen = self.view.body.minlen_option.number_selector._number_label.text()
-
-        is_crop_active = self.view.body.crop_option.leading_button.isChecked()
-        crop = self.view.body.crop_option.number_selector._number_label.text()
-
-        if (
-            not is_illumina_clip_active
-            and not is_leading_active
-            and not is_trailing_active
-            and not is_sliding_window_active
-            and not is_quality_threshold_active
-            and not is_minlen_active
-            and not is_crop_active
-        ):
-            self.view.show_error_dialog("Please select at least one trim step")
-            return
-
-        if threads < 1:
-            self.view.show_error_dialog("Please select at least one thread")
-            return
-
-        if not input_file_se or not output_file_se:
-            self.view.show_error_dialog("Please select input and output files")
-            return
-
-        if os.path.splitext(input_file_se)[1] != ".fastq":
-            self.view.show_error_dialog("Input file must be a .fastq file")
-            return
-
-        if os.path.splitext(output_file_se)[1] != ".fastq":
-            self.view.show_error_dialog("Output file must be a .fastq file")
-            return
-
-        trimmomatic_jar_path = get_trimmomatic_jar_path()
-        print(f"Trimmomatic path: {trimmomatic_jar_path}")
-
-        if not trimmomatic_jar_path:
-            self.view.show_error_dialog(
-                "Trimmomatic not found. Please install Trimmomatic and try again."
-            )
-            return
-
-        arguments = [
-            "-jar",
-            f"{trimmomatic_jar_path}",
-            mode,
-            "-threads",
-            str(threads),
-            f"-phred{phred}",
-        ]
-
-        if mode == "PE":
-            arguments.extend(
-                [
-                    f'"{input_file_pe1}"',
-                    f'"{input_file_pe2}"',
-                    f'"{output_file_paired1}"',
-                    f'"{output_file_paired2}"',
-                    f'"{output_file_unpaired1}"',
-                    f'"{output_file_unpaired2}"',
-                ]
-            )
-        else:
-            arguments.extend(
-                [
-                    f'{input_file_se.replace("\\", "/")}',
-                    # """ f'{output_file_se.replace("\\", "/")}', """
-                    f'{settings.value("current_workspace", "")}/trimmed/trimmed.fastq',
-                ]
-            )
-
-        if is_illumina_clip_active:
-            illumina_clip_arguments = f"ILLUMINACLIP:{to_unc_path(adapter)}:{seed_mismatches}:{palindrome_clip_threshold}:{simple_clip_threshold}"
-            if is_min_adapter_length_active:
-                illumina_clip_arguments += f":{min_adapter_length}"
-            if keep_both_reads:
-                illumina_clip_arguments += ":True"
-            arguments.append(illumina_clip_arguments)
-
-        if is_leading_active:
-            arguments.append(f"LEADING:{leading}")
-
-        if is_trailing_active:
-            arguments.append(f"TRAILING:{trailing}")
-
-        if is_sliding_window_active:
-            arguments.append(f"SLIDINGWINDOW:{window_size}:{quality_threshold}")
-
-        if is_minlen_active:
-            arguments.append(f"MINLEN:{minlen}")
-
-        if is_crop_active:
-            arguments.append(f"CROP:{crop}")
-
-        return arguments
-
     def run_proccess(self):
         arguments = self.generate_arguments()
 
         if not arguments:
             return
 
-        self.view.head.indeterminate_progress_bar_background.setVisible(True)
+        """ self.view.head.indeterminate_progress_bar_background.setVisible(True)
         self.view.head.cancel_button.setVisible(True)
         self.view.head.play_button.setVisible(False)
-        self.view.body.setEnabled(False)
+        self.view.body.setEnabled(False) """
 
         self.process.start(
             "java",
-            self.generate_arguments(),
+            arguments,
         )
+
+        self.view.body.setCurrentIndex(2)
 
     def kill_process(self):
         self.view.body.setEnabled(True)
@@ -568,9 +465,13 @@ class TrimmomaticPanelController:
             print("No process running to cancel")
 
     def on_stdout(self):
-        print("output", self.process.readAllStandardOutput().data().decode())
+        output = self.process.readAllStandardOutput().data().decode()
+        self.view.body.generation_page_widget.title_label.setText(output)
+        print("output", output)
 
     def on_stderr(self):
+        error = self.process.readAllStandardError().data().decode()
+        self.view.body.generation_page_widget.set_text(error)
         print("error", self.process.readAllStandardError().data().decode())
 
     def on_finished(self, exit_code, exit_status):
@@ -581,10 +482,11 @@ class TrimmomaticPanelController:
         if exit_status == QProcess.ExitStatus.NormalExit and exit_code == 0:
             pass
 
-        self.view.body.setEnabled(True)
-        self.view.head.indeterminate_progress_bar_background.setVisible(False)
-        self.view.head.cancel_button.setVisible(False)
-        self.view.head.play_button.setVisible(True)
+        self._go_back()
+        """ self.view.body.setEnabled(True) """
+        """ self.view.head.indeterminate_progress_bar_background.setVisible(False) """
+        """ self.view.head.cancel_button.setVisible(False)
+        self.view.head.play_button.setVisible(True) """
 
     # save configs
 
@@ -599,14 +501,7 @@ class TrimmomaticPanelController:
 
     def load_saved_configs(self):
 
-        for index in range(self.view.body.config_list_widget.main_layout.count()):
-            item = self.view.body.config_list_widget.list_layout.itemAt(index)
-
-            if item is None:
-                continue
-
-            if item.widget():
-                item.widget().deleteLater()
+        clear_layout(self.view.body.options_page.list_widget.scroll_content_layout)
 
         project_file_path = get_project_file_path()
 
@@ -621,10 +516,22 @@ class TrimmomaticPanelController:
                 data = json.load(f)
                 configs = data.get("trimmomatic_configs", {})
 
+                if not configs:
+                    self.view.body.options_page.saved_configurations_widget.setVisible(
+                        False
+                    )
+                    print(
+                        f"{Path(__file__).name}", "-", "No saved configurations found"
+                    )
+                    return
+
+                self.view.body.options_page.saved_configurations_widget.setVisible(True)
+                print(f"{Path(__file__).name}", "-", "Loading saved configurations...")
+
                 for config_name, _ in configs.items():
                     config_item_widget = SavedConfigItemWidget(
                         config_name,
-                        parent=self.view.body.config_list_widget.list_widget,
+                        parent=self.view.body.options_page.list_widget,
                     )
                     config_item_widget.load_action.clicked.connect(
                         lambda _, c=config_name: self.load_config(c)
@@ -632,9 +539,11 @@ class TrimmomaticPanelController:
                     config_item_widget.delete_action.clicked.connect(
                         lambda _, c=config_name: self.delete_config(c)
                     )
-                    self.view.body.config_list_widget.list_layout.addWidget(
+                    self.view.body.options_page.list_widget.scroll_content_layout.addWidget(
                         config_item_widget
                     )
+
+                print(f"{Path(__file__).name}", "-", "Saved configurations loaded")
 
         except FileNotFoundError:
             self.view.show_error_dialog(
@@ -654,62 +563,47 @@ class TrimmomaticPanelController:
             return
 
         config_data = {
-            "selected_input_file_1": (
-                self.selected_input_file_1.relative_to(
-                    current_workspace_path
-                ).as_posix()
-                if self.selected_input_file_1
-                else None
-            ),
-            "selected_input_file_2": (
-                self.selected_input_file_2.relative_to(
-                    current_workspace_path
-                ).as_posix()
-                if self.selected_input_file_2
-                else None
-            ),
-            "mode": self.view.body.operation_mode_widget.button_group.checkedButton().text(),
-            "threads": self.view.body.threads_selector_widget.slider.value(),
-            "phred": self.view.body.quality_scores_format_options_widget.button_group.checkedId(),
+            "threads": self.view.body.options_page.threads_selector_widget.slider.value(),
+            "phred": self.view.body.options_page.quality_scores_format_options_widget.button_group.checkedId(),
             "illumina_clip": {
-                "active": self.view.body.illumina_clip_option_widget.checkbox.isChecked(),
+                "active": self.view.body.options_page.illumina_clip_option_widget.checkbox.isChecked(),
                 "adapter": cast(
                     Path,
-                    self.view.body.illumina_clip_option_widget.adaptar_suboption.combo_box.currentData(),
+                    self.view.body.options_page.illumina_clip_option_widget.adaptar_suboption.combo_box.currentData(),
                 )
                 .relative_to(adapters_folder_path)
                 .name,
-                "seed_mismatches": self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.value(),
-                "palindrome_clip_threshold": self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.value(),
-                "simple_clip_threshold": self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.value(),
-                "min_adapter_length_active": self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.check_box_widget.isChecked(),
-                "min_adapter_length": self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.value(),
-                "keep_both_reads": self.view.body.illumina_clip_option_widget.checkbox.isChecked(),
+                "seed_mismatches": self.view.body.options_page.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.value(),
+                "palindrome_clip_threshold": self.view.body.options_page.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.value(),
+                "simple_clip_threshold": self.view.body.options_page.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.value(),
+                "min_adapter_length_active": self.view.body.options_page.illumina_clip_option_widget.min_adapter_length_suboption.check_box_widget.isChecked(),
+                "min_adapter_length": self.view.body.options_page.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.value(),
+                "keep_both_reads": self.view.body.options_page.illumina_clip_option_widget.checkbox.isChecked(),
             },
             "leading": {
-                "active": self.view.body.leading_option_widget.checkbox.isChecked(),
-                "value": self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
+                "active": self.view.body.options_page.leading_option_widget.checkbox.isChecked(),
+                "value": self.view.body.options_page.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
             "trailing": {
-                "active": self.view.body.trailing_option_widget.checkbox.isChecked(),
-                "value": self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
+                "active": self.view.body.options_page.trailing_option_widget.checkbox.isChecked(),
+                "value": self.view.body.options_page.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
             "sliding_window": {
-                "active": self.view.body.sliding_window_option_widget.checkbox.isChecked(),
-                "window_size": self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.value(),
-                "quality_threshold": self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.value(),
+                "active": self.view.body.options_page.sliding_window_option_widget.checkbox.isChecked(),
+                "window_size": self.view.body.options_page.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.value(),
+                "quality_threshold": self.view.body.options_page.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.value(),
             },
             "minlen": {
-                "active": self.view.body.minlen_option_widget.checkbox.isChecked(),
-                "value": self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
+                "active": self.view.body.options_page.minlen_option_widget.checkbox.isChecked(),
+                "value": self.view.body.options_page.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
             "crop": {
-                "active": self.view.body.crop_option_widget.checkbox.isChecked(),
-                "value": self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
+                "active": self.view.body.options_page.crop_option_widget.checkbox.isChecked(),
+                "value": self.view.body.options_page.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
             "headcrop": {
-                "active": self.view.body.headcrop_option_widget.checkbox.isChecked(),
-                "value": self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
+                "active": self.view.body.options_page.headcrop_option_widget.checkbox.isChecked(),
+                "value": self.view.body.options_page.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.value(),
             },
         }
 
@@ -767,7 +661,7 @@ class TrimmomaticPanelController:
                     self.view.show_error_dialog("Config not found")
                     return
 
-                # Input files
+                """ # Input files
                 if config_data["selected_input_file_1"]:
                     self.selected_input_file_1 = (
                         current_workspace_path
@@ -788,92 +682,94 @@ class TrimmomaticPanelController:
                     self.view.body.paired_input_file_widget.select_file_push_button_2.set_file(
                         self.selected_input_file_2.stem,
                         self.selected_input_file_2.as_posix(),
-                    )
+                    ) """
 
-                # Operation mode
-                self.view.body.operation_mode_widget.button_group.button(
+                """ # Operation mode
+                self.view.body.fil.ooperation_mode_widget.button_group.button(
                     1 if config_data["mode"] == OperationModes.SingleEnd.value[0] else 2
-                ).setChecked(True)
+                ).setChecked(True) """
 
                 # Threads
-                self.view.body.threads_selector_widget.slider.setValue(
+                self.view.body.options_page.threads_selector_widget.slider.setValue(
                     config_data["threads"]
                 )
 
                 # Phred
-                self.view.body.quality_scores_format_options_widget.button_group.button(
-                    1 if config_data["phred"] == "Phred33" else 2
-                ).setChecked(True)
+                self.view.body.options_page.quality_scores_format_options_widget.button_group.button(
+                    config_data["phred"]
+                ).setChecked(
+                    True
+                )
 
-                self.view.body.illumina_clip_option_widget.checkbox.setChecked(
+                self.view.body.options_page.illumina_clip_option_widget.checkbox.setChecked(
                     config_data["illumina_clip"]["active"]
                 )
-                self.view.body.illumina_clip_option_widget.adaptar_suboption.combo_box.setCurrentIndex(
-                    self.view.body.illumina_clip_option_widget.adaptar_suboption.combo_box.findText(
+                self.view.body.options_page.illumina_clip_option_widget.adaptar_suboption.combo_box.setCurrentIndex(
+                    self.view.body.options_page.illumina_clip_option_widget.adaptar_suboption.combo_box.findText(
                         config_data["illumina_clip"]["adapter"]
                     )
                 )
-                self.view.body.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.setValue(
+                self.view.body.options_page.illumina_clip_option_widget.seed_mismatches_suboption.number_selector._spin_box.setValue(
                     config_data["illumina_clip"]["seed_mismatches"]
                 )
-                self.view.body.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.setValue(
+                self.view.body.options_page.illumina_clip_option_widget.palindrome_clip_threshold_suboption.number_selector._spin_box.setValue(
                     config_data["illumina_clip"]["palindrome_clip_threshold"]
                 )
-                self.view.body.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.setValue(
+                self.view.body.options_page.illumina_clip_option_widget.simple_clip_threshold_suboption.number_selector._spin_box.setValue(
                     config_data["illumina_clip"]["simple_clip_threshold"]
                 )
-                self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.check_box_widget.setChecked(
+                self.view.body.options_page.illumina_clip_option_widget.min_adapter_length_suboption.check_box_widget.setChecked(
                     config_data["illumina_clip"]["min_adapter_length_active"]
                 )
-                self.view.body.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.setValue(
+                self.view.body.options_page.illumina_clip_option_widget.min_adapter_length_suboption.number_selector._spin_box.setValue(
                     config_data["illumina_clip"]["min_adapter_length"]
                 )
-                self.view.body.illumina_clip_option_widget.keep_both_reads_suboption.checkbox.setChecked(
+                self.view.body.options_page.illumina_clip_option_widget.keep_both_reads_suboption.checkbox.setChecked(
                     config_data["illumina_clip"]["keep_both_reads"]
                 )
 
-                self.view.body.sliding_window_option_widget.checkbox.setChecked(
+                self.view.body.options_page.sliding_window_option_widget.checkbox.setChecked(
                     config_data["sliding_window"]["active"]
                 )
-                self.view.body.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.setValue(
+                self.view.body.options_page.sliding_window_option_widget.window_size_suboption.number_selector._spin_box.setValue(
                     config_data["sliding_window"]["window_size"]
                 )
-                self.view.body.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.setValue(
+                self.view.body.options_page.sliding_window_option_widget.quality_threshold_suboption.number_selector._spin_box.setValue(
                     config_data["sliding_window"]["quality_threshold"]
                 )
 
-                self.view.body.leading_option_widget.checkbox.setChecked(
+                self.view.body.options_page.leading_option_widget.checkbox.setChecked(
                     config_data["leading"]["active"]
                 )
-                self.view.body.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
+                self.view.body.options_page.leading_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["leading"]["value"]
                 )
 
-                self.view.body.trailing_option_widget.checkbox.setChecked(
+                self.view.body.options_page.trailing_option_widget.checkbox.setChecked(
                     config_data["trailing"]["active"]
                 )
-                self.view.body.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
+                self.view.body.options_page.trailing_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["trailing"]["value"]
                 )
 
-                self.view.body.minlen_option_widget.checkbox.setChecked(
+                self.view.body.options_page.minlen_option_widget.checkbox.setChecked(
                     config_data["minlen"]["active"]
                 )
-                self.view.body.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
+                self.view.body.options_page.minlen_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["minlen"]["value"]
                 )
 
-                self.view.body.crop_option_widget.checkbox.setChecked(
+                self.view.body.options_page.crop_option_widget.checkbox.setChecked(
                     config_data["crop"]["active"]
                 )
-                self.view.body.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
+                self.view.body.options_page.crop_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["crop"]["value"]
                 )
 
-                self.view.body.headcrop_option_widget.checkbox.setChecked(
+                self.view.body.options_page.headcrop_option_widget.checkbox.setChecked(
                     config_data["headcrop"]["active"]
                 )
-                self.view.body.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
+                self.view.body.options_page.headcrop_option_widget.number_selector_suboption_widget.number_selector._spin_box.setValue(
                     config_data["headcrop"]["value"]
                 )
 
@@ -881,36 +777,50 @@ class TrimmomaticPanelController:
             with open(project_file_path, "w", encoding="utf-8") as f:
                 json.dump("{}", f, indent=4)
 
-    def delete_config(self, config_name):
-        project_file_path = get_project_file_path()
+    def delete_config(self, name):
+        from PySide6.QtWidgets import QMessageBox
 
-        if not project_file_path:
-            self.view.show_error_dialog(
-                "No project file found. Please create a project first."
-            )
-            return
+        reply = QMessageBox.question(
+            self.view,
+            "Delete Configuration",
+            f"Are you sure you want to delete the configuration '{name}'?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
 
-        try:
-            with open(project_file_path, "r+", encoding="utf-8") as f:
-                data = json.load(f)
-                configs = data.get("trimmomatic_configs", {})
+        if reply == QMessageBox.StandardButton.Yes:
+            project_file_path = get_project_file_path()
 
-                if config_name in configs:
-                    del configs[config_name]
-                    data["trimmomatic_configs"] = configs
+            if not project_file_path:
+                self.view.show_error_dialog(
+                    "No project file found. Please create a project first."
+                )
+                return
 
-                    f.seek(0)
-                    json.dump(data, f, indent=4)
-                    f.truncate()
+            try:
+                with open(project_file_path, "r+", encoding="utf-8") as f:
+                    data = json.load(f)
+                    configs = data.get("trimmomatic_configs", {})
 
-                    self.load_saved_configs()
-                else:
-                    self.view.show_error_dialog("Config not found")
+                    if name in configs:
+                        del configs[name]
+                        data["trimmomatic_configs"] = configs
 
-        except FileNotFoundError:
-            self.view.show_error_dialog(
-                "Project file not found. Please create a project first."
-            )
+                        f.seek(0)
+                        json.dump(data, f, indent=4)
+                        f.truncate()
+
+                        self.load_saved_configs()
+                    else:
+                        self.view.show_error_dialog("Config not found")
+
+            except FileNotFoundError:
+                self.view.show_error_dialog(
+                    "Project file not found. Please create a project first."
+                )
+
+            self.load_saved_configs()
+            print(f"{Path(__file__).name}", "-", f"Configuration '{name}' deleted.")
 
     def check_configs(self):
         pass
@@ -932,11 +842,140 @@ class TrimmomaticPanelController:
             return
 
         adapters = [adapter.name for adapter in Path(adapters_folder_path).glob("*.fa")]
-        self.view.body.illumina_clip_option_widget.adaptar_suboption.combo_box.clear()
+        self.view.body.options_page.illumina_clip_option_widget.adaptar_suboption.combo_box.clear()
 
         print(Path(__file__).name, "-", f"Available adapters: {adapters}")
 
         for adapter in adapters:
-            self.view.body.illumina_clip_option_widget.adaptar_suboption.combo_box.addItem(
+            self.view.body.options_page.illumina_clip_option_widget.adaptar_suboption.combo_box.addItem(
                 adapter, userData=adapters_folder_path / adapter
             )
+
+    def _reset_options_values(self):
+        self.view.body.options_page.threads_selector_widget.slider.setValue(1)
+
+        self.view.body.options_page.illumina_clip_option_widget.set_checked(False)
+        self.view.body.options_page.illumina_clip_option_widget.adaptar_suboption.combo_box.setCurrentIndex(
+            0
+        )
+        self.view.body.options_page.illumina_clip_option_widget.seed_mismatches_suboption.set_value(
+            0
+        )
+        self.view.body.options_page.illumina_clip_option_widget.palindrome_clip_threshold_suboption.set_value(
+            30
+        )
+        self.view.body.options_page.illumina_clip_option_widget.simple_clip_threshold_suboption.set_value(
+            0
+        )
+        self.view.body.options_page.illumina_clip_option_widget.min_adapter_length_suboption.set_checked(
+            False
+        )
+        self.view.body.options_page.illumina_clip_option_widget.min_adapter_length_suboption.set_value(
+            0
+        )
+        self.view.body.options_page.illumina_clip_option_widget.keep_both_reads_suboption.set_checked(
+            False
+        )
+
+        self.view.body.options_page.sliding_window_option_widget.set_checked(False)
+        self.view.body.options_page.sliding_window_option_widget.window_size_suboption.set_value(
+            0
+        )
+        self.view.body.options_page.sliding_window_option_widget.quality_threshold_suboption.set_value(
+            0
+        )
+
+        self.view.body.options_page.quality_scores_format_options_widget.button_group.buttons()[
+            0
+        ].setChecked(
+            True
+        )  # Set Phred33 as default
+
+        self.view.body.options_page.leading_option_widget.set_checked(False)
+        self.view.body.options_page.leading_option_widget.number_selector_suboption_widget.set_value(
+            0
+        )
+
+        self.view.body.options_page.trailing_option_widget.set_checked(False)
+        self.view.body.options_page.trailing_option_widget.number_selector_suboption_widget.set_value(
+            0
+        )
+
+        self.view.body.options_page.minlen_option_widget.set_checked(False)
+        self.view.body.options_page.minlen_option_widget.number_selector_suboption_widget.set_value(
+            0
+        )
+
+        self.view.body.options_page.crop_option_widget.set_checked(False)
+        self.view.body.options_page.crop_option_widget.number_selector_suboption_widget.set_value(
+            0
+        )
+
+        self.view.body.options_page.headcrop_option_widget.set_checked(False)
+        self.view.body.options_page.headcrop_option_widget.number_selector_suboption_widget.set_value(
+            0
+        )
+
+    def _reset_upload_files_values(self):
+        """
+        Reset the values of the upload files page.
+        """
+        self.selected_input_file_1 = None
+        self.selected_input_file_2 = None
+        self.selected_database = None
+
+        self.view.body.files_page.select_file_1.clear_file()
+        self.view.body.files_page.select_file_2.clear_file()
+
+        self.view.body.files_page.operation_mode_widget.button_group.buttons()[
+            0
+        ].setChecked(True)
+        self.view.body.files_page.select_input_2_widget.setVisible(False)
+
+    # Navigation
+
+    def _change_page(self, index: int):
+        """Change the current page of the Kraken panel."""
+        if index == 1:
+            self.view.head.star_button.setVisible(True)
+            self.view.head.cli_push_button.setVisible(True)
+            self.load_saved_configs()
+        else:
+            self.view.head.star_button.setVisible(False)
+            self.view.head.cli_push_button.setVisible(False)
+
+    def _to_options_page(self):
+        """Navigate to the options page in the Kraken panel."""
+        mode = (
+            self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
+        )
+
+        if mode == "Single End":
+            required = [self.selected_input_file_1]
+            msg = "Debe seleccionar un archivo de entrada."
+        else:
+            required = [self.selected_input_file_1, self.selected_input_file_2]
+            msg = "Debe seleccionar dos archivos de entrada."
+
+        if any(file is None for file in required):
+            from PySide6.QtWidgets import QMessageBox
+
+            QMessageBox.warning(
+                self.view,
+                "Error",
+                msg,
+            )
+            return
+
+        self.view.body.setCurrentIndex(1)
+
+    def _go_back(self):
+        """Go back to the previous page in the Kraken panel."""
+        if self.view.body.currentIndex() == 2:
+            self.view.body.setCurrentIndex(0)  # Navigate back to the CLI page
+            print(f"{Path(__file__).name}", "-", "Going back to the upload page")
+        elif self.view.body.currentIndex() == 1:
+            self.view.body.setCurrentIndex(0)
+            print(f"{Path(__file__).name}", "-", "Going back to the upload page")
+
+        self._reset_options_values()
