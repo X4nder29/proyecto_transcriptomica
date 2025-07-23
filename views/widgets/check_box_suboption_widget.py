@@ -32,3 +32,11 @@ class CheckBoxSuboptionWidget(QWidget):
 
         # spacer
         self.main_layout.addStretch(1)
+
+    def checked(self) -> bool:
+        """Returns the checked state of the checkbox."""
+        return self.checkbox.isChecked()
+    
+    def set_checked(self, checked: bool):
+        """Sets the checked state of the checkbox."""
+        self.checkbox.setChecked(checked)
