@@ -1,4 +1,5 @@
 from .trimmomatic_panel import TrimmomaticPanel
+from .trimmomatic_panel_head import TrimmomaticPanelHead
 from .trimmomatic_panel_body import TrimmomaticPanelBody
 from .widgets import (
     IlluminaClipOptionWidget,
