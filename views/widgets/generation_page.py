@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (
     QProgressBar,
     QPushButton,
 )
-from PySide6.QtGui import QPainter
+from PySide6.QtGui import QPainter, QFontMetrics
 from PySide6.QtCore import Qt, QFile, QTextStream
 
 
@@ -62,6 +62,13 @@ class GenerationPage(QWidget):
         self.cancel_button.setObjectName("CancelButton")
         self.progress_bar_layout.addWidget(
             self.cancel_button, alignment=Qt.AlignmentFlag.AlignCenter
+        )
+
+    def set_text(self, text: str):
+        self.title_label.setText(
+            QFontMetrics(self.title_label.font()).elidedText(
+                text, Qt.TextElideMode.ElideRight, 300
+            )
         )
 
     def load_stylesheet(self):
