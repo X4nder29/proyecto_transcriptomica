@@ -15,7 +15,7 @@ class MainWindow(QMainWindow):
 
         self.setObjectName("MainWindow")
         self.setWindowTitle("TranscriptoHub")
-        self.setGeometry(250, 200, 1000, 700)
+        self.setGeometry(250, 200, 1300, 700)
         self.setWindowIcon(QIcon(":/assets/icon.svg"))
 
         self.setupUi()
