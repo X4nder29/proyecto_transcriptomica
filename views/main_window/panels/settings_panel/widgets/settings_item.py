@@ -25,6 +25,7 @@ class SettingsItem(QWidget):
 
     def setup_ui(self):
         self.setObjectName("SettingsItem")
+        self.setMaximumWidth(1000)
 
         # Layout horizontal principal
         horizontal_layout = QHBoxLayout(self)
