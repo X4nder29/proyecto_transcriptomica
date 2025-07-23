@@ -20,6 +20,7 @@ from utils import (
     get_source_files_paths,
     get_trimmed_files_paths,
 )
+from workers import GenericWorker
 
 
 class KrakenPanelController:
@@ -29,8 +30,6 @@ class KrakenPanelController:
 
     def __init__(self, view: KrakenPanel):
         self.view = view
-
-        self._load_existing_report()
 
         self.kraken_procces = QProcess()
         self.kraken_procces.readyReadStandardOutput.connect(self._on_kraken_stdout)
@@ -100,16 +99,20 @@ class KrakenPanelController:
     # checking
 
     def _load_existing_report(self):
-        files = get_krakened_files_paths()
+        self.view.body.files_page.previous_reports_container_widget.setVisible(False)
+        self.view.body.files_page.previous_reports_list_widget.setVisible(False)
 
-        if not files:
-            self.view.body.files_page.previous_reports_container_widget.setVisible(
-                False
-            )
-            print(f"{Path(__file__).name}", "-", "No Krakened files found.")
-            return
+        self.pool = QThreadPool.globalInstance()
 
+        self.worker = GenericWorker(get_krakened_files_paths)
+        self.worker.signals.finished.connect(self._on_load_existing_report_finished)
+        self.worker.signals.error.connect(self._on_load_existing_report_error)
+        self.pool.start(self.worker)
+
+    def _on_load_existing_report_finished(self, files: list[Path]):
         self.view.body.files_page.previous_reports_container_widget.setVisible(True)
+        self.view.body.files_page.previous_reports_list_widget.setVisible(True)
+        self.view.body.files_page.loading_widget.setVisible(False)
 
         for i in range(
             self.view.body.files_page.previous_reports_list_widget.scroll_content_layout.count()
@@ -139,6 +142,14 @@ class KrakenPanelController:
             self.view.body.files_page.previous_reports_list_widget.scroll_content_layout.addWidget(
                 file_list_item
             )
+
+        print(f"{Path(__file__).name}", "-", "Existing Krakened files loaded.")
+
+    def _on_load_existing_report_error(self, error: str):
+        self.view.body.files_page.previous_reports_container_widget.setVisible(True)
+        self.view.body.files_page.previous_reports_list_widget.setVisible(False)
+        self.view.body.files_page.loading_widget.setCurrentIndex(1)  # Show error state
+        print(f"{Path(__file__).name}", "-", "Error loading existing reports:", error)
 
     def _checking_existing_report(self):
         mode = (

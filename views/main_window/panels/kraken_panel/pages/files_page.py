@@ -11,7 +11,12 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QPainter
 from PySide6.QtCore import Qt, QFile, QTextStream
-from views.widgets import OperationModeWidget, SelectFilePushButton, ListWidget
+from views.widgets import (
+    OperationModeWidget,
+    SelectFilePushButton,
+    ListWidget,
+    LoadingWidget,
+)
 
 
 class FilesPage(QWidget):
@@ -153,9 +158,15 @@ class FilesPage(QWidget):
         self.previous_reports_container_layout.addWidget(self.previous_reports_label)
 
         self.previous_reports_list_widget = ListWidget(self)
+        self.previous_reports_list_widget.setVisible(False)
         self.previous_reports_container_layout.addWidget(
             self.previous_reports_list_widget
         )
+
+        # loading files
+
+        self.loading_widget = LoadingWidget(self.previous_reports_container_widget)
+        self.previous_reports_container_layout.addWidget(self.loading_widget)
 
     def change_operation_mode(self, mode: str):
         """
