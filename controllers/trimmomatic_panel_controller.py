@@ -107,7 +107,7 @@ class TrimmomaticPanelController:
                 file_list_item
             )
 
-        print(f"{Path(__file__).name}", "-", "Existing Krakened files loaded.")
+        print(f"{Path(__file__).name}", "-", "Existing Trimmed files loaded.")
 
     def _on_load_existing_report_error(self, error: str):
         self.view.body.files_page.previous_reports_container_widget.setVisible(True)
