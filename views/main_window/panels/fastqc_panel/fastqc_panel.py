@@ -24,6 +24,7 @@ class FastqcPanel(QWidget):
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(20, 20, 20, 20)
         self.main_layout.setSpacing(20)
+        self.setLayout(self.main_layout)
 
         # head
 
@@ -32,14 +33,7 @@ class FastqcPanel(QWidget):
         # body
 
         self.body = FastqcPanelBody(self)
-
-        # add widgets
-
-        self.main_layout.addWidget(self.head, alignment=Qt.AlignmentFlag.AlignTop)
         self.main_layout.addWidget(self.body)
-        self.setLayout(self.main_layout)
-
-
 
     def show_error_dialog(self, message):
         QMessageBox.critical(
