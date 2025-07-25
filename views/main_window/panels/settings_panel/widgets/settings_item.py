@@ -13,13 +13,12 @@ from PySide6.QtCore import QFile, QTextStream
 
 class SettingsItem(QWidget):
     def __init__(
-        self, icon: QIcon, title: str, subtitle=None, has_toggle=False, parent=None
+        self, icon: QIcon, title: str, subtitle=None, parent=None
     ):
         super().__init__(parent)
         self.icon = icon
         self.title = title
         self.subtitle = subtitle
-        self.has_toggle = has_toggle
         self.setup_ui()
         self.load_stylesheet()
 
