@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
     QMessageBox,
 )
 from PySide6.QtCore import Qt
-from ....widgets import PanelHeadSimple
+from .fastqc_panel_head import FastqcPanelHead
 from .fastqc_panel_body import FastqcPanelBody
 
 
@@ -28,7 +28,8 @@ class FastqcPanel(QWidget):
 
         # head
 
-        self.head = PanelHeadSimple("FastQC", self)
+        self.head = FastqcPanelHead(self)
+        self.main_layout.addWidget(self.head, alignment=Qt.AlignmentFlag.AlignTop)
 
         # body
 
