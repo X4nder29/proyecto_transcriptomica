@@ -1,0 +1,32 @@
+QListWidget {
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+}
+
+QListView::item {
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+
+QListView::item:selected {
+    background-color: #6495ED;
+    outline: none;
+    border: none;
+}
+
+QListView::item:!selected:hover {
+    background-color: #404040;
+}
+
+QListView::item:focus {
+    outline: none;
+    border: none;
+}
+
+QListWidget::item[separator="true"] {
+    border-top: 1px solid #303030;
+}
