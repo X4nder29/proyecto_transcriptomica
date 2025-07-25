@@ -3,3 +3,4 @@ from .settings_area import SettingsArea
 from .settings_item import SettingsItem
 from .installed_program_item import InstalledProgramItem
 from .installed_dependency_item import InstalledDependencyItem
+from .simple_action_item import SimpleActionItem
