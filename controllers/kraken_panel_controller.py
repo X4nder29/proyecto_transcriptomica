@@ -60,7 +60,7 @@ class KrakenPanelController:
         self.view.body.files_page.select_file_2.clicked.connect(
             lambda: self._open_file_selector_dialog(
                 button=self.view.body.files_page.select_file_2,
-                on_file=lambda file: setattr(self, "selected_input_file_1", file),
+                on_file=lambda file: setattr(self, "selected_input_file_2", file),
             )
         )
         self.view.body.files_page.select_database_button.clicked.connect(
