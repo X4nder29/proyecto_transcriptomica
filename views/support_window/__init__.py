@@ -1,1 +1,2 @@
 from .support_window_sidebar import SupportWindowSidebar
+from .support_window_content import SupportWindowContent
