@@ -661,10 +661,11 @@ def get_current_workspace_source_folder_path() -> Path:
 
     source_folder_path = Path(workspace_path) / "source"
 
-    if source_folder_path.is_dir():
-        return source_folder_path
-    else:
-        return None
+    if not source_folder_path.exists():
+        source_folder_path.mkdir(parents=True, exist_ok=True)
+        print(f"Created source folder at: {source_folder_path}")
+
+    return source_folder_path
 
 
 def get_files_in_workspace_folder() -> list[Path]:
