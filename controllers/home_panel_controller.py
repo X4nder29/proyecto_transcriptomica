@@ -139,10 +139,12 @@ class HomePanelController:
         self.thread = MoveFileWorker(
             str(file_path), str(get_current_workspace_source_folder_path())
         )
-        self.thread.finished.connect(
-            lambda: (dialog.close(), self.load_workspace_files())
-        )
+        self.thread.finished.connect(lambda d=dialog: self._on_upload_file_finished(d))
         self.thread.start()
+
+    def _on_upload_file_finished(self, dialog: QProgressDialog):
+        dialog.close()
+        self.load_workspace_files()
 
     def load_workspace_files(self, fltr: Optional[str] = None):
 
