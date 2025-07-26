@@ -484,10 +484,7 @@ class TrimmomaticPanelController:
             pass
 
         self._go_back()
-        """ self.view.body.setEnabled(True) """
-        """ self.view.head.indeterminate_progress_bar_background.setVisible(False) """
-        """ self.view.head.cancel_button.setVisible(False)
-        self.view.head.play_button.setVisible(True) """
+        self._load_existing_report()
 
     # save configs
 
