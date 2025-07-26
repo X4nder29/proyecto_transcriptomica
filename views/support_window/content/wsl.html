@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Instalación de WSL para TranscriptoHub</title>
+</head>
+
+<body>
+    <p>Para ejecutar <strong>TranscriptoHub</strong> en Windows es necesario tener instalado en el sistema
+        <strong>WSL</strong> (Subsistema de Linux en Windows). Para ello, sigue estos pasos:</p>
+
+    <hr>
+
+    <h3>3.1 Abrir PowerShell como Administrador</h3>
+
+    <hr>
+
+    <h3>3.2 Habilitar WSL</h3>
+    <pre><code class="language-powershell">
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+  </code></pre>
+
+    <hr>
+
+    <h3>3.3 Habilitar Máquina Virtual</h3>
+    <pre><code class="language-powershell">
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+  </code></pre>
+
+    <hr>
+
+    <h3>3.4 Reiniciar el Equipo</h3>
+    <ol>
+        <li>Cierra todas las aplicaciones.</li>
+        <li>Reinicia Windows.</li>
+    </ol>
+
+    <hr>
+
+    <h3>3.5 Desinstalar e Instalar TranscriptoHub</h3>
+    <p>Una vez reiniciado el equipo es necesario desinstalar TranscriptoHub y volver a instalar para así tener una
+        instalación correcta del software en su totalidad.</p>
+    <ol>
+        <li>Abre el menú Inicio y busca “TranscriptoHub”.</li>
+        <li>Haz clic derecho y selecciona <strong>Desinstalar</strong>.</li>
+        <li>En la ventana del sistema, confirma la eliminación.</li>
+    </ol>
+</body>
+
+</html>

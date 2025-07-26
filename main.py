@@ -1,6 +1,7 @@
 import sys
 import assets.assets_rc
 import styles.styles_rc
+import views.support_window.content.manual_rc
 from pathlib import Path
 from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QGuiApplication, Qt

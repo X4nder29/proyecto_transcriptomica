@@ -1,0 +1,110 @@
+<section id="panel-home">
+
+  <h2>2. Panel Home</h2>
+
+  <p>
+    El <strong>Panel Home</strong> es la primera pantalla que ves al abrir TranscriptoHub. Aquí tendrás una vista
+    general de tu <strong>Entorno de Trabajo</strong> actual, con su nombre, ruta y todos los archivos asociados (tanto
+    los que has cargado como los que se han generado tras usar cada módulo).
+  </p>
+
+  <hr />
+
+  <h3>Vista General del Panel</h3>
+  <p style="text-align: center;">
+    <img src="./assets/home_panel_overview.png" alt="Vista general del Panel Home" width="700" />
+  </p>
+
+  <ol>
+    <li>
+      <strong>Nombre del Proyecto</strong><br />
+      Lugar donde aparece el nombre de tu entorno de trabajo activo.<br />
+      <!-- Inserta aquí un recorte de la imagen señalando el texto “Test 1” en negrita. -->
+    </li>
+    <li>
+      <strong>Ruta del Proyecto</strong><br />
+      Muestra la carpeta donde están ubicados tus archivos.<br />
+      <!-- Inserta aquí un recorte señalando la línea <code>C:/Users/Alexander/Desktop/Test 1</code>. -->
+    </li>
+    <li>
+      <strong>Lista de Archivos</strong><br />
+      Pestañas filtrables:
+      <ul>
+        <li><strong>Todos</strong>: muestra todos los archivos del proyecto.</li>
+        <li><strong>Recortados</strong>, <strong>Taxonomizado</strong>, <strong>Ordenados</strong>: muestran sólo los
+          ficheros generados por cada etapa.</li>
+      </ul>
+      Cada ítem de archivo incluye:
+      <ul>
+        <li>Icono de documento y nombre de archivo.</li>
+        <li>Ruta completa (texto pequeño debajo).</li>
+        <li>Botones rápidos:
+          <ul>
+            <li>📂 Abrir carpeta contenedora</li>
+            <li>🗑️ Eliminar del proyecto</li>
+          </ul>
+        </li>
+      </ul>
+      <!-- Para esta sección, inserta un recorte que destaque uno de los ítems con sus botones. -->
+    </li>
+  </ol>
+
+  <hr />
+
+  <h3>Barra Lateral (Sidebar)</h3>
+  <p>A la izquierda encontrarás la <strong>barra de navegación</strong> con iconos que te llevan a cada módulo de
+    TranscriptoHub:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Icono</th>
+        <th>Módulo</th>
+        <th>Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><img src="./assets/icon_home.png" alt="home-icon" width="24" height="24" /></td>
+        <td><strong>Home</strong></td>
+        <td>Vista general del entorno de trabajo.</td>
+      </tr>
+      <tr>
+        <td><img src="./assets/icon_fastqc.png" alt="fastqc-icon" width="24" height="24" /></td>
+        <td><strong>FastQC</strong></td>
+        <td>Control de calidad de lecturas.</td>
+      </tr>
+      <tr>
+        <td><img src="./assets/icon_trimmomatic.png" alt="trimmomatic-icon" width="24" height="24" /></td>
+        <td><strong>Trimmomatic</strong></td>
+        <td>Recorte y filtrado de secuencias.</td>
+      </tr>
+      <tr>
+        <td><img src="./assets/icon_sortmerna.png" alt="sortmerna-icon" width="24" height="24" /></td>
+        <td><strong>SortMeRNA</strong></td>
+        <td>Eliminación de rRNA de las lecturas.</td>
+      </tr>
+      <tr>
+        <td><img src="./assets/icon_kraken2.png" alt="kraken2-icon" width="24" height="24" /></td>
+        <td><strong>Kraken2</strong></td>
+        <td>Clasificación taxonómica de lecturas.</td>
+      </tr>
+      <tr>
+        <td><img src="./assets/icon_settings.png" alt="settings-icon" width="24" height="24" /></td>
+        <td><strong>Configuración</strong></td>
+        <td>Ajustes generales de TranscriptoHub.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <blockquote>
+    <p><strong>Tip:</strong> Pasa el ratón sobre cada icono para ver su nombre completo en un tooltip.</p>
+  </blockquote>
+
+  <p>
+    Con esta estructura, el usuario podrá reconocer rápidamente dónde buscar cada elemento en el Panel Home y cómo
+    navegar entre módulos. Asegúrate de reemplazar las rutas de las imágenes (<code>./assets/...</code>) por las
+    correctas de tu proyecto.
+  </p>
+
+</section>

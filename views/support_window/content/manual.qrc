@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource prefix="manual">
+    <file alias="fastqc.html">fastqc.html</file>
+    <file alias="home.html">home.html</file>
+    <file alias="kraken2.html">kraken2.html</file>
+    <file alias="manual.qrc">manual.qrc</file>
+    <file alias="manual_rc.py">manual_rc.py</file>
+    <file alias="no_content.html">no_content.html</file>
+    <file alias="settings.html">settings.html</file>
+    <file alias="sortmerna.html">sortmerna.html</file>
+    <file alias="trimmomatic.html">trimmomatic.html</file>
+    <file alias="welcome.html">welcome.html</file>
+    <file alias="wsl.html">wsl.html</file>
+    <file alias="fastqc.png">images/fastqc.png</file>
+    <file alias="kraken_db.png">images/kraken_db.png</file>
+    <file alias="kraken_options.png">images/kraken_options.png</file>
+    <file alias="kraken_paired.png">images/kraken_paired.png</file>
+    <file alias="kraken_single.png">images/kraken_single.png</file>
+    <file alias="kraken_toolbar.png">images/kraken_toolbar.png</file>
+    <file alias="krona.png">images/krona.png</file>
+    <file alias="sortmerna_db.png">images/sortmerna_db.png</file>
+    <file alias="sortmerna_options.png">images/sortmerna_options.png</file>
+    <file alias="sortmerna_paired.png">images/sortmerna_paired.png</file>
+    <file alias="sortmerna_single.png">images/sortmerna_single.png</file>
+    <file alias="trimmomatic_options.png">images/trimmomatic_options.png</file>
+    <file alias="trimmomatic_paired.png">images/trimmomatic_paired.png</file>
+    <file alias="trimmomatic_single.png">images/trimmomatic_single.png</file>
+    <file alias="manual_rc.cpython-313.pyc">__pycache__/manual_rc.cpython-313.pyc</file>
+  </qresource>
+</RCC>
