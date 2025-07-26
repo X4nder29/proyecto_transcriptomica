@@ -1,27 +1,31 @@
-from PySide6.QtWidgets import (
-    QWidget,
-    QVBoxLayout,
-    QSizePolicy,
-    QMessageBox,
-)
 from PySide6.QtCore import Qt
+from views.widgets import PanelHeadBase, ActionButtonWidget
 
 
-class FastqcPanelHead(QWidget):
+class FastqcPanelHead(PanelHeadBase):
 
     def __init__(self, parent=None):
-        super().__init__(parent)
+        super().__init__("FastQC", parent)
 
-        self.setObjectName("FastqcPanelHead")
-        self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+    def setup_ui(self):
+        super().setup_ui()
 
-        self.setupUi()
+        # user manual button
 
-    def setupUi(self):
-        self.main_layout = QVBoxLayout(self)
-        self.main_layout.setContentsMargins(0, 0, 0, 0)
-        self.main_layout.setSpacing(20)
+        self.user_manual_button = ActionButtonWidget(
+            icon_path=":/assets/user_manual.svg",
+            tooltip="Manual de usuario",
+            parent=self,
+        )
+        self.user_manual_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.main_layout.addWidget(self.user_manual_button)
 
-        # head widgets setup can be added here
+        # cli push button
 
-        self.setLayout(self.main_layout)
+        self.cli_push_button = ActionButtonWidget(
+            icon_path=":/assets/cli_filled.svg",
+            tooltip="Visualizar comando a ejecutar",
+            parent=self,
+        )
+        self.cli_push_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.main_layout.addWidget(self.cli_push_button)

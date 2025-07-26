@@ -46,6 +46,7 @@ class KrakenPanelController:
         )
         self.view.head.cli_push_button.clicked.connect(self._show_command)
         self.view.head.star_button.clicked.connect(self._open_save_config_dialog)
+        self.view.head.user_manual_button.clicked.connect(self.open_user_manual)
 
         self.view.body.currentChanged.connect(self._change_page)
 
@@ -989,3 +990,13 @@ class KrakenPanelController:
             remove_kraken2_saved_config(name)
             self._load_saved_config()
             print(f"{Path(__file__).name}", "-", f"Configuration '{name}' deleted.")
+
+    def open_user_manual(self):
+        from views.support_window.support_window import SupportWindow
+        from controllers.support_window_controller import SupportWindowController
+
+        self.support_window = SupportWindow(self.view.window())
+        self.support_window_controller = SupportWindowController(
+            self.support_window, "Kraken2"
+        )
+        self.support_window.show()

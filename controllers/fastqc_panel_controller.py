@@ -42,6 +42,7 @@ class FastQCPanelController:
             self.cancel_report_generation
         )
         self.view.head.cli_push_button.clicked.connect(self._open_cli_dialog)
+        self.view.head.user_manual_button.clicked.connect(self.open_user_manual)
 
     def _open_cli_dialog(self):
         if self.selected_input_file is None:
@@ -402,3 +403,13 @@ class FastQCPanelController:
 
         self.view.body.summary_list_widget.adapter_content_push_button.setEnabled(False)
         self.view.body.summary_list_widget.adapter_content_push_button.setChecked(False)
+
+    def open_user_manual(self):
+        from views.support_window.support_window import SupportWindow
+        from controllers.support_window_controller import SupportWindowController
+
+        self.support_window = SupportWindow(self.view.window())
+        self.support_window_controller = SupportWindowController(
+            self.support_window, "FastQC"
+        )
+        self.support_window.show()

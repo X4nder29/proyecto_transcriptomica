@@ -26,6 +26,8 @@ class HomePanelController:
 
         self.load_workspace_files()
 
+        self.view.header.user_manual_button.clicked.connect(self.open_user_manual)
+
         self.view.content.files_area.upload_files_push_button.clicked.connect(
             self.open_file_dialog
         )
@@ -238,3 +240,13 @@ class HomePanelController:
             self.load_workspace_files()
         except Exception as e:
             print(f"Error deleting file {file}: {e}")
+
+    def open_user_manual(self):
+        from views.support_window.support_window import SupportWindow
+        from controllers.support_window_controller import SupportWindowController
+
+        self.support_window = SupportWindow(self.view.window())
+        self.support_window_controller = SupportWindowController(
+            self.support_window, "Inicio"
+        )
+        self.support_window.show()

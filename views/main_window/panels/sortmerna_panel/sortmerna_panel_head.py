@@ -16,6 +16,15 @@ class SortMeRnaPanelHead(PanelHeadBase):
         super().setup_ui()
         self.setObjectName("SortMeRnaPanelHead")
 
+        # user manual button
+        self.user_manual_button = ActionButtonWidget(
+            icon_path=":/assets/user_manual.svg",
+            tooltip="Manual de usuario",
+            parent=self,
+        )
+        self.user_manual_button.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+        self.main_layout.addWidget(self.user_manual_button)
+
         # cli push button
 
         self.cli_push_button = ActionButtonWidget(

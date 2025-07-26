@@ -41,6 +41,7 @@ class TrimmomaticPanelController:
 
         self._load_available_adapters()
 
+        self.view.head.user_manual_button.clicked.connect(self.open_user_manual)
         self.view.head.cli_push_button.clicked.connect(self._open_cli_dialog)
         self.view.head.star_button.clicked.connect(self.open_save_config_dialog)
 
@@ -979,3 +980,13 @@ class TrimmomaticPanelController:
             print(f"{Path(__file__).name}", "-", "Going back to the upload page")
 
         self._reset_options_values()
+
+    # open user manual
+
+    def open_user_manual(self):
+        from views.support_window.support_window import SupportWindow
+        from controllers.support_window_controller import SupportWindowController
+
+        self.support_window = SupportWindow(self.view.window())
+        self.support_window_controller = SupportWindowController(self.support_window, "Trimmomatic")
+        self.support_window.show()
