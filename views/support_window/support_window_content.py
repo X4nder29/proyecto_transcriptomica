@@ -25,22 +25,6 @@ class SupportWindowContent(QWidget):
         self.main_layout.setSpacing(10)
         self.setLayout(self.main_layout)
 
-        # search
-
-        self.search_layout = QHBoxLayout()
-        self.search_layout.setContentsMargins(0, 0, 0, 0)
-        self.search_layout.setSpacing(10)
-        self.main_layout.addLayout(self.search_layout)
-
-        self.search_input = QLineEdit()
-        self.search_input.setPlaceholderText("Buscar en el manual...")
-        self.search_layout.addWidget(self.search_input)
-
-        self.search_btn = QPushButton("Buscar")
-        self.search_layout.addWidget(self.search_btn)
-
-        # content
-
         self.viewer = QTextBrowser()
         self.viewer.setReadOnly(True)
         self.viewer.setOpenExternalLinks(True)
