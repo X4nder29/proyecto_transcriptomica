@@ -15,12 +15,8 @@ from PySide6.QtGui import QPainter
 from PySide6.QtCore import Qt, QFile, QTextStream
 from views.widgets import (
     ThreadsSelectorWidget,
-    SimpleInputFileWidget,
-    PairedInputFileWidget,
     NumberSelectorOptionWidget,
     SegmentedOptionWidget,
-    ConfigListWidget,
-    LoadingWidget,
     ListWidget,
 )
 from ..widgets import (
