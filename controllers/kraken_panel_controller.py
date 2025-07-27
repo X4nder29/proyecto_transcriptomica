@@ -1,7 +1,6 @@
 import os
 from typing import Callable, Optional, Tuple
 from pathlib import Path
-from PySide6.QtCore import QProcess
 from views.main_window.panels import KrakenPanel
 from views.main_window.panels.kraken_panel.widgets import (
     PreviousReportItemWidget,
@@ -102,7 +101,9 @@ class KrakenPanelController:
         from controllers import KrakenDatabaseManagerController
 
         database_manager_dialog = DatabaseManagerDialog(parent=self.view)
-        KrakenDatabaseManagerController(database_manager_dialog)
+        KrakenDatabaseManagerController(
+            database_manager_dialog,
+        )
         database_manager_dialog.show()
 
     # checking
