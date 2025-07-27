@@ -98,7 +98,9 @@ class KrakenPanelController:
         Open the Kraken2 database manager.
         """
         from views.widgets import DatabaseManagerDialog
-        from controllers import KrakenDatabaseManagerController
+        from controllers import (
+            KrakenDatabaseManagerController,
+        )
 
         database_manager_dialog = DatabaseManagerDialog(parent=self.view)
         KrakenDatabaseManagerController(
