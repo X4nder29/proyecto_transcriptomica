@@ -186,7 +186,9 @@ class KrakenPanelController:
 
         if krona_html.exists() and kraken_txt.exists():
 
-            print(f"{Path(__file__).name}", "-", "Krona report and Kraken report found.")
+            print(
+                f"{Path(__file__).name}", "-", "Krona report and Kraken report found."
+            )
             self._reset_upload_files_values()
             self._reset_options_values()
             self._go_back()
@@ -351,7 +353,9 @@ class KrakenPanelController:
         )
 
         if is_confidence_active:
-            confidence_value = self.view.body.options_page.confidence.decimal_selector_suboption_widget.decimal_selector._spin_box.value()
+            confidence_value = (
+                self.view.body.options_page.confidence.decimal_selector_suboption_widget.decimal_selector._spin_box.value()
+            )
             if confidence_value >= 0.0 and confidence_value <= 1.0:
                 arguments.extend(
                     [
