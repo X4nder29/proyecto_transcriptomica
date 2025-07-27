@@ -6,3 +6,4 @@ from .home_panel_controller import HomePanelController
 from .sortmerna_panel_controller import SortMeRnaPanelController
 from .kraken_panel_controller import KrakenPanelController
 from .kraken_database_manager_controller import KrakenDatabaseManagerController
+from .support_window_controller import SupportWindowController
