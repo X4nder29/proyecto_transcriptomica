@@ -73,7 +73,7 @@ class OptionsPage(QWidget):
         self.threads_selector_widget.help.setToolTip(
             "Número de subprocesos (CPU cores) que se usarán para procesar en paralelo, acelerando el recorte de las lecturas."
         )
-        self.container_layout.addWidget(self.threads_selector_widget, 0, 1, 1, 1)
+        self.container_layout.addWidget(self.threads_selector_widget, 0, 0, 1, 1)
 
         self.illumina_clip_option_widget = IlluminaClipOptionWidget(self)
         self.illumina_clip_option_widget.help_button.setToolTip(
@@ -87,17 +87,7 @@ class OptionsPage(QWidget):
                 • Keep Both Reads: (PE) Conserva ambos extremos del par aunque sólo uno contenga adaptador; por defecto sólo se devuelve el extremo “limpio”.
             """
         )
-        self.container_layout.addWidget(self.illumina_clip_option_widget, 1, 1, 7, 1)
-
-        self.sliding_window_option_widget = SlidingWindowOptionWidget(self)
-        self.sliding_window_option_widget.help_button.setToolTip(
-            """
-            Recorta regiones de baja calidad analizando ventanas móviles a lo largo de cada lectura.
-                • Window Size: Tamaño (en nucleótidos) de la ventana que se desplaza por la lectura.
-                • Quality Threshold: Calidad media mínima requerida dentro de cada ventana; si baja de este valor, se recortan las bases restantes.
-            """
-        )
-        self.container_layout.addWidget(self.sliding_window_option_widget, 8, 1, 3, 1)
+        self.container_layout.addWidget(self.illumina_clip_option_widget, 1, 0, 7, 1)
 
         # options column 1
 
@@ -110,38 +100,50 @@ class OptionsPage(QWidget):
             "Define la codificación de calidad de las bases: Phred33 (0-41) o Phred64 (0-62)."
         )
         self.container_layout.addWidget(
-            self.quality_scores_format_options_widget, 0, 2, 1, 1
+            self.quality_scores_format_options_widget, 0, 1, 1, 1
         )
+
+        self.sliding_window_option_widget = SlidingWindowOptionWidget(self)
+        self.sliding_window_option_widget.help_button.setToolTip(
+            """
+            Recorta regiones de baja calidad analizando ventanas móviles a lo largo de cada lectura.
+                • Window Size: Tamaño (en nucleótidos) de la ventana que se desplaza por la lectura.
+                • Quality Threshold: Calidad media mínima requerida dentro de cada ventana; si baja de este valor, se recortan las bases restantes.
+            """
+        )
+        self.container_layout.addWidget(self.sliding_window_option_widget, 1, 1, 3, 1)
 
         self.leading_option_widget = NumberSelectorOptionWidget("Leading", self)
         self.leading_option_widget.help_button.setToolTip(
             "Recorta desde el extremo 5' de la lectura todas las bases cuya calidad sea inferior al umbral especificado."
         )
-        self.container_layout.addWidget(self.leading_option_widget, 1, 2, 2, 1)
+        self.container_layout.addWidget(self.leading_option_widget, 4, 1, 2, 1)
 
         self.trailing_option_widget = NumberSelectorOptionWidget("Trailing", self)
         self.trailing_option_widget.help_button.setToolTip(
             "Recorta desde el extremo 3' de la lectura todas las bases cuya calidad sea inferior al umbral especificado."
         )
-        self.container_layout.addWidget(self.trailing_option_widget, 3, 2, 2, 1)
+        self.container_layout.addWidget(self.trailing_option_widget, 6, 1, 2, 1)
+
+        # options column 2
 
         self.minlen_option_widget = NumberSelectorOptionWidget("Minlen", self)
         self.minlen_option_widget.help_button.setToolTip(
             "Longitud mínima que debe tener la lectura tras todos los recortes; si es más corta, se descarta por completo."
         )
-        self.container_layout.addWidget(self.minlen_option_widget, 5, 2, 2, 1)
+        self.container_layout.addWidget(self.minlen_option_widget, 0, 2, 2, 1)
 
         self.crop_option_widget = NumberSelectorOptionWidget("Crop", self)
         self.crop_option_widget.help_button.setToolTip(
             "Recorta cada lectura a la longitud fija indicada, eliminando cualquier base que exceda ese punto."
         )
-        self.container_layout.addWidget(self.crop_option_widget, 7, 2, 2, 1)
+        self.container_layout.addWidget(self.crop_option_widget, 2, 2, 2, 1)
 
         self.headcrop_option_widget = NumberSelectorOptionWidget("Headcrop", self)
         self.headcrop_option_widget.help_button.setToolTip(
             "Elimina un número fijo de nucleótidos desde el extremo 5' de la lectura antes de aplicar cualquier otro recorte."
         )
-        self.container_layout.addWidget(self.headcrop_option_widget, 9, 2, 2, 1)
+        self.container_layout.addWidget(self.headcrop_option_widget, 4, 2, 2, 1)
 
         # navigation buttons
 
