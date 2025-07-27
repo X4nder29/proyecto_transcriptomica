@@ -56,16 +56,20 @@ class KrakenPanelController:
             lambda: self._open_file_selector_dialog(
                 button=self.view.body.files_page.select_file_1,
                 on_file=lambda file: setattr(self, "selected_input_file_1", file),
-                on_cancel=lambda: (setattr(self, "selected_input_file_1", None), 
-                                   self.view.body.files_page.select_file_1.clear_file()),
+                on_cancel=lambda: (
+                    setattr(self, "selected_input_file_1", None),
+                    self.view.body.files_page.select_file_1.clear_file(),
+                ),
             )
         )
         self.view.body.files_page.select_file_2.clicked.connect(
             lambda: self._open_file_selector_dialog(
                 button=self.view.body.files_page.select_file_2,
                 on_file=lambda file: setattr(self, "selected_input_file_2", file),
-                on_cancel=lambda: (setattr(self, "selected_input_file_2", None), 
-                                   self.view.body.files_page.select_file_2.clear_file()),
+                on_cancel=lambda: (
+                    setattr(self, "selected_input_file_2", None),
+                    self.view.body.files_page.select_file_2.clear_file(),
+                ),
             )
         )
         self.view.body.files_page.select_database_button.clicked.connect(
