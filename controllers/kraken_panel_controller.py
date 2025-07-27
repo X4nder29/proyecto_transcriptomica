@@ -545,7 +545,9 @@ class KrakenPanelController:
             "ktImportText",
         ]
 
-        mode = self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
+        mode = (
+            self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
+        )
 
         if mode == "Single End":
             input_file = win_to_wsl(
@@ -617,7 +619,9 @@ class KrakenPanelController:
     def _on_krona_finished(self):
         """Handle the completion of the Krona process."""
 
-        mode = self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
+        mode = (
+            self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
+        )
 
         if mode == "Single End":
             krona_html = (
@@ -963,7 +967,9 @@ class KrakenPanelController:
 
             value: int = value_dict.get("value", None)
             if value is not None and isinstance(value, int):
-                self.view.body.options_page.minimum_base_quality.set_value(config["minimum_base_quality"]["value"])
+                self.view.body.options_page.minimum_base_quality.set_value(
+                    config["minimum_base_quality"]["value"]
+                )
             else:
                 print(
                     Path(__file__).name,
