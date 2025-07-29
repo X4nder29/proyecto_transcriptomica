@@ -20,6 +20,14 @@ Facultad de Ingeniería, Universidad Cooperativa de Colombia
 Desarrollo de un software Front‑End bioinformático con una interfaz gráfica intuitiva para el análisis y visualización de datos de secuencias de ARN de placa dental y saliva en personas con y sin carcinoma escamo celular oral.
 La plataforma integra Trimmomatic, FastQC, SortMeRNA y Kraken2 en un flujo de trabajo automatizado de escritorio.
 
+## Generación del ejecutable
+
+Para generar el ejecutable del software se debe utilizar el siguiente comando:
+
+```bash
+pyinstaller --clean --onefile --noconsole --icon=./assets/app.ico --name TranscriptoHub main.py
+```
+
 ## Agradecimientos
 - A Dios, por darnos fortaleza, guía y sabiduría en cada paso
 - A nuestros tutores José Fernando Noguera Polanía, Alveiro T. Erira y Aldo de Jesús Daconte Blanco por su dedicación, orientación y confianza 
