@@ -11,6 +11,11 @@ Facultad de Ingeniería, Universidad Cooperativa de Colombia
 - Alexander de Jesús Pérez Meza
 - Sebastián Núñez Gámez
 
+## Tutores
+- José Fernando Noguera Polanía  
+- Alveiro T. Erira  
+- Aldo de Jesús Daconte Blanco  
+
 ## Descripción
 Desarrollo de un software Front‑End bioinformático con una interfaz gráfica intuitiva para el análisis y visualización de datos de secuencias de ARN de placa dental y saliva en personas con y sin carcinoma escamo celular oral.
 La plataforma integra Trimmomatic, FastQC, SortMeRNA y Kraken2 en un flujo de trabajo automatizado de escritorio.
