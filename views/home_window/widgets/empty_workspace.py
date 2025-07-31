@@ -44,7 +44,7 @@ class EmptyWorkspace(QWidget):
 
         button_area_layout = QHBoxLayout(buttons_area)
         button_area_layout.setContentsMargins(0, 0, 0, 0)
-        button_area_layout.setSpacing(5)
+        button_area_layout.setSpacing(20)
 
         # Create Button
 
