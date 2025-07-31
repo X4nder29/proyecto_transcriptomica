@@ -26,11 +26,13 @@ class EmptyWorkspace(QWidget):
         main_layout = QVBoxLayout(self)
         main_layout.setAlignment(Qt.AlignCenter)
 
-        title_label = QLabel("Welcome to TranscriptoHub")
+        title_label = QLabel("Bienvenido a TranscriptoHub")
         title_label.setObjectName("TitleLabel")
         main_layout.addWidget(title_label, alignment=Qt.AlignHCenter)
 
-        indication_label = QLabel("Open existing workspace from disk")
+        indication_label = QLabel(
+            "Abrir un espacio de trabajo existente desde el disco"
+        )
         indication_label.setObjectName("IndicationLabel")
         main_layout.addWidget(indication_label, alignment=Qt.AlignHCenter)
 
@@ -63,7 +65,7 @@ class EmptyWorkspace(QWidget):
         self.create_button.setFixedSize(64, 64)
         create_button_area_layout.addWidget(self.create_button, alignment=Qt.AlignHCenter)
 
-        create_label = QLabel("Create new workspace", create_button_area)
+        create_label = QLabel("Crear nuevo espacio de trabajo", create_button_area)
         create_label.setObjectName("ButtonName")
         create_button_area_layout.addWidget(create_label, alignment=Qt.AlignHCenter)
 
@@ -84,7 +86,7 @@ class EmptyWorkspace(QWidget):
         self.open_button.setFixedSize(64, 64)
         open_button_area_layout.addWidget(self.open_button, alignment=Qt.AlignHCenter)
 
-        open_label = QLabel("Open existing workspace")
+        open_label = QLabel("Abrir espacio de trabajo existente")
         open_label.setObjectName("ButtonName")
         open_button_area_layout.addWidget(open_label, alignment=Qt.AlignHCenter)
 
