@@ -1,6 +1,7 @@
 import os
 from typing import Callable, Optional, Tuple
 from pathlib import Path
+from PySide6.QtCore import QProcess, QThreadPool
 from views.main_window.panels import KrakenPanel
 from views.main_window.panels.kraken_panel.widgets import (
     PreviousReportItemWidget,
