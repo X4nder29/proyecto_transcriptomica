@@ -1,9 +1,7 @@
 import os
-import glob
 from pathlib import Path
 from PySide6.QtCore import QStandardPaths, QCoreApplication
-from typing import Optional, Tuple
-from views.main_window.panels.home_panel.widgets import current_workspace
+from typing import Optional
 
 
 QCoreApplication.setOrganizationName("Universidad Cooperativa de Colombia")
