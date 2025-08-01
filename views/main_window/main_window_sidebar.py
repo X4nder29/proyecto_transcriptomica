@@ -19,7 +19,6 @@ class MainWindowSideBar(QWidget):
         super().__init__(parent)
         self.setup_ui()
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
-        QGuiApplication.styleHints().colorSchemeChanged.connect(self.update_icons)
         QGuiApplication.styleHints().colorSchemeChanged.emit(
             QGuiApplication.styleHints().colorScheme()
         )
