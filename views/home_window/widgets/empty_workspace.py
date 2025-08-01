@@ -22,8 +22,6 @@ class EmptyWorkspace(QWidget):
 
         self.setObjectName("EmptyWorkspace")
 
-        """ self.load_stylesheet() """
-
         self.setup_ui()
 
     def setup_ui(self):
