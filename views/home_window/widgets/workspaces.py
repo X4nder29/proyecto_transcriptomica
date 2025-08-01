@@ -13,8 +13,9 @@ from PySide6.QtWidgets import (
     QScrollArea,
     QSizePolicy,
 )
-from PySide6.QtGui import QIcon, QPainter
+from PySide6.QtGui import QIcon, QPainter, QGuiApplication, QColor
 from PySide6.QtCore import Qt, QFile, QTextStream
+from utils import tint_icon
 
 
 class Workspaces(QWidget):
@@ -22,12 +23,17 @@ class Workspaces(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.setObjectName("Workspaces")
-
-        self.load_stylesheet()
         self.setup_ui()
+        
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.update_icons)
+        QGuiApplication.styleHints().colorSchemeChanged.emit(
+            QGuiApplication.styleHints().colorScheme()
+        )
 
     def setup_ui(self):
+        self.setObjectName("Workspaces")
+
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(20, 20, 20, 20)
         self.main_layout.setSpacing(15)
@@ -126,11 +132,25 @@ class Workspaces(QWidget):
         self.workspaces_scroll_area.setWidget(self.workspaces_list)
         self.body_area_layout.addWidget(self.workspaces_scroll_area)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def update_icons(self, scheme: Qt.ColorScheme):
+        icon = (
+            QIcon(":/assets/search.svg")
+            if scheme == Qt.ColorScheme.Dark
+            else tint_icon(":/assets/search.svg", QColor("#000000"))
+        )
+        self.search_icon_label.setPixmap(icon.pixmap(20, 20))
+
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):

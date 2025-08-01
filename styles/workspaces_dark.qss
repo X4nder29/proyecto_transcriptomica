@@ -2,6 +2,7 @@
     background-color: transparent;
     border: none;
     font-size: 14px;
+    color: white;
 }
 
 #CreateNewWorkspaceButton, #OpenExistingWorkspaceButton {
@@ -9,6 +10,7 @@
     border-radius: 5px;
     padding: 5px 10px;
     background-color: #303030;
+    color: white;
 }
 
 #CreateNewWorkspaceButton:hover, #OpenExistingWorkspaceButton:hover {
@@ -18,4 +20,13 @@
 #HorizontalSpacer {
     color: gray;
     max-height: 1px;
+}
+
+#WorkspacesScrollArea {
+    background-color: #1E1E1E;
+    border: none;
+}
+
+#WorkspacesList {
+    background-color: #1E1E1E;
 }
