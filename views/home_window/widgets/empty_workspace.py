@@ -15,9 +15,14 @@ class EmptyWorkspace(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent=parent)
 
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
+        QGuiApplication.styleHints().colorSchemeChanged.emit(
+            QGuiApplication.styleHints().colorScheme()
+        )
+
         self.setObjectName("EmptyWorkspace")
 
-        self.load_stylesheet()
+        """ self.load_stylesheet() """
 
         self.setup_ui()
 
@@ -90,12 +95,15 @@ class EmptyWorkspace(QWidget):
         open_label.setObjectName("ButtonName")
         open_button_area_layout.addWidget(open_label, alignment=Qt.AlignHCenter)
 
-    def load_stylesheet(self):
-        is_dark = QGuiApplication.styleHints().colorScheme() == Qt.ColorScheme.Dark
+    def load_stylesheet(self, scheme: Qt.ColorScheme = QGuiApplication.styleHints().colorScheme()):
         qss_file = QFile(
-            f":/styles/{Path(__file__).stem}_{"dark" if is_dark else "light"}.qss"
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
         )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()

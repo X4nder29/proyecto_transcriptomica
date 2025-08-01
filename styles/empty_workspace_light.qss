@@ -1,0 +1,25 @@
+#TitleLabel {
+    font-size: 24px;
+    font-weight: bold;
+    color: black;
+}
+
+#IndicationLabel {
+    font-size: 14px;
+    color: black;
+}
+
+#ButtonName {
+    color: black;
+}
+
+#CreateWorkspaceButton, #OpenWorkspaceButton {
+    font-size: 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3578E5;
+}
+
+#CreateWorkspaceButton:hover, #OpenWorkspaceButton:hover {
+    background-color: #2F69CC;
+}

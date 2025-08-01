@@ -1,11 +1,16 @@
 #TitleLabel {
     font-size: 24px;
     font-weight: bold;
+    color: white;
 }
 
-#IndicatorLabel {
+#IndicationLabel {
     font-size: 16px;
-    color: #AAA;
+    color: white;
+}
+
+#ButtonName {
+    color: white;
 }
 
 #CreateWorkspaceButton, #OpenWorkspaceButton {
