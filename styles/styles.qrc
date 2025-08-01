@@ -67,7 +67,8 @@
     <file alias="single_option_widget.qss">single_option_widget.qss</file>
     <file alias="styles.qrc">styles.qrc</file>
     <file alias="styles_rc.py">styles_rc.py</file>
-    <file alias="summary_widget.qss">summary_widget.qss</file>
+    <file alias="summary_widget_dark.qss">summary_widget_dark.qss</file>
+    <file alias="summary_widget_light.qss">summary_widget_light.qss</file>
     <file alias="support_window.qss">support_window.qss</file>
     <file alias="support_window_content.qss">support_window_content.qss</file>
     <file alias="support_window_sidebar.qss">support_window_sidebar.qss</file>
