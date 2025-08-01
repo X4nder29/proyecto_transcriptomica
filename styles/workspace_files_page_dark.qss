@@ -1,6 +1,7 @@
 #HeaderLabel {
     font-size: 14px;
     font-weight: bold;
+    color: #FFFFFF;
 }
 
 #UploadButton {
@@ -19,6 +20,7 @@
     border: none;
     border-radius: 5px;
     padding: 7.5px;
+    color: #212529;
 }
 
 #FilterButton:checked {

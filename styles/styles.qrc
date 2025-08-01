@@ -80,7 +80,8 @@
     <file alias="upload_files_push_button.qss">upload_files_push_button.qss</file>
     <file alias="work_in_progress_poster_panel.qss">work_in_progress_poster_panel.qss</file>
     <file alias="workspace_file_item_widget.qss">workspace_file_item_widget.qss</file>
-    <file alias="workspace_files_page.qss">workspace_files_page.qss</file>
+    <file alias="workspace_files_page_dark.qss">workspace_files_page_dark.qss</file>
+    <file alias="workspace_files_page_light.qss">workspace_files_page_light.qss</file>
     <file alias="workspace_files_widget_dark.qss">workspace_files_widget_dark.qss</file>
     <file alias="workspace_files_widget_light.qss">workspace_files_widget_light.qss</file>
     <file alias="workspace_item_dark.qss">workspace_item_dark.qss</file>

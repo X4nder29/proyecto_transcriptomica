@@ -1,0 +1,37 @@
+#HeaderLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#UploadButton {
+    color: #ffffff;
+	border: none;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+#UploadButton:hover {
+	background-color: #2F69CC;
+}
+
+#FilterButton {
+    background-color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 7.5px;
+    color: #FFFFFF;
+}
+
+#FilterButton:!checked:hover {
+    background-color: #E5F1FF;
+}
+
+#FilterButton:!checked {
+    color: #212529;
+}
+
+#FilterButton:checked {
+    background-color: #6C757D;
+    color: #FFFFFF;
+}
