@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Optional
 from PySide6.QtCore import QDir, QSettings
 
-from utils.paths import get_app_data_path
+from .paths import get_app_data_path
 
 
 settings_file = QDir(get_app_data_path()).filePath("transcriptohub.ini")
