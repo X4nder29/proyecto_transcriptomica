@@ -10,7 +10,8 @@
     <file alias="combo_box_suboption_widget.qss">combo_box_suboption_widget.qss</file>
     <file alias="config_list_widget.qss">config_list_widget.qss</file>
     <file alias="create_workspace_dialog.qss">create_workspace_dialog.qss</file>
-    <file alias="current_workspace.qss">current_workspace.qss</file>
+    <file alias="current_workspace_dark.qss">current_workspace_dark.qss</file>
+    <file alias="current_workspace_light.qss">current_workspace_light.qss</file>
     <file alias="database_item_widget.qss">database_item_widget.qss</file>
     <file alias="database_manager_dialog.qss">database_manager_dialog.qss</file>
     <file alias="decimal_selector.qss">decimal_selector.qss</file>
