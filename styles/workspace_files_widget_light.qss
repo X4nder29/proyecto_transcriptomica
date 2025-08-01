@@ -1,0 +1,5 @@
+#FilesArea {
+    background-color: #3578E5;
+    border-radius: 5px;
+    color: #FFFFFF;
+}

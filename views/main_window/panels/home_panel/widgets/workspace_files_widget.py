@@ -7,8 +7,8 @@ from PySide6.QtWidgets import (
     QStyleOption,
     QSizePolicy,
 )
-from PySide6.QtGui import QPainter
-from PySide6.QtCore import QFile, QTextStream, Signal
+from PySide6.QtGui import QGuiApplication, QPainter
+from PySide6.QtCore import Qt, QFile, QTextStream, Signal
 from .upload_files_push_button import UploadFilesPushButton
 from .workspace_files_page import WorkspaceFilesPage
 
@@ -16,10 +16,13 @@ from .workspace_files_page import WorkspaceFilesPage
 class WorkspaceFilesWidget(QWidget):
     dropped = Signal(str)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: QWidget = None):
         super().__init__(parent)
-        self.load_stylesheet()
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
+        QGuiApplication.styleHints().colorSchemeChanged.emit(
+            QGuiApplication.styleHints().colorScheme()
+        )
 
     def setup_ui(self):
         self.setObjectName("FilesArea")
@@ -41,11 +44,17 @@ class WorkspaceFilesWidget(QWidget):
         self.file_list_widget = WorkspaceFilesPage(self)
         self.stacked.addWidget(self.file_list_widget)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, event):
