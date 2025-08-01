@@ -4,14 +4,12 @@ import styles.styles_rc
 import views.support_window.content.manual_rc
 from pathlib import Path
 from PySide6.QtWidgets import QApplication
-from PySide6.QtGui import QGuiApplication, Qt
 from utils import set_default_settings, center_window_on_screen, get_current_workspace
 from app_state import AppState
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.state = AppState
-    QGuiApplication.styleHints().setColorScheme(Qt.ColorScheme.Dark)
 
     set_default_settings()
 
