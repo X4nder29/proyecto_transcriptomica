@@ -34,7 +34,8 @@
     <file alias="kraken_panel_body.qss">kraken_panel_body.qss</file>
     <file alias="line_edit_with_button.qss">line_edit_with_button.qss</file>
     <file alias="list_widget.qss">list_widget.qss</file>
-    <file alias="main_window_sidebar.qss">main_window_sidebar.qss</file>
+    <file alias="main_window_sidebar_dark.qss">main_window_sidebar_dark.qss</file>
+    <file alias="main_window_sidebar_light.qss">main_window_sidebar_light.qss</file>
     <file alias="number_selector.qss">number_selector.qss</file>
     <file alias="operation_mode_widget.qss">operation_mode_widget.qss</file>
     <file alias="option_area.qss">option_area.qss</file>

@@ -1,3 +1,4 @@
+from pathlib import Path
 from PySide6.QtWidgets import (
     QWidget,
     QMenu,
@@ -8,28 +9,25 @@ from PySide6.QtWidgets import (
     QStyleOption,
     QStyle,
 )
-from PySide6.QtGui import QPainter, QIcon, Qt, QAction
-from PySide6.QtCore import QSize, QFile, QTextStream
-from pathlib import Path
+from PySide6.QtGui import QGuiApplication, QPainter, QIcon, Qt, QAction
+from PySide6.QtCore import Qt, QSize, QFile, QTextStream
 
 
 class MainWindowSideBar(QWidget):
 
-    def __init__(
-        self,
-        parent=None,
-    ):
+    def __init__(self, parent: QWidget = None):
         super().__init__(parent)
+        self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.update_icons)
+        QGuiApplication.styleHints().colorSchemeChanged.emit(
+            QGuiApplication.styleHints().colorScheme()
+        )
 
+    def setup_ui(self):
         self.setObjectName("SideBar")
         self.setFixedWidth(68)
         self.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Expanding)
-
-        self.load_stylesheet()
-
-        self.setup_ui()
-
-    def setup_ui(self):
 
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(10, 10, 10, 10)
@@ -86,9 +84,7 @@ class MainWindowSideBar(QWidget):
 
         self.button_group = QButtonGroup()
         self.button_group.setExclusive(True)
-        self.button_group.buttonClicked.connect(
-            lambda btn: self.changeButtonIcon(btn)
-        )
+        self.button_group.buttonClicked.connect(lambda btn: self.changeButtonIcon(btn))
 
         # home section
 
@@ -203,11 +199,17 @@ class MainWindowSideBar(QWidget):
         else:
             self.fastqc_button.setIcon(self.outlined_icon[4])
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):
