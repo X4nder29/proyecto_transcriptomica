@@ -10,9 +10,7 @@ class HomeWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.update_icon)
-        QGuiApplication.styleHints().colorSchemeChanged.emit(
-            QGuiApplication.styleHints().colorScheme()
-        )
+        self.update_icon(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
 
     def setup_ui(self):

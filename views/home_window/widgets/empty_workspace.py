@@ -14,14 +14,12 @@ class EmptyWorkspace(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent=parent)
-
+        
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
-        QGuiApplication.styleHints().colorSchemeChanged.emit(
-            QGuiApplication.styleHints().colorScheme()
-        )
 
         self.setObjectName("EmptyWorkspace")
 
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
 
     def setup_ui(self):

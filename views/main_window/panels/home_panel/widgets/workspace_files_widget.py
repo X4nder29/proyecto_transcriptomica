@@ -18,11 +18,9 @@ class WorkspaceFilesWidget(QWidget):
 
     def __init__(self, parent: QWidget = None):
         super().__init__(parent)
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
-        QGuiApplication.styleHints().colorSchemeChanged.emit(
-            QGuiApplication.styleHints().colorScheme()
-        )
 
     def setup_ui(self):
         self.setObjectName("FilesArea")

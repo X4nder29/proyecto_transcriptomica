@@ -22,14 +22,11 @@ class Workspaces(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
         
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.update_icons)
-        QGuiApplication.styleHints().colorSchemeChanged.emit(
-            QGuiApplication.styleHints().colorScheme()
-        )
 
     def setup_ui(self):
         self.setObjectName("Workspaces")
