@@ -1,0 +1,14 @@
+#WorkspaceFileItemWidget {
+    background-color: #6C757D;
+    border-radius: 5px;
+    color: #FFFFFF;
+}
+
+#NameLabel {
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#PathLabel {
+    color: #DDDDDD;
+}
