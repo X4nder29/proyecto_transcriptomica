@@ -44,7 +44,8 @@
     <file alias="options_page.qss">options_page.qss</file>
     <file alias="paired_input_file_widget.qss">paired_input_file_widget.qss</file>
     <file alias="panel_head.qss">panel_head.qss</file>
-    <file alias="panel_head_base.qss">panel_head_base.qss</file>
+    <file alias="panel_head_base_dark.qss">panel_head_base_dark.qss</file>
+    <file alias="panel_head_base_light.qss">panel_head_base_light.qss</file>
     <file alias="panel_head_simple.qss">panel_head_simple.qss</file>
     <file alias="previous_report_item_widget.qss">previous_report_item_widget.qss</file>
     <file alias="quality_scores_format_option.qss">quality_scores_format_option.qss</file>
