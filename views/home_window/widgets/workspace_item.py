@@ -11,8 +11,9 @@ from PySide6.QtWidgets import (
     QStyleOption,
     QStyle,
 )
-from PySide6.QtGui import QPixmap, QIcon, QPainter, QAction
+from PySide6.QtGui import QPixmap, QIcon, QPainter, QAction, QGuiApplication, QColor
 from PySide6.QtCore import Qt, Signal, QFile, QTextStream
+from utils import tint_icon
 
 
 class WorkspaceItem(QWidget):
@@ -25,16 +26,18 @@ class WorkspaceItem(QWidget):
         self.path = path
         self.enable = self.path.exists() and self.path.is_dir()
 
+        self.setup_ui()
+
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.update_icons)
+        QGuiApplication.styleHints().colorSchemeChanged.emit(
+            QGuiApplication.styleHints().colorScheme()
+        )
+
+    def setup_ui(self):
         self.setObjectName("WorkspaceItem")
         self.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Fixed)
         self.setFixedHeight(64)
-        """ self.setEnabled(self.path.exists() and self.path.is_dir()) """
-
-        self.load_stylesheet()
-
-        self.setup_ui()
-
-    def setup_ui(self):
 
         self.main_layout = QHBoxLayout(self)
         self.main_layout.setContentsMargins(10, 10, 10, 10)
@@ -42,17 +45,17 @@ class WorkspaceItem(QWidget):
 
         # Icono (Etiqueta con imagen)
 
-        icon_label = QLabel(self)
-        icon_label.setObjectName("IconLabel")
-        icon_label.setEnabled(self.enable)
-        icon_label.setFixedSize(32, 32)
-        icon_label.setPixmap(
+        self.icon_label = QLabel(self)
+        self.icon_label.setObjectName("IconLabel")
+        self.icon_label.setEnabled(self.enable)
+        self.icon_label.setFixedSize(32, 32)
+        self.icon_label.setPixmap(
             QPixmap(":/assets/adn.svg").scaled(
                 24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation
             )
         )
-        icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.main_layout.addWidget(icon_label, alignment=Qt.AlignmentFlag.AlignTop)
+        self.icon_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.main_layout.addWidget(self.icon_label, alignment=Qt.AlignmentFlag.AlignTop)
 
         ## Contenedor del texto
 
@@ -102,11 +105,25 @@ class WorkspaceItem(QWidget):
             self.action_button.mapToGlobal(self.action_button.rect().bottomLeft())
         )
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def update_icons(self, scheme: Qt.ColorScheme):
+        action_icon = (
+            QIcon(":/assets/more_vert.svg")
+            if scheme == Qt.ColorScheme.Dark
+            else tint_icon(":/assets/more_vert.svg", QColor("#6C757D"))
+        )
+        self.action_button.setIcon(action_icon)
+
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def mousePressEvent(self, _):

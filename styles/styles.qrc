@@ -78,7 +78,8 @@
     <file alias="workspace_file_item_widget.qss">workspace_file_item_widget.qss</file>
     <file alias="workspace_files_page.qss">workspace_files_page.qss</file>
     <file alias="workspace_files_widget.qss">workspace_files_widget.qss</file>
-    <file alias="workspace_item.qss">workspace_item.qss</file>
+    <file alias="workspace_item_dark.qss">workspace_item_dark.qss</file>
+    <file alias="workspace_item_light.qss">workspace_item_light.qss</file>
     <file alias="workspaces_dark.qss">workspaces_dark.qss</file>
     <file alias="workspaces_light.qss">workspaces_light.qss</file>
     <file alias="styles_rc.cpython-313.pyc">__pycache__/styles_rc.cpython-313.pyc</file>
