@@ -1,7 +1,8 @@
 import os
 from pathlib import Path
 from PySide6.QtWidgets import QApplication, QBoxLayout
-from PySide6.QtGui import QCursor
+from PySide6.QtGui import QCursor, QIcon, QPainter, QColor
+from PySide6.QtCore import QSize
 
 
 def to_unc_path(path):
@@ -81,3 +82,13 @@ def clear_layout(layout: QBoxLayout):
             item.widget().deleteLater()
         elif item.layout():
             clear_layout(item.layout())
+
+
+def tint_icon(path: str, size: QSize, color: QColor) -> QIcon:
+    base_icon = QIcon(path)
+    pix = base_icon.pixmap(size)
+    painter = QPainter(pix)
+    painter.setCompositionMode(QPainter.CompositionMode.CompositionMode_SourceIn)
+    painter.fillRect(pix.rect(), color)
+    painter.end()
+    return QIcon(pix)

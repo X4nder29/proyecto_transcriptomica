@@ -29,7 +29,8 @@ from .utils import (
     win_to_wsl,
     split_name,
     clear_layout,
-    strip_any_suffix
+    strip_any_suffix,
+    tint_icon,
 )
 from .paths import (
     get_app_data_path,
