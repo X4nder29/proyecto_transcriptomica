@@ -20,7 +20,7 @@
     border: none;
     border-radius: 5px;
     padding: 7.5px;
-    color: #212529;
+    color: #FFFFFF;
 }
 
 #FilterButton:checked {
