@@ -63,7 +63,8 @@
     <file alias="settings_item.qss">settings_item.qss</file>
     <file alias="settings_panel_body.qss">settings_panel_body.qss</file>
     <file alias="simple_action_item.qss">simple_action_item.qss</file>
-    <file alias="simple_input_file_widget.qss">simple_input_file_widget.qss</file>
+    <file alias="simple_input_file_widget_dark.qss">simple_input_file_widget_dark.qss</file>
+    <file alias="simple_input_file_widget_light.qss">simple_input_file_widget_light.qss</file>
     <file alias="single_option.qss">single_option.qss</file>
     <file alias="single_option_widget.qss">single_option_widget.qss</file>
     <file alias="styles.qrc">styles.qrc</file>

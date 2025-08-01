@@ -8,21 +8,21 @@ from PySide6.QtWidgets import (
     QStyleOption,
     QStyle,
 )
-from PySide6.QtGui import QPainter
+from PySide6.QtGui import QGuiApplication, QPainter
 from PySide6.QtCore import Qt, QFile, QTextStream
 from views.widgets import SelectFilePushButton
 
 
 class SimpleInputFileWidget(QWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent: QWidget = None):
         super().__init__(parent)
-
-        self.setObjectName("InputFileWidget")
-
-        self.load_stylesheet()
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
+        self.setObjectName("InputFileWidget")
+
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(10, 10, 10, 10)
         self.main_layout.setSpacing(10)
@@ -52,11 +52,17 @@ class SimpleInputFileWidget(QWidget):
         self.select_file_button = SelectFilePushButton(self)
         self.main_layout.addWidget(self.select_file_button)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):

@@ -1,11 +1,12 @@
 #InputFileWidget {
-    background-color: #303030;
+    background-color: #3578E5;
     border-radius: 5px;
 }
 
 #TitleLabel {
     font-size: 14px;
     font-weight: bold;
+    color: #FFFFFF;
 }
 
 #HelpButton {
@@ -16,5 +17,5 @@
 }
 
 #HelpButton:hover {
-    background-color: #404040;
+    background-color: #2F69CC;
 }
