@@ -3,9 +3,11 @@ from PySide6.QtWidgets import (
     QMainWindow,
     QHBoxLayout,
 )
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QGuiApplication, QIcon, QColor
+from PySide6.QtCore import Qt
 from .main_window_sidebar import MainWindowSideBar
 from .main_window_content import MainWindowContent
+from utils import tint_icon
 
 
 class MainWindow(QMainWindow):
@@ -13,14 +15,18 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        self.setupUi()
+
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.update_icon)
+        QGuiApplication.styleHints().colorSchemeChanged.emit(
+            QGuiApplication.styleHints().colorScheme()
+        )
+
+    def setupUi(self):
+
         self.setObjectName("MainWindow")
         self.setWindowTitle("TranscriptoHub")
         self.setGeometry(250, 200, 1300, 700)
-        self.setWindowIcon(QIcon(":/assets/icon.svg"))
-
-        self.setupUi()
-
-    def setupUi(self):
 
         self.central_widget = QWidget(self)
         self.central_widget.setObjectName("CentralWidget")
@@ -42,3 +48,11 @@ class MainWindow(QMainWindow):
     def changePanel(self, index):
         if index != self.content.main_layout.currentIndex():
             self.content.main_layout.setCurrentIndex(index)
+
+    def update_icon(self, scheme: Qt.ColorScheme):
+        self.icon = (
+            QIcon(":/assets/icon.svg")
+            if scheme == Qt.ColorScheme.Dark
+            else tint_icon(":/assets/icon.svg", QColor("#3578E5"))
+        )
+        self.setWindowIcon(self.icon)
