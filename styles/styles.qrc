@@ -2,7 +2,8 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
   <qresource prefix="styles">
-    <file alias="action_button_widget.qss">action_button_widget.qss</file>
+    <file alias="action_button_widget_dark.qss">action_button_widget_dark.qss</file>
+    <file alias="action_button_widget_light.qss">action_button_widget_light.qss</file>
     <file alias="basic_statistics_report_widget.qss">basic_statistics_report_widget.qss</file>
     <file alias="checkbox_widget.qss">checkbox_widget.qss</file>
     <file alias="combo_box_option_widget.qss">combo_box_option_widget.qss</file>
