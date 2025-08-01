@@ -6,8 +6,10 @@
 #BasicStatisticsTitleLabel {
     font-size: 14px;
     font-weight: bold;
+    color: #FFFFFF;
 }
 
 #BasicStatisticsValueLabel {
     font-size: 12px;
+    color: #FFFFFF;
 }

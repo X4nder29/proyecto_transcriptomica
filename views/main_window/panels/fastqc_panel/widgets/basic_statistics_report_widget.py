@@ -2,27 +2,24 @@ from pathlib import Path
 from PySide6.QtWidgets import (
     QWidget,
     QGridLayout,
-    QSizePolicy,
     QStyleOption,
     QStyle,
     QLabel,
-    QProgressBar,
-    QPushButton,
 )
-from PySide6.QtGui import QPainter
+from PySide6.QtGui import QGuiApplication, QPainter
 from PySide6.QtCore import Qt, QFile, QTextStream
 
 
 class BasicStatisticsReportWidget(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
-
-        self.setObjectName("BasicStatisticsReportWidget")
-
-        self.load_stylesheet()
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
+        self.setObjectName("BasicStatisticsReportWidget")
+
         self.main_layout = QGridLayout(self)
         self.main_layout.setContentsMargins(10, 10, 10, 10)
         self.main_layout.setSpacing(10)
@@ -146,11 +143,17 @@ class BasicStatisticsReportWidget(QWidget):
     def set_percent_gc(self, percent_gc: str):
         self._percent_gc_value_label.setText(percent_gc)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):
