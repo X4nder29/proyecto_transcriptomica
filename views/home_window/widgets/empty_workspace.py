@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
     QLabel,
     QPushButton,
 )
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QGuiApplication, QIcon
 from PySide6.QtCore import Qt, QSize, QFile, QTextStream
 
 
@@ -91,7 +91,10 @@ class EmptyWorkspace(QWidget):
         open_button_area_layout.addWidget(open_label, alignment=Qt.AlignHCenter)
 
     def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+        is_dark = QGuiApplication.styleHints().colorScheme() == Qt.ColorScheme.Dark
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if is_dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
