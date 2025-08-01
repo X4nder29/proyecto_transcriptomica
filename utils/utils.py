@@ -84,7 +84,7 @@ def clear_layout(layout: QBoxLayout):
             clear_layout(item.layout())
 
 
-def tint_icon(path: str, size: QSize, color: QColor) -> QIcon:
+def tint_icon(path: str, color: QColor, size: QSize = QSize(24, 24)) -> QIcon:
     base_icon = QIcon(path)
     pix = base_icon.pixmap(size)
     painter = QPainter(pix)
