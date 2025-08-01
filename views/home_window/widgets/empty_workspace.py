@@ -56,7 +56,7 @@ class EmptyWorkspace(QWidget):
 
         create_button_area_layout = QVBoxLayout(create_button_area)
         create_button_area_layout.setContentsMargins(0, 0, 0, 0)
-        create_button_area_layout.setSpacing(0)
+        create_button_area_layout.setSpacing(5)
 
         self.create_button = QPushButton(create_button_area)
         self.create_button.setObjectName("CreateWorkspaceButton")
@@ -77,7 +77,7 @@ class EmptyWorkspace(QWidget):
 
         open_button_area_layout = QVBoxLayout(open_button_area)
         open_button_area_layout.setContentsMargins(0, 0, 0, 0)
-        open_button_area_layout.setSpacing(0)
+        open_button_area_layout.setSpacing(5)
 
         self.open_button = QPushButton(open_button_area)
         self.open_button.setObjectName("OpenWorkspaceButton")
