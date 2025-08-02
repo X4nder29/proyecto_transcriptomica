@@ -5,16 +5,17 @@ from PySide6.QtWidgets import (
     QStyle,
     QPushButton,
 )
-from PySide6.QtGui import QPainter, QIcon
-from PySide6.QtCore import QFile, QTextStream
+from PySide6.QtGui import QGuiApplication, QPainter, QIcon
+from PySide6.QtCore import Qt, QFile, QTextStream
 
 
 class CheckBoxWidget(QPushButton):
     def __init__(self, parent: QWidget = None, checked: bool = False):
         super().__init__(parent)
         self.checked = checked
-        self.load_stylesheet()
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
         self.setObjectName("CheckBoxWidget")
@@ -29,11 +30,17 @@ class CheckBoxWidget(QPushButton):
         else:
             self.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):

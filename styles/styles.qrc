@@ -6,7 +6,8 @@
     <file alias="action_button_widget_light.qss">action_button_widget_light.qss</file>
     <file alias="basic_statistics_report_widget_dark.qss">basic_statistics_report_widget_dark.qss</file>
     <file alias="basic_statistics_report_widget_light.qss">basic_statistics_report_widget_light.qss</file>
-    <file alias="checkbox_widget.qss">checkbox_widget.qss</file>
+    <file alias="checkbox_widget_dark.qss">checkbox_widget_dark.qss</file>
+    <file alias="checkbox_widget_light.qss">checkbox_widget_light.qss</file>
     <file alias="combo_box_option_widget.qss">combo_box_option_widget.qss</file>
     <file alias="combo_box_suboption_widget.qss">combo_box_suboption_widget.qss</file>
     <file alias="config_list_widget.qss">config_list_widget.qss</file>
