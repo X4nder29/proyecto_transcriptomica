@@ -1,9 +1,10 @@
 #UnselectedReportContainer {
-    background-color: #303030;
+    background-color: #3578E5;
     border-radius: 5px;
 }
 
 #UnselectedReportLabel {
     font-size: 14px;
     font-weight: bold;
+    color: #FFFFFF;
 }
