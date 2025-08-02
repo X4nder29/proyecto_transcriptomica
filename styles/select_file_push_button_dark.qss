@@ -10,9 +10,10 @@
 
 #PrimaryLabel {
     font-size: 12px;
+    color: #FFFFFF;
 }
 
 #SecondaryLabel {
-    color: gray;
+    color: #DDDDDD;
     font-size: 11px;
 }
