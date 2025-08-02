@@ -33,7 +33,6 @@
 }
 
 #SegmentedButton:!checked {
-    background-color: #202020;
     color: darkgray;
 }
 

@@ -5,7 +5,8 @@ from PySide6.QtWidgets import (
     QPushButton,
     QButtonGroup,
 )
-from PySide6.QtCore import QFile, QTextStream
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtCore import Qt, QFile, QTextStream
 from .option_widget import OptionWidget
 
 
@@ -39,10 +40,16 @@ class SegmentedOptionWidget(OptionWidget):
             self.button_group.addButton(button, id=index + 1)
             self.body_layout.addWidget(button)
 
-    def load_stylesheet(self):
-        super().load_stylesheet()
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        super().load_stylesheet(QGuiApplication.styleHints().colorScheme())
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(self.styleSheet() + "\n" + stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()

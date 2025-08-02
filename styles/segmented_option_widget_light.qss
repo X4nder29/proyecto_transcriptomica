@@ -1,0 +1,41 @@
+#SegmentedOptionWidget {
+    background-color: #3578E5;
+    border-radius: 5px;
+}
+
+#SegmentedOptionLabel {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#HelpButton {
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+#HelpButton:hover {
+    background-color: #2F69CC;
+}
+
+#SegmentedButton {
+    background-color: #FFFFFF;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+#SegmentedButton:checked {
+    background-color: #6C757D;
+}
+
+#SegmentedButton:!checked {
+    color: #212529;
+}
+
+#SegmentedButton:!checked:hover {
+    background-color: #E5F1FF;
+}

@@ -44,7 +44,8 @@
     <file alias="operation_mode_widget_dark.qss">operation_mode_widget_dark.qss</file>
     <file alias="operation_mode_widget_light.qss">operation_mode_widget_light.qss</file>
     <file alias="option_area.qss">option_area.qss</file>
-    <file alias="option_widget.qss">option_widget.qss</file>
+    <file alias="option_widget_dark.qss">option_widget_dark.qss</file>
+    <file alias="option_widget_light.qss">option_widget_light.qss</file>
     <file alias="options_page.qss">options_page.qss</file>
     <file alias="paired_input_file_widget.qss">paired_input_file_widget.qss</file>
     <file alias="panel_head.qss">panel_head.qss</file>
@@ -61,7 +62,8 @@
     <file alias="section_1.qss">section_1.qss</file>
     <file alias="section_2.qss">section_2.qss</file>
     <file alias="section_3.qss">section_3.qss</file>
-    <file alias="segmented_option_widget.qss">segmented_option_widget.qss</file>
+    <file alias="segmented_option_widget_dark.qss">segmented_option_widget_dark.qss</file>
+    <file alias="segmented_option_widget_light.qss">segmented_option_widget_light.qss</file>
     <file alias="select_file_push_button_dark.qss">select_file_push_button_dark.qss</file>
     <file alias="select_file_push_button_light.qss">select_file_push_button_light.qss</file>
     <file alias="settings_area.qss">settings_area.qss</file>
