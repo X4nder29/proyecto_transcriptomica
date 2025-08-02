@@ -40,7 +40,8 @@
     <file alias="main_window_sidebar_dark.qss">main_window_sidebar_dark.qss</file>
     <file alias="main_window_sidebar_light.qss">main_window_sidebar_light.qss</file>
     <file alias="number_selector.qss">number_selector.qss</file>
-    <file alias="operation_mode_widget.qss">operation_mode_widget.qss</file>
+    <file alias="operation_mode_widget_dark.qss">operation_mode_widget_dark.qss</file>
+    <file alias="operation_mode_widget_light.qss">operation_mode_widget_light.qss</file>
     <file alias="option_area.qss">option_area.qss</file>
     <file alias="option_widget.qss">option_widget.qss</file>
     <file alias="options_page.qss">options_page.qss</file>

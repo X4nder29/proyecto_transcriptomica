@@ -1,0 +1,19 @@
+#OperationModeWidget {
+    background-color: #3578E5;
+    border-radius: 5px;
+}
+
+#ModeButton {
+    background-color: #3578E5;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #FFFFFF;
+}
+
+#ModeButton:!checked:hover {
+    background-color: #2F69CC;
+}
+
+#ModeButton:checked {
+    background-color: #6C757D;
+}
