@@ -11,7 +11,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QHBoxLayout,
 )
-from PySide6.QtGui import QPainter
+from PySide6.QtGui import QGuiApplication, QPainter
 from PySide6.QtCore import Qt, QFile, QTextStream
 from views.widgets import (
     ThreadsSelectorWidget,
@@ -25,8 +25,9 @@ from views.widgets import (
 class OptionsPage(QWidget):
     def __init__(self, parent: QWidget = None):
         super().__init__(parent=parent)
-        self.load_stylesheet()
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
         self.setObjectName("OptionsPageWidget")
@@ -181,11 +182,17 @@ class OptionsPage(QWidget):
         self.list_widget = ListWidget(self.saved_configurations_widget)
         self.saved_configurations_layout.addWidget(self.list_widget)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):

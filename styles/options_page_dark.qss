@@ -1,0 +1,35 @@
+#TitleColumnLabel {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#SavedConfigurationsLabel {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#NavigationButton {
+    background-color: #303030;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#NavigationButton:hover {
+    background-color: #404040;
+}
+
+#ExecuteButton {
+    background-color: #6495ED;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+#ExecuteButton:hover {
+    background-color: #4169E1;
+}

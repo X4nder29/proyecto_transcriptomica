@@ -46,7 +46,8 @@
     <file alias="option_area.qss">option_area.qss</file>
     <file alias="option_widget_dark.qss">option_widget_dark.qss</file>
     <file alias="option_widget_light.qss">option_widget_light.qss</file>
-    <file alias="options_page.qss">options_page.qss</file>
+    <file alias="options_page_dark.qss">options_page_dark.qss</file>
+    <file alias="options_page_light.qss">options_page_light.qss</file>
     <file alias="paired_input_file_widget.qss">paired_input_file_widget.qss</file>
     <file alias="panel_head.qss">panel_head.qss</file>
     <file alias="panel_head_base_dark.qss">panel_head_base_dark.qss</file>
