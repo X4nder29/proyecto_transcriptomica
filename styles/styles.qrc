@@ -51,7 +51,8 @@
     <file alias="panel_head_simple.qss">panel_head_simple.qss</file>
     <file alias="previous_report_item_widget.qss">previous_report_item_widget.qss</file>
     <file alias="quality_scores_format_option.qss">quality_scores_format_option.qss</file>
-    <file alias="report_generation_widget.qss">report_generation_widget.qss</file>
+    <file alias="report_generation_widget_dark.qss">report_generation_widget_dark.qss</file>
+    <file alias="report_generation_widget_light.qss">report_generation_widget_light.qss</file>
     <file alias="save_config_dialog.qss">save_config_dialog.qss</file>
     <file alias="saved_config_item_widget.qss">saved_config_item_widget.qss</file>
     <file alias="section_1.qss">section_1.qss</file>

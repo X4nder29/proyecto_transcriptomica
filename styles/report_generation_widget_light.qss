@@ -1,0 +1,21 @@
+#ReportGenerationContainer {
+    background-color: #3578E5;
+    border-radius: 5px;
+}
+
+#ReportGenerationLabel {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#ReportGenerationCancelButton {
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #FFFFFF;
+}
+
+#ReportGenerationCancelButton:hover {
+    background-color: #FF6565;
+}
