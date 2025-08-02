@@ -79,7 +79,8 @@
     <file alias="threads_selector_widget.qss">threads_selector_widget.qss</file>
     <file alias="trimmomatic_panel_body.qss">trimmomatic_panel_body.qss</file>
     <file alias="trimmomatic_panel_head.qss">trimmomatic_panel_head.qss</file>
-    <file alias="unselected_report_visualization_widget.qss">unselected_report_visualization_widget.qss</file>
+    <file alias="unselected_report_visualization_widget_dark.qss">unselected_report_visualization_widget_dark.qss</file>
+    <file alias="unselected_report_visualization_widget_light.qss">unselected_report_visualization_widget_light.qss</file>
     <file alias="unselected_report_widget.qss">unselected_report_widget.qss</file>
     <file alias="upload_files_push_button.qss">upload_files_push_button.qss</file>
     <file alias="work_in_progress_poster_panel.qss">work_in_progress_poster_panel.qss</file>

@@ -1,9 +1,10 @@
 #UnselectedReportVisualizationContainer {
-    background-color: #303030;
+    background-color: #3578E5;
     border-radius: 5px;
 }
 
 #UnselectedReportVisualizationLabel {
     font-size: 14px;
     font-weight: bold;
+    color: #FFFFFF;
 }
