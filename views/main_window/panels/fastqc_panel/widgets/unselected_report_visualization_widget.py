@@ -40,7 +40,7 @@ class UnselectedReportVisualizationWidget(QWidget):
 
         self.label = QLabel(self)
         self.label.setObjectName("UnselectedReportVisualizationLabel")
-        self.label.setText("Select a report to visualize it.")
+        self.label.setText("Seleccione un informe para visualizarlo")
         self.container_layout.addWidget(self.label)
 
     def load_stylesheet(self):
