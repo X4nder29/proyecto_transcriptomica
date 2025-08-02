@@ -9,4 +9,9 @@
 
 #NameLabel {
     font-weight: bold;
+    color: #FFFFFF;
+}
+
+#PathLabel {
+    color: #DDDDDD;
 }

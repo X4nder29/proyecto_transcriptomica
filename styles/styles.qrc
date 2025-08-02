@@ -49,7 +49,8 @@
     <file alias="panel_head_base_dark.qss">panel_head_base_dark.qss</file>
     <file alias="panel_head_base_light.qss">panel_head_base_light.qss</file>
     <file alias="panel_head_simple.qss">panel_head_simple.qss</file>
-    <file alias="previous_report_item_widget.qss">previous_report_item_widget.qss</file>
+    <file alias="previous_report_item_widget_dark.qss">previous_report_item_widget_dark.qss</file>
+    <file alias="previous_report_item_widget_light.qss">previous_report_item_widget_light.qss</file>
     <file alias="quality_scores_format_option.qss">quality_scores_format_option.qss</file>
     <file alias="report_generation_widget_dark.qss">report_generation_widget_dark.qss</file>
     <file alias="report_generation_widget_light.qss">report_generation_widget_light.qss</file>

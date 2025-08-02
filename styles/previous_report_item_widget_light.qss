@@ -1,0 +1,17 @@
+#PreviousReportItemWidget {
+    background-color: #6C757D;
+    border-radius: 5px;
+}
+
+#PreviousReportItemWidget:hover {
+    background-color: #5A6268;
+}
+
+#NameLabel {
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#PathLabel {
+    color: #DDDDDD;
+}
