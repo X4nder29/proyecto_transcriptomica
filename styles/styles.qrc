@@ -42,6 +42,8 @@
     <file alias="main_window_sidebar_light.qss">main_window_sidebar_light.qss</file>
     <file alias="number_selector_dark.qss">number_selector_dark.qss</file>
     <file alias="number_selector_light.qss">number_selector_light.qss</file>
+    <file alias="number_selector_suboption_widget_dark.qss">number_selector_suboption_widget_dark.qss</file>
+    <file alias="number_selector_suboption_widget_light.qss">number_selector_suboption_widget_light.qss</file>
     <file alias="operation_mode_widget_dark.qss">operation_mode_widget_dark.qss</file>
     <file alias="operation_mode_widget_light.qss">operation_mode_widget_light.qss</file>
     <file alias="option_area.qss">option_area.qss</file>
