@@ -1,5 +1,5 @@
 #ThreadsSelectorWidget {
-    background-color: #303030;
+    background-color: #3578E5;
     border-radius: 5;
 }
 
@@ -8,14 +8,19 @@
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
+    color: #FFFFFF;
 }
 
 #HelpButton:hover {
-    background-color: #505050;
+    background-color: #2F69CC;
 }
 
 #OptionTitle {
     font-size: 14px;
     font-weight: bold;
     color: white;
+}
+
+#ThreadsSlider {
+    color: #FFFFFF;
 }

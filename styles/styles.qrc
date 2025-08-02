@@ -80,7 +80,8 @@
     <file alias="support_window_content.qss">support_window_content.qss</file>
     <file alias="support_window_sidebar.qss">support_window_sidebar.qss</file>
     <file alias="threads_option.qss">threads_option.qss</file>
-    <file alias="threads_selector_widget.qss">threads_selector_widget.qss</file>
+    <file alias="threads_selector_widget_dark.qss">threads_selector_widget_dark.qss</file>
+    <file alias="threads_selector_widget_light.qss">threads_selector_widget_light.qss</file>
     <file alias="trimmomatic_panel_body.qss">trimmomatic_panel_body.qss</file>
     <file alias="trimmomatic_panel_head.qss">trimmomatic_panel_head.qss</file>
     <file alias="unselected_report_visualization_widget_dark.qss">unselected_report_visualization_widget_dark.qss</file>
