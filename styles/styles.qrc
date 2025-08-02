@@ -23,7 +23,8 @@
     <file alias="file_list_item_push_button.qss">file_list_item_push_button.qss</file>
     <file alias="file_selector_dialog.qss">file_selector_dialog.qss</file>
     <file alias="file_selector_dialog_item_widget.qss">file_selector_dialog_item_widget.qss</file>
-    <file alias="files_page.qss">files_page.qss</file>
+    <file alias="files_page_dark.qss">files_page_dark.qss</file>
+    <file alias="files_page_light.qss">files_page_light.qss</file>
     <file alias="generation_page.qss">generation_page.qss</file>
     <file alias="graphic.qss">graphic.qss</file>
     <file alias="home_panel.qss">home_panel.qss</file>
