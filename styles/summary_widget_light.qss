@@ -23,6 +23,7 @@
 
 #SummaryItem:checked {
     background-color: #6C757D;
+    color: #FFFFFF;
 }
 
 #SummaryItem:!checked:hover {
