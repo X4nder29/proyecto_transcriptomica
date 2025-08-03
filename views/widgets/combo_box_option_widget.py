@@ -11,24 +11,23 @@ from PySide6.QtWidgets import (
     QPushButton,
     QComboBox,
 )
-from PySide6.QtGui import QPainter, QIcon
+from PySide6.QtGui import QGuiApplication, QPainter, QIcon
 from PySide6.QtCore import Qt, QFile, QTextStream
 
 
 class ComboBoxOptionWidget(QWidget):
-    def __init__(self, label: str, options: list[Tuple[str, str]], parent=None):
+    def __init__(self, label: str, options: list[Tuple[str, str]], parent: QWidget = None):
         super().__init__(parent)
-
         self.label = label
         self.options = options
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
+        self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
+    def setup_ui(self):
         self.setObjectName("ComboBoxOptionWidget")
         self.setMinimumWidth(300)
 
-        self.load_stylesheet()
-        self.setup_ui()
-
-    def setup_ui(self):
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(10, 10, 10, 10)
         self.main_layout.setSpacing(20)
@@ -102,11 +101,17 @@ class ComboBoxOptionWidget(QWidget):
         else:
             self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, event):
