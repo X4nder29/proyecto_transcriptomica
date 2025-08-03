@@ -1,0 +1,9 @@
+#SavegConfigItemWidget {
+    background-color: #6C757D;
+    border-radius: 5px;
+    color: #FFFFFF;
+}
+
+#NameLabel {
+    color: #FFFFFF;
+}
