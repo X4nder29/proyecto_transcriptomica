@@ -1,6 +1,7 @@
 #InstalledLabel, #UninstalledLabel {
     font-size: 16px;
     font-weight: bold;
+    color: #FFFFFF;
 }
 
 #LinkLineEdit {
@@ -8,6 +9,7 @@
     border-radius: 5px;
     padding: 10px;
     background-color: #303030;
+    color: #FFFFFF;
 }
 
 #AddButton {
@@ -20,4 +22,14 @@
 
 #AddButton:hover {
     background-color: #404040;
+}
+
+#InstalledScrollArea, #UninstalledScrollArea {
+    background-color: transparent;
+    border: none;
+}
+
+#uninstalledWidget, #installedWidget {
+    background-color: transparent;
+    border: none;
 }

@@ -23,3 +23,13 @@
 #AddButton:hover {
     background-color: #2F69CC;
 }
+
+#InstalledScrollArea, #UninstalledScrollArea {
+    background-color: transparent;
+    border: none;
+}
+
+#uninstalledWidget, #installedWidget {
+    background-color: transparent;
+    border: none;
+}
