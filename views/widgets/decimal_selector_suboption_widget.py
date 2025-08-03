@@ -1,10 +1,12 @@
+from pathlib import Path
 from PySide6.QtWidgets import (
     QWidget,
     QSizePolicy,
     QHBoxLayout,
     QLabel,
 )
-from PySide6.QtCore import Qt
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtCore import Qt, QFile, QTextStream
 from .decimal_selector import DecimalSelector
 from .checkbox_widget import CheckBoxWidget
 
@@ -27,7 +29,9 @@ class DecimalSelectorSuboptionWidget(QWidget):
         self.decimals = decimals
         self.step = step
 
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
         self.setObjectName("SubOptionWidget")
@@ -80,3 +84,16 @@ class DecimalSelectorSuboptionWidget(QWidget):
 
     def set_single_step(self, step: float):
         self.decimal_selector.set_single_step(step)
+
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
+        if qss_file.open(QFile.ReadOnly | QFile.Text):
+            stylesheet = QTextStream(qss_file).readAll() + "\n"
+            self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
+            qss_file.close()
