@@ -191,10 +191,7 @@ class SortMeRnaPanelController:
         Open the Kraken2 database manager.
         """
         from views.widgets import DatabaseManagerDialog
-        from controllers import (
-            DatabaseManagerController,
-            SortMeRnaDatabaseManagerController,
-        )
+        from controllers import DatabaseManagerController
 
         db_folder = get_sortmerna_databases_folder_from_settings()
 
