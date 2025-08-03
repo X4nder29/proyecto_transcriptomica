@@ -20,7 +20,8 @@
     <file alias="current_workspace_light.qss">current_workspace_light.qss</file>
     <file alias="database_item_widget.qss">database_item_widget.qss</file>
     <file alias="database_manager_dialog.qss">database_manager_dialog.qss</file>
-    <file alias="decimal_selector.qss">decimal_selector.qss</file>
+    <file alias="decimal_selector_dark.qss">decimal_selector_dark.qss</file>
+    <file alias="decimal_selector_light.qss">decimal_selector_light.qss</file>
     <file alias="empty_workspace_dark.qss">empty_workspace_dark.qss</file>
     <file alias="empty_workspace_light.qss">empty_workspace_light.qss</file>
     <file alias="fastqc_panel_body.qss">fastqc_panel_body.qss</file>

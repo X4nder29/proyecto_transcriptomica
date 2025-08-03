@@ -1,0 +1,41 @@
+#DecimalSelector {
+    background: #202020;
+    border-radius: 5px;
+}
+
+QDoubleSpinBox {
+    padding: 8px 10px;
+    background: #202020;
+    border: none;
+    color: #FFFFFF;
+}
+QDoubleSpinBox > QLineEdit {
+    background: none;
+    color: #FFFFFF;
+}
+
+#IncrementButton, #DecrementButton {
+    padding: 0px 10px;
+    background: none;
+    color: #FFFFFF;
+}
+#IncrementButton:hover, #DecrementButton:hover {
+    background: #404040;
+}
+#IncrementButton:pressed, #DecrementButton:pressed {
+    background: #252525;
+}
+
+#IncrementButton {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#DecrementButton {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
