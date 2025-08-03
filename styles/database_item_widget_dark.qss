@@ -2,3 +2,11 @@
     background-color: #303030;
     border-radius: 5px;
 }
+
+#NameLabel {
+    color: #FFFFFF;
+}
+
+#LinkLabel {
+    color: #FFFFFF;
+}

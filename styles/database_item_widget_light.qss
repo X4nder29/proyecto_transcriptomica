@@ -1,0 +1,12 @@
+#DatabaseItemWidget {
+    background-color: #6C757D;
+    border-radius: 5px;
+}
+
+#NameLabel {
+    color: #FFFFFF;
+}
+
+#LinkLabel {
+    color: #FFFFFF;
+}

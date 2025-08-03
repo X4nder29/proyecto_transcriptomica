@@ -3,7 +3,7 @@ from PySide6.QtWidgets import (
     QWidget,
     QLabel,
 )
-from PySide6.QtGui import QFontMetrics
+from PySide6.QtGui import QGuiApplication, QFontMetrics
 from PySide6.QtCore import Qt, QFile, QTextStream
 from views.widgets import ItemWidget, ItemActionWidget
 
@@ -16,7 +16,8 @@ class DatabaseItemWidget(ItemWidget):
         self.link = link
         self.installed = installed
         super().__init__(":/assets/database.svg", parent=parent)
-        self.load_stylesheet()
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
         super().setup_ui()
@@ -65,11 +66,17 @@ class DatabaseItemWidget(ItemWidget):
         self.name = name
         self.name_label.setText(name)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def _on_resize_finished(self):
