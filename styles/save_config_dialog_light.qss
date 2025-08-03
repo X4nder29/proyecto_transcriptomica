@@ -1,18 +1,20 @@
 #ConfigName {
-    background-color: #303030;
+    background-color: #6C757D;
     border: none;
     border-radius: 5px;
     padding: 5px;
     font-size: 14px;
+    color: white;
 }
 
 QPushButton {
-    background-color: #303030;
+    background-color: #3578E5;
     border: none;
     border-radius: 5px;
     padding: 10px 20px;
+    color: white;
 }
 
 QPushButton:hover {
-    background-color: #505050;
+    background-color: #2F69CC;
 }
