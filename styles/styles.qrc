@@ -32,7 +32,8 @@
     <file alias="fastqc_panel_head.qss">fastqc_panel_head.qss</file>
     <file alias="file_list_item_push_button.qss">file_list_item_push_button.qss</file>
     <file alias="file_selector_dialog_dark.qss">file_selector_dialog_dark.qss</file>
-    <file alias="file_selector_dialog_item_widget.qss">file_selector_dialog_item_widget.qss</file>
+    <file alias="file_selector_dialog_item_widget_dark.qss">file_selector_dialog_item_widget_dark.qss</file>
+    <file alias="file_selector_dialog_item_widget_light.qss">file_selector_dialog_item_widget_light.qss</file>
     <file alias="file_selector_dialog_light.qss">file_selector_dialog_light.qss</file>
     <file alias="files_page_dark.qss">files_page_dark.qss</file>
     <file alias="files_page_light.qss">files_page_light.qss</file>

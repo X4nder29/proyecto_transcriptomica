@@ -1,0 +1,21 @@
+#FileSelectorDialogItemWidget {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+#FileSelectorDialogItemWidget[checked="false"]:hover {
+    background-color: #404040;
+}
+
+#FileSelectorDialogItemWidget[checked="true"] {
+    background-color: #6495ED;
+}
+
+#NameLabel {
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#PathLabel {
+    color: #FFFFFF;
+}
