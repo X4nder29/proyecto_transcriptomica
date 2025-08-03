@@ -1,0 +1,26 @@
+QDialogButtonBox > QPushButton, #FilterButton {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+}
+
+QDialogButtonBox > QPushButton {
+    background-color: #3578E5;
+}
+
+QDialogButtonBox > QPushButton:hover {
+    background-color: #2F69CC;
+}
+
+ #FilterButton {
+    background-color: #6C757D;
+ }
+
+#FilterButton:hover {
+    background-color: #5A6268;
+}
+
+#FilterButton:checked {
+    background-color: #3578E5;
+}

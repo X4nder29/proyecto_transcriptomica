@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
     QButtonGroup,
     QDialogButtonBox,
 )
-from PySide6.QtGui import QPainter, QIcon
+from PySide6.QtGui import QGuiApplication, QPainter, QIcon
 from PySide6.QtCore import Qt, QFile, QTextStream
 from views.widgets import ListWidget
 from .file_selector_dialog_item_widget import FileSelectorDialogItemWidget
@@ -38,8 +38,9 @@ class FileSelectorDialog(QDialog):
         self.filters = filters
         self.multiple = multiple
         self.checked_files: list[Path] = []
-        self.load_stylesheet()
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
         self.setWindowTitle("Files Window")
@@ -161,11 +162,17 @@ class FileSelectorDialog(QDialog):
                     or filter == "all"
                 )
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):
