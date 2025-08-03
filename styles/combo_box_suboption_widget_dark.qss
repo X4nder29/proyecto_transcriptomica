@@ -27,6 +27,13 @@
 	background-color: #404040;
 }
 
+#SubOptionWidgetLabel {
+	color: #FFFFFF;
+}
+#SubOptionWidgetLabel:disabled {
+	color: #A9A9A9;
+}
+
 QComboBox {
 	background-color: #202020;
 	color: #ffffff;

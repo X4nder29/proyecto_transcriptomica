@@ -11,7 +11,8 @@
     <file alias="checkbox_widget_dark.qss">checkbox_widget_dark.qss</file>
     <file alias="checkbox_widget_light.qss">checkbox_widget_light.qss</file>
     <file alias="combo_box_option_widget.qss">combo_box_option_widget.qss</file>
-    <file alias="combo_box_suboption_widget.qss">combo_box_suboption_widget.qss</file>
+    <file alias="combo_box_suboption_widget_dark.qss">combo_box_suboption_widget_dark.qss</file>
+    <file alias="combo_box_suboption_widget_light.qss">combo_box_suboption_widget_light.qss</file>
     <file alias="config_list_widget.qss">config_list_widget.qss</file>
     <file alias="create_workspace_dialog.qss">create_workspace_dialog.qss</file>
     <file alias="current_workspace_dark.qss">current_workspace_dark.qss</file>

@@ -10,7 +10,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QComboBox,
 )
-from PySide6.QtGui import QPainter, QIcon
+from PySide6.QtGui import QGuiApplication, QPainter, QIcon
 from PySide6.QtCore import Qt, QFile, QTextStream
 
 
@@ -19,22 +19,21 @@ class ComboBoxSuboptionWidget(QWidget):
     def __init__(
         self,
         title: str,
-        parent=None,
+        parent: QWidget = None,
         checkable: bool = False,
         options: Optional[list[Tuple[str, Optional[str]]]] = None,
     ):
         super().__init__(parent)
-
         self.title = title
         self.options = options
         self.checkable = checkable
-
-        self.setObjectName("ComboBoxSubOptionWidget")
-
-        self.load_stylesheet()
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
+        self.setObjectName("ComboBoxSubOptionWidget")
+
         self.main_layout = QHBoxLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(10)
@@ -53,6 +52,7 @@ class ComboBoxSuboptionWidget(QWidget):
 
         # label
         self.label = QLabel(self.title, self)
+        self.label.setObjectName("SubOptionWidgetLabel")
         self.label.setToolTip("Enable or disable this option")
         self.main_layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignLeft)
 
@@ -83,11 +83,17 @@ class ComboBoxSuboptionWidget(QWidget):
         else:
             self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):
