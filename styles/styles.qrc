@@ -102,8 +102,10 @@
     <file alias="summary_widget_dark.qss">summary_widget_dark.qss</file>
     <file alias="summary_widget_light.qss">summary_widget_light.qss</file>
     <file alias="support_window.qss">support_window.qss</file>
-    <file alias="support_window_content.qss">support_window_content.qss</file>
-    <file alias="support_window_sidebar.qss">support_window_sidebar.qss</file>
+    <file alias="support_window_content_dark.qss">support_window_content_dark.qss</file>
+    <file alias="support_window_content_light.qss">support_window_content_light.qss</file>
+    <file alias="support_window_sidebar_dark.qss">support_window_sidebar_dark.qss</file>
+    <file alias="support_window_sidebar_light.qss">support_window_sidebar_light.qss</file>
     <file alias="threads_option.qss">threads_option.qss</file>
     <file alias="threads_selector_widget_dark.qss">threads_selector_widget_dark.qss</file>
     <file alias="threads_selector_widget_light.qss">threads_selector_widget_light.qss</file>
