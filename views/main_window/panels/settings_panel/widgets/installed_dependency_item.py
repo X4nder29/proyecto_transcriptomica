@@ -1,6 +1,7 @@
 from pathlib import Path
 from PySide6.QtWidgets import QLabel, QPushButton
-from PySide6.QtCore import QFile, QTextStream
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtCore import Qt, QFile, QTextStream
 from .settings_item import SettingsItem
 
 
@@ -27,7 +28,7 @@ class InstalledDependencyItem(SettingsItem):
 
     def set_installed(self, installed: bool):
         self.checking_indicator.setVisible(False)
-        
+
         if installed:
             self.installed_indicator.setVisible(True)
             self.install_push_button.setVisible(False)
@@ -35,10 +36,16 @@ class InstalledDependencyItem(SettingsItem):
             self.installed_indicator.setVisible(False)
             self.install_push_button.setVisible(True)
 
-    def load_stylesheet(self):
-        super().load_stylesheet()
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        super().load_stylesheet(QGuiApplication.styleHints().colorScheme())
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(self.styleSheet() + stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()

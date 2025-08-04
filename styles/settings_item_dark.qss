@@ -1,0 +1,14 @@
+#SettingsItem {
+    background-color: #303030;
+    border-radius: 5px;
+}
+
+#SettingsItemTitle {
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#SettingsItemSubtitle {
+    font-size: 11px;
+    color: #EEEEEE;
+}

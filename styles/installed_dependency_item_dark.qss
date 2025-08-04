@@ -1,0 +1,43 @@
+#CheckingIndicator {
+    width: 100px;
+    height: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #202020;
+    color: #FFFFFF;
+}
+
+#InstallButton, #InstalledIndicator {
+    width: 100px;
+    height: 20px;
+    padding: 5px;
+    background-color: #3578E5;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: #FFFFFF;
+}
+
+#InstallButton {
+    background-color: #edc864;
+    color: #FFFFFF;
+}
+
+#InstallButton:hover {
+    background-color: #FF8C00;
+}
+
+#UninstallButton {
+    width: 100px;
+    height: 20px;
+    padding: 5px;
+    background-color: #202020;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    color: #FFFFFF;
+}
+
+#UninstallButton:hover {
+    background-color: #FF4500;
+}

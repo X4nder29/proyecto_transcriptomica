@@ -43,8 +43,10 @@
     <file alias="illumina_clip_option.qss">illumina_clip_option.qss</file>
     <file alias="illumina_clip_option_widget.qss">illumina_clip_option_widget.qss</file>
     <file alias="info_row.qss">info_row.qss</file>
-    <file alias="installed_dependency_item.qss">installed_dependency_item.qss</file>
-    <file alias="installed_program_item.qss">installed_program_item.qss</file>
+    <file alias="installed_dependency_item_dark.qss">installed_dependency_item_dark.qss</file>
+    <file alias="installed_dependency_item_light.qss">installed_dependency_item_light.qss</file>
+    <file alias="installed_program_item_dark.qss">installed_program_item_dark.qss</file>
+    <file alias="installed_program_item_light.qss">installed_program_item_light.qss</file>
     <file alias="installed_widget.qss">installed_widget.qss</file>
     <file alias="item_action_widget.qss">item_action_widget.qss</file>
     <file alias="kraken_panel_body.qss">kraken_panel_body.qss</file>
@@ -86,9 +88,11 @@
     <file alias="select_file_push_button_light.qss">select_file_push_button_light.qss</file>
     <file alias="settings_area_dark.qss">settings_area_dark.qss</file>
     <file alias="settings_area_light.qss">settings_area_light.qss</file>
-    <file alias="settings_item.qss">settings_item.qss</file>
+    <file alias="settings_item_dark.qss">settings_item_dark.qss</file>
+    <file alias="settings_item_light.qss">settings_item_light.qss</file>
     <file alias="settings_panel_body.qss">settings_panel_body.qss</file>
-    <file alias="simple_action_item.qss">simple_action_item.qss</file>
+    <file alias="simple_action_item_dark.qss">simple_action_item_dark.qss</file>
+    <file alias="simple_action_item_light.qss">simple_action_item_light.qss</file>
     <file alias="simple_input_file_widget_dark.qss">simple_input_file_widget_dark.qss</file>
     <file alias="simple_input_file_widget_light.qss">simple_input_file_widget_light.qss</file>
     <file alias="single_option.qss">single_option.qss</file>

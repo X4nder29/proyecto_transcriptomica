@@ -1,4 +1,5 @@
 from pathlib import Path
+from turtle import st
 from typing import Optional
 from PySide6.QtWidgets import (
     QWidget,
@@ -6,8 +7,8 @@ from PySide6.QtWidgets import (
     QStyle,
     QPushButton,
 )
-from PySide6.QtGui import QPainter, QIcon
-from PySide6.QtCore import QFile, QTextStream
+from PySide6.QtGui import QGuiApplication, QPainter, QIcon
+from PySide6.QtCore import Qt, QFile, QTextStream
 from .settings_item import SettingsItem
 
 
@@ -29,12 +30,18 @@ class SimpleActionItem(SettingsItem):
         self.open_manual_push_button = QPushButton(self.action)
         self.action_layout.addWidget(self.open_manual_push_button)
 
-    def load_stylesheet(self):
-        super().load_stylesheet()
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        super().load_stylesheet(QGuiApplication.styleHints().colorScheme())
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
-            self.setStyleSheet(self.styleSheet() + f"\n{stylesheet}")
+            self.setStyleSheet(self.styleSheet() + stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):

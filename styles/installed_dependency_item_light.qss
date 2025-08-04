@@ -1,36 +1,21 @@
-#HorizontalWidget {
-    background-color: #303030;
-    border-radius: 5px;
-}
-
-#ChangeButton {
-    padding: 5px;
-    background-color: #202020;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-}
-
-#ChangeButton:hover {
-    background-color: #404040;
-}
-
 #CheckingIndicator {
     width: 100px;
     height: 20px;
     padding: 5px;
     border-radius: 5px;
-    background-color: #202020;
+    background-color: #3578E5;
+    color: #FFFFFF;
 }
 
 #InstallButton, #InstalledIndicator {
     width: 100px;
     height: 20px;
     padding: 5px;
-    background-color: #6495ED;
+    background-color: #3578E5;
     border: none;
     border-radius: 5px;
     outline: none;
+    color: #FFFFFF;
 }
 
 #InstallButton {
@@ -38,17 +23,18 @@
 }
 
 #InstallButton:hover {
-    background-color: #ffd900;
+    background-color: #FF8C00;
 }
 
 #UninstallButton {
     width: 100px;
     height: 20px;
     padding: 5px;
-    background-color: #202020;
+    background-color: #3578E5;
     border: none;
     border-radius: 5px;
     outline: none;
+    color: #FFFFFF;
 }
 
 #UninstallButton:hover {
