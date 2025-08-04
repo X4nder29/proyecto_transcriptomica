@@ -84,7 +84,8 @@
     <file alias="segmented_option_widget_light.qss">segmented_option_widget_light.qss</file>
     <file alias="select_file_push_button_dark.qss">select_file_push_button_dark.qss</file>
     <file alias="select_file_push_button_light.qss">select_file_push_button_light.qss</file>
-    <file alias="settings_area.qss">settings_area.qss</file>
+    <file alias="settings_area_dark.qss">settings_area_dark.qss</file>
+    <file alias="settings_area_light.qss">settings_area_light.qss</file>
     <file alias="settings_item.qss">settings_item.qss</file>
     <file alias="settings_panel_body.qss">settings_panel_body.qss</file>
     <file alias="simple_action_item.qss">simple_action_item.qss</file>

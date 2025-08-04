@@ -7,8 +7,8 @@ from PySide6.QtWidgets import (
     QStyle,
     QLabel,
 )
-from PySide6.QtGui import QPainter
-from PySide6.QtCore import QFile, QTextStream
+from PySide6.QtGui import QGuiApplication, QPainter
+from PySide6.QtCore import Qt, QFile, QTextStream
 from .settings_item import SettingsItem
 
 
@@ -16,8 +16,9 @@ class SettingsArea(QWidget):
     def __init__(self, parent: QWidget = None, title: Optional[str] = None):
         super().__init__(parent)
         self.title = title
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
-        self.load_stylesheet()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
         self.setObjectName("SettingsArea")
@@ -44,11 +45,17 @@ class SettingsArea(QWidget):
         self.layout().addWidget(item_widget)
         item_widget.setParent(self)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):
