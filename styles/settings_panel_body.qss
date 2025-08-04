@@ -1,3 +1,11 @@
 #ScrollArea {
-    background-color: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+#ScrollContent {
+    border: none;
+    outline: none;
+    background-color: transparent;
 }
