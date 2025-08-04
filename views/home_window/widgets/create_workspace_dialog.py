@@ -12,7 +12,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QSpacerItem,
 )
-from PySide6.QtGui import QPainter, QIcon
+from PySide6.QtGui import QGuiApplication, QPainter, QIcon
 from PySide6.QtCore import Qt, QSize, QFile, QTextStream
 
 
@@ -20,16 +20,13 @@ class CreateWorkspaceDialog(QDialog):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-
-        self.setWindowTitle("Create Workspace")
-
-        self.setObjectName("CreateWorkspace")
-
-        self.load_stylesheet()
-
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
+        self.setWindowTitle("Create Workspace")
+        self.setObjectName("CreateWorkspace")
 
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(40, 20, 40, 20)
@@ -120,11 +117,17 @@ class CreateWorkspaceDialog(QDialog):
         all_filled = name_filled and location_filled
         self.buttons.button(QDialogButtonBox.Ok).setEnabled(all_filled)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def paintEvent(self, _):

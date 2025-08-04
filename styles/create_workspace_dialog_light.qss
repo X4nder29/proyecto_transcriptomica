@@ -1,0 +1,45 @@
+#Title {
+    font-weight: bold;
+    color: #212529;
+}
+
+#LocationLabel, #NameLabel {
+    color: #212529;
+}
+
+#LocationInput, #NameInput {
+    border: none;
+    border-radius: 5px;
+    padding-left: 5px;
+    background-color: #6C757D;
+    color: #FFFFFF;
+}
+
+#LocationButton {
+    background-color: #6C757D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+}
+
+#LocationButton:hover {
+    background-color: #5A6268;
+}
+
+QDialogButtonBox > QPushButton {
+    background-color: #6C757D;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+QDialogButtonBox > QPushButton:hover {
+    background-color: #5A6268;
+}
+
+QDialogButtonBox > QPushButton:disabled {
+    background-color: #383d41;
+    color: gray;color: gray;
+}
