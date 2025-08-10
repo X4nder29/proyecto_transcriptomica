@@ -30,8 +30,8 @@ class SaveConfigDialog(QDialog):
 
         self.config_name = QLineEdit(self)
         self.config_name.setObjectName("ConfigName")
-        self.config_name.setPlaceholderText("Enter configuration name")
-        self.config_name.setToolTip("Enter a name for the configuration")
+        self.config_name.setPlaceholderText("Ingrese un nombre para la configuración")
+        self.config_name.setToolTip("Ingrese un nombre para la configuración")
         self.config_name.setMaxLength(50)
         self.config_name.setClearButtonEnabled(True)
         self.config_name.setMinimumWidth(300)
@@ -45,6 +45,7 @@ class SaveConfigDialog(QDialog):
         self.buttons = QDialogButtonBox(
             QDialogButtonBox.Ok | QDialogButtonBox.Cancel, self
         )
+        self.buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("Cancelar")
         self.buttons.setObjectName("Buttons")
         self.buttons.accepted.connect(self.accept)
         self.buttons.rejected.connect(self.reject)
