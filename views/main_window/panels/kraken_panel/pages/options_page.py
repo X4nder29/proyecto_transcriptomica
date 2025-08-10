@@ -68,26 +68,17 @@ class OptionsPage(QWidget):
         # column 0
 
         self.threads_selector_widget = ThreadsSelectorWidget(self)
-        self.threads_selector_widget.help.setToolTip(
-            "Número de hilos de cómputo que Kraken2 empleará en paralelo.\nAumentar este valor acelera el análisis si dispones de CPU multinúcleo."
-        )
         self.container_layout.addWidget(self.threads_selector_widget, 0, 0, 2, 1)
 
         self.quick = OptionWidget(
             self,
             "Quick",
         )
-        self.quick.help_button.setToolTip(
-            "Activa la búsqueda rápida (equivalente a --quick), \nque salta algunos k-mers durante el escaneo para reducir tiempo\nde ejecución a costa de una ligera pérdida de sensibilidad."
-        )
         self.container_layout.addWidget(self.quick, 2, 0, 1, 1)
 
         self.memory_mapping = OptionWidget(
             self,
             "Memory Mapping",
-        )
-        self.memory_mapping.help_button.setToolTip(
-            "Usa memoria mapeada (mmap) para cargar la base de datos en lugar de leerla tradicionalmente.\n Esto puede acelerar el acceso y reducir el uso de RAM redundante."
         )
         self.container_layout.addWidget(self.memory_mapping, 3, 0, 1, 1)
 
@@ -100,26 +91,17 @@ class OptionsPage(QWidget):
             step=0.01,
         )
         self.confidence.set_range(0.0, 1.0)
-        self.confidence.help_button.setToolTip(
-            "Umbral mínimo de confianza (--confidence) para asignaciones.\nSolo se reportarán clasificaciones con una puntuación\nde confianza ≥ este valor (float entre 0 y 1)."
-        )
         self.container_layout.addWidget(self.confidence, 0, 1, 2, 1)
 
         self.minimum_hit_groups = NumberSelectorOptionWidget(
             "Minimum Hit Groups",
             self,
         )
-        self.minimum_hit_groups.help_button.setToolTip(
-            "Número mínimo de grupos de hits contiguos (--minimum-hit-groups)\n necesarios para reportar una asignación.\n Elevarlo aumenta la especificidad al descartar hits aislados."
-        )
         self.container_layout.addWidget(self.minimum_hit_groups, 2, 1, 2, 1)
 
         self.minimum_base_quality = NumberSelectorOptionWidget(
             "Minimum Base Quality",
             self,
-        )
-        self.minimum_base_quality.help_button.setToolTip(
-            "Calidad mínima de cada base en la lectura (--minimum-base-quality).\n Bases por debajo de este valor (Phred score) se ignoran en el proceso de clasificación."
         )
         self.minimum_base_quality.setVisible(False)  # Initially hidden
         self.container_layout.addWidget(self.minimum_base_quality, 4, 1, 2, 1)

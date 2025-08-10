@@ -57,13 +57,6 @@ class OptionWidget(QWidget):
 
         self.head_layout.addStretch(1)
 
-        self.help_button = QPushButton("?", self)
-        self.help_button.setObjectName("OptionWidgetHelpPushButton")
-        self.help_button.setToolTip("Help")
-        self.head_layout.addWidget(
-            self.help_button, alignment=Qt.AlignmentFlag.AlignRight
-        )
-
     def is_checked(self):
         return self.checkbox.isChecked() if self.checkable else True
 

@@ -29,7 +29,6 @@ class SegmentedOptionWidget(OptionWidget):
         self.button_group = QButtonGroup(self.body)
         self.button_group.setObjectName("SegmentedOptionButtonGroup")
         self.button_group.setExclusive(True)
-        self.button_group.setId(self.help_button, 0)
 
         for index, option in enumerate(self.options):
             button = QPushButton(option, self.body)
