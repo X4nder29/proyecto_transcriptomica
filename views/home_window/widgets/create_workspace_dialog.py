@@ -25,7 +25,7 @@ class CreateWorkspaceDialog(QDialog):
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
-        self.setWindowTitle("Create Workspace")
+        self.setWindowTitle("Crear Workspace")
         self.setObjectName("CreateWorkspace")
 
         self.main_layout = QVBoxLayout(self)
@@ -33,7 +33,7 @@ class CreateWorkspaceDialog(QDialog):
         self.main_layout.setSpacing(20)
 
         # title
-        self.title = QLabel("Create Workspace")
+        self.title = QLabel("Crear Workspace")
         self.title.setObjectName("Title")
         self.title.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
         self.main_layout.addWidget(self.title)
@@ -102,6 +102,8 @@ class CreateWorkspaceDialog(QDialog):
 
         self.buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel, self)
         self.buttons.setObjectName("Buttons")
+        self.buttons.button(QDialogButtonBox.Ok).setText("Ok")
+        self.buttons.button(QDialogButtonBox.Cancel).setText("Cancelar")
         self.buttons.accepted.connect(self.accept)
         self.buttons.rejected.connect(self.reject)
         self.buttons.button(QDialogButtonBox.Ok).setEnabled(False)
