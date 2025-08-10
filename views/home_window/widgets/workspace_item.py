@@ -27,7 +27,7 @@ class WorkspaceItem(QWidget):
         self.enable = self.path.exists() and self.path.is_dir()
         self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
         self.setup_ui()
-
+        self.update_icons(QGuiApplication.styleHints().colorScheme())
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.update_icons)
 
