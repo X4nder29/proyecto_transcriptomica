@@ -46,9 +46,9 @@ class CreateWorkspaceDialog(QDialog):
 
         self.name_area_layout = QHBoxLayout(self.name_area)
         self.name_area_layout.setContentsMargins(0, 0, 0, 0)
-        self.name_area_layout.setSpacing(40)
+        self.name_area_layout.setSpacing(13)
 
-        self.name_label = QLabel("Name")
+        self.name_label = QLabel("Nombre")
         self.name_label.setObjectName("NameLabel")
         self.name_label.setAlignment(Qt.AlignVCenter)
         self.name_label.setMinimumWidth(50)
@@ -56,7 +56,7 @@ class CreateWorkspaceDialog(QDialog):
 
         self.name_input = QLineEdit(self)
         self.name_input.setObjectName("NameInput")
-        self.name_input.setPlaceholderText("Enter workspace name")
+        self.name_input.setPlaceholderText("Ingrese el nombre")
         self.name_input.setAlignment(Qt.AlignVCenter)
         self.name_input.setMinimumHeight(30)
         self.name_input.setMinimumWidth(200)
@@ -73,17 +73,15 @@ class CreateWorkspaceDialog(QDialog):
         self.location_area_layout.setContentsMargins(0, 0, 0, 0)
         self.location_area_layout.setSpacing(0)
 
-        self.location_label = QLabel("Location")
+        self.location_label = QLabel("Ubicación")
         self.location_label.setObjectName("LocationLabel")
         self.location_label.setAlignment(Qt.AlignVCenter)
         self.location_label.setMinimumWidth(50)
         self.location_area_layout.addWidget(self.location_label)
 
-        self.location_area_layout.addItem(QSpacerItem(40, 10))
-
         self.location_input = QLineEdit("", self)
         self.location_input.setObjectName("LocationInput")
-        self.location_input.setPlaceholderText("Enter workspace location")
+        self.location_input.setPlaceholderText("Ingrese la ubicación")
         self.location_input.setMinimumHeight(30)
         self.location_input.setMinimumWidth(200)
         self.location_input.textChanged.connect(self.validate_inputs)
