@@ -58,7 +58,7 @@ class Workspaces(QWidget):
 
         self.search_line_edit = QLineEdit(self.header_area)
         self.search_line_edit.setObjectName("SearchLineEdit")
-        self.search_line_edit.setPlaceholderText("Search workspaces...")
+        self.search_line_edit.setPlaceholderText("Buscar...")
         self.search_line_edit.setMinimumHeight(30)
         self.header_area_layout.addWidget(self.search_line_edit)
 
@@ -66,7 +66,7 @@ class Workspaces(QWidget):
 
         self.create_new_workspace_button = QPushButton(self.header_area)
         self.create_new_workspace_button.setObjectName("CreateNewWorkspaceButton")
-        self.create_new_workspace_button.setText("New Workspace")
+        self.create_new_workspace_button.setText("Nuevo")
         self.create_new_workspace_button.setFixedHeight(self.search_line_edit.height())
         self.header_area_layout.addWidget(self.create_new_workspace_button)
 
@@ -74,7 +74,7 @@ class Workspaces(QWidget):
 
         self.open_existing_workspace_button = QPushButton(self.header_area)
         self.open_existing_workspace_button.setObjectName("OpenExistingWorkspaceButton")
-        self.open_existing_workspace_button.setText("Open")
+        self.open_existing_workspace_button.setText("Abrir")
         self.open_existing_workspace_button.setFixedHeight(
             self.search_line_edit.height()
         )
