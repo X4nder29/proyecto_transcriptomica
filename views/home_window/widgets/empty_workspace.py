@@ -31,12 +31,6 @@ class EmptyWorkspace(QWidget):
         title_label.setObjectName("TitleLabel")
         main_layout.addWidget(title_label, alignment=Qt.AlignHCenter)
 
-        indication_label = QLabel(
-            "Abrir un espacio de trabajo existente desde el disco"
-        )
-        indication_label.setObjectName("IndicationLabel")
-        main_layout.addWidget(indication_label, alignment=Qt.AlignHCenter)
-
         main_layout.addSpacing(25)
 
         # Buttons area
