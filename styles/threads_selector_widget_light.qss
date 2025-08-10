@@ -3,18 +3,6 @@
     border-radius: 5;
 }
 
-#HelpButton {
-    background-color: none;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-    color: #FFFFFF;
-}
-
-#HelpButton:hover {
-    background-color: #2F69CC;
-}
-
 #OptionTitle {
     font-size: 14px;
     font-weight: bold;

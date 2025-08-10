@@ -50,13 +50,6 @@ class ThreadsSelectorWidget(QWidget):
 
         self.header_layout.addStretch()
 
-        # help
-
-        self.help = QPushButton("?", self.header)
-        self.help.setObjectName("HelpButton")
-        self.help.setToolTip("Select the number of threads to use for processing.")
-        self.header_layout.addWidget(self.help, alignment=Qt.AlignmentFlag.AlignRight)
-
         ## body
 
         self.slider = QSlider(Qt.Horizontal, self)
