@@ -4,17 +4,6 @@
     color: #212529;
 }
 
-#HelpButton {
-    color: #CED4DA;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
-
-#HelpButton:hover {
-    background-color: #E5F1FF;
-}
-
 #SummaryItem {
     border-radius: 5px;
     padding: 10px;

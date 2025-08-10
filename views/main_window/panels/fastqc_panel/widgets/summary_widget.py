@@ -47,12 +47,6 @@ class SummaryListWidget(QWidget):
             self.summary_label, alignment=Qt.AlignmentFlag.AlignLeft
         )
 
-        self.help_button = QPushButton("?", self.head_widget)
-        self.help_button.setObjectName("HelpButton")
-        self.help_button.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        self.help_button.setToolTip("Ayuda")
-        self.head_widget_layout.addWidget(self.help_button, alignment=Qt.AlignmentFlag.AlignRight)
-
         self.button_group = QButtonGroup(self)
         self.button_group.setObjectName("SummaryButtonGroup")
         self.button_group.setExclusive(True)

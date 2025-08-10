@@ -42,13 +42,6 @@ class SimpleInputFileWidget(QWidget):
         self.title_label.setText("Archivo de entrada")
         self.head_widget_layout.addWidget(self.title_label, alignment=Qt.AlignmentFlag.AlignLeft)
 
-        self.head_widget_layout.addStretch()
-
-        self.help_push_button = QPushButton(self.head_widget)
-        self.help_push_button.setObjectName("HelpButton")
-        self.help_push_button.setText("?")
-        self.head_widget_layout.addWidget(self.help_push_button, alignment=Qt.AlignmentFlag.AlignRight)
-
         self.select_file_button = SelectFilePushButton(self)
         self.main_layout.addWidget(self.select_file_button)
 

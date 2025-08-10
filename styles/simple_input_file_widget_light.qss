@@ -6,16 +6,5 @@
 #TitleLabel {
     font-size: 14px;
     font-weight: bold;
-    color: #FFFFFF;
-}
-
-#HelpButton {
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
-
-#HelpButton:hover {
-    background-color: #2F69CC;
+    color: #1b3533;
 }
