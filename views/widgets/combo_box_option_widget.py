@@ -51,6 +51,7 @@ class ComboBoxOptionWidget(QWidget):
         self.checkbox.setChecked(False)
         self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
         self.checkbox.toggled.connect(self.toggle_checkbox_icon)
+        self.checkbox.toggled.connect(self.toggle_suboption)
         self.head_layout.addWidget(self.checkbox, alignment=Qt.AlignmentFlag.AlignLeft)
 
         # name label
@@ -80,6 +81,7 @@ class ComboBoxOptionWidget(QWidget):
 
         self.combo_box = QComboBox(self.body)
         self.combo_box.setObjectName("ComboBox")
+        self.combo_box.setEnabled(self.checkbox.isChecked())
         self.combo_box.setSizePolicy(
             QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
         )
@@ -93,6 +95,9 @@ class ComboBoxOptionWidget(QWidget):
             self.checkbox.setIcon(QIcon(":/assets/checkbox_filled.svg"))
         else:
             self.checkbox.setIcon(QIcon(":/assets/checkbox_outlined.svg"))
+
+    def toggle_suboption(self, checked: bool):
+        self.combo_box.setEnabled(checked)
 
     def load_stylesheet(self, scheme: Qt.ColorScheme):
         qss_file = QFile(
