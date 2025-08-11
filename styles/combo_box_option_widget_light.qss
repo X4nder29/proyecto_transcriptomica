@@ -15,17 +15,6 @@ QWidget {
 	background-color: #2F69CC;
 }
 
-#HelpButton {
-	color: #ffffff;
-	border: none;
-	border-radius: 5px;
-	padding: 5px 10px;
-}
-
-#HelpButton:hover {
-	background-color: #2F69CC;
-}
-
 QLabel {
 	font-size: 14px;
 	font-weight: bold;

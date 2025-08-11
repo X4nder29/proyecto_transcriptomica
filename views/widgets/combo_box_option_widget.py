@@ -65,13 +65,6 @@ class ComboBoxOptionWidget(QWidget):
 
         self.head_layout.addStretch()
 
-        self.help_button = QPushButton("?", self)
-        self.help_button.setObjectName("HelpButton")
-        self.help_button.setToolTip("Help")
-        self.head_layout.addWidget(
-            self.help_button, alignment=Qt.AlignmentFlag.AlignRight
-        )
-
         # body
 
         self.body = QWidget(self)
