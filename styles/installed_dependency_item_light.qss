@@ -3,7 +3,7 @@
     height: 20px;
     padding: 5px;
     border-radius: 5px;
-    background-color: #3578E5;
+    background-color: #19324a;
     color: #FFFFFF;
 }
 
@@ -11,7 +11,7 @@
     width: 100px;
     height: 20px;
     padding: 5px;
-    background-color: #3578E5;
+    background-color: #19324a;
     border: none;
     border-radius: 5px;
     outline: none;
@@ -30,7 +30,7 @@
     width: 100px;
     height: 20px;
     padding: 5px;
-    background-color: #3578E5;
+    background-color: #19324a;
     border: none;
     border-radius: 5px;
     outline: none;

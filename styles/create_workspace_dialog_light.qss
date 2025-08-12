@@ -11,12 +11,12 @@
     border: none;
     border-radius: 5px;
     padding-left: 5px;
-    background-color: #6C757D;
+    background-color: #4a6361;
     color: #FFFFFF;
 }
 
 #LocationButton {
-    background-color: #6C757D;
+    background-color: #006a66;
     color: #FFFFFF;
     border: none;
     border-radius: 5px;
@@ -24,11 +24,11 @@
 }
 
 #LocationButton:hover {
-    background-color: #5A6268;
+    background-color: #00504d;
 }
 
 QDialogButtonBox > QPushButton {
-    background-color: #6C757D;
+    background-color: #006a66;
     color: #FFFFFF;
     border: none;
     border-radius: 5px;
@@ -36,10 +36,10 @@ QDialogButtonBox > QPushButton {
 }
 
 QDialogButtonBox > QPushButton:hover {
-    background-color: #5A6268;
+    background-color: #00504d;
 }
 
 QDialogButtonBox > QPushButton:disabled {
-    background-color: #383d41;
-    color: gray;color: gray;
+    background-color: #324b49;
+    color: gray;
 }

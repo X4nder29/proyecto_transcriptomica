@@ -53,6 +53,6 @@ class MainWindow(QMainWindow):
         self.icon = (
             QIcon(":/assets/icon.svg")
             if scheme == Qt.ColorScheme.Dark
-            else tint_icon(":/assets/icon.svg", QColor("#3578E5"))
+            else tint_icon(":/assets/icon.svg", QColor("#006a66"))
         )
         self.setWindowIcon(self.icon)

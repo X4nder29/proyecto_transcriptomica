@@ -1,14 +1,14 @@
 #FileSelectorDialogItemWidget {
-    background-color: #6C757D;
+    background-color: #4a6361;
     border-radius: 5px;
 }
 
 #FileSelectorDialogItemWidget[checked="false"]:hover {
-    background-color: #5A6268;
+    background-color: #517975;
 }
 
 #FileSelectorDialogItemWidget[checked="true"] {
-    background-color: #3578E5;
+    background-color: #19324a;
 }
 
 #NameLabel {

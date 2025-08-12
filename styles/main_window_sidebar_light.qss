@@ -1,5 +1,5 @@
 #SideBar {
-    background-color: #3578E5;
+    background-color: #4a6361;
 }
 
 QPushButton {
@@ -8,12 +8,12 @@ QPushButton {
 }
 
 QPushButton:checked {
-    background-color: #2D66C3;
+    background-color: #3f4948;
     border-radius: 10px;
 }
 
 QPushButton:!checked:hover {
-    background-color: #5D93EA;
+    background-color: #6f7978;
     border-radius: 10px;
 }
 

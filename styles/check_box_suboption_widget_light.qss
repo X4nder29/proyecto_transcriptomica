@@ -1,7 +1,7 @@
 #SubOptionWidgetLabel {
-    color: #FFFFFF;
+    color: #cce8e5;
 }
 
 #SubOptionWidgetLabel:disabled {
-    color: #A9A9A9;
+    color: #9cb1af;
 }

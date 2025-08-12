@@ -17,9 +17,9 @@
     font-size: 14px;
     border: none;
     border-radius: 10px;
-    background-color: #3578E5;
+    background-color: #006a66;
 }
 
 #CreateWorkspaceButton:hover, #OpenWorkspaceButton:hover {
-    background-color: #2F69CC;
+    background-color: #00504d;
 }

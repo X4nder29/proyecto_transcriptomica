@@ -1,36 +1,36 @@
 #NumberSelector {
-    background: #6C757D;
+    background: #cce8e5;
     border-radius: 5px;
-    color: #FFFFFF;
+    color: #324b49;
 }
 
 QSpinBox {
     padding: 8px 10px;
-    background: #6C757D;
+    background: #cce8e5;
     border: none;
-    color: #FFFFFF;
+    color: #324b49;
 }
 QSpinBox:disabled {
-    color: #A9A9A9;
+    color: #72aca8;
 }
 QSpinBox > QLineEdit {
     background: none;
-    color: #FFFFFF;
+    color: #324b49;
 }
 
 #IncrementButton, #DecrementButton {
     padding: 0px 10px;
     background: none;
-    color: #FFFFFF;
+    color: #324b49;
 }
 #IncrementButton:disabled, #DecrementButton:disabled {
-    color: #A9A9A9;
+    color: #72aca8;
 }
 #IncrementButton:hover, #DecrementButton:hover {
-    background: #5A6268;
+    background: #80d5cf;
 }
 #IncrementButton:pressed, #DecrementButton:pressed {
-    background: #545B62 ;
+    background: #00504d;
 }
 
 #IncrementButton {

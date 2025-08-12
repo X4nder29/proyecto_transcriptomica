@@ -14,7 +14,7 @@ QListView::item {
 }
 
 QListView::item:selected {
-    background-color: #6495ED;
+    background-color: #4a6361;
     outline: none;
     border: none;
     color: #FFFFFF;
@@ -30,5 +30,5 @@ QListView::item:focus {
 }
 
 QListWidget::item[separator="true"] {
-    border-top: 1px solid #3578E5;
+    border-top: 1px solid #4a6361;
 }

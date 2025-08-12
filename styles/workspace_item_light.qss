@@ -1,10 +1,10 @@
 #WorkspaceItem:hover {
-    background-color: #E5F1FF;
+    background-color: #cce8e5;
     border-radius: 5px;
 }
 
 #IconLabel {
-    background-color: #3578E5;
+    background-color: #006a66;
     border-radius: 8px;
 }
 #IconLabel:disabled {

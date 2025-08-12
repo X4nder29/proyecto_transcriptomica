@@ -9,13 +9,13 @@
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
-    background-color: #6C757D;
+    background-color: #006a66;
     color: white;
     outline: none;
 }
 
 #CreateNewWorkspaceButton:hover, #OpenExistingWorkspaceButton:hover {
-    background-color: #5A6268;
+    background-color: #00504d;
 }
 
 #HorizontalSpacer {

@@ -1,7 +1,7 @@
 #HeaderLabel {
     font-size: 14px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #324b49;
 }
 
 #UploadButton {
@@ -12,7 +12,7 @@
 }
 
 #UploadButton:hover {
-	background-color: #2F69CC;
+	background-color: #324b49;
 }
 
 #FilterButton {
@@ -24,7 +24,7 @@
 }
 
 #FilterButton:!checked:hover {
-    background-color: #E5F1FF;
+    background-color: #80d5cf;
 }
 
 #FilterButton:!checked {
@@ -32,6 +32,6 @@
 }
 
 #FilterButton:checked {
-    background-color: #6C757D;
+    background-color: #006a66;
     color: #FFFFFF;
 }

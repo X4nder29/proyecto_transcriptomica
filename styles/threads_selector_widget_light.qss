@@ -1,14 +1,14 @@
 #ThreadsSelectorWidget {
-    background-color: #3578E5;
+    background-color: #324b49;
     border-radius: 5;
 }
 
 #OptionTitle {
     font-size: 14px;
     font-weight: bold;
-    color: white;
+    color: #cce8e5;
 }
 
 #ThreadsSlider {
-    color: #FFFFFF;
+    color: #cce8e5;
 }

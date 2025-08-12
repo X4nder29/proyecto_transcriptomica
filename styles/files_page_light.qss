@@ -10,14 +10,14 @@
 }
 
 #NavigationButton {
-    background-color: #3578E5;
-    border: none;
+    background-color: transparent;
+    border: 2px solid #49607b;
     border-radius: 5px;
     padding: 10px 20px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #49607b;
 }
 
 #NavigationButton:hover {
-    background-color: #2F69CC;
+    background-color: #d0e4ff;
 }

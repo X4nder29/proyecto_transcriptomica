@@ -8,12 +8,12 @@
     border: none;
     border-radius: 5px;
     padding: 10px;
-    background-color: #3578E5;
+    background-color: #4a6361;
     color: #FFFFFF;
 }
 
 #AddButton {
-    background-color: #3578E5;
+    background-color: #006a66;
     color: white;
     border: none;
     border-radius: 5px;
@@ -21,7 +21,7 @@
 }
 
 #AddButton:hover {
-    background-color: #2F69CC;
+    background-color: #00504d;
 }
 
 #InstalledScrollArea, #UninstalledScrollArea {

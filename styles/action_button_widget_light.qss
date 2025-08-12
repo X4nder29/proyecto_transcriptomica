@@ -1,5 +1,5 @@
 #ActionButtonWidget {
-    background-color: #3578E5;
+    background-color: #006a66;
     border-radius: 10px;
     color: white;
     font-size: 16px;
@@ -8,9 +8,9 @@
 }
 
 #ActionButtonWidget:hover {
-    background-color: #2F69CC;
+    background-color: #007c78;
 }
 
 #ActionButtonWidget:pressed {
-    background-color: #2659B3;
+    background-color: #005754;
 }

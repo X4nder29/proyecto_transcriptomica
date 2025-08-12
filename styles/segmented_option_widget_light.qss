@@ -1,27 +1,11 @@
-#SegmentedOptionWidget {
-    background-color: #3578E5;
-    border-radius: 5px;
-}
-
 #SegmentedOptionLabel {
     color: #FFFFFF;
     font-size: 14px;
     font-weight: bold;
 }
 
-#HelpButton {
-    color: #FFFFFF;
-    border: none;
-    border-radius: 5px;
-    padding: 5px 10px;
-}
-
-#HelpButton:hover {
-    background-color: #2F69CC;
-}
-
 #SegmentedButton {
-    background-color: #FFFFFF;
+    background-color: #cce8e5;
     color: #FFFFFF;
     border: none;
     border-radius: 5px;
@@ -29,13 +13,13 @@
 }
 
 #SegmentedButton:checked {
-    background-color: #6C757D;
+    background-color: #49607b;
 }
 
 #SegmentedButton:!checked {
-    color: #212529;
+    color: #324b49;
 }
 
 #SegmentedButton:!checked:hover {
-    background-color: #E5F1FF;
+    background-color: #a6bdba;
 }

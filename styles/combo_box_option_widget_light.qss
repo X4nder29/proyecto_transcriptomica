@@ -1,5 +1,5 @@
 QWidget {
-	background-color: #3578E5;
+	background-color: #324b49;
 	border-radius: 5px;
 }
 
@@ -12,7 +12,7 @@ QWidget {
 }
 
 #Checkbox:hover {
-	background-color: #2F69CC;
+	background-color: #006a66;
 }
 
 QLabel {
@@ -22,8 +22,8 @@ QLabel {
 }
 
 QComboBox {
-	background-color: #6C757D;
-	color: #ffffff;
+	background-color: #cce8e5;
+	color: #324b49;
 	border: none;
 	border-radius: 5px;
 	padding: 5px 15px;
@@ -36,7 +36,11 @@ QComboBox:on {
 }
 
 QComboBox:hover {
-	background-color: #5A6268;
+	background-color: #a6bdba;
+}
+
+QComboBox:disabled {
+	color: #72aca8;
 }
 
 QComboBox::drop-down {
@@ -51,11 +55,11 @@ QComboBox::down-arrow {
 }
 
 QComboBox QAbstractItemView {
-	background: #6C757D;
+	background: #cce8e5;
     outline: none;
 }
 
 QComboBox QAbstractItemView::item {
 	padding: 5px;
-	color: #FFFFFF;
+	color: #324b49;
 }

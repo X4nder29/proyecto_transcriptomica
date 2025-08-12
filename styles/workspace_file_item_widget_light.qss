@@ -1,5 +1,5 @@
 #WorkspaceFileItemWidget {
-    background-color: #6C757D;
+    background-color: #4a6361;
     border-radius: 5px;
     color: #FFFFFF;
 }

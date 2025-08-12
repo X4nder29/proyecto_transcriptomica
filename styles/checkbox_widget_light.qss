@@ -7,5 +7,5 @@
 }
 
 #CheckBoxWidget:hover {
-	background-color: #2F69CC;
+	background-color: #006a66;
 }
