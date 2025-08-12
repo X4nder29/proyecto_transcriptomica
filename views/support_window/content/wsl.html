@@ -1,51 +1,140 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Instalación de WSL para TranscriptoHub</title>
-</head>
-
-<body>
-    <p>Para ejecutar <strong>TranscriptoHub</strong> en Windows es necesario tener instalado en el sistema
-        <strong>WSL</strong> (Subsistema de Linux en Windows). Para ello, sigue estos pasos:</p>
-
-    <hr>
-
-    <h3>3.1 Abrir PowerShell como Administrador</h3>
-
-    <hr>
-
-    <h3>3.2 Habilitar WSL</h3>
-    <pre><code class="language-powershell">
-dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-  </code></pre>
-
-    <hr>
-
-    <h3>3.3 Habilitar Máquina Virtual</h3>
-    <pre><code class="language-powershell">
-dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-  </code></pre>
-
-    <hr>
-
-    <h3>3.4 Reiniciar el Equipo</h3>
-    <ol>
-        <li>Cierra todas las aplicaciones.</li>
-        <li>Reinicia Windows.</li>
-    </ol>
-
-    <hr>
-
-    <h3>3.5 Desinstalar e Instalar TranscriptoHub</h3>
-    <p>Una vez reiniciado el equipo es necesario desinstalar TranscriptoHub y volver a instalar para así tener una
-        instalación correcta del software en su totalidad.</p>
-    <ol>
-        <li>Abre el menú Inicio y busca “TranscriptoHub”.</li>
-        <li>Haz clic derecho y selecciona <strong>Desinstalar</strong>.</li>
-        <li>En la ventana del sistema, confirma la eliminación.</li>
-    </ol>
-</body>
-
-</html>
+<h2 id="4-habilitar-wsl">4. Habilitar WSL</h2>
+</ul>
+<p><strong>Requisito previo:</strong> necesitas una cuenta con privilegios de administrador en el equipo.</p>
+<h3 id="1-abrir-la-herramienta-de-caracter-sticas-de-windows">1. Abrir la herramienta de características de Windows
+</h3>
+<ol>
+    <li>
+        <p>Haz clic en <strong>Inicio</strong> (o pulsa la tecla Windows).</p>
+    </li>
+    <li>
+        <p>Escribe <strong>Activar o desactivar las características de Windows</strong> y pulsa <strong>Enter</strong>
+            o selecciona la opción del Panel de control.</p>
+    </li>
+</ol>
+<br>
+<img src=":/manual/busqueda_de_activar_caracteristicas.png" alt="" width="500">
+<br>
+<p>Se abrirá la ventana <strong>Características de Windows</strong>.</p>
+<br>
+<img src=":/manual/ventana_activar_caracteristicas.png" alt="" width="500">
+<br>
+<h3 id="2-marcar-las-caracter-sticas-necesarias">2. Marcar las características necesarias</h3>
+<p>En la ventana <strong>Características de Windows</strong>:</p>
+<ol>
+    <li>
+        <p>Busca y marca la casilla <strong>Subsistema de Windows para Linux</strong> (o <strong>Windows Subsystem for
+                Linux</strong>).</p>
+    </li>
+    <li>
+        <p>Para usar <strong>WSL 2</strong> y mejorar rendimiento, también marca <strong>Plataforma de máquina
+                virtual</strong> (Virtual Machine Platform).</p>
+    </li>
+    <li>
+        <p>Opcionalmente (según versión de Windows y necesidad de virtualización) marca <strong>Hyper-V</strong> o
+            <strong>Plataforma de hipervisor de Windows</strong> si aparece y la necesitas.
+        </p>
+        <ul>
+            <li><strong>Nota:</strong> marcar Hyper-V no siempre es obligatorio para WSL 2, pero en algunos
+                equipos/classes de Windows ayuda a habilitar virtualización completa.</li>
+        </ul>
+    </li>
+</ol>
+<br>
+<img src=":/manual/ventana_activar_caracteristicas.png" alt="" width="500">
+<br>
+<blockquote>
+    <p>Asegúrate de marcar al menos <strong>Subsistema de Windows para Linux</strong> y <strong>Plataforma de máquina
+            virtual</strong>.</p>
+</blockquote>
+<h3 id="3-aplicar-cambios-y-reiniciar">3. Aplicar cambios y reiniciar</h3>
+<ol>
+    <li>Haz clic en <strong>Aceptar</strong>.</li>
+</ol>
+<br>
+<img src=":/manual/ventana_activando_caracteristica.png" alt="" width="500">
+<br>
+<ol>
+    <li>
+        <p>Windows aplicará los cambios (instalará los componentes necesarios) y te pedirá reiniciar el equipo.</p>
+    </li>
+    <li>
+        <p>Reinicia el equipo cuando se solicite.</p>
+    </li>
+</ol>
+<br>
+<img src=":/manual/ventana_reiniciar_activar_caracteristicas.png" alt="" width="500">
+<br>
+<blockquote>
+    <p><strong>IMPORTANTE:</strong> no podrás usar WSL hasta que completes el reinicio.</p>
+</blockquote>
+<h3 id="4-opcional-verificar-que-wsl-est-habilitado">4. (Opcional) Verificar que WSL está habilitado</h3>
+<p>Después del reinicio:</p>
+<ol>
+    <li>
+        <p>Abre <strong>Windows PowerShell</strong> o <strong>Símbolo del sistema</strong> como administrador (clic
+            derecho → <em>Ejecutar como administrador</em>).</p>
+    </li>
+    <li>
+        <p>Ejecuta el comando de verificación:</p>
+    </li>
+</ol>
+<pre><code class="lang-powershell">wsl <span class="hljs-_">-l</span> -v
+</code></pre>
+<ul>
+    <li>
+        <p>Si WSL está habilitado y hay distribuciones instaladas verás la lista y la versión (1 o 2).</p>
+    </li>
+    <li>
+        <p>Si no hay distribuciones instaladas verás un mensaje indicando que no hay distribuciones instaladas (eso es
+            normal).</p>
+    </li>
+</ul>
+<h3 id="5-opcional-convertir-usar-wsl2-y-o-instalar-distribuci-n">5. (Opcional) Convertir/usar WSL2 y/o instalar
+    distribución</h3>
+<ul>
+    <li>Si quieres que WSL use la versión 2 por defecto (recomendado cuando la máquina lo soporte), en
+        PowerShell/Admin ejecuta:</li>
+</ul>
+<pre><code class="lang-powershell">wsl --<span class="hljs-keyword">set</span>-<span class="hljs-keyword">default</span>-version <span class="hljs-number">2</span>
+</code></pre>
+<blockquote>
+    <p><strong>Nota:</strong> en algunos sistemas puede ser necesaria una actualización del kernel de WSL. Si Windows
+        te lo solicita, descarga e instala el <em>WSL2 kernel update</em> desde Microsoft (la ventana de error indica
+        el enlace).</p>
+</blockquote>
+<ul>
+    <li>Para instalar una distro (Ubuntu, Debian, etc.) abre la <strong>Microsoft Store</strong>, busca la
+        distribución deseada e instálala, o bien instala desde PowerShell con
+        <code>wsl --install -d &lt;Distro&gt;</code> si tu Windows soporta ese comando.
+    </li>
+</ul>
+<h3 id="6-ltima-verificaci-n">6. Última verificación</h3>
+<p>Tras instalar una distro, ejecuta en PowerShell:</p>
+<pre><code class="lang-powershell">wsl <span class="hljs-_">-l</span> -v
+</code></pre>
+<p>Deberías ver algo como:</p>
+<pre><code>  NAME      STATE           <span class="hljs-keyword">VERSION</span>
+<span class="hljs-comment">* Ubuntu    Running         2</span>
+</code></pre>
+<p>Si aparece <code>VERSION 2</code>, estás usando WSL 2 correctamente.</p>
+<hr>
+<h3 id="soluci-n-de-problemas-r-pidos">Solución de problemas rápidos</h3>
+<ul>
+    <li>
+        <p><strong>No ves la opción “Subsistema de Windows para Linux” en la lista:</strong> asegúrate de tener Windows
+            10 (actualizado) o Windows 11; si es una versión muy antigua actualiza Windows.</p>
+    </li>
+    <li>
+        <p><strong>La instalación falla o falta soporte mmap/WSL2:</strong> revisa Windows Update y aplica las últimas
+            actualizaciones; reinicia y vuelve a intentar.</p>
+    </li>
+    <li>
+        <p><strong>Prefieres línea de comandos:</strong> puedes habilitar las características con DISM si la
+            herramienta visual falla:</p>
+    </li>
+</ul>
+<pre><code class="lang-powershell">dism.exe <span class="hljs-regexp">/online /</span>enable-feature <span class="hljs-regexp">/featurename:Microsoft-Windows-Subsystem-Linux /</span>all /norestart
+dism.exe <span class="hljs-regexp">/online /</span>enable-feature <span class="hljs-regexp">/featurename:VirtualMachinePlatform /</span>all /norestart
+</code></pre>
+<p>luego reinicia.</p>

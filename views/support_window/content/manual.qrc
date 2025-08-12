@@ -13,6 +13,33 @@
     <file alias="trimmomatic.html">trimmomatic.html</file>
     <file alias="welcome.html">welcome.html</file>
     <file alias="wsl.html">wsl.html</file>
+    <file alias="busqueda_de_activar_caracteristicas.png">images/busqueda_de_activar_caracteristicas.png</file>
+    <file alias="file_selector_dialog.png">images/file_selector_dialog.png</file>
+    <file alias="home_window_create_workspace_dialog.png">images/home_window_create_workspace_dialog.png</file>
+    <file alias="home_window_empty_workspace.png">images/home_window_empty_workspace.png</file>
+    <file alias="home_window_workspaces.png">images/home_window_workspaces.png</file>
+    <file alias="icon.png">images/icon.png</file>
+    <file alias="main_window_fastqc_command.png">images/main_window_fastqc_command.png</file>
+    <file alias="main_window_fastqc_panel_chart_selected.png">images/main_window_fastqc_panel_chart_selected.png</file>
+    <file alias="main_window_fastqc_panel_empty.png">images/main_window_fastqc_panel_empty.png</file>
+    <file alias="main_window_fastqc_panel_report_selected.png">images/main_window_fastqc_panel_report_selected.png</file>
+    <file alias="main_window_home_panel.png">images/main_window_home_panel.png</file>
+    <file alias="main_window_kraken_panel_command.png">images/main_window_kraken_panel_command.png</file>
+    <file alias="main_window_kraken_panel_database.png">images/main_window_kraken_panel_database.png</file>
+    <file alias="main_window_kraken_panel_files_page.png">images/main_window_kraken_panel_files_page.png</file>
+    <file alias="main_window_kraken_panel_options_page.png">images/main_window_kraken_panel_options_page.png</file>
+    <file alias="main_window_settings.png">images/main_window_settings.png</file>
+    <file alias="main_window_sortmerna_panel_command.png">images/main_window_sortmerna_panel_command.png</file>
+    <file alias="main_window_sortmerna_panel_database.png">images/main_window_sortmerna_panel_database.png</file>
+    <file alias="main_window_sortmerna_panel_files_page.png">images/main_window_sortmerna_panel_files_page.png</file>
+    <file alias="main_window_sortmerna_panel_options_page.png">images/main_window_sortmerna_panel_options_page.png</file>
+    <file alias="main_window_trimmomatic_panel_command.png">images/main_window_trimmomatic_panel_command.png</file>
+    <file alias="main_window_trimmomatic_panel_files_page.png">images/main_window_trimmomatic_panel_files_page.png</file>
+    <file alias="main_window_trimmomatic_panel_options_page.png">images/main_window_trimmomatic_panel_options_page.png</file>
+    <file alias="save_config_dialog.png">images/save_config_dialog.png</file>
+    <file alias="ventana_activando_caracteristica.png">images/ventana_activando_caracteristica.png</file>
+    <file alias="ventana_activar_caracteristicas.png">images/ventana_activar_caracteristicas.png</file>
+    <file alias="ventana_reiniciar_activar_caracteristicas.png">images/ventana_reiniciar_activar_caracteristicas.png</file>
     <file alias="manual_rc.cpython-313.pyc">__pycache__/manual_rc.cpython-313.pyc</file>
   </qresource>
 </RCC>
