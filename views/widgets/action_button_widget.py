@@ -1,13 +1,14 @@
 from pathlib import Path
-from PySide6.QtWidgets import QWidget, QPushButton
+from PySide6.QtWidgets import QWidget, QPushButton, QHBoxLayout, QLabel
 from PySide6.QtGui import QGuiApplication, QIcon
 from PySide6.QtCore import Qt, QFile, QTextStream
 
 
 class ActionButtonWidget(QPushButton):
-    def __init__(self, icon_path: str, tooltip: str, parent: QWidget = None):
+    def __init__(self, icon_path: str, name: str, tooltip: str, parent: QWidget = None):
         super().__init__(parent=parent)
         self.icon_path = icon_path
+        self.name = name
         self.tooltip = tooltip
         self.setup_ui()
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
@@ -18,6 +19,7 @@ class ActionButtonWidget(QPushButton):
     def setup_ui(self):
         self.setObjectName("ActionButtonWidget")
         self.setToolTip(self.tooltip)
+        self.setText(f"  {self.name}")
         self.setIcon(QIcon(self.icon_path))
 
     def load_stylesheet(self, scheme: Qt.ColorScheme):

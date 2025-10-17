@@ -14,6 +14,7 @@ class FastqcPanelHead(PanelHeadBase):
 
         self.user_manual_button = ActionButtonWidget(
             icon_path=":/assets/user_manual.svg",
+            name="Manual de usuario",
             tooltip="Manual de usuario",
             parent=self,
         )
@@ -24,6 +25,7 @@ class FastqcPanelHead(PanelHeadBase):
 
         self.cli_push_button = ActionButtonWidget(
             icon_path=":/assets/cli_filled.svg",
+            name="Comando",
             tooltip="Visualizar comando a ejecutar",
             parent=self,
         )

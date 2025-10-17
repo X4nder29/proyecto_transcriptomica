@@ -14,6 +14,7 @@ class HomePanelHead(PanelHeadBase):
         # user manual button
         self.user_manual_button = ActionButtonWidget(
             icon_path=":/assets/user_manual.svg",
+            name="Manual de usuario",
             tooltip="Manual de usuario",
             parent=self,
         )

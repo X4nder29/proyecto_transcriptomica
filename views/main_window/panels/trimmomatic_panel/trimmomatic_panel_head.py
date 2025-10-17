@@ -15,6 +15,7 @@ class TrimmomaticPanelHead(PanelHeadBase):
         # user manual button
         self.user_manual_button = ActionButtonWidget(
             icon_path=":/assets/user_manual.svg",
+            name="Manual de usuario",
             tooltip="Manual de usuario",
             parent=self,
         )
@@ -24,6 +25,7 @@ class TrimmomaticPanelHead(PanelHeadBase):
         # cli push button
         self.cli_push_button = ActionButtonWidget(
             icon_path=":/assets/cli_filled.svg",
+            name="Comando",
             tooltip="Visualizar comando a ejecutar",
             parent=self,
         )
@@ -34,6 +36,7 @@ class TrimmomaticPanelHead(PanelHeadBase):
         # star button
         self.star_button = ActionButtonWidget(
             icon_path=":/assets/filled_star.svg",
+            name="Favorito",
             tooltip="Marcar como favorito",
             parent=self,
         )

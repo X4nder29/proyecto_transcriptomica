@@ -19,6 +19,7 @@ class KrakenPanelHead(PanelHeadBase):
         # user manual button
         self.user_manual_button = ActionButtonWidget(
             icon_path=":/assets/user_manual.svg",
+            name="Manual de usuario",
             tooltip="Manual de usuario",
             parent=self,
         )
@@ -29,6 +30,7 @@ class KrakenPanelHead(PanelHeadBase):
 
         self.cli_push_button = ActionButtonWidget(
             icon_path=":/assets/cli_filled.svg",
+            name="Comando",
             tooltip="Visualizar comando a ejecutar",
             parent=self,
         )
@@ -40,6 +42,7 @@ class KrakenPanelHead(PanelHeadBase):
 
         self.star_button = ActionButtonWidget(
             icon_path=":/assets/filled_star.svg",
+            name="Favorito",
             tooltip="Marcar como favorito",
             parent=self,
         )
@@ -51,6 +54,7 @@ class KrakenPanelHead(PanelHeadBase):
 
         self.database_download_manager_button = ActionButtonWidget(
             icon_path=":/assets/database.svg",
+            name="Bases de datos",
             tooltip="Abrir gestor de bases de datos",
             parent=self,
         )
