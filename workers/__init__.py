@@ -5,3 +5,4 @@ from .ungzip_worker import UngzipWorker
 from .filename_worker import FilenameWorker
 from .check_worker import CheckWorker
 from .generic_worker import GenericWorker
+from .file_scanner_worker import FileScannerWorker
