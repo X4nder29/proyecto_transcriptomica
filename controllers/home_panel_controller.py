@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 from typing import Optional
 from PySide6.QtWidgets import QFileDialog, QProgressDialog
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer, QThread, QObject, Slot
 from utils import (
     get_current_workspace,
     get_current_workspace_source_folder_path,
@@ -15,7 +15,7 @@ from utils import (
 )
 from views.main_window.panels.home_panel import HomePanel
 from views.main_window.panels.home_panel.widgets import WorkspaceFileItemWidget
-from workers import MoveFileWorker
+from workers import MoveFileWorker, FileScannerWorker
 
 
 class HomePanelController:
@@ -24,7 +24,9 @@ class HomePanelController:
 
         self.view = view
 
-        self.load_workspace_files()
+        self._scan_ui_handler = FileScanUIHandler(self)
+
+        QTimer.singleShot(0, lambda: self.load_workspace_files())
 
         self.view.header.user_manual_button.clicked.connect(self.open_user_manual)
 
@@ -148,63 +150,66 @@ class HomePanelController:
 
     def load_workspace_files(self, fltr: Optional[str] = None):
 
-        source_files = get_source_files_paths()
-        trimmed_files = get_trimmed_files_paths()
-        sorted_files = get_sorted_files_paths()
-        krakened_files = get_krakened_files_paths()
+        self._scanner_thread = QThread()
+        self._scanner_worker = FileScannerWorker(fltr)
+        self._scanner_worker.moveToThread(self._scanner_thread)
 
-        if not source_files and not trimmed_files and not sorted_files:
+        self._scanner_worker.finished.connect(
+            self._scan_ui_handler.handle_scan_finished
+        )
+        self._scanner_worker.error.connect(self._scan_ui_handler.handle_scan_error)
+
+        self._scanner_thread.started.connect(self._scanner_worker.run)
+        self._scanner_worker.finished.connect(self._scanner_thread.quit)
+        self._scanner_worker.finished.connect(self._scanner_worker.deleteLater)
+        self._scanner_thread.finished.connect(self._scanner_thread.deleteLater)
+
+        # arrancar
+        self._scanner_thread.start()
+
+    def _on_scan_error(self, msg: str):
+        print("Error scanning files:", msg)
+        if hasattr(self, "_loading_dialog"):
+            self._loading_dialog.close()
+
+    def _on_scan_finished(self, files_str_list):
+
+        # limpiar elementos antiguos (hazlo en hilo UI)
+        layout = self.view.content.files_area.file_list_widget.list_widget.scroll_content_layout
+        # eliminar todos los widgets de forma segura
+        while layout.count():
+            item = layout.takeAt(0)
+            w = item.widget()
+            if w:
+                w.deleteLater()
+
+        # si no hay archivos, mostrar la página vacía
+        if not files_str_list:
             self.view.content.files_area.stacked.setCurrentIndex(0)
-            print(__name__, "-", "No files found in the workspace.")
             self.current_files = []
             return
 
-        # delete existing file list items
-
-        for i in range(
-            self.view.content.files_area.file_list_widget.list_widget.scroll_content_layout.count()
-        ):
-            item = self.view.content.files_area.file_list_widget.list_widget.scroll_content_layout.itemAt(
-                i
-            )
-
-            if item.widget():
-                item.widget().deleteLater()
-
-        # add new file list items
-
-        files = []
-
-        if fltr == "Recortados":
-            files = trimmed_files
-        elif fltr == "Ordenados":
-            files = sorted_files
-        elif fltr == "Taxonomizado":
-            files = krakened_files
-        else:
-            files = source_files + trimmed_files + sorted_files + krakened_files
-
-        for file in files:
-            if not file.exists():
+        # crear widgets (UI thread) a partir de la lista de rutas
+        for fpath in files_str_list:
+            p = Path(fpath)
+            if not p.exists():
                 continue
-
             file_list_item = WorkspaceFileItemWidget(
-                file.name,
-                str(file),
+                p.name,
+                str(p),
                 parent=self.view.content.files_area.file_list_widget,
             )
+            # abrir carpeta padre (capturamos p como valor por defecto)
             file_list_item.open_action.clicked.connect(
-                lambda _, f=file: os.startfile(f.parent.as_posix())
+                lambda _, p=p: os.startfile(p.parent.as_posix())
             )
             file_list_item.delete_action.clicked.connect(
-                lambda _, f=file: self.show_delete_source_file_dialog(f)
+                lambda _, p=p: self.show_delete_source_file_dialog(p)
             )
+            layout.addWidget(file_list_item)
 
-            self.view.content.files_area.file_list_widget.list_widget.scroll_content_layout.addWidget(
-                file_list_item
-            )
-
-            self.view.content.files_area.stacked.setCurrentIndex(1)
+        self.view.content.files_area.stacked.setCurrentIndex(1)
+        self.current_files = [Path(p) for p in files_str_list]
 
     def show_delete_source_file_dialog(self, source_file: Path):
         """
@@ -252,3 +257,20 @@ class HomePanelController:
             self.support_window, "Inicio"
         )
         self.support_window.show()
+
+
+class FileScanUIHandler(QObject):
+    """Handler que vive en hilo UI; sus slots actualizan la UI de forma segura."""
+
+    def __init__(self, controller):
+        super().__init__()  # sin parent o parent=self.view si lo prefieres
+        self.controller = controller
+
+    @Slot(list)
+    def handle_scan_finished(self, files_str_list):
+        # Este método se ejecuta en el hilo del FileScanUIHandler (UI thread).
+        self.controller._on_scan_finished(files_str_list)
+
+    @Slot(str)
+    def handle_scan_error(self, msg):
+        self.controller._on_scan_error(msg)

@@ -39,8 +39,6 @@ class TrimmomaticPanelController:
         self.process.readyReadStandardError.connect(self.on_stderr)
         self.process.finished.connect(self.on_finished)
 
-        self._load_available_adapters()
-
         self.view.head.user_manual_button.clicked.connect(self.open_user_manual)
         self.view.head.cli_push_button.clicked.connect(self._open_cli_dialog)
         self.view.head.star_button.clicked.connect(self.open_save_config_dialog)

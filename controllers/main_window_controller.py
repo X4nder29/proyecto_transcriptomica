@@ -70,11 +70,14 @@ class MainWindowController:
     def _on_fastqc(self):
         pass
 
-    def _on_trimmomatic(self):
-        self.view.content.trimmomatic_panel_controller._load_existing_report()
+    def _on_trimmomatic(self, checked: bool):
+        if checked:
+            self.view.content.trimmomatic_panel_controller._load_available_adapters()
+            self.view.content.trimmomatic_panel_controller._load_existing_report()
 
-    def _on_sortmerna(self):
-        pass
+    def _on_sortmerna(self, checked: bool):
+        if checked:
+            self.view.content.sort_me_rna_controller._load_existing_report()
 
     def _on_kraken(self, checked: bool):
         if checked:

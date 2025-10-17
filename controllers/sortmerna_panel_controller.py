@@ -42,8 +42,6 @@ class SortMeRnaPanelController:
 
         self.view = view
 
-        self._load_existing_report()
-
         # process
 
         self.process = QProcess()
