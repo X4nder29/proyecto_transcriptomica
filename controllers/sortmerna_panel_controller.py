@@ -444,7 +444,7 @@ class SortMeRnaPanelController:
             self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
         )
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             self.view.body.options_page.paired.setEnabled(True)
         else:
             self.view.body.options_page.paired.setEnabled(False)
@@ -455,7 +455,7 @@ class SortMeRnaPanelController:
             self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
         )
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             required = [self.selected_input_file_1]
             msg = "Debe seleccionar un archivo de entrada."
         else:

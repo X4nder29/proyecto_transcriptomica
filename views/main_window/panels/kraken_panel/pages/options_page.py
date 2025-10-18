@@ -72,20 +72,20 @@ class OptionsPage(QWidget):
 
         self.quick = OptionWidget(
             self,
-            "Quick",
+            "Rápido",
         )
         self.container_layout.addWidget(self.quick, 2, 0, 1, 1)
 
         self.memory_mapping = OptionWidget(
             self,
-            "Memory Mapping",
+            "Mapeo de memoria",
         )
         self.container_layout.addWidget(self.memory_mapping, 3, 0, 1, 1)
 
         # column 1
 
         self.confidence = DecimalSelectorOptionWidget(
-            "Confidence",
+            "Confianza",
             self,
             decimals=2,
             step=0.01,
@@ -94,13 +94,13 @@ class OptionsPage(QWidget):
         self.container_layout.addWidget(self.confidence, 0, 1, 2, 1)
 
         self.minimum_hit_groups = NumberSelectorOptionWidget(
-            "Minimum Hit Groups",
+            "Grupos de impacto mínimos",
             self,
         )
         self.container_layout.addWidget(self.minimum_hit_groups, 2, 1, 2, 1)
 
         self.minimum_base_quality = NumberSelectorOptionWidget(
-            "Minimum Base Quality",
+            "Calidad base mínima",
             self,
         )
         self.minimum_base_quality.setVisible(False)  # Initially hidden

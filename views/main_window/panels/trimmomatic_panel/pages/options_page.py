@@ -79,7 +79,7 @@ class OptionsPage(QWidget):
         # options column 1
 
         self.quality_scores_format_options_widget = SegmentedOptionWidget(
-            "Quality Scores Format",
+            "Formato de puntuaciones de calidad",
             ["Phred33", "Phred64"],
             self,
         )
@@ -90,21 +90,23 @@ class OptionsPage(QWidget):
         self.sliding_window_option_widget = SlidingWindowOptionWidget(self)
         self.container_layout.addWidget(self.sliding_window_option_widget, 1, 1, 3, 1)
 
-        self.leading_option_widget = NumberSelectorOptionWidget("Leading", self)
+        self.leading_option_widget = NumberSelectorOptionWidget("Inicio", self)
         self.container_layout.addWidget(self.leading_option_widget, 4, 1, 2, 1)
 
-        self.trailing_option_widget = NumberSelectorOptionWidget("Trailing", self)
+        self.trailing_option_widget = NumberSelectorOptionWidget("Final", self)
         self.container_layout.addWidget(self.trailing_option_widget, 6, 1, 2, 1)
 
         # options column 2
 
-        self.minlen_option_widget = NumberSelectorOptionWidget("Minlen", self)
+        self.minlen_option_widget = NumberSelectorOptionWidget("Longitud mínima", self)
         self.container_layout.addWidget(self.minlen_option_widget, 0, 2, 2, 1)
 
-        self.crop_option_widget = NumberSelectorOptionWidget("Crop", self)
+        self.crop_option_widget = NumberSelectorOptionWidget("Recortar", self)
         self.container_layout.addWidget(self.crop_option_widget, 2, 2, 2, 1)
 
-        self.headcrop_option_widget = NumberSelectorOptionWidget("Headcrop", self)
+        self.headcrop_option_widget = NumberSelectorOptionWidget(
+            "Recorte frontal", self
+        )
         self.container_layout.addWidget(self.headcrop_option_widget, 4, 2, 2, 1)
 
         # navigation buttons

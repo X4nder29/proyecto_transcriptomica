@@ -11,6 +11,8 @@ from PySide6.QtWidgets import (
 from PySide6.QtGui import QGuiApplication, QPainter
 from PySide6.QtCore import Qt, QFile, QTextStream
 
+from utils.operation_modes import OperationModes
+
 
 class OperationModeWidget(QWidget):
     def __init__(self, parent: QWidget = None):
@@ -30,7 +32,7 @@ class OperationModeWidget(QWidget):
         self.button_group = QButtonGroup(self)
         self.button_group.setObjectName("OperationModeButtonGroup")
 
-        self.single_end_button = QPushButton("Single End", self)
+        self.single_end_button = QPushButton(OperationModes.SingleEnd.value[0], self)
         self.single_end_button.setCheckable(True)
         self.single_end_button.setObjectName("ModeButton")
         self.single_end_button.setSizePolicy(
@@ -40,7 +42,7 @@ class OperationModeWidget(QWidget):
         self.button_group.addButton(self.single_end_button)
         self.main_layout.addWidget(self.single_end_button)
 
-        self.paired_end_button = QPushButton("Paired End", self)
+        self.paired_end_button = QPushButton(OperationModes.PairedEnd.value[0], self)
         self.paired_end_button.setCheckable(True)
         self.paired_end_button.setObjectName("ModeButton")
         self.paired_end_button.setSizePolicy(

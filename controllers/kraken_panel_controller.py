@@ -2,6 +2,7 @@ import os
 from typing import Callable, Optional, Tuple
 from pathlib import Path
 from PySide6.QtCore import QProcess, QThreadPool
+from utils.operation_modes import OperationModes
 from views.main_window.panels import KrakenPanel
 from views.main_window.panels.kraken_panel.widgets import (
     PreviousReportItemWidget,
@@ -169,7 +170,7 @@ class KrakenPanelController:
             self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
         )
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             krona_html = (
                 get_kraken2_output_folder_path()
                 / f"{self.selected_input_file_1.stem}_report.krona.html"
@@ -179,7 +180,7 @@ class KrakenPanelController:
                 / f"{self.selected_input_file_1.stem}_report.txt"
             )
 
-        if mode == "Paired End":
+        if mode == OperationModes.SingleEnd.value[1]:
             krona_html = (
                 get_kraken2_output_folder_path()
                 / f"{self.selected_input_file_1.stem}_{self.selected_input_file_2.stem}.krona.html"
@@ -257,7 +258,7 @@ class KrakenPanelController:
 
         # input files check
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             required = [self.selected_input_file_1]
             msg = "Debe seleccionar un archivo de entrada."
         else:
@@ -314,7 +315,7 @@ class KrakenPanelController:
             )
             return "", []
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             report_output_path = (
                 output_folder_path / f"{self.selected_input_file_1.stem}_report.txt"
             )
@@ -409,10 +410,10 @@ class KrakenPanelController:
 
         # input files
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             arguments.append(f"{win_to_wsl(self.selected_input_file_1).as_posix()}")
 
-        if mode == "Paired End":
+        if mode == OperationModes.PairedEnd.value[0]:
             arguments.extend(
                 [
                     "--paired",
@@ -557,7 +558,7 @@ class KrakenPanelController:
             self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
         )
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             input_file = win_to_wsl(
                 get_kraken2_output_folder_path()
                 / f"{self.selected_input_file_1.stem}_report.txt"
@@ -572,7 +573,7 @@ class KrakenPanelController:
                 ]
             )
 
-        if mode == "Paired End":
+        if mode == OperationModes.PairedEnd.value[0]:
             input_file = win_to_wsl(
                 get_kraken2_output_folder_path()
                 / f"{self.selected_input_file_1.stem}_{self.selected_input_file_2.stem}_report.txt"
@@ -631,13 +632,13 @@ class KrakenPanelController:
             self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
         )
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             krona_html = (
                 get_kraken2_output_folder_path()
                 / f"{self.selected_input_file_1.stem}_report.krona.html"
             )
 
-        if mode == "Paired End":
+        if mode == OperationModes.PairedEnd.value[0]:
             krona_html = (
                 get_kraken2_output_folder_path()
                 / f"{self.selected_input_file_1.stem}_{self.selected_input_file_2.stem}_report.krona.html"
@@ -684,7 +685,7 @@ class KrakenPanelController:
         )
 
         if index == 1:
-            if mode == "Single End":
+            if mode == OperationModes.SingleEnd.value[0]:
                 required = [self.selected_input_file_1]
             else:
                 required = [self.selected_input_file_1, self.selected_input_file_2]
@@ -710,7 +711,7 @@ class KrakenPanelController:
             self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
         )
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             required = [self.selected_input_file_1]
             msg = "Debe seleccionar un archivo de entrada."
         else:

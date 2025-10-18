@@ -78,7 +78,7 @@ class FileSelectorDialog(QDialog):
                 self.filter_layout.addWidget(button)
 
                 if i == 0:
-                    button.setText("All")
+                    button.setText("Todos")
                     button.clicked.connect(lambda: self.set_filter("all"))
                     continue
 

@@ -8,42 +8,42 @@ from views.widgets import (
 
 class IlluminaClipOptionWidget(OptionWidget):
     def __init__(self, parent=None):
-        super().__init__(parent=parent, title="Illumina Clip")
+        super().__init__(parent=parent, title="Recorte de adaptadores Illumina")
 
     def setup_ui(self):
         super().setup_ui()
         self.checkbox.toggled.connect(self.toggle_suboption)
 
-        self.adaptar_suboption = ComboBoxSuboptionWidget("Adapter", parent=self)
+        self.adaptar_suboption = ComboBoxSuboptionWidget("Adaptadores", parent=self)
         self.adaptar_suboption.setEnabled(self.checkbox.isChecked())
         self.main_layout.addWidget(self.adaptar_suboption)
 
         self.seed_mismatches_suboption = NumberSelectorSuboptionWidget(
-            "Seed Mismatches", parent=self
+            "Desajustes en la semilla", parent=self
         )
         self.seed_mismatches_suboption.setEnabled(self.checkbox.isChecked())
         self.main_layout.addWidget(self.seed_mismatches_suboption)
 
         self.palindrome_clip_threshold_suboption = NumberSelectorSuboptionWidget(
-            "Palindrome Clip Threshold", parent=self
+            "Umbral de recorte de palíndromo", parent=self
         )
         self.palindrome_clip_threshold_suboption.setEnabled(self.checkbox.isChecked())
         self.main_layout.addWidget(self.palindrome_clip_threshold_suboption)
 
         self.simple_clip_threshold_suboption = NumberSelectorSuboptionWidget(
-            "Simple Clip Threshold", parent=self
+            "Umbral de recorte simple", parent=self
         )
         self.simple_clip_threshold_suboption.setEnabled(self.checkbox.isChecked())
         self.main_layout.addWidget(self.simple_clip_threshold_suboption)
 
         self.min_adapter_length_suboption = NumberSelectorSuboptionWidget(
-            "Minimum Adapter Length", parent=self, checkable=True
+            "Longitud mínima de adaptador", parent=self, checkable=True
         )
         self.min_adapter_length_suboption.setEnabled(self.checkbox.isChecked())
         self.main_layout.addWidget(self.min_adapter_length_suboption)
 
         self.keep_both_reads_suboption = CheckBoxSuboptionWidget(
-            "Keep Both Reads", self
+            "Conservar ambos pares", self
         )
         self.keep_both_reads_suboption.setEnabled(self.checkbox.isChecked())
         self.main_layout.addWidget(self.keep_both_reads_suboption)

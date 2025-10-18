@@ -23,7 +23,7 @@ class NumberSelectorOptionWidget(OptionWidget):
         self.number_selector_suboption_widget.setEnabled(checked)
 
     def set_checked(self, checked: bool):
-        self.checkbox.setEnabled(checked)
+        self.checkbox.setChecked(checked)
 
     def value(self):
         return self.number_selector_suboption_widget.value()

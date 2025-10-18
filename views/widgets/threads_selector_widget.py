@@ -42,7 +42,7 @@ class ThreadsSelectorWidget(QWidget):
 
         # title
 
-        self.title = QLabel("Threads", self.header)
+        self.title = QLabel("Hilos", self.header)
         self.title.setObjectName("OptionTitle")
         self.header_layout.addWidget(self.title, alignment=Qt.AlignmentFlag.AlignLeft)
 

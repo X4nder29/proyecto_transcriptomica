@@ -858,7 +858,7 @@ class TrimmomaticPanelController:
             0
         )
         self.view.body.options_page.illumina_clip_option_widget.palindrome_clip_threshold_suboption.set_value(
-            30
+            0
         )
         self.view.body.options_page.illumina_clip_option_widget.simple_clip_threshold_suboption.set_value(
             0
@@ -931,7 +931,7 @@ class TrimmomaticPanelController:
     # Navigation
 
     def _change_page(self, index: int):
-        """Change the current page of the Kraken panel."""
+        """Change the current page of the Trimmomatic panel."""
         if index == 1:
             self.view.head.star_button.setVisible(True)
             self.view.head.cli_push_button.setVisible(True)
@@ -941,12 +941,12 @@ class TrimmomaticPanelController:
             self.view.head.cli_push_button.setVisible(False)
 
     def _to_options_page(self):
-        """Navigate to the options page in the Kraken panel."""
+        """Navigate to the options page in the Trimmomatic panel."""
         mode = (
             self.view.body.files_page.operation_mode_widget.button_group.checkedButton().text()
         )
 
-        if mode == "Single End":
+        if mode == OperationModes.SingleEnd.value[0]:
             required = [self.selected_input_file_1]
             msg = "Debe seleccionar un archivo de entrada."
         else:

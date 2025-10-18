@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
 )
 from PySide6.QtGui import QGuiApplication, QPainter
 from PySide6.QtCore import Qt, QFile, QTextStream
+from utils.operation_modes import OperationModes
 from views.widgets import OperationModeWidget, SelectFilePushButton, ListWidget, LoadingWidget
 
 
@@ -145,10 +146,7 @@ class FilesPage(QWidget):
         Change the operation mode between Single End and Paired End.
         :param mode: The operation mode to set ('SingleEnd' or 'PairedEnd').
         """
-        if mode.replace(" ", "") == "SingleEnd":
-            self.select_input_2_widget.setVisible(False)
-        elif mode.replace(" ", "") == "PairedEnd":
-            self.select_input_2_widget.setVisible(True)
+        self.select_input_2_widget.setVisible(mode == OperationModes.PairedEnd.value[0])
 
     def load_stylesheet(self, scheme: Qt.ColorScheme):
         qss_file = QFile(
