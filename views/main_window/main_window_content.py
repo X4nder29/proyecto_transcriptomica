@@ -29,7 +29,6 @@ class MainWindowContent(QWidget):
         self.main_layout = QStackedLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(0)
-        self.main_layout.setCurrentIndex(1)
 
         ## panels
         # home panel
