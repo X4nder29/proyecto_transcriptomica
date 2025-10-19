@@ -176,6 +176,11 @@ class HomeWindowController:
             self.view.body.workspaces.workspaces_list_layout.addWidget(workspace_item)
 
     def open_workspace(self, workspace_path: Path):
+
+        if not workspace_path.exists():
+            self.has_workspaces()
+            return
+
         set_current_workspace(workspace_path)
 
         self.view.close()
