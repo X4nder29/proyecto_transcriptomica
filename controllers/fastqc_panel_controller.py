@@ -324,8 +324,12 @@ class FastQCPanelController:
 
             self.check_existing_report(self.selected_input_file)
         else:
+            self.selected_input_file = None
             self.view.body.input_file_widget.select_file_button.clear_file()
             print("FilesWindow rejected")
+            self.view.body.basic_statistics_report_widget.setVisible(False)
+            self.view.body.report_content_area.setCurrentIndex(0)
+            self._disable_summary_buttons()
 
     def cancel_report_generation(self):
         """
@@ -349,6 +353,8 @@ class FastQCPanelController:
         """
         Disables all summary buttons in the FastQC panel.
         """
+        self.view.body.summary_list_widget.button_group.setExclusive(False)
+
         self.view.body.summary_list_widget.per_base_sequence_quality_push_button.setEnabled(
             False
         )
@@ -403,6 +409,8 @@ class FastQCPanelController:
 
         self.view.body.summary_list_widget.adapter_content_push_button.setEnabled(False)
         self.view.body.summary_list_widget.adapter_content_push_button.setChecked(False)
+
+        self.view.body.summary_list_widget.button_group.setExclusive(True)
 
     def open_user_manual(self):
         from views.support_window.support_window import SupportWindow
