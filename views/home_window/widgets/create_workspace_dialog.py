@@ -36,7 +36,9 @@ class CreateWorkspaceDialog(QDialog):
         # title
         self.title = QLabel("Crear Workspace")
         self.title.setObjectName("Title")
-        self.title.setAlignment(Qt.AlignLeft | Qt.AlignVCenter)
+        self.title.setAlignment(
+            Qt.AlignmentFlag.AlignLeft | Qt.AlignmentFlag.AlignVCenter
+        )
         self.main_layout.addWidget(self.title)
 
         # name
@@ -101,13 +103,16 @@ class CreateWorkspaceDialog(QDialog):
 
         #
 
-        self.buttons = QDialogButtonBox(QDialogButtonBox.Ok | QDialogButtonBox.Cancel, self)
+        self.buttons = QDialogButtonBox(
+            QDialogButtonBox.StandardButton.Ok | QDialogButtonBox.StandardButton.Cancel,
+            self,
+        )
         self.buttons.setObjectName("Buttons")
-        self.buttons.button(QDialogButtonBox.Ok).setText("Ok")
-        self.buttons.button(QDialogButtonBox.Cancel).setText("Cancelar")
+        self.buttons.button(QDialogButtonBox.StandardButton.Ok).setText("Ok")
+        self.buttons.button(QDialogButtonBox.StandardButton.Cancel).setText("Cancelar")
         self.buttons.accepted.connect(self.accept)
         self.buttons.rejected.connect(self.reject)
-        self.buttons.button(QDialogButtonBox.Ok).setEnabled(False)
+        self.buttons.button(QDialogButtonBox.StandardButton.Ok).setEnabled(False)
 
         self.main_layout.addWidget(self.buttons)
 
@@ -118,6 +123,7 @@ class CreateWorkspaceDialog(QDialog):
         drive, tail = ntpath.splitdrive(self.location_input.text())
 
         all_filled = name_filled and location_filled and bool(drive and tail)
+        self.buttons.button(QDialogButtonBox.StandardButton.Ok).setEnabled(all_filled)
 
     def load_stylesheet(self, scheme: Qt.ColorScheme):
         qss_file = QFile(
