@@ -204,7 +204,7 @@ class TrimmomaticPanelController:
 
         if not arguments:
             print("No arguments to run the process")
-            self.view.show_error_dialog("Please select at least one option")
+            self.view.show_error_dialog("Por favor seleccione al menos una opción")
             return
 
         command = "java " + " ".join(arguments)
