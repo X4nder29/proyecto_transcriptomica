@@ -185,8 +185,8 @@ class HomePanelController:
 
         # si no hay archivos, mostrar la página vacía
         if not files_str_list:
-            self.view.content.files_area.stacked.setCurrentIndex(0)
             self.current_files = []
+            print("No files found")
             return
 
         # crear widgets (UI thread) a partir de la lista de rutas
