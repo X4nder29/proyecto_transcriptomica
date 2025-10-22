@@ -104,7 +104,7 @@ class SortMeRnaPanelController:
             self.view.body.files_page.previous_reports_container_widget.setVisible(
                 False
             )
-            print(f"{Path(__file__).name}", "-", "No Krakened files found.")
+            print(f"{Path(__file__).name}", "-", "No Sorted files found.")
             return
 
         self.view.body.files_page.previous_reports_container_widget.setVisible(True)
