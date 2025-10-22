@@ -1,6 +1,7 @@
 #TitleLabel {
     font-size: 12px;
     font-weight: bold;
+    color: #FFFFFF;
 }
 
 #ProgressBarWidget {

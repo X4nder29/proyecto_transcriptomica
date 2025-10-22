@@ -38,7 +38,8 @@
     <file alias="file_selector_dialog_light.qss">file_selector_dialog_light.qss</file>
     <file alias="files_page_dark.qss">files_page_dark.qss</file>
     <file alias="files_page_light.qss">files_page_light.qss</file>
-    <file alias="generation_page.qss">generation_page.qss</file>
+    <file alias="generation_page_dark.qss">generation_page_dark.qss</file>
+    <file alias="generation_page_light.qss">generation_page_light.qss</file>
     <file alias="graphic.qss">graphic.qss</file>
     <file alias="home_panel.qss">home_panel.qss</file>
     <file alias="illumina_clip_option.qss">illumina_clip_option.qss</file>

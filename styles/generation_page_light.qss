@@ -1,0 +1,22 @@
+#TitleLabel {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+#ProgressBarWidget {
+    background-color: #4a6361;
+    border-radius: 5px;
+}
+
+#CancelButton {
+    background-color: #4a6361;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+}
+
+#CancelButton:hover {
+    background-color: #ff4d4d;
+}
