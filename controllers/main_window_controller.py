@@ -21,6 +21,7 @@ class MainWindowController:
 
         self.view.side_bar.home_button.toggled.connect(self._on_home)
         self.view.side_bar.trimmomatic_button.toggled.connect(self._on_trimmomatic)
+        self.view.side_bar.sortmerna_button.toggled.connect(self._on_sortmerna)
         self.view.side_bar.kraken_button.toggled.connect(self._on_kraken)
         self.view.side_bar.settings_button.toggled.connect(self._on_settings)
 
