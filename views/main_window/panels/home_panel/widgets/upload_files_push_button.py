@@ -7,7 +7,7 @@ from PySide6.QtWidgets import (
     QPushButton,
     QLabel,
 )
-from PySide6.QtGui import QPainter, QDragEnterEvent, QDropEvent, QPixmap
+from PySide6.QtGui import QPainter, QDragEnterEvent, QDropEvent, QPixmap, QGuiApplication
 from PySide6.QtCore import Qt, Signal, QFile, QTextStream
 
 
@@ -17,14 +17,15 @@ class UploadFilesPushButton(QPushButton):
     def __init__(self, parent=None):
         super().__init__(parent)
 
+        self.load_stylesheet(QGuiApplication.styleHints().colorScheme())
+        self.setup_ui()
+        QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
+
+    def setup_ui(self):
         self.setObjectName("UploadFilesPushButton")
         self.setAcceptDrops(True)
         self.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
 
-        self.load_stylesheet()
-        self.setup_ui()
-
-    def setup_ui(self):
         self.main_layout = QVBoxLayout(self)
         self.main_layout.setContentsMargins(0, 0, 0, 0)
         self.main_layout.setSpacing(5)
@@ -50,11 +51,17 @@ class UploadFilesPushButton(QPushButton):
         self.secondary_label.setAlignment(Qt.AlignCenter)
         self.main_layout.addWidget(self.secondary_label, alignment=Qt.AlignCenter)
 
-    def load_stylesheet(self):
-        qss_file = QFile(f":/styles/{Path(__file__).stem}.qss")
+    def load_stylesheet(self, scheme: Qt.ColorScheme):
+        qss_file = QFile(
+            f":/styles/{Path(__file__).stem}_{"dark" if scheme == Qt.ColorScheme.Dark else "light"}.qss"
+        )
         if qss_file.open(QFile.ReadOnly | QFile.Text):
             stylesheet = QTextStream(qss_file).readAll() + "\n"
             self.setStyleSheet(stylesheet)
+            style = self.style()
+            style.unpolish(self)
+            style.polish(self)
+            self.update()
             qss_file.close()
 
     def dragEnterEvent(self, event: QDragEnterEvent):

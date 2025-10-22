@@ -116,7 +116,8 @@
     <file alias="unselected_report_visualization_widget_light.qss">unselected_report_visualization_widget_light.qss</file>
     <file alias="unselected_report_widget_dark.qss">unselected_report_widget_dark.qss</file>
     <file alias="unselected_report_widget_light.qss">unselected_report_widget_light.qss</file>
-    <file alias="upload_files_push_button.qss">upload_files_push_button.qss</file>
+    <file alias="upload_files_push_button_dark.qss">upload_files_push_button_dark.qss</file>
+    <file alias="upload_files_push_button_light.qss">upload_files_push_button_light.qss</file>
     <file alias="work_in_progress_poster_panel.qss">work_in_progress_poster_panel.qss</file>
     <file alias="workspace_file_item_widget_dark.qss">workspace_file_item_widget_dark.qss</file>
     <file alias="workspace_file_item_widget_light.qss">workspace_file_item_widget_light.qss</file>
