@@ -1,3 +1,4 @@
+import ntpath
 from pathlib import Path
 from PySide6.QtWidgets import (
     QWidget,
@@ -114,8 +115,9 @@ class CreateWorkspaceDialog(QDialog):
         name_filled = bool(self.name_input.text().strip())
         location_filled = bool(self.location_input.text().strip())
 
-        all_filled = name_filled and location_filled
-        self.buttons.button(QDialogButtonBox.Ok).setEnabled(all_filled)
+        drive, tail = ntpath.splitdrive(self.location_input.text())
+
+        all_filled = name_filled and location_filled and bool(drive and tail)
 
     def load_stylesheet(self, scheme: Qt.ColorScheme):
         qss_file = QFile(
