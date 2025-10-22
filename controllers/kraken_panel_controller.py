@@ -20,6 +20,7 @@ from utils import (
     remove_kraken2_saved_config,
     get_source_files_paths,
     get_trimmed_files_paths,
+    get_sorted_files_paths
 )
 from workers import GenericWorker
 
@@ -768,7 +769,7 @@ class KrakenPanelController:
 
         file_selector_dialog = FileSelectorDialog(
             icon=":/assets/file.svg",
-            files=get_source_files_paths() + get_trimmed_files_paths(),
+            files=get_source_files_paths() + get_trimmed_files_paths() + get_sorted_files_paths(),
             parent=self.view,
             filters=True,
             multiple=False,
