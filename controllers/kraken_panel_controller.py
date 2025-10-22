@@ -124,6 +124,11 @@ class KrakenPanelController:
         self.pool.start(self.worker)
 
     def _on_load_existing_report_finished(self, files: list[Path]):
+
+        if not files:
+            print(f"{Path(__file__).name}", "-", "No existing reports found.")
+            return
+
         self.view.body.files_page.previous_reports_container_widget.setVisible(True)
         self.view.body.files_page.previous_reports_list_widget.setVisible(True)
         self.view.body.files_page.loading_widget.setVisible(False)
