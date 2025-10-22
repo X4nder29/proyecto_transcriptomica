@@ -34,7 +34,7 @@ class ReportGenerationWidget(QWidget):
 
         self.label = QLabel(self.container)
         self.label.setObjectName("ReportGenerationLabel")
-        self.label.setText("Generating report, please wait...")
+        self.label.setText("Generando informe, por favor espere...")
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.container_layout.addWidget(self.label, alignment=Qt.AlignmentFlag.AlignCenter)
 
@@ -47,7 +47,7 @@ class ReportGenerationWidget(QWidget):
 
         self.cancel_button = QPushButton(self.container)
         self.cancel_button.setObjectName("ReportGenerationCancelButton")
-        self.cancel_button.setText("Cancel")
+        self.cancel_button.setText("Cancelar")
         self.cancel_button.setCursor(Qt.CursorShape.PointingHandCursor)
         self.container_layout.addWidget(self.cancel_button, alignment=Qt.AlignmentFlag.AlignCenter)
 

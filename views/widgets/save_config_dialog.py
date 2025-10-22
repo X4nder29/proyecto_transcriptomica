@@ -21,7 +21,7 @@ class SaveConfigDialog(QDialog):
         QGuiApplication.styleHints().colorSchemeChanged.connect(self.load_stylesheet)
 
     def setup_ui(self):
-        self.setWindowTitle("Save Configuration")
+        self.setWindowTitle("Guardar Configuración")
         self.setObjectName("SaveConfigDialog")
 
         self.main_layout = QVBoxLayout(self)

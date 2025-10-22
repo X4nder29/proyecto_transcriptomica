@@ -17,7 +17,7 @@ class ReportTableWidget(QTableWidget):
         self.setObjectName("ReportTable")
         self.setColumnCount(4)
         self.setHorizontalHeaderLabels(
-            ["Sequence", "Count", "Percentage", "Possible Source"]
+            ["Secuencia", "Cantidad", "Porcentaje", "Posible fuente"]
         )
         self.setEditTriggers(QTableWidget.NoEditTriggers)
         self.setSelectionMode(QTableWidget.SelectionMode.NoSelection)

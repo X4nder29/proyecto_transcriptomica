@@ -29,28 +29,28 @@ class BasicStatisticsReportWidget(QWidget):
 
         self._filename_title_label = QLabel(self)
         self._filename_title_label.setObjectName("BasicStatisticsTitleLabel")
-        self._filename_title_label.setText("File Name")
+        self._filename_title_label.setText("Nombre del Archivo")
         self._filename_title_label.setWordWrap(True)
         self._filename_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(self._filename_title_label, 0, 0, 1, 1)
 
         self._filetype_title_label = QLabel(self)
         self._filetype_title_label.setObjectName("BasicStatisticsTitleLabel")
-        self._filetype_title_label.setText("File Type")
+        self._filetype_title_label.setText("Tipo de Archivo")
         self._filetype_title_label.setWordWrap(True)
         self._filetype_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(self._filetype_title_label, 0, 1, 1, 1)
 
         self._encoding_title_label = QLabel(self)
         self._encoding_title_label.setObjectName("BasicStatisticsTitleLabel")
-        self._encoding_title_label.setText("Encoding")
+        self._encoding_title_label.setText("Codificación")
         self._encoding_title_label.setWordWrap(True)
         self._encoding_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(self._encoding_title_label, 0, 2, 1, 1)
 
         self._total_sequences_title_label = QLabel(self)
         self._total_sequences_title_label.setObjectName("BasicStatisticsTitleLabel")
-        self._total_sequences_title_label.setText("Total Sequences")
+        self._total_sequences_title_label.setText("Secuencias Totales")
         self._total_sequences_title_label.setWordWrap(True)
         self._total_sequences_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(self._total_sequences_title_label, 0, 3, 1, 1)
@@ -59,14 +59,16 @@ class BasicStatisticsReportWidget(QWidget):
         self._sequences_flagged_as_poor_quiality_label.setObjectName(
             "BasicStatisticsTitleLabel"
         )
-        self._sequences_flagged_as_poor_quiality_label.setText("Sequences Flagged as Poor Quality")
+        self._sequences_flagged_as_poor_quiality_label.setText(
+            "Secuencias marcadas como de mala calidad"
+        )
         self._sequences_flagged_as_poor_quiality_label.setWordWrap(True)
         self._sequences_flagged_as_poor_quiality_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(self._sequences_flagged_as_poor_quiality_label, 0, 4, 1, 1)
 
         self._sequence_length_title_label = QLabel(self)
         self._sequence_length_title_label.setObjectName("BasicStatisticsTitleLabel")
-        self._sequence_length_title_label.setText("Sequence Length")
+        self._sequence_length_title_label.setText("Longitud de la secuencia")
         self._sequence_length_title_label.setWordWrap(True)
         self._sequence_length_title_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.main_layout.addWidget(self._sequence_length_title_label, 0, 5, 1, 1)

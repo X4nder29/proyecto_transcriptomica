@@ -50,8 +50,8 @@ class FastQCPanelController:
 
             QMessageBox.warning(
                 self.view,
-                "No file selected",
-                "Please select a file to generate a report.",
+                "No hay ningún archivo seleccionado",
+                "Seleccione un archivo para visualizar el comando a ejecutar.",
             )
             return
 
