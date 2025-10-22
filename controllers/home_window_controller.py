@@ -41,7 +41,7 @@ class HomeWindowController:
         )
         result = self.create_workspace_dialog.exec_()
 
-        if result == QDialog.Accepted:
+        if result == QDialog.DialogCode.Accepted:
             name = self.create_workspace_dialog.name_input.text()
             location = Path(self.create_workspace_dialog.location_input.text())
 
@@ -84,7 +84,7 @@ class HomeWindowController:
             self.view,
             "Seleccionar espacio de trabajo",
             "",
-            QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks,
+            QFileDialog.Option.ShowDirsOnly | QFileDialog.Option.DontResolveSymlinks,
         )
 
         if not workspace_path:
@@ -130,7 +130,7 @@ class HomeWindowController:
             self.view,
             "Seleccionar directorio",
             "",
-            QFileDialog.ShowDirsOnly | QFileDialog.DontResolveSymlinks,
+            QFileDialog.Option.ShowDirsOnly | QFileDialog.Option.DontResolveSymlinks,
         )
 
         if directory_path:
@@ -199,10 +199,10 @@ class HomeWindowController:
             self.view,
             "Confirmar eliminación",
             f"¿Estás seguro de que quieres eliminar el espacio de trabajo '{workspace_item.name}'?",
-            QMessageBox.Yes | QMessageBox.No,
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
         )
 
-        if reply == QMessageBox.Yes:
+        if reply == QMessageBox.StandardButton.Yes:
             remove_workspace(workspace_item.path)
 
             workspace_path = workspace_item.path
