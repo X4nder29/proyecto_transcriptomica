@@ -43,9 +43,9 @@ class HomeWindowController:
 
         if result == QDialog.DialogCode.Accepted:
             name = self.create_workspace_dialog.name_input.text()
-            location = Path(self.create_workspace_dialog.location_input.text())
+            directory_path = Path(self.create_workspace_dialog.location_input.text())
 
-            workspace_path = location / name
+            workspace_path = directory_path / name
             if not workspace_path.exists():
                 workspace_path.mkdir(parents=True, exist_ok=True)
 
@@ -133,14 +133,15 @@ class HomeWindowController:
             QFileDialog.Option.ShowDirsOnly | QFileDialog.Option.DontResolveSymlinks,
         )
 
-        if directory_path:
-            print(f"Directorio seleccionado: {directory_path}")
-            self.create_workspace_dialog.location_input.setText(directory_path)
-        else:
+        if not directory_path:
             print("No se seleccionó ningún directorio")
             QMessageBox.warning(
                 self.view, "Error", "No se seleccionó ningún directorio"
             )
+            return
+
+        print(f"Directorio seleccionado: {directory_path}")
+        self.create_workspace_dialog.location_input.setText(directory_path)
 
     def has_workspaces(self):
         workspaces = get_workspaces()
