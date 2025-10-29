@@ -94,21 +94,28 @@ Flags: runhidden waituntilterminated; \
 StatusMsg: "Habilitando Hyper V Feature..."; \
 Check: not GetResume();
 
-; 4) Habilitar WSL2
+; 4) Habilitar WSL
 Filename: "cmd.exe"; \
 Parameters: "/C dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart"; \
 Flags: runhidden waituntilterminated; \
 StatusMsg: "Habilitando Microsoft Windows Subsystem Linux Feature..."; \
 Check: not GetResume();
 
-; 5) Import Ubuntu
+; 5) Update WSL
+Filename: "cmd.exe"; \
+Parameters: "/C wsl --update"; \
+Flags: runhidden waituntilterminated; \
+StatusMsg: "Actualizando Windows-Subsystem-Linux..."; \
+Check: GetResume();
+
+; 6) Import Ubuntu
 Filename: "{sys}\WindowsPowerShell\v1.0\powershell.exe"; \
 Parameters: "-ExecutionPolicy Bypass -NoProfile -WindowStyle Hidden -File ""{tmp}\import_debian_kraken_krona.ps1"" ""{tmp}\DebianKrakenKrona.tar"" ""{sd}\WSL\DebianKrakenKrona"" ""{app}"""; \
 StatusMsg: "Instalando Kraken2 | Importando Ubuntu con kraken2..."; \
 Flags: runhidden waituntilterminated; \
 Check: GetResume();
 
-; 6) Instalación de software
+; 7) Instalación de software
 Filename: "{app}\{#MyAppExeName}"; \
 Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; \
 Flags: nowait postinstall skipifsilent; \
